@@ -1,5 +1,4 @@
 var imgaeHost = 'https://image.tmdb.org/t/p/w500'
-var activeInput = null
 
 function renderLogin() {
     var loginPageBox = el('div','login-page-box')
