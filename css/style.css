@@ -11,3 +11,7 @@
 .active-background {
     background-color: #2e844e !important;
 }
+
+.scale {
+    transform: scale(1.1);
+}

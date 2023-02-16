@@ -1,5 +1,9 @@
 var activeInput = null
 
+var isUpperCase = false
+
+var keyboard = englishKeyboard
+
 function renderKeyboard(array) {
     var keyboardBox = el('div','keyboard-box')
 
@@ -17,7 +21,9 @@ function renderKeyboard(array) {
 
             keyboardItemIfElse(array[i][j],keyboardRowsItemBox)
 
-            keyboardRowsItemBox.onclick = keyboardItemClick
+            keyboardRowsItemBox.onclick = function () {
+                keyboardItemClick(this,array)
+            }
 
         }        
     }
@@ -52,58 +58,83 @@ function keyboardItemIfElse(item,elem) {
     if (item === 'Done') {
         elem.classList.add('width')
     }
+
+    if (item === 'Eng') {
+        elem.classList.add('width')
+    }
 }
 
-function keyboardItemClick() {
-    if (this.textContent.length === 1) {
-        activeInput.value+=this.textContent
-        showHideKeyboardItemActive(this)
+function keyboardItemClick(elem,array) {
+    if (elem.textContent.length === 1) {
+        activeInput.value+=elem.textContent
+        showHideKeyboardItemActive(elem)
     }
 
-    if (this.textContent === 'Clean') {
+    if (elem.textContent === 'Clean') {
         if (activeInput.value) {
             activeInput.value = ''
-            showHideKeyboardItemActive(this)
+            showHideKeyboardItemActive(elem)
         }
     }
 
-    if (this.classList.contains('close')) {
+    if (elem.classList.contains('close')) {
         var x = activeInput.value.substring(0,activeInput.value.length-1)
         activeInput.value = x
-        showHideKeyboardItemActive(this)
+        showHideKeyboardItemActive(elem)
     }
 
-    if (this.classList.contains('space')) {
+    if (elem.classList.contains('space')) {
         activeInput.value+=' '
-        showHideKeyboardItemActive(this)
+        showHideKeyboardItemActive(elem)
     }
 
-    if (this.classList.contains('shift')) {
-        for (var i = 0; i < englishKeyboard.length; i++) {
-            for (var j = 0; j < englishKeyboard[i].length; j++) {
-                if (englishKeyboard[i][j].length === 1) {
-                    // if (englishKeyboard[i][j].toLocaleLowerCase()) {
-                    //     console.log('big');
-                    //     englishKeyboard[i][j] = englishKeyboard[i][j].toLocaleUpperCase()
-                    // }else if (englishKeyboard[i][j].toLocaleUpperCase()) {
-                    //     console.log('small');
-                    //     englishKeyboard[i][j] = englishKeyboard[i][j].toLocaleLowerCase()
-                    // }
-                    
-                }
+    if (elem.classList.contains('shift')) {
+        if (array === englishKeyboard) {
+            if (isUpperCase) {
+                lowerCase()
+            }else {
+                upperCase()
             }
+
+            document.querySelector('.keyboard-box').remove()
+            document.getElementById('root').append(renderKeyboard(englishKeyboard))
+        }else if (array === numberKeyboard) {
+            document.querySelector('.keyboard-box').remove()
+            document.getElementById('root').append(renderKeyboard(numberKeyboard))
         }
-        //document.querySelector('.keyboard-box').remove()
-        console.log('shift',englishKeyboard);
-        showHideKeyboardItemActive(this)
+
+        showHideKeyboardItemActive(elem)
+        controls.select.removeClass()
+        controls.select.firstActive()
     }
 
-    if (this.textContent === 'Done') {
+    if (elem.textContent === 'Done') {
         if (controls.privius === controls.login) {
             controls.privius.index+=1
             controls.privius.ok()
         }
-        showHideKeyboardItemActive(this)
+        showHideKeyboardItemActive(elem)
+    }
+
+    if (elem.textContent === '123') {
+        keyboard = numberKeyboard
+        console.log('123');
+        controls.select.removeClass()
+        document.querySelector('.keyboard-box').remove()
+        document.getElementById('root').append(renderKeyboard(numberKeyboard))
+        controls.select.firstActive()
+
+        showHideKeyboardItemActive(elem)
+    }
+
+    if (elem.textContent === 'Eng') {
+        keyboard = englishKeyboard
+        controls.select.removeClass()
+        document.querySelector('.keyboard-box').remove()
+        document.getElementById('root').append(renderKeyboard(englishKeyboard))
+        controls.select.firstActive()
+
+        showHideKeyboardItemActive(elem)
     }
 }
 
@@ -112,4 +143,26 @@ function showHideKeyboardItemActive(elem) {
         elem.classList.add('active-background')
     }, 100);
     elem.classList.remove('active-background')
+}
+
+function lowerCase() {
+    isUpperCase = false
+    for (var i = 0; i < englishKeyboard.length; i++) {
+        for (var j = 0; j < englishKeyboard[i].length; j++) {
+            if (englishKeyboard[i][j].length === 1) {
+                englishKeyboard[i][j] = englishKeyboard[i][j].toLocaleLowerCase()
+            }
+        }
+    }
+}
+
+function upperCase() {
+    isUpperCase = true
+    for (var i = 0; i < englishKeyboard.length; i++) {
+        for (var j = 0; j < englishKeyboard[i].length; j++) {
+            if (englishKeyboard[i][j].length === 1) {
+                englishKeyboard[i][j] = englishKeyboard[i][j].toLocaleUpperCase()
+            }
+        }
+    }
 }

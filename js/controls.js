@@ -149,5 +149,53 @@ var controls = {
                 this.items[this.rowsIndex].getElementsByClassName('keyboard-rows-item-box')[i].classList.remove(this.class)
             }
         }
+    },
+    menu: {
+        items:document.getElementsByClassName('menu-card-box'),
+        index:0,
+        class:'active-border',
+
+        left: function () {
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+
+            }
+            
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            
+        },
+        down: function () {
+            
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+            this.items[this.index].classList.add('scale')
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+                this.items[i].classList.remove('scale')
+            }
+        }
     }
 }

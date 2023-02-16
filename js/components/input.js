@@ -20,7 +20,7 @@ function inputClick() {
         if (document.querySelector('.keyboard-box')) {
             document.querySelector('.keyboard-box').remove()
         }
-        document.getElementById('root').append(renderKeyboard(englishKeyboard))
+        document.getElementById('root').append(renderKeyboard(keyboard))
         controls.select.firstActive()
     }
 }

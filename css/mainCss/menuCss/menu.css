@@ -1,0 +1,77 @@
+.menu-page-box {
+    height: 100vh;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-logo-box {
+
+width: 230px;
+
+height: 230px;
+
+position: absolute;
+
+top: 60px;
+}
+
+.menu-cards-parent-box {
+
+display: flex;
+
+height: 400px;
+
+width: 1920px;
+
+justify-content: center;
+
+align-items: center;
+}
+
+.menu-card-box {
+
+    margin: 50px;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(32, 32, 32);
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: 0.3s linear;
+}
+
+.menu-card-poster-box {
+
+width: 140px;
+
+height: 120px;
+}
+
+.menu-card-poster {
+
+width: 100%;
+
+height: 100%;
+
+object-fit: contain;
+}
+
+.menu-card-name {
+    
+font-weight: 700;
+    
+color: white;
+    
+font-size: 34px;
+    
+font-family: sans-serif;
+    
+position: relative;
+    
+bottom: -20px;
+}
