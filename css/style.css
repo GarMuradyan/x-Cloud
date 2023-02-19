@@ -4,6 +4,21 @@
     box-sizing: border-box;
 }
 
+.back-box {
+    width: 86px;
+    height: 82px;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.back-box>span {
+    font-size: 60px;
+}
+
 .active-border {
     outline: 3px solid #2e844e;
 }
@@ -13,5 +28,18 @@
 }
 
 .scale {
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+.search-button-box {
+    width: 346px;
+    height: 83px;
+}
+
+.search-button-box>span {
+
+}
+
+.search-text {
+
 }

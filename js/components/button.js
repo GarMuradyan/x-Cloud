@@ -25,7 +25,9 @@ function loginButtonClick(elem) {
     loginLoad.append(renderLoading())
 
     elem.append(loginLoad)
+
     removeLoginPageInputsActive()
+    
     if (document.querySelector('.keyboard-box')) {
         document.querySelector('.keyboard-box').remove()
     }
@@ -37,9 +39,9 @@ function loginButtonClick(elem) {
 
     var elems = document.getElementsByClassName('content-inputs-items-box')
 
-    if (elems[0].value === "g") {
-        if (elems[1].value === "g") {
-            if (elems[2].value === 'g') {
+    if (elems[0].value === "") {
+        if (elems[1].value === "") {
+            if (elems[2].value === '') {
                 setTimeout(() => {
                     document.getElementById('root').append(renderMenu())
                     if (document.querySelector('.login-page-box')) {
@@ -64,12 +66,12 @@ function loginError() {
     var error = el('div','error')
     error.textContent = 'invalid login or password'
 
+    document.querySelector('.inputs-parent-box').append(error) 
+
     setTimeout(() => {
         if (document.querySelector('.login-load')) {
             document.querySelector('.login-load').remove()
         }
-
-        document.querySelector('.inputs-parent-box').append(error) 
         
     }, 1500);
 

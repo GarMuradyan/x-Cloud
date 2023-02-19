@@ -1,0 +1,123 @@
+.movies-and-series-page-box {
+
+    background-image: url(https://api.xtream.cloud/bg.png);
+    
+    height: 100vh;
+    
+    background-repeat: no-repeat;
+    
+    background-size: cover;
+    }
+    
+    .page-content-box {
+    
+    height: 100%;
+    
+    padding: 20px 100px;
+    }
+    
+    .page-header-box {
+    
+    margin-top: 15px;
+    }
+    
+    .header-top-box {
+    
+display: flex;
+    
+width: 444px;
+    
+justify-content: space-between;
+    }
+    
+    .header-bottom-box {
+    
+    display: flex;
+    
+    color: white;
+    
+    font-size: 24px;
+    
+    font-family: sans-serif;
+    
+    align-items: center;
+    
+    width: 1380px;
+    
+    justify-content: space-between;
+    
+    margin-top: 40px;
+    }
+    
+    .page-lists-parent-box {
+    
+margin-top: 13px;
+    
+height: 809px;
+    
+overflow: hidden;
+    }
+    
+    .parent-content-box {
+    
+width: 11111111111111112011110px;
+    
+height: 1111212121212121212212121212121px;
+    }
+    
+    .content-rows-box {
+    
+color: white;
+    
+font-family: sans-serif;
+    
+height: 570px;
+    }
+    
+    .content-rows-name-box {
+    
+font-size: 30px;
+    
+height: 60px;
+    }
+    
+    .content-rows-lists-box {
+    
+display: flex;
+    
+height: 510px;
+    }
+    
+    .header-components-box {
+    
+width: 330px;
+    
+height: 100px;
+    
+display: flex;
+    
+justify-content: center;
+    
+align-items: center;
+    
+background-color: rgb(32, 32, 32);
+    
+border-radius: 10px;
+    }
+    
+    .content-rows-lists-card-box {
+    
+width: 330px;
+    }
+    
+    .card-image-box {
+        
+height: 354px;
+    }
+    
+    .card-name-box {
+        
+height: 76px;
+        
+font-size: 22px;
+    }

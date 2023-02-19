@@ -44,10 +44,30 @@ function menuCardsClick(type) {
     if (type === 'live') {
         console.log('live');
     }else if (type === 'movies') {
-        console.log('movies');
+        cardMoviesAndSeries()
     }else if (type === 'series') {
         console.log('series');
     }else if (type === 'settings') {
         console.log('settings');
+    }
+}
+
+function cardMoviesAndSeries() {
+    controls.privius = controls.select
+
+    document.querySelector('.menu-page-box').remove()
+    
+    document.getElementById('root').append(renderMoviesAndSeries(menuMoviesData))
+
+}
+
+function getLIveData(url,method) {
+    var xhr = new XMLHttpRequest()
+    xhr.open(method,url,true)
+    xhr.send()
+
+    xhr.onload = ()=> {
+        var data = JSON.parse(xhr.response)
+        console.log(data);
     }
 }

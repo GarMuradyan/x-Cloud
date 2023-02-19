@@ -12,17 +12,21 @@ function renderinputBox(placeholder,type,className,classList) {
 
 function inputClick() {
     if (this.getAttribute('placeholder') === 'Provider' || this.getAttribute('placeholder') === 'Username' || this.getAttribute('placeholder') === 'Password') {
-        activeInput = this
-        controls.privius = controls.login
-        controls.select = controls.keyboard
-        removeLoginPageInputsActive()
-        this.classList.add('active-border')
-        if (document.querySelector('.keyboard-box')) {
-            document.querySelector('.keyboard-box').remove()
-        }
-        document.getElementById('root').append(renderKeyboard(keyboard))
-        controls.select.firstActive()
+        clickProviderUsernameAndPassword(this)
     }
+}
+
+function clickProviderUsernameAndPassword(elem) {
+    activeInput = elem
+    controls.privius = controls.login
+    controls.select = controls.keyboard
+    removeLoginPageInputsActive()
+    elem.classList.add('active-border')
+    if (document.querySelector('.keyboard-box')) {
+        document.querySelector('.keyboard-box').remove()
+    }
+    document.getElementById('root').append(renderKeyboard(keyboard))
+    controls.select.firstActive()
 }
 
 function removeLoginPageInputsActive() {

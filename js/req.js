@@ -1,10 +1,13 @@
-function req(method,url,header,data,params) {
-    return axios({
-        method,
-        url,
-        header: {},
-        data:{},
-        params:{}
+function req(url,method) {
+    var xhr = new XMLHttpRequest()
+    xhr.open(method,url,true)
+    xhr.send()
 
-    })
+    xhr.onload = ()=> {
+        var data = JSON.parse(xhr.response)
+        ress = data
+        console.log(ress);
+    }
+
+
 }
