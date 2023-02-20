@@ -4,7 +4,7 @@ var isUpperCase = false
 
 var keyboard = englishKeyboard
 
-function renderKeyboard(array) {
+function renderKeyboard(array,data) {
     var keyboardBox = el('div','keyboard-box')
 
     for (var i = 0; i < array.length; i++) {
@@ -22,7 +22,7 @@ function renderKeyboard(array) {
             keyboardItemIfElse(array[i][j],keyboardRowsItemBox)
 
             keyboardRowsItemBox.onclick = function () {
-                keyboardItemClick(this,array)
+                keyboardItemClick(this,array,data)
             }
 
         }        
@@ -64,10 +64,13 @@ function keyboardItemIfElse(item,elem) {
     }
 }
 
-function keyboardItemClick(elem,array) {
+function keyboardItemClick(elem,array,data) {
     if (elem.textContent.length === 1) {
         activeInput.value+=elem.textContent
         showHideKeyboardItemActive(elem)
+        if (data) {
+            
+        }
     }
 
     if (elem.textContent === 'Clean') {

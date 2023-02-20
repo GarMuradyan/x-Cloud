@@ -20,15 +20,18 @@
     width: 185px !important;
 }
 
-.keyboard-box {
+.absolute-box {
     position: absolute;
+    background: #161616;
+    bottom: 0;
+    left: 17%;
+}
+
+.keyboard-box {
     display: flex;
     flex-direction: column;
     width: 1250px;
     height: 354px;
-    bottom: 0;
-    left: 17%;
-    background: #161616;
     justify-content: space-between;
     padding: 5px 0;
 }

@@ -7,7 +7,7 @@ function renderMenu() {
         menuCardsParentBox.append(renderMenuCards(menuImagesLinks[i].name,menuImagesLinks[i].url,menuImagesLinks[i].type))
     }
 
-    menuBox.style.backgroundImage = "url(" + backgroundImage + ")"
+    menuBox.style.backgroundImage = 'url(bg.png)'
 
     menuLogoBox.append(renderSecondLogo())
 
@@ -44,20 +44,22 @@ function menuCardsClick(type) {
     if (type === 'live') {
         console.log('live');
     }else if (type === 'movies') {
-        cardMoviesAndSeries()
+        cardMoviesAndSeries(menuMoviesData)
     }else if (type === 'series') {
-        console.log('series');
+        cardMoviesAndSeries(menuSeriesData)
     }else if (type === 'settings') {
         console.log('settings');
     }
 }
 
-function cardMoviesAndSeries() {
+function cardMoviesAndSeries(data) {
     controls.privius = controls.select
 
     document.querySelector('.menu-page-box').remove()
     
-    document.getElementById('root').append(renderMoviesAndSeries(menuMoviesData))
+    document.getElementById('root').append(renderMoviesAndSeries(data))
+    controls.select = controls.headerComponents
+    controls.select.addActive()
 
 }
 

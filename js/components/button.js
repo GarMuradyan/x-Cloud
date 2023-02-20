@@ -42,12 +42,15 @@ function loginButtonClick(elem) {
     if (elems[0].value === "") {
         if (elems[1].value === "") {
             if (elems[2].value === '') {
+                controls.select = controls.menu
                 setTimeout(() => {
                     document.getElementById('root').append(renderMenu())
                     if (document.querySelector('.login-page-box')) {
                         document.querySelector('.login-page-box').remove()
                     }
-                    controls.select = controls.menu
+                    if (document.querySelector('.absolute-box')) {
+                        document.querySelector('.absolute-box').remove()
+                    }
                     controls.select.addActive()
                 }, 4000);
 

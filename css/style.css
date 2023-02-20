@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .back-box>span {
@@ -34,12 +34,18 @@
 .search-button-box {
     width: 346px;
     height: 83px;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    background-color: rgb(32, 32, 32);
+    border-radius: 10px;
 }
 
 .search-button-box>span {
 
+font-size: 50px;
 }
 
-.search-text {
-
-}
+.search-text {font-size: 35px;margin-left: 15px;}

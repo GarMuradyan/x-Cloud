@@ -33,16 +33,25 @@ align-items: center;
 
 .menu-card-box {
 
-    margin: 50px;
-    width: 300px;
-    height: 300px;
-    background-color: rgb(32, 32, 32);
-    border-radius: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    transition: 0.3s linear;
+margin:0px 50px;
+
+width: 300px;
+
+height: 300px;
+
+background-color: rgb(32, 32, 32);
+
+border-radius: 1.1rem;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: space-evenly;
+
+transition: 0.3s linear;
 }
 
 .menu-card-poster-box {

@@ -25,7 +25,9 @@ function clickProviderUsernameAndPassword(elem) {
     if (document.querySelector('.keyboard-box')) {
         document.querySelector('.keyboard-box').remove()
     }
-    document.getElementById('root').append(renderKeyboard(keyboard))
+    var absoluteBox = el('div','absolute-box')
+    absoluteBox.append(renderKeyboard(keyboard,''))
+    document.getElementById('root').append(absoluteBox)
     controls.select.firstActive()
 }
 

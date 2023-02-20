@@ -1,6 +1,8 @@
 function renderMoviesAndSeries(data) {
     var moviesAndSeriesPageBox = el('div','movies-and-series-page-box')
-    var pageContentBox = el('div','page-content-box')   
+    var pageContentBox = el('div','page-content-box')  
+    
+    moviesAndSeriesPageBox.style.backgroundImage = "url(" + backgroundImage + ")"
 
     pageContentBox.append(renderMoviesSeriesHeader(data))
     pageContentBox.append(renderMoviesSeriesLists(data))
@@ -20,7 +22,7 @@ function renderMoviesSeriesHeader(data) {
     }
 
     headerTopBox.append(renderBackButton())
-    headerTopBox.append(renderSearchButtonBox())
+    headerTopBox.append(renderSearchButtonBox(data))
 
     pageHeaderBox.append(headerTopBox)
     pageHeaderBox.append(headerBottomBox)
@@ -36,6 +38,8 @@ function renderMoviesSeriesLists(data) {
         var contentRowsBox = el('div','content-rows-box')
         var contentRowsNameBox = el('div','content-rows-name-box')
         var contentRowsListsBox = el('div','content-rows-lists-box')
+
+        contentRowsListsBox.setAttribute('position',0)
 
         contentRowsBox.append(contentRowsNameBox)
         contentRowsBox.append(contentRowsListsBox)
