@@ -48,6 +48,10 @@ var controls = {
         addActive: function () {
             this.items[this.index].classList.add(this.class)
         },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
         removeClass: function () {
             for (var i = 0; i < this.items.length; i++) {
                 this.items[i].classList.remove(this.class)
@@ -80,6 +84,14 @@ var controls = {
         },
 
         up: function () {
+            if (this.rowsIndex === 0) {
+                console.log(8);
+                if (controls.privius === controls.search) {
+                    this.removeClass()
+                    controls.select = controls.back
+                    controls.select.addActive()
+                }
+            }
             if (this.rowsIndex > 0) {
                 this.removeClass()
                 if (this.rowsIndex === 3 && this.index === 1) {
@@ -185,7 +197,13 @@ var controls = {
             
         },
         back: function () {
-            
+            if (document.querySelector('.menu-page-box')) {
+                document.getElementById('root').innerHTML = ''
+                document.getElementById('root').append(renderLogin())
+                controls.select = controls.login
+                controls.select.class = 'active-border'
+                controls.select.firstActive()   
+            }
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
@@ -208,9 +226,11 @@ var controls = {
         },
 
         right: function () {
-            this.removeClass()
-            controls.select = controls.searchButton
-            controls.select.addActive()
+            if (document.querySelector('.search-button-box')) {
+                this.removeClass()
+                controls.select = controls.searchButton
+                controls.select.addActive()   
+            }
             
         },
 
@@ -222,19 +242,19 @@ var controls = {
             
         },
         down: function () {
+            if (controls.privius === controls.search) {
+                this.removeClass()
+                controls.select = controls.keyboard
+                controls.select.firstActive()
+                return
+            }
             this.removeClass()
             controls.select = controls.headerComponents
             controls.select.addActive()
             
         },
         back: function () {
-            if (controls.privius === controls.menu) {
-                document.querySelector('.movies-and-series-page-box').remove()
-                document.getElementById('root').append(renderMenu())
-                controls.select = controls.menu
-                controls.select.index = 0
-                controls.select.addActive()
-            }
+            backButtonClick()
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
@@ -312,6 +332,7 @@ var controls = {
         },
 
         up: function () {
+            controls.privius = controls.headerComponents
             this.removeClass()
             controls.select = controls.back
             controls.select.addActive()
@@ -411,5 +432,9 @@ var controls = {
                 this.items[this.rowsIndex].getElementsByClassName('card-name-box')[i].classList.remove(this.class)
             }
         }
+    },
+
+    search: {
+
     }
 }

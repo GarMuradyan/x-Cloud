@@ -17,10 +17,9 @@ function renderSearchButtonBox(data) {
 }
 
 function searchButtonClick(data) {
-    controls.privius = controls.select
-    document.querySelector('.movies-and-series-page-box').remove()
-    document.getElementById('root').append(renderMoviesSeriesSearchingBox(data))
-    var keyboadrAbsoluteBox = el('div','keyboard-absolute-box')
+    controls.privius = controls.search
+    document.getElementById('root').innerHTML = ''
+    document.getElementById('root').append(renderMoviesSeriesSearchingBox())
 
     var arr = []
 
@@ -30,9 +29,15 @@ function searchButtonClick(data) {
         }
     }
 
-    keyboadrAbsoluteBox.append(renderKeyboard(keyboard,arr))
-    document.getElementById('root').append(keyboadrAbsoluteBox)
+    document.getElementById('root').append(renderKyeboardAbsolute(arr))
     activeInput = document.querySelector('.search-page-content-search-input')
     controls.select = controls.keyboard
     controls.select.firstActive()
+}
+
+function renderKyeboardAbsolute(arr) {
+    var keyboadrAbsoluteBox = el('div','keyboard-absolute-box')
+    keyboadrAbsoluteBox.append(renderKeyboard(keyboard,arr))
+
+    return keyboadrAbsoluteBox
 }

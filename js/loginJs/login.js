@@ -11,14 +11,6 @@ function renderLogin() {
     return loginPageBox
 }
 
-// function renderLoginPageFirstBox() {
-//     var descBox = el('div','desc-box')
-//     // var descTitleBox = el('p','desc-title-box')
-//     // var descSubtitleBox = el('p','desc-subtitle-box')
-
-
-// }
-
 function renderLoginInputsBox() {
     var placeholders = ['Provider','Username','Password']
     var types = ['text','text','password']

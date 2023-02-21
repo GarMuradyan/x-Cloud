@@ -1,3 +1,5 @@
+var moviesSeriesData = null
+
 function renderMenu() {
     var menuBox = el('div','menu-page-box')
     var menuLogoBox = el('div','menu-logo-box')
@@ -44,9 +46,11 @@ function menuCardsClick(type) {
     if (type === 'live') {
         console.log('live');
     }else if (type === 'movies') {
-        cardMoviesAndSeries(menuMoviesData)
+        moviesSeriesData = menuMoviesData
+        cardMoviesAndSeries(moviesSeriesData)
     }else if (type === 'series') {
-        cardMoviesAndSeries(menuSeriesData)
+        moviesSeriesData = menuSeriesData
+        cardMoviesAndSeries(moviesSeriesData)
     }else if (type === 'settings') {
         console.log('settings');
     }
@@ -55,7 +59,7 @@ function menuCardsClick(type) {
 function cardMoviesAndSeries(data) {
     controls.privius = controls.select
 
-    document.querySelector('.menu-page-box').remove()
+    document.getElementById('root').innerHTML = ''
     
     document.getElementById('root').append(renderMoviesAndSeries(data))
     controls.select = controls.headerComponents

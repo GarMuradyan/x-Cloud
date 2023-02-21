@@ -69,7 +69,7 @@ function keyboardItemClick(elem,array,data) {
         activeInput.value+=elem.textContent
         showHideKeyboardItemActive(elem)
         if (data) {
-            
+            console.log(data);
         }
     }
 
@@ -92,53 +92,100 @@ function keyboardItemClick(elem,array,data) {
     }
 
     if (elem.classList.contains('shift')) {
-        if (array === englishKeyboard) {
-            if (isUpperCase) {
-                lowerCase()
-            }else {
-                upperCase()
-            }
-
-            document.querySelector('.keyboard-box').remove()
-            document.getElementById('root').append(renderKeyboard(englishKeyboard))
-        }else if (array === numberKeyboard) {
-            document.querySelector('.keyboard-box').remove()
-            document.getElementById('root').append(renderKeyboard(numberKeyboard))
-        }
-
-        showHideKeyboardItemActive(elem)
-        controls.select.removeClass()
-        controls.select.firstActive()
+        shiftClick(elem,array,data)
     }
 
     if (elem.textContent === 'Done') {
-        if (controls.privius === controls.login) {
-            controls.privius.index+=1
-            controls.privius.ok()
-        }
-        showHideKeyboardItemActive(elem)
+        doneClick(elem,array,data)
     }
 
     if (elem.textContent === '123') {
-        keyboard = numberKeyboard
-        console.log('123');
-        controls.select.removeClass()
-        document.querySelector('.keyboard-box').remove()
-        document.getElementById('root').append(renderKeyboard(numberKeyboard))
-        controls.select.firstActive()
-
-        showHideKeyboardItemActive(elem)
+        numberClick(elem,array,data)
     }
 
     if (elem.textContent === 'Eng') {
-        keyboard = englishKeyboard
-        controls.select.removeClass()
-        document.querySelector('.keyboard-box').remove()
-        document.getElementById('root').append(renderKeyboard(englishKeyboard))
-        controls.select.firstActive()
-
-        showHideKeyboardItemActive(elem)
+        engClick(elem,array,data)
     }
+}
+
+function shiftClick(elem,array,data) {
+    if (array === englishKeyboard) {
+        if (isUpperCase) {
+            lowerCase()
+        }else {
+            upperCase()
+        }
+        if (document.querySelector('.login-page-box')) {
+            document.querySelector('.absolute-box').remove()
+            document.getElementById('root').append(renderAbsoluteBox())
+        }
+        if (document.querySelector('.movies-series-search-page')) {
+            document.querySelector('.keyboard-absolute-box').remove()
+            document.getElementById('root').append(renderKyeboardAbsolute(data))
+        }
+        
+    }else if (array === numberKeyboard) {
+        if (document.querySelector('.login-page-box')) {
+            document.querySelector('.absolute-box').remove()
+            document.getElementById('root').append(renderAbsoluteBox())
+        }
+        if (document.querySelector('.movies-series-search-page')) {
+            document.querySelector('.keyboard-absolute-box').remove()
+            document.getElementById('root').append(renderKyeboardAbsolute(data))
+        }
+    }
+
+    showHideKeyboardItemActive(elem)
+    controls.select.removeClass()
+    controls.select.firstActive()
+}
+
+function doneClick(elem,array,data) {
+    if (document.querySelector('.login-page-box')) {
+        controls.privius.index+=1
+        controls.privius.ok()
+    }
+    if (document.querySelector('.movies-series-search-page')) {
+        console.log('done');
+    }
+    showHideKeyboardItemActive(elem)
+}
+
+function numberClick(elem,array,data) {
+    if (document.querySelector('.login-page-box')) {
+        keyboard = numberKeyboard
+        document.querySelector('.absolute-box').remove()
+        document.getElementById('root').append(renderAbsoluteBox())
+    }
+    if (document.querySelector('.movies-series-search-page')) {
+        keyboard = numberKeyboard
+        document.querySelector('.keyboard-absolute-box').remove()
+        document.getElementById('root').append(renderKyeboardAbsolute(data))
+    }
+
+    controls.select.removeClass()
+    controls.select.firstActive()
+
+    showHideKeyboardItemActive(elem)
+}
+
+function engClick(elem,array,data) {
+    if (document.querySelector('.login-page-box')) {
+        keyboard = englishKeyboard
+        document.querySelector('.absolute-box').remove()
+        document.getElementById('root').append(renderAbsoluteBox())
+    }
+
+    if (document.querySelector('.movies-series-search-page')) {
+        keyboard = englishKeyboard
+        document.querySelector('.keyboard-absolute-box').remove()
+        document.getElementById('root').append(renderKyeboardAbsolute(data))
+    }
+
+    controls.select.removeClass()
+    controls.select.firstActive()
+
+    showHideKeyboardItemActive(elem)
 }
 
 function showHideKeyboardItemActive(elem) {

@@ -22,12 +22,10 @@ function clickProviderUsernameAndPassword(elem) {
     controls.select = controls.keyboard
     removeLoginPageInputsActive()
     elem.classList.add('active-border')
-    if (document.querySelector('.keyboard-box')) {
-        document.querySelector('.keyboard-box').remove()
+    if (document.querySelector('.absolute-box')) {
+        document.querySelector('.absolute-box').remove()
     }
-    var absoluteBox = el('div','absolute-box')
-    absoluteBox.append(renderKeyboard(keyboard,''))
-    document.getElementById('root').append(absoluteBox)
+    document.getElementById('root').append(renderAbsoluteBox())
     controls.select.firstActive()
 }
 
@@ -36,4 +34,11 @@ function removeLoginPageInputsActive() {
     for (var i = 0; i < elem.length; i++) {
         elem[i].classList.remove('active-border')
     }
+}
+
+function renderAbsoluteBox () {
+    var absoluteBox = el('div','absolute-box')
+    absoluteBox.append(renderKeyboard(keyboard,''))
+
+    return absoluteBox
 }

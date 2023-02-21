@@ -40,26 +40,40 @@ align-items: center;
 
 .search-page-content-search-input {
 
-border-radius: 10px;
+font-size: 40px;
 
-position: absolute;
+color: white;
 
-width: 1113px;
+background-color: transparent;
 
-bottom: 37%;
+border: 0;
 
-height: 62px;
+margin-left: 20px;
 
-background-color: rgb(32, 32, 32);
-
-left: 21%;
-
-display: flex;
-
-align-items: center;
+width: 1000px;
 }
 
-.search-page-content-search-input>span {
+.search-page-content-search-box {
+    border-radius: 10px;
+
+    position: absolute;
+    
+    width: 1113px;
+    
+    bottom: 37%;
+    
+    height: 62px;
+    
+    background-color: rgb(32, 32, 32);
+    
+    left: 21%;
+    
+    display: flex;
+    
+    align-items: center;
+}
+
+.search-page-content-search-box>span {
 
 color: white;
 
