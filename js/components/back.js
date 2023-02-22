@@ -14,7 +14,7 @@ function renderBackButton() {
 }
 
 function backButtonClick() {
-    if (controls.privius === controls.headerComponents || controls.privius === controls.menu) {
+    if (document.querySelector('.movies-and-series-page-box')) {
         document.getElementById('root').innerHTML = ''
         document.getElementById('root').append(renderMenu())
         controls.select = controls.menu
@@ -24,9 +24,14 @@ function backButtonClick() {
 
     if (controls.privius === controls.search) {
         document.getElementById('root').innerHTML = ''
-        if (document.querySelector('.keyboard-box')) {
-            document.querySelector('.keyboard-box').remove()
-        }
+        document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData))
+        controls.select = controls.headerComponents
+        controls.select.index = 0
+        controls.select.addActive()
+    }
+
+    if (document.querySelector('.movies-card-info-page')) {
+        document.getElementById('root').innerHTML = ''
         document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData))
         controls.select = controls.headerComponents
         controls.select.index = 0

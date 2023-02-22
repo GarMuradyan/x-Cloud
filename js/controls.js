@@ -248,6 +248,12 @@ var controls = {
                 controls.select.firstActive()
                 return
             }
+            if (document.querySelector('.movies-card-info-page')) {
+                this.removeClass()
+                controls.select = controls.playBuuton
+                controls.select.addActive()
+                return
+            }
             this.removeClass()
             controls.select = controls.headerComponents
             controls.select.addActive()
@@ -380,6 +386,7 @@ var controls = {
         },
 
         ok: function () {
+            this.items[this.rowsIndex].getElementsByClassName('card-name-box')[this.index].click()
         },
 
         up: function () {
@@ -436,5 +443,43 @@ var controls = {
 
     search: {
 
+    },
+    playBuuton: {
+        items:document.getElementsByClassName('card-poster-play-button'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+
+        },
+
+        right: function () {
+
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            this.removeClass()
+            controls.select = controls.back
+            controls.select.addActive()
+            
+        },
+        down: function () {
+
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
     }
 }

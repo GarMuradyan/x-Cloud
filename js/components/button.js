@@ -1,4 +1,4 @@
-function renderButton(className,text,classList) {
+function renderButton(className,text,classList,data) {
     var buttonBox = el('button',className)
 
     buttonBox.textContent = text

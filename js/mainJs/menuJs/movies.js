@@ -48,7 +48,7 @@ function renderMoviesSeriesLists(data) {
 
         contentRowsNameBox.textContent = data[i].name
         for (var j = 0; j < data[i].playlist.length; j++) {
-            contentRowsListsBox.append(renderListsCardBox(data[i].playlist[j].name,data[i].playlist[j].poster,data[i].playlist[j].description))
+            contentRowsListsBox.append(renderListsCardBox(data[i].playlist[j]))
         }
     }
 

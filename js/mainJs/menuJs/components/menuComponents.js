@@ -10,16 +10,16 @@ function renderHeaderComponents(name,index) {
     return headerComponentsBox
 }
 
-function renderListsCardBox(name,url,desc) {
+function renderListsCardBox(data) {
     var contentRowsListsCardBox = el('div','content-rows-lists-card-box')
     var cardImageBox = el('div','card-image-box')
     var cardNameBox = el('div','card-name-box')
 
-    cardImageBox.style.backgroundImage = 'url(' + url + ')'
-    cardNameBox.textContent = name
+    cardImageBox.style.backgroundImage = 'url(' + data.poster + ')'
+    cardNameBox.textContent = data.name
 
     contentRowsListsCardBox.onclick = function () {
-        clickListsCard(this)
+        clickListsCard(data)
     }
 
     contentRowsListsCardBox.append(cardImageBox)
@@ -39,6 +39,10 @@ function clickHeaderComponents() {
     controls.select.listTransX()
 }
 
-function clickListsCard(elem) {
-    console.log(elem);
+function clickListsCard(data) {
+    controls.privius = controls.select
+    document.getElementById('root').innerHTML = ''
+    document.getElementById('root').append(renderMoviesCardInfo(data))
+    controls.select = controls.playBuuton
+    controls.select.addActive()
 }
