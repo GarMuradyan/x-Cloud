@@ -1,5 +1,10 @@
 var imgaeHost = 'https://image.tmdb.org/t/p/w500'
 var backgroundImage = 'https://api.xtream.cloud/bg.png'
+var page = 'login'
+
+if (localStorage.getItem('page')) {
+    page = localStorage.getItem('page')
+}
 
 function renderLogin() {
     var loginPageBox = el('div','login-page-box')

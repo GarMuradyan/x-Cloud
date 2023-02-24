@@ -16,13 +16,16 @@ function renderMoviesSeriesHeader(data) {
     var pageHeaderBox = el('div','page-header-box')
     var headerTopBox = el('div','header-top-box')
     var headerBottomBox = el('div','header-bottom-box')
+    var headerBottomContentBox = el('div','header-bottom-content-box')
 
     for (var i = 0; i < data.length; i++) {
-        headerBottomBox.append(renderHeaderComponents(data[i].name,i))
+        headerBottomContentBox.append(renderHeaderComponents(data[i].name,i))
     }
 
     headerTopBox.append(renderBackButton())
     headerTopBox.append(renderSearchButtonBox(data))
+
+    headerBottomBox.append(headerBottomContentBox)
 
     pageHeaderBox.append(headerTopBox)
     pageHeaderBox.append(headerBottomBox)

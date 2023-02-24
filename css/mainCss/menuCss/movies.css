@@ -31,23 +31,22 @@ justify-content: space-between;
     }
     
     .header-bottom-box {
-    
-display: flex;
-    
-color: white;
-    
-font-size: 24px;
-    
-font-family: sans-serif;
-    
-align-items: center;
+    overflow: hidden;
     
 width: 1380px;
     
-/* justify-content: space-between; */
-    
 margin-top: 40px;
     }
+
+.header-bottom-content-box {
+    display: flex;
+    color: white;
+    font-size: 24px;
+    font-family: sans-serif;
+    align-items: center;
+    width: 99999999999999999999px;
+    transition: 0.4s;
+}    
     
     .page-lists-parent-box {
     

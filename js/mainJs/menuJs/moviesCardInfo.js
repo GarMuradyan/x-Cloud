@@ -38,6 +38,7 @@ function renderCardInfoBox(data) {
     var cardInfoRatingAndDurationBox = el('div','card-info-rating-and-duration-box')
     var cardInfoSeasonBox = el('div','card-info-season-box') 
     var seasonTopBox = el('div','season-top-box')
+    var seasonTopContentBox = el('div','season-top-content-box')
     var seasonBottomBox = el('div','season-bottom-box')
     var seasonBottomContentBox = el('div','season-bottom-content-box')
 
@@ -46,13 +47,15 @@ function renderCardInfoBox(data) {
 
     if (data.season) {
         for (var i = 0; i < data.season.length; i++) {
-            seasonTopBox.append(renderSeasonCard(data.season[i].name,i,data))
+            seasonTopContentBox.append(renderSeasonCard(data.season[i].name,i,data))
         }
         for (var i = 0; i < data.season[0].seriesQuant.length; i++) {
             seasonBottomContentBox.append(renderSeasonEpisodesCard(data.season[0].seriesQuant[i]))
         }
 
         seasonBottomBox.append(seasonBottomContentBox)
+
+        seasonTopBox.append(seasonTopContentBox)
 
         cardInfoSeasonBox.append(seasonTopBox)
         cardInfoSeasonBox.append(seasonBottomBox)
@@ -82,14 +85,12 @@ function renderCardInfoRatingBox(data) {
 
 function renderCardInfoDurationBox(data) {
     var cardInfoDurationBox = el('div','card-info-duration-box')
-    var cardInfoDurationIcon = el('span','material-symbols-outlined')
 
-    cardInfoDurationIcon.textContent = 'history_toggle_off'
 
     if (data.duration) {
         cardInfoDurationBox.textContent = data.duration
+        cardInfoDurationBox.style.backgroundImage = 'url(https://www.shutterstock.com/image-vector/clock-icon-white-thin-line-260nw-621051203.jpg)'
 
-        cardInfoDurationBox.append(cardInfoDurationIcon)
     }
 
     return cardInfoDurationBox
@@ -102,7 +103,7 @@ function renderSeasonCard(name,i,data) {
     seasonCardBox.setAttribute('index',i)
 
     seasonCardBox.onclick =function () {
-        seasonCardClick(data,this.getAttribute('index'))
+        seasonCardClick(data,this.getAttribute('index'),this)
     } 
 
     return seasonCardBox
@@ -122,9 +123,28 @@ function renderSeasonEpisodesCard(data) {
     return seasonEpisodeCardBox
 }
 
-function seasonCardClick(data,num) {
+function seasonCardClick(data,num,elem) {
+    seasonCardRemoveActive()
+    for (var i = 0; i < document.getElementsByClassName('season-card-box').length; i++) {
+        document.getElementsByClassName('season-card-box')[i].classList.remove('active-background')
+    }
+    seasonCardAddActive(elem)
     document.querySelector('.season-bottom-content-box').innerHTML = ''
     for (var i = 0; i < data.season[num].seriesQuant.length; i++) {
         document.querySelector('.season-bottom-content-box').append(renderSeasonEpisodesCard(data.season[num].seriesQuant[i]))
+    }
+
+    controls.select = controls.seasonsEpisodes
+    controls.select.firstActive()
+    controls.select.listTransX()
+}
+
+function seasonCardAddActive(elem) {
+    elem.classList.add('active-border')
+}
+
+function seasonCardRemoveActive() {
+    for (var i = 0; i < document.getElementsByClassName('season-card-box').length; i++) {
+        document.getElementsByClassName('season-card-box')[i].classList.remove('active-border')
     }
 }

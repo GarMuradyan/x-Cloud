@@ -52,7 +52,7 @@ function menuCardsClick(type) {
         moviesSeriesData = menuSeriesData
         cardMoviesAndSeries(moviesSeriesData)
     }else if (type === 'settings') {
-        console.log('settings');
+        cardSettings()
     }
 }
 
@@ -63,8 +63,19 @@ function cardMoviesAndSeries(data) {
     
     document.getElementById('root').append(renderMoviesAndSeries(data))
     controls.select = controls.headerComponents
+    controls.select.index = 0
     controls.select.addActive()
 
+}
+
+function cardSettings() {
+    
+    document.getElementById('root').innerHTML = ''
+
+    document.getElementById('root').append(renderSettingsPage(settingsData))
+
+    controls.select = controls.settings
+    controls.select.firstActive()
 }
 
 function getLIveData(url,method) {

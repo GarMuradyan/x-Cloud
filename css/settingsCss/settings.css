@@ -1,0 +1,120 @@
+.settings-card-box.checked .settings-card-checked-point-box{
+    background-color: rgb(10, 237, 29) !important;
+    transform: translateX(25px)
+}
+
+.checked-trans {
+    transform: translateX(25px);
+}
+
+.settings-page-box {
+
+display: flex;
+
+display: -webkit-flex;
+
+justify-content: center;
+}
+
+.settings-page-content-box {
+
+width: 762px;
+
+height: 871px;
+
+position: relative;
+
+top: 110px;
+}
+
+.settings-back-box {position: absolute;left: 20px;top: 20px;display: flex;display: -webkit-flex;align-items: center;}
+
+.settings-page-title {
+
+color: white;
+
+margin-left: 20px;
+
+font-size: 40px;
+
+font-family: sans-serif;
+}
+
+.settings-card-box {
+
+width: 694px;
+
+height: 80px;
+
+background-color: rgb(32, 32, 32);
+
+margin-top: 10px;
+
+border-radius: 12px;
+
+color: white;
+
+font-family: sans-serif;
+
+display: flex;
+
+display: -webkit-flex;
+
+align-items: center;
+
+padding: 0px 20px;
+}
+
+.settings-card-img-box {
+
+background-repeat: no-repeat;
+
+width: 40px;
+
+height: 40px;
+
+background-size: contain;
+}
+
+.settings-card-name-box {
+
+font-size: 32px;
+
+margin-left: 30px;
+}
+
+.settings-card-checked-box {
+
+width: 55px;
+
+height: 25px;
+
+background-color: white;
+
+border-radius: 30px;
+
+position: absolute;
+
+right: 100px;
+
+display: flex;
+
+display: -webkit-flex;
+
+align-items: center;
+}
+
+.settings-card-checked-point-box {
+
+height: 17px;
+
+width: 17px;
+
+background-color: black;
+
+border-radius: 50%;
+
+margin-left: 6px;
+
+transition: 0.3s;
+}

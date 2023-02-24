@@ -198,6 +198,7 @@ var controls = {
         },
         back: function () {
             if (document.querySelector('.menu-page-box')) {
+                localStorage.setItem('page','login')
                 document.getElementById('root').innerHTML = ''
                 document.getElementById('root').append(renderLogin())
                 controls.select = controls.login
@@ -231,6 +232,11 @@ var controls = {
                 controls.select = controls.searchButton
                 controls.select.addActive()   
             }
+            if (document.querySelector('.settings-page-box')) {
+                this.removeClass()
+                controls.select = controls.settings
+                controls.select.firstActive()
+            }
             
         },
 
@@ -254,9 +260,16 @@ var controls = {
                 controls.select.addActive()
                 return
             }
+            if (document.querySelector('.settings-page-box')) {
+                this.removeClass()
+                controls.select = controls.settings
+                controls.select.firstActive()
+                return
+            }
             this.removeClass()
             controls.select = controls.headerComponents
             controls.select.addActive()
+            controls.select.listTransX()
             
         },
         back: function () {
@@ -322,6 +335,7 @@ var controls = {
                 this.removeClass()
                 this.index--
                 this.addActive()
+                this.listTransX()
             }
         },
 
@@ -330,6 +344,7 @@ var controls = {
                 this.removeClass()
                 this.index++
                 this.addActive()
+                this.listTransX()
             }
         },
 
@@ -348,9 +363,13 @@ var controls = {
             this.removeClass()
             controls.select = controls.moviesLists
             controls.select.addActive()
+            controls.select.listTransX()
         },
         back: function () {
             
+        },
+        listTransX:function () {
+            document.querySelector('.header-bottom-content-box').style.transform = 'translateX(' + (- this.index * 350) + 'px)'
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
@@ -394,6 +413,7 @@ var controls = {
                 this.removeClass()
                 controls.select = controls.headerComponents
                 controls.select.addActive()
+                this.listTransX()
             }
 
             if (this.rowsIndex > 0) {
@@ -454,7 +474,9 @@ var controls = {
         },
 
         right: function () {
-
+            this.removeClass()
+            controls.seasons.ok()
+            controls.seasons.listTransX()
         },
 
         ok: function () {
@@ -475,6 +497,192 @@ var controls = {
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
+    seasons: {
+        items:document.getElementsByClassName('season-card-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+                this.listTransX()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+                this.listTransX()
+            }
+
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            this.removeClass()
+            controls.select = controls.back
+            controls.select.addActive()
+            
+        },
+        down: function () {
+            for (var i = 0; i < document.getElementsByClassName('season-card-box').length; i++) {
+                document.getElementsByClassName('season-card-box')[i].classList.remove('active-background')
+            }
+            controls.select = controls.seasonsEpisodes
+            controls.select.addActive()
+            controls.select.listTransX()
+
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+            this.items[this.index].classList.add('active-border')
+        },
+        listTransX:function () {
+            if (this.items.length > 5) {
+                document.querySelector('.season-top-content-box').style.transform = 'translateX('+ (- this.index * 140) + 'px)'   
+            }
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+                this.items[i].classList.remove('active-border')
+            }
+        }
+    },
+    seasonsEpisodes: {
+        items:document.getElementsByClassName('season-episode-card-name-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+            if (this.index === 0) {
+                this.removeClass()
+                controls.seasons.removeClass()
+                controls.select = controls.playBuuton
+                controls.select.addActive()
+            }
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+                this.listTransX()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+                this.listTransX()
+            }
+
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            this.removeClass()
+            controls.select = controls.seasons
+            controls.select.addActive()
+            controls.select.listTransX()
+            
+        },
+        down: function () {
+
+        },
+        back: function () {
+            
+        },
+        listTransX:function () {
+            document.querySelector('.season-bottom-content-box').style.transform = 'translateX('+ (- this.index * 140) + 'px)'
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
+    settings: {
+        items:document.getElementsByClassName('settings-card-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+            this.removeClass()
+            controls.select = controls.back
+            controls.select.addActive()
+        },
+
+        right: function () {
+
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            if (this.index === 0) {
+                this.removeClass()
+                controls.select = controls.back
+                controls.select.addActive()
+            }
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+            
+        },
+        down: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
         },
         removeClass: function () {
             for (var i = 0; i < this.items.length; i++) {

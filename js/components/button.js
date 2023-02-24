@@ -42,6 +42,7 @@ function loginButtonClick(elem) {
     if (elems[0].value === "") {
         if (elems[1].value === "") {
             if (elems[2].value === '') {
+                localStorage.setItem('page','menu')
                 controls.select = controls.menu
                 setTimeout(() => {
                     document.getElementById('root').innerHTML = ''

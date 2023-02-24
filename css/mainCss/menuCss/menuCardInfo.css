@@ -154,14 +154,18 @@ align-items: center;
 font-family: sans-serif;
         
 flex-direction: row-reverse;
+        
+height: 30px;
+        
+background-size: 37px;
+        
+background-position: 1px 16%;
+        
+background-repeat: no-repeat;
+        
+padding-left: 46px;
         }
         
-        .card-info-duration-box>span {
-            
-margin-right: 11px;
-            
-font-size: 28px;
-        }
     
         .card-info-back-box {
             
@@ -173,21 +177,29 @@ font-size: 28px;
         }
 
 .season-top-box {
+width: 1210px;
+overflow: hidden;
+}
 
-display: flex;
+.season-top-content-box {
+    display: flex;
 
-align-items: center;
+    align-items: center;
+    
+    display: -webkit-flex;
+    
+    color: white;
 
-display: -webkit-flex;
+    width: 99999999999999999999999px;
 
-color: white;
-}   
+    transition: 0.3s;
+}
 
 .season-bottom-box {
 
 margin-top: 25px;
 
-width: 830px;
+width: 1210px;
 
 overflow: hidden;
 }
@@ -201,6 +213,8 @@ display: -webkit-flex;
 align-items: center;
 
 width: 99999999999999999999999px;
+
+transition: 0.3s;
 }
 
 .season-card-box {
