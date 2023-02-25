@@ -197,14 +197,6 @@ var controls = {
             
         },
         back: function () {
-            if (document.querySelector('.menu-page-box')) {
-                localStorage.setItem('page','login')
-                document.getElementById('root').innerHTML = ''
-                document.getElementById('root').append(renderLogin())
-                controls.select = controls.login
-                controls.select.class = 'active-border'
-                controls.select.firstActive()   
-            }
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)

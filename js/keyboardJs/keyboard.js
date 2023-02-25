@@ -31,6 +31,28 @@ function renderKeyboard(array,data) {
     return keyboardBox
 }
 
+function renderPinKeyboard(array) {
+    var pinKeyboardBox = el('div','pin-keyboard-box')
+
+    for (var i = 0; i < array.length; i++) {
+        var pinKeyboardItemBox = el('div','pin-keyboard-item-box')
+
+        pinKeyboardItemBox.onclick = function () {
+            pinKeyboardItemClick(this)
+        }
+
+        pinKeyboardItemBox.textContent = array[i]
+
+        pinKeyboardBox.append(pinKeyboardItemBox)
+    }
+
+    return pinKeyboardBox
+}
+
+function pinKeyboardItemClick(elem) {
+    console.log(elem.textContent);
+}
+
 function keyboardItemIfElse(item,elem) {
     if (item === 'close') {
         elem.textContent = ''

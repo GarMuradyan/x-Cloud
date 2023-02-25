@@ -4,9 +4,7 @@ window.onload = ()=> {
 
 function main() {
     if (page === 'login') {
-        document.getElementById('root').append(renderLogin())
-        controls.select = controls.login
-        controls.select.addActive()
+        document.getElementById('root').append(renderLoadingPage())
     }else if (page === 'menu') {
         document.getElementById('root').append(renderMenu())
         controls.select = controls.menu

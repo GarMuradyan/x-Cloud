@@ -60,6 +60,10 @@ var settingsData = [
     {
         img:'http://smarttv.xtream.cloud/img/icons/parentalicon.png',
         name:'Change parental code',
+        onClick:function () {
+            document.getElementById('root').innerHTML = ''
+            document.getElementById('root').append(renderPinCodePage('Enter old pin'))
+        }
     },
     {
         img:'http://smarttv.xtream.cloud/img/icons/padlock.png',
@@ -70,6 +74,8 @@ var settingsData = [
         name:'Log Out',
     },
 ]
+
+localStorage.setItem('pin','0000')
 
 function renderSettingsPage(data) {
     var settingsPageBox = el('div','settings-page-box')
