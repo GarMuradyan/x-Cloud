@@ -56,4 +56,11 @@ function backButtonClick() {
         controls.select.index = 0
         controls.select.addActive()
     }
+
+    if (document.querySelector('.pin-code-page-box')) {
+        document.getElementById('root').innerHTML = ''
+        document.getElementById('root').append(renderSettingsPage(settingsData))
+        controls.select = controls.settings
+        controls.select.firstActive()
+    }
 }

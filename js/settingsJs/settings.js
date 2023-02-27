@@ -1,3 +1,11 @@
+var pinCode = '0000'
+
+if (localStorage.getItem('pin')) {
+    pinCode = localStorage.getItem('pin')
+}
+
+localStorage.setItem('pin',pinCode)
+
 var settingsData = [
     {
         img:'http://smarttv.xtream.cloud/img/icons/globus.png',
@@ -63,6 +71,9 @@ var settingsData = [
         onClick:function () {
             document.getElementById('root').innerHTML = ''
             document.getElementById('root').append(renderPinCodePage('Enter old pin'))
+            activeInput = document.querySelector('.pin-code-page-inputs-item-box')
+            controls.select = controls.pinInputs
+            controls.select.firstActive()
         }
     },
     {
@@ -74,8 +85,6 @@ var settingsData = [
         name:'Log Out',
     },
 ]
-
-localStorage.setItem('pin','0000')
 
 function renderSettingsPage(data) {
     var settingsPageBox = el('div','settings-page-box')

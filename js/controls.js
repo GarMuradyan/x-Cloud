@@ -229,6 +229,11 @@ var controls = {
                 controls.select = controls.settings
                 controls.select.firstActive()
             }
+            if (document.querySelector('.pin-code-page-box')) {
+                this.removeClass()
+                controls.select = controls.pinInputs
+                controls.select.firstActive()
+            }
             
         },
 
@@ -255,6 +260,12 @@ var controls = {
             if (document.querySelector('.settings-page-box')) {
                 this.removeClass()
                 controls.select = controls.settings
+                controls.select.firstActive()
+                return
+            }
+            if (document.querySelector('.pin-code-page-box')) {
+                this.removeClass()
+                controls.select = controls.pinInputs
                 controls.select.firstActive()
                 return
             }
@@ -665,6 +676,112 @@ var controls = {
                 this.index++
                 this.addActive()
             }
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
+    pinInputs: {
+        items:document.getElementsByClassName('pin-code-page-inputs-item-box'),
+        index:0,
+        class:'active-border',
+
+        left: function () {
+            if (this.index === 0) {
+                this.removeClass()
+                controls.select = controls.back
+                controls.select.addActive()
+            }
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            this.removeClass()
+            controls.select = controls.back
+            controls.select.addActive()
+            
+        },
+        down: function () {
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
+    pinKeyboard: {
+        items:document.getElementsByClassName('pin-keyboard-item-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            this.removeClass()
+            document.querySelector('.pin-keyboard-box').remove()
+            controls.select = controls.pinInputs
+            controls.select.addActive()
+            
+        },
+        down: function () {
         },
         back: function () {
             
