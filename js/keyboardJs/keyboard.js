@@ -51,78 +51,88 @@ function renderPinKeyboard(array) {
 
 function pinKeyboardItemClick(elem) {
     if (elem.textContent.length === 1) {
-        if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter old pin') {
-            oldPin+=elem.textContent
-        }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter new pin') {
-            newPin+=elem.textContent
-        }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Confirm new pin') {
-            confirmPin+=elem.textContent
-        }
+
+        toCheckPinPageTitleText(elem)
 
         if (activeInput.getElementsByClassName('pin-code-icon')) {
             activeInput.innerHTML = ''
         }
+
         activeInput.append(el('div','pin-code-icon'))
 
         controls.pinInputs.index++
 
         if (controls.pinInputs.index === 4) {
-            if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter old pin') {
-                if (oldPin === localStorage.getItem('pin')) {
-                    removePinInputsHtml()
-                    controls.pinInputs.index = 0
-                    controls.pinInputs.ok()
-                    document.querySelector('.pin-code-page-title-box').textContent = 'Enter new pin'
-                    return
-                }else {
-                    removePinInputsHtml()
-                    controls.pinInputs.index = 0
-                    controls.pinInputs.ok()
-                    wrongPin('Wrong Pin')
-                    return
-                }
-            }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter new pin') {
-                if (newPin.length == 4) {
-                    removePinInputsHtml()
-                    controls.pinInputs.index = 0
-                    controls.pinInputs.ok()
-                    document.querySelector('.pin-code-page-title-box').textContent = 'Confirm new pin'
-                    console.log(newPin);
-
-                    return
-                }else {
-                    newPin = ''
-                    removePinInputsHtml()
-                    controls.pinInputs.index = 0
-                    controls.pinInputs.ok()
-                    document.querySelector('.pin-code-page-title-box').textContent = 'Enter new pin'
-                    return
-                }
-            }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Confirm new pin') {
-                if (confirmPin === newPin) {
-                    newPin = ''
-                    localStorage.setItem('pin',confirmPin)
-                    wrongPin('Pin Code Saved')
-                    setTimeout(() => {
-
-                        document.getElementById('root').innerHTML = ''
-                        document.getElementById('root').append(renderSettingsPage(settingsData))
-
-                        controls.select = controls.settings
-                        controls.select.firstActive()
-                    }, 1500);
-                    return
-                }else {
-                    removePinInputsHtml()
-                    controls.pinInputs.index = 0
-                    controls.pinInputs.ok()
-                    wrongPin('Pin not Mutch')
-                    return
-                }
-            }
+            toCheckPinIndexEqualFor()
         }
         controls.pinInputs.ok()
         showHideKeyboardItemActive(elem)
+    }
+}
+
+function toCheckPinPageTitleText(elem) {
+    if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter old pin') {
+        oldPin+=elem.textContent
+    }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter new pin') {
+        newPin+=elem.textContent
+    }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Confirm new pin') {
+        confirmPin+=elem.textContent
+    }
+}
+
+function toCheckPinIndexEqualFor() {
+    if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter old pin') {
+        if (oldPin === localStorage.getItem('pin')) {
+            removePinInputsHtml()
+            controls.pinInputs.index = 0
+            controls.pinInputs.ok()
+            document.querySelector('.pin-code-page-title-box').textContent = 'Enter new pin'
+            return
+        }else {
+            removePinInputsHtml()
+            controls.pinInputs.index = 0
+            controls.pinInputs.ok()
+            wrongPin('Wrong Pin')
+            return
+        }
+    }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Enter new pin') {
+        if (newPin.length == 4) {
+            removePinInputsHtml()
+            controls.pinInputs.index = 0
+            controls.pinInputs.ok()
+            document.querySelector('.pin-code-page-title-box').textContent = 'Confirm new pin'
+            console.log(newPin);
+
+            return
+        }else {
+            newPin = ''
+            removePinInputsHtml()
+            controls.pinInputs.index = 0
+            controls.pinInputs.ok()
+            document.querySelector('.pin-code-page-title-box').textContent = 'Enter new pin'
+            return
+        }
+    }else if (document.querySelector('.pin-code-page-title-box').textContent === 'Confirm new pin') {
+        if (confirmPin === newPin) {
+            newPin = ''
+            localStorage.setItem('pin',confirmPin)
+            wrongPin('Pin Code Saved')
+            setTimeout(() => {
+
+                document.getElementById('root').innerHTML = ''
+                document.getElementById('root').append(renderSettingsPage(settingsData))
+
+                controls.select = controls.settings
+                controls.select.firstActive()
+            }, 1500);
+            return
+        }else {
+            removePinInputsHtml()
+            controls.pinInputs.index = 0
+            controls.pinInputs.ok()
+            wrongPin('Pin not Mutch')
+            return
+        }
     }
 }
 

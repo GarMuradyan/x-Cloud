@@ -83,6 +83,24 @@ var settingsData = [
     {
         img:'http://smarttv.xtream.cloud/img/icons/logout.png',
         name:'Log Out',
+        onClick: function () {
+            var data = [
+                {
+                    name:'Cancel',
+                    type:'cancel'
+                },
+                {
+                    name:'Log out',
+                    type:'log out'
+                }
+            ]
+            document.querySelector('.settings-page-box').classList.add('exit-background')
+            document.getElementById('root').append(renderLogOutPopup(data))
+            controls.select.removeClass()
+            controls.select = controls.logOut
+            controls.select.firstActive()
+
+        }
     },
 ]
 
@@ -114,7 +132,6 @@ function renderSettingsBackBox() {
 }
 
 function renderSettingsContentCardBox(data) {
-    console.log(data);
     var settingsCardBox = el('div','settings-card-box')
     var settingsCardImgBox = el('div','settings-card-img-box')
     var settingsCardNameBox = el('div','settings-card-name-box')
@@ -141,6 +158,61 @@ function renderSettingsContentCardBox(data) {
 
     return settingsCardBox
 
-
 }
 
+function renderLogOutPopup(data) {
+    var logOutPopupBox = el('div','log-out-popup-box')
+    var logOutPopupContentBox = el('div','log-out-popup-content-box')
+    var logOutPopupContentTitleBox = el('div','log-out-popup-content-title-box')
+    var logOutPopupContentButtonsBox = el('div','log-out-popup-content-buttons-box')
+
+    logOutPopupContentTitleBox.textContent = 'Are you sure, you want to log out ?'
+
+    for (var i = 0; i < data.length; i++) {
+        var contentButtonsButtonBox = el('div','content-buttons-button-box')
+
+        contentButtonsButtonBox.classList.add('active-border')
+        contentButtonsButtonBox.setAttribute('type',data[i].type)
+        contentButtonsButtonBox.textContent = data[i].name
+
+        contentButtonsButtonBox.onclick = function () {
+            logOutPopupButtonsClick(this.getAttribute('type'))
+        }
+
+        logOutPopupContentButtonsBox.append(contentButtonsButtonBox)
+    }
+
+
+    logOutPopupContentBox.append(logOutPopupContentTitleBox)
+    logOutPopupContentBox.append(logOutPopupContentButtonsBox)
+
+    logOutPopupBox.append(logOutPopupContentBox)
+
+    return logOutPopupBox
+}
+
+function logOutPopupButtonsClick(type) {
+    switch (type) {
+        case 'cancel':
+            typeCancel()
+            break;
+    
+        case 'log out':
+            typeLogOut()
+            break;
+    }
+}
+
+function typeCancel() {
+    document.querySelector('.log-out-popup-box').remove()
+    document.querySelector('.settings-page-box').classList.remove('exit-background')
+    controls.select = controls.settings
+    controls.select.firstActive()
+}
+
+function typeLogOut() {
+    document.getElementById('root').innerHTML = ''
+    page = 'login'
+    localStorage.setItem('page',page)
+    document.getElementById('root').append(renderLoadingPage())
+}

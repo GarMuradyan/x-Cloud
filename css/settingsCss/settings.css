@@ -14,6 +14,8 @@ display: flex;
 display: -webkit-flex;
 
 justify-content: center;
+
+height: 100vh;
 }
 
 .settings-page-content-box {
@@ -24,7 +26,7 @@ height: 871px;
 
 position: relative;
 
-top: 110px;
+top: 125px;
 }
 
 .settings-back-box {position: absolute;left: 20px;top: 20px;display: flex;display: -webkit-flex;align-items: center;}
@@ -117,4 +119,82 @@ border-radius: 50%;
 margin-left: 6px;
 
 transition: 0.3s;
+}
+
+.log-out-popup-box {
+
+position: fixed;
+
+top: 0;
+
+width: 1920px;
+
+height: 258px;
+
+background-color: rgb(32, 32, 32) !important;
+
+display: flex;
+
+display: -webkit-flex;
+
+justify-content: center;
+
+align-items: center;
+}
+
+.log-out-popup-content-box {
+
+height: 200px;
+
+color: white;
+
+font-family: sans-serif;
+
+display: flex;
+
+display: -webkit-flex;
+
+flex-direction: column;
+
+align-items: center;
+}
+
+.log-out-popup-content-title-box {
+
+font-size: 43px;
+}
+
+.log-out-popup-content-buttons-box {
+
+display: flex;
+
+display: -webkit-flex;
+
+align-items: center;
+}
+
+.content-buttons-button-box {
+    
+width: 273px;
+    
+height: 68px;
+    
+margin: 40px;
+    
+display: flex;
+    
+display: -webkit-flex;
+    
+align-items: center;
+    
+justify-content: center;
+    
+font-size: 33px;
+
+border-radius: 5px;
+}
+
+.exit-background {
+    background-color: rgb(29 30 33 / 50%);
+    opacity: 0.6;
 }

@@ -798,5 +798,53 @@ var controls = {
                 this.items[i].classList.remove(this.class)
             }
         }
+    },
+
+    logOut: {
+        items:document.getElementsByClassName('content-buttons-button-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+            
+        },
+        down: function () {
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
     }
 }
