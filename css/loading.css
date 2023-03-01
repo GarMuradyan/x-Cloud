@@ -3,9 +3,9 @@
     height: 100%;
     background-color: transparent;
     border-radius: 50%;
-    border-top: 5px solid white;
+    border: 6px solid white;
+    border-color: #fff transparent #fff transparent;
     animation: toggle 2s linear infinite;
-    border-bottom: 5px solid white;
 }
 
 .loading-page-box {

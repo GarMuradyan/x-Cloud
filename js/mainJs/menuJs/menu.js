@@ -44,7 +44,7 @@ function renderMenuCards(name,url,type) {
 
 function menuCardsClick(type) {
     if (type === 'live') {
-        console.log('live');
+        cardLive()
     }else if (type === 'movies') {
         moviesSeriesData = menuMoviesData
         cardMoviesAndSeries(moviesSeriesData)
@@ -76,6 +76,15 @@ function cardSettings() {
 
     controls.select = controls.settings
     controls.select.firstActive()
+}
+
+function cardLive() {
+    document.getElementById('root').innerHTML = ''
+
+    document.getElementById('root').append(renderLiveTvPage(liveTvData))
+
+    controls.select = controls.tvChannels
+    controls.select.addActive()
 }
 
 function getLIveData(url,method) {

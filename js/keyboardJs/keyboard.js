@@ -184,18 +184,22 @@ function keyboardItemIfElse(item,elem) {
 
     if (item === '123') {
         elem.classList.add('width')
+        elem.classList.add('num')
     }
 
     if (item === 'Clean') {
         elem.classList.add('width')
+        elem.classList.add('clean')
     }
 
     if (item === 'Done') {
         elem.classList.add('width')
+        elem.classList.add('done')
     }
 
     if (item === 'Eng') {
         elem.classList.add('width')
+        elem.classList.add('eng')
     }
 }
 
@@ -208,7 +212,7 @@ function keyboardItemClick(elem,array,data) {
         }
     }
 
-    if (elem.textContent === 'Clean') {
+    if (elem.classList.contains('clean')) {
         if (activeInput.value) {
             activeInput.value = ''
             showHideKeyboardItemActive(elem)
@@ -230,15 +234,15 @@ function keyboardItemClick(elem,array,data) {
         shiftClick(elem,array,data)
     }
 
-    if (elem.textContent === 'Done') {
+    if (elem.classList.contains('done')) {
         doneClick(elem,array,data)
     }
 
-    if (elem.textContent === '123') {
+    if (elem.classList.contains('num')) {
         numberClick(elem,array,data)
     }
 
-    if (elem.textContent === 'Eng') {
+    if (elem.classList.contains('eng')) {
         engClick(elem,array,data)
     }
 }

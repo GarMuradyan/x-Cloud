@@ -693,6 +693,110 @@ var controls = {
             }
         }
     },
+    tvChannels: {
+        items:document.getElementsByClassName('live-tv-channels-card-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+
+        },
+
+        right: function () {
+
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+            
+        },
+        down: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+        back: function () {
+            this.removeClass()
+            tvCategoriesTitleClick()
+            controls.select = controls.tvCategories
+            controls.select.addActive()
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
+    tvCategories: {
+        items:document.getElementsByClassName('live-tv-categories-card-box'),
+        index:0,
+        class:'active-background',
+
+        left: function () {
+
+        },
+
+        right: function () {
+            document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
+            document.querySelector('.live-tv-categories-box').classList.add('display')
+            controls.select = controls.tvChannels
+            controls.select.addActive()
+        },
+
+        ok: function () {
+            this.items[this.index].click()
+        },
+
+        up: function () {
+
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+            
+        },
+        down: function () {
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+        back: function () {
+            
+        },
+        addActive: function () {
+            this.items[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.remove(this.class)
+            }
+        }
+    },
     pinInputs: {
         items:document.getElementsByClassName('pin-code-page-inputs-item-box'),
         index:0,
