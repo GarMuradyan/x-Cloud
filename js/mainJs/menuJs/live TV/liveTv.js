@@ -2,6 +2,7 @@ function renderLiveTvPage(data) {
     var liveTvPageBox = el('div','live-tv-page-box')
 
     liveTvPageBox.append(renderTvCategoriesBox(data))
+    liveTvPageBox.append(renderTvPLayerBox(data[1].playlist[0],1))
 
     return liveTvPageBox
 
@@ -89,7 +90,7 @@ function liveTvCategoriesCardClick(data) {
         document.querySelector('.live-tv-categories-box').classList.add('display')
     }
     controls.select = controls.tvChannels
-    controls.select.addActive()
+    controls.select.firstActive()
 }
 
 function renderLiveTvChannelsBox(playlist) {
@@ -116,6 +117,10 @@ function renderLiveTvChannelsCardBox(data,i) {
     channelCardNameBox.textContent = data.name
     channelCardPosterBox.style.backgroundImage = 'url(' + data.poster + ')'
 
+    liveTvChannelsCardBox.onclick = function () {
+        liveTvChannelsCardClick(this,data,i)
+    }
+
     channelCardPosterAndNameBox.append(channelCardPosterBox)
     channelCardPosterAndNameBox.append(channelCardNameBox)
 
@@ -124,4 +129,19 @@ function renderLiveTvChannelsCardBox(data,i) {
 
     return liveTvChannelsCardBox
     
+}
+
+function liveTvChannelsCardClick(elem,data,i) {
+    removeLiveTvChannelsActive()
+    elem.classList.add('active-border')
+    if (document.querySelector('.player-content-box')) {
+        document.querySelector('.player-content-box').remove()
+    }
+    document.querySelector('.tv-player-box').insertBefore(renderTvPlayerContentBox(data,i+1),document.querySelector('.tv-player-box').children[1])
+}
+
+function removeLiveTvChannelsActive() {
+    for (var i = 0; i < document.getElementsByClassName('live-tv-channels-card-box').length; i++) {
+        document.getElementsByClassName('live-tv-channels-card-box')[i].classList.remove(('active-border'))
+    }
 }

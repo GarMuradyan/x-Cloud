@@ -782,7 +782,8 @@ var controls = {
             }
         },
         back: function () {
-            
+            document.getElementById('root').innerHTML = ''
+            document.getElementById('root').append(renderLoadingPage())
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)

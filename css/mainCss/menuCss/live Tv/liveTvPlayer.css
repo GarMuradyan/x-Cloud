@@ -1,0 +1,135 @@
+.tv-player-box{
+
+    position: absolute;
+    
+    top: 20px;
+    
+    width: 1072px;
+    
+    height: 1040px;
+    
+    left: 43%;
+    
+    border-radius: 5px;
+    
+    }
+                
+                .tv-player-time-box {
+                
+                width: 100%;
+                
+                background-color: rgb(32, 32, 32) !important;
+                
+                height: 83px;
+                
+                border-radius: 5px;
+                }
+                
+                .player-content-box {
+                
+    margin-top: 25px;
+                }
+                
+                .player-content-video-box{
+                
+width: 100%;
+                
+height: 674px;
+                
+border-radius: 5px;
+                
+background-color: black;
+                }
+                
+                .tv-player-video-box {
+                
+    width: 100%;
+                
+    height: 100%;
+                
+    object-fit: fill;
+                
+    border-radius: 5px;
+                }
+                
+                .player-content-info-box {
+                
+    margin-top: 1%;
+                
+    width: 100%;
+                
+    height: 155px;
+                
+    background-color: rgb(32, 32, 32) !important;
+                
+    display: flex;
+                
+    align-items: center;
+                
+    color: white;
+                
+    font-family: sans-serif;
+                
+    border-radius: 5px;
+                }
+                
+                .player-content-info-number-box {
+                
+            font-size: 50px;
+                
+            font-weight: 700;
+                
+            margin-left: 70px;
+                }
+                
+                .player-content-info-poster-box {
+                
+            width: 105px;
+                
+            height: 83px;
+                
+            background-size: contain;
+                
+            margin-left: 60px;
+                }
+                
+                .channel-info-box {
+                
+            margin-left: 50px;
+                
+            height: 130px;
+                
+            font-size: 30px;
+                }
+                
+                .channel-info-name-box {
+                
+                }
+                
+                .channel-info-epg-box {
+                
+            margin-top: 10px;
+                }
+                
+                .current-epg {
+                
+            display: flex;
+                
+            flex-direction: row-reverse;
+                }
+                
+                .next-epg {
+                
+            margin-top: 10px;
+                
+            display: flex;
+                
+            flex-direction: row-reverse;
+                }
+                
+                .epg-time {
+                    
+            color: green;
+                    
+            margin-right: 15px;
+                }

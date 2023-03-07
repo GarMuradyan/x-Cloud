@@ -85,6 +85,7 @@ function cardLive() {
 
     controls.select = controls.tvChannels
     controls.select.addActive()
+    controls.select.ok()
 }
 
 function getLIveData(url,method) {

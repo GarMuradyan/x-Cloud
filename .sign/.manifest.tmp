@@ -4,12 +4,16 @@ config.xml__DEL__xGfqxjrRVtRzSUDDSRTvb6uo0yiXhsFF4YLia92gWIY2agMKGbbXGJ5AiC75ccA
 X2B7r+mU+Q==
 css/keyboard.css__DEL__E64SFX6P6/Ix0Qr34OcO91iOsT4jQy68Qk9UW5tzn7soGw28bHMWvoKWVE6iWxtcEsvxdaDaIfwC
 2MXm7FVC6w==
-css/loading.css__DEL__/LLXZqDGYMf1XeN8gSKnJgdVD/y6l77BbYVx3MSN2c1lDhZ719rZODxh/ZNqWojBVLKXTfkGGlWB
-Ps7+Oa+VpQ==
+css/loading.css__DEL__VEXJP2Mwhzw8kNj+pJQelL8b0pCylcYuxcQB7D1tTq5MJ8iDFvRh0C+iU1LRHkFk9cxNUAeTHLbP
+Z3hPtdAlAA==
 css/loginCss/login.css__DEL__MM8BXGMdlf0oOLB29Lk/ZyxJ5UwPZnc6es2kr7sUpHrQvEoHM8B7RcXR04i0Jt0Jbpf6MPeJoBVM
 m69QQnE49A==
 css/mainCss/menuCss/components/menuComponents.css__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
+css/mainCss/menuCss/live Tv/liveTv.css__DEL__/4iqnQvV4pVePsS0Q3odBpOX0kbMFUDkBu+iyH7pxnJwgkawyB7LUJtbmtN2uEwO+GxJGWGHcTYW
++EHFjVwagg==
+css/mainCss/menuCss/live Tv/liveTvPlayer.css__DEL__wSFMrmXvyh133yA33nx+eMWrCXp97Bi4dfNuYYz0uSrUiby+QiqWa0X61/2xVK9UWtqxHWeDW+xY
+GRLAoN65zw==
 css/mainCss/menuCss/menu.css__DEL__gEqH4JQGx/wJNqCjacDlUTqN/BuOaMOptc4O23VjE2ohUy+fAZHvnpOwQb8wh3Y22ZOtdq1IzbxW
 g7AaMWwhCA==
 css/mainCss/menuCss/menuCardInfo.css__DEL__wwTCF90r2wuKZgzYqg9G34ioVbnPNoM52hQL8yDEhDSpp7Z7qDCLIBbamKJDQoTm3zFu+B2mesar
@@ -22,12 +26,12 @@ css/mainCss/style.css__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXy
 ODJ6+SfaPg==
 css/pinCodecss/pinCode.css__DEL__17VPrue4xmFaANZoYFvN6g8mlCuNQ5GtptJXIt+2ycsgIS6f4jG8VB/sG8x/5PcvsnZHa/GIBprO
 xVgbh+4+EA==
-css/settingsCss/settings.css__DEL__uxu21ijneq8CjoiQrrZ1NKNBRbTTKUn2fr4H/+V8EtN4sBELcjKAL7D2jWzAJYd8amIS6ci7inN1
-51pNL5MuIQ==
+css/settingsCss/settings.css__DEL__F8qqVFPg1Vl9FkrHSBHwnWc+cpZ21wKR4Zfhl3BXov7/pX1S1mt0Py8m5eg86XV9/dlUIKOvXo9X
+MPU1TwiFdA==
 css/style.css__DEL__yVz+9de3D8MfauTQFvKQ4kf7TZYAXq7aIK8Oa/y2UDcQZ94m698cUQearmwcDVwDatp53j8PYTs2
 IfVhhvkzMw==
-index.html__DEL__J0gsYsuf0FmNf9k/s2ZZzGLAyZ71m8YOr13SMR04LDziVXTna1oySlDRiw1DVxDyMu4NUssfGHrC
-KwGNOly3LQ==
+index.html__DEL__L/gc357dRT0Mz+6IpKyfHgt83GECzclMRzDdIzZygHRCLk+KS2du+UKlHo9fHMhmhMzgovz/6xyj
+6gA6kkI3bA==
 js/components/back.js__DEL__G1yqm8rraPI27PSkZxDjiTkPqFRCBYbWw70eupFnJzOdNaFHywtSlpgxjmmAWPAqrNkDgXbxN+Ol
 2kesSXnGMg==
 js/components/button.js__DEL__S8mLO0bVNbydR8VByIKhxKxvCVQ4plaYKSB/LoyqsoT9klht4N1aH/Oe9j7HCK2nTC/tg3myUF8w
@@ -40,26 +44,32 @@ js/components/logo.js__DEL__Brd/UCluM0hm6aSa3JP7LcVB7mkDWKhLH9/uXJOFMcKfIZjKbr7j
 Bbom1RwanA==
 js/components/search.js__DEL__QVfliFWMmozUd0CcWaRnA+Uhp3ZJdaWz4GE3dtRETZOFbeZ0/NvWJDaJC3YX/eYMZdDRoggq0G+g
 gBkLT4EkLw==
-js/controls.js__DEL__iS3mW1CsnoOedqU/SU509DE3in/dnwqqHsWM5dW+oRRwXt5GpDyECx3JFWTZQshNq8I+Y8X5yQNS
-zAdCO6mMwQ==
-js/index.js__DEL__BIJpeclRr8j9aPZO3P2xcp2akctJEGr5TrcPPXuTQY9Epkp9CHBAFk/BWC49jubM3ewLbD2gZa7D
-UDNkeY3YNA==
-js/keyboardJs/keyboard.js__DEL__HO6XFHqyvDtbbwDhXSU6SWJuqVtkGi8yyAeMEFMGuqjj/bcFRGs6qn5y9yvLduh8yJT0jYpC51b7
-sSmVptuRFA==
+js/controls.js__DEL__uQ7JnyFxgln/2mRbfeTI0A5+iZ95Sw0R8xWBxKIOSh289W6zuyuHcut2kTeklql//fwqAIlJMRHZ
+A7ftwF047A==
+js/index.js__DEL__L6EqVWIp0VczxFs8UJq0cqiFnxxVucla97y7nX23CyfHcGarvQ914kHow4YeXHihIiwXvbVQgYOL
+FIaHxv+qvA==
+js/keyboardJs/keyboard.js__DEL__nM+sw/arEOGgNs1XtHRISZMiCPKyrxouTiqXJoBP0r1+i/GTdOtUMBi/Zl1GmhPOhqOjB8yziA2g
+2Z11Cw7OhA==
 js/keyboardJs/keyboardItems.js__DEL__YQlVU6DotIJ0ximyDnI8McOVgKgoqhVpiq4PGplPztZwGgDIzZ6rrlhX0queD8XuKU+OvuDjR+BN
 yRf/vxtE+A==
 js/keys.js__DEL__SCn3LiOwMPMSQkksKiz3CwmOwQBJeidtqaf+IplqhIKKWS4SoZt5mUvR8gn6+gnE47sUQWKvBCOe
 XE1qmmiODQ==
-js/loadingJs/loading.js__DEL__HESJvGJctCW/4/lXzJKVyUYapepBdWgnpmeTvROr5xQPsf1cRY5/7BS+PDr+e0U4AMXl/vkvYlck
-jrW2qltrJA==
+js/loadingJs/loading.js__DEL__lnN+Xu5YwJwVjq4pzgGzBgv9PhN0hT/bj2y5/JaWLGksViH7y2+mWuCbNHZnasDMwV6HEAJMgXUo
+3jvn3dI0Nw==
 js/loginJs/login.js__DEL__Ozj5U1ZRY1cFtLds/6BeFF2QPbLpg9VEnCN6VTDKQEYfdGO8h+8C3lCiYe41dcGWXTb7MXpPE+pe
 i/dHQ/D0Xw==
 js/mainJs/index.js__DEL__z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGl
 ODJ6+SfaPg==
 js/mainJs/menuJs/components/menuComponents.js__DEL__dDRdomxiA1TBkifCULnd7Yxf59HjtYRyfHYI7ASrCSoUsEgfy7PSk9wAZpsIIa56EwL3PDillizk
 jUxcOF5p8A==
-js/mainJs/menuJs/menu.js__DEL__6jQd2eckBKWzx/D4nv3ITJ+5O2PkVkKalcRmYeF5k3gw1RiuCdzbx4vPO/4uDwtX2W+SIqrpthQL
-zDXNRBlUuw==
+js/mainJs/menuJs/live TV/live Tv Data.js__DEL__uRLrSNfwO0UQLA9Tq4H6E2f43HxT4pirCNHijfh/L2cKAXjTKfiWGPmBEfyKiHawLn2lhLyKEi08
+iJc2AabN7Q==
+js/mainJs/menuJs/live TV/liveTv.js__DEL__uKU0e2ZJe0KY7UEM16O+4ENhiu4QV2+xy1kVtnr3JQdG+WCHIujAWvOwsmTNLmZpNlHuLRsodgSk
+3cY6aOgaOA==
+js/mainJs/menuJs/live TV/liveTvPlayer.js__DEL__faY13S+2eG9Diu03RZKMcR3FQg6VqTi50o83eJSLHBhCGu8SEOySgOABmYwD2UMxHtONEI/rDCY6
+564Rnc30hA==
+js/mainJs/menuJs/menu.js__DEL__TlUHZl2uje9g7z137xlqsqbKTGpeWyo62GnJdJIrgtOqgMJfjAteInrOwiE7GXrDNWlLEp2dd9RQ
+OonVGI1Kzg==
 js/mainJs/menuJs/menuImagesLinks.js__DEL__WIT8d4WdPU0jhhg21bN4njHqoH7Y0C/5U/lwMcPCqgOzKAyHFwKSHiMrx3P4osI4SqhhAIhdKa5w
 WiLaACEEkQ==
 js/mainJs/menuJs/movies.js__DEL__O7Ld+H/Yct0649wTv3h7fMfPW24fV24ndSRUF/vVtVyd2XceNak8iqt6k176O/1YjEzpOq19cil9
@@ -72,11 +82,11 @@ js/pinCodeJs/pinCode.js__DEL__XdSU15UMcY+jwd81E6tXxAj4b/fXHw12jEZ1fM6FOmT1Hty81P
 +JUO4/RWlw==
 js/req.js__DEL__+CKhl4BIBPj5SBry3QeEF7Cq8bdajqbArer99u4euepO4oadsZT+ow3RNho6HX7PEkkr+PeMb1KK
 nFAlkCM06A==
-js/settingsJs/settings.js__DEL__necui8xKn5I8lyEnMT6QhZouPaiGRVtOAqAblAk8rJfGBYJ2afFpMwQYnaMoStfO/F4QT0hkj9Xf
-kr2DK70dcA==
+js/settingsJs/settings.js__DEL__QBTj2w9SyLdNYiAuV0Z2sKnlOAKg5VJwH/1TZlSev6vgJu+p3hrf6MWVN/6xi6Fvnq5nfAGmvxuR
+mMWiyYAF4A==
 js/util.js__DEL__edpMTC6PqxlB3qWzJ9UjzgvepsS7nBfefLjGQO6NhQ8NufiBgxsHFfs4AjK7kchR8ctj5YprJpFl
 DPwOvgn/vw==
 logo.png__DEL__mhw1HM32HFSEoyKgCa3Ru1x1p1R0WjrsKf5YvnaUPRltgKRrrdBzs04lJMgOINHtBNNCR8IkB77K
 waHsVYUdAg==
-author-signature.xml__DEL__u1BPh7bZZxwWoUc1fmetdH4W0KD/i9ogfejVCWkOMlot6SHC8yHRbeJ/LXQ3/4A5zulZ2WFeQu0K
-X8r3UdOlUg==
+author-signature.xml__DEL__i0xelnfNt51UUuVQaw1RUw3oV+8LGb6JLESI9bF/rM/voHOpZ/hCSApKP1l0W2o1jKzp6A/IfzLR
+iVG7SfhfUQ==

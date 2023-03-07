@@ -1,208 +1,216 @@
 .live-tv-page-box {
 
-    padding: 20px 10px 20px 50px;
+    padding: 20px 10px 20px 40px;
     
     height: 100vh;
-    }
-    
-    .tv-categories-box {display: flex;display: -webkit-flex;flex-direction: column;width: 752px;align-items: center;}
-    
-    .tv-categories-title-box {
-    
-    color: white;
-    
-    width: 752px;
-    
-    height: 83px;
-    
-    background-color: rgb(32, 32, 32) !important;
-    
-    border-radius: 5px;
-    
-    display: flex;
-    
-    display: -webkit-flex;
-    
-    align-items: center;
-    
-    flex-direction: row-reverse;
-    
-    padding-left: 40px;
-    
-    padding-right: 300px;
-    
-    font-size: 37px;
-    
-    font-family: sans-serif;
-    
-    justify-content: flex-end;
-    
-    font-weight: 700;
-    }
-    
-    .tv-categories-title-icon-box {
-    
-    width: 55px;
-    
-    height: 55px;
-    
-    background-size: contain;
-    
-    background-repeat: no-repeat;
-    
-    margin-right: 31px;
-    }
-    
-    .tv-categories-content-box {
-    
-margin-top: 15px;
-    }
-    
-    .live-tv-categories-box {
-    
-width: 752px;
-    
-height: 950px;
-    
-overflow: hidden;
-    
-padding: 0 15px;
-
-transition: 0.6s;
-    position: absolute;
-    top: 11%;
-    left: 2.6%;
-    z-index: 999;
-}
-    
-    .live-tv-categories-card-box {
-    
-    width: 100%;
-    
-    height: 123px;
-    
-    background-color: rgb(32, 32, 32) ;
-    
-    margin-top: 10px;
-    
-    color: white;
-    
-    font-family: sans-serif;
-    
-    font-size: 30px;
-    
-    font-weight: 700;
-    
-    display: flex;
-    
-    display: -webkit-flex;
-    
-    align-items: center;
-    
-    padding-left: 70px;
-    
-    border-radius: 6px;
-    }
-    
-    .live-tv-channels-box {
-    
-width: 752px;
-    
-height: 950px;
-    
-overflow: hidden;
-    
-padding: 0 15px;
-
-transition: 0.6s;
-
-position: absolute;
-    top: 11%;
-    left: 2.6%;
-    z-index: 999;
-}
-    
-    .live-tv-channels-card-box {
-    
-    width: 100%;
-    
-    height: 123px;
-    
-    background-color: rgb(32, 32, 32) ;
-    
-    margin-top: 10px;
-    
-    color: white;
-    
-    font-family: sans-serif;
-    
-    font-size: 30px;
-    
-    font-weight: 700;
-    
-    display: flex;
-    
-    display: -webkit-flex;
-    
-    align-items: center;
-    
-    padding-left: 70px;
-    
-    border-radius: 6px;
-    }
-    
-    .channel-card-number-box {
     
     }
-    
-    .channel-card-poster-and-name-box {
-    
-    margin-left: 60px;
-    
-    display: flex;
-    
-    display: -webkit-flex;
-    
-    align-items: center;
-    }
-    
-    .channel-card-poster-box {
-    
-    width: 118px;
-    
-    height: 107px;
-    
-    background-repeat: no-repeat;
-    
-    background-size: 65%;
-    
-    background-position: center;
-    }
-    
-    .channel-card-name-box {
         
-    margin-left: 30px;
+        .tv-categories-box {display: flex;display: -webkit-flex;flex-direction: column;width: 752px;align-items: center;height: 1035px;}
+        
+        .tv-categories-title-box {
+        
+        color: white;
+        
+        width: 752px;
+        
+        height: 83px;
+        
+        background-color: rgb(32, 32, 32) !important;
+        
+        border-radius: 5px;
+        
+        display: flex;
+        
+        display: -webkit-flex;
+        
+        align-items: center;
+        
+        flex-direction: row-reverse;
+        
+        padding-left: 40px;
+        
+        padding-right: 300px;
+        
+        font-size: 37px;
+        
+        font-family: sans-serif;
+        
+        justify-content: flex-end;
+        
+        font-weight: 700;
+        }
+        
+        .tv-categories-title-icon-box {
+        
+        width: 55px;
+        
+        height: 55px;
+        
+        background-size: contain;
+        
+        background-repeat: no-repeat;
+        
+        margin-right: 31px;
+        }
+        
+        .tv-categories-content-box {
+        
+    margin-top: 15px;
+        }
+        
+        .live-tv-categories-box {
+        
+    width: 752px;
+        
+    height: 950px;
+        
+    overflow: hidden;
+        
+    padding: 0 15px;
+        
+    transition: 0.6s;
+        
+    position: absolute;
+        
+    top: 11%;
+        
+    left: 2.0%;
+        
+    z-index: 999;
     }
-
-.display {
-    transform: translateX(-130%);
-}
-
-.scale-tv {
-    transform: scale(0.7);
-    opacity: 0;
-}
-
-.live-tv-channels-content-box {
-
-height: 8e+28px;
-
-transition: 0.4s;
-}
-
-.live-tv-categories-content-box {
+        
+        .live-tv-categories-card-box {
+        
+        width: 100%;
+        
+        height: 123px;
+        
+        background-color: rgb(32, 32, 32) ;
+        
+        margin-top: 10px;
+        
+        color: white;
+        
+        font-family: sans-serif;
+        
+        font-size: 30px;
+        
+        font-weight: 700;
+        
+        display: flex;
+        
+        display: -webkit-flex;
+        
+        align-items: center;
+        
+        padding-left: 70px;
+        
+        border-radius: 6px;
+        }
+        
+        .live-tv-channels-box {
+        
+    width: 752px;
+        
+    height: 950px;
+        
+    overflow: hidden;
+        
+    padding: 0 15px;
+        
+    transition: 0.6s;
+        
+    position: absolute;
+        
+    top: 11%;
+        
+    left: 2.0%;
+        
+    z-index: 999;
+    }
+        
+        .live-tv-channels-card-box {
+        
+        width: 100%;
+        
+        height: 123px;
+        
+        background-color: rgb(32, 32, 32) ;
+        
+        margin-top: 10px;
+        
+        color: white;
+        
+        font-family: sans-serif;
+        
+        font-size: 30px;
+        
+        font-weight: 700;
+        
+        display: flex;
+        
+        display: -webkit-flex;
+        
+        align-items: center;
+        
+        padding-left: 70px;
+        
+        border-radius: 6px;
+        }
+        
+        .channel-card-number-box {
+        
+        }
+        
+        .channel-card-poster-and-name-box {
+        
+        margin-left: 60px;
+        
+        display: flex;
+        
+        display: -webkit-flex;
+        
+        align-items: center;
+        }
+        
+        .channel-card-poster-box {
+        
+        width: 118px;
+        
+        height: 107px;
+        
+        background-repeat: no-repeat;
+        
+        background-size: 65%;
+        
+        background-position: center;
+        }
+        
+        .channel-card-name-box {
+            
+        margin-left: 30px;
+        }
     
-height: 80000000000000000000000000000px;
+    .display {
+        transform: translateX(-130%);
+    }
     
-transition: 0.4s;
-}
+    .scale-tv {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    
+    .live-tv-channels-content-box {
+    
+    height: 8e+28px;
+    
+    transition: 0.4s;
+    }
+    
+    .live-tv-categories-content-box {
+        
+    height: 80000000000000000000000000000px;
+        
+    transition: 0.4s;
+    }
