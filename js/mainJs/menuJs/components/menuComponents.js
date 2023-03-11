@@ -30,10 +30,10 @@ function renderListsCardBox(data) {
 }
 
 function clickHeaderComponents() {
-    console.log(this.getAttribute('index'));
     controls.select.removeClass()
     controls.select = controls.moviesLists
     controls.select.rowsIndex = this.getAttribute('index')
+    controls.select.index = document.getElementsByClassName('content-rows-lists-box')[controls.select.rowsIndex].getAttribute('position')
     controls.select.addActive()
     controls.select.listTransY()
     controls.select.listTransX()

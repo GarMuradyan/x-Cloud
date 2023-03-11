@@ -84,6 +84,13 @@ function cardLive() {
     document.getElementById('root').append(renderLiveTvPage(liveTvData))
 
     controls.select = controls.tvCategories
+    if (controls.select.index === 0 || controls.select.index === '0') {
+        controls.select.index = 1
+    }
+
+    if (controls.select.index === 2 || controls.select.index === '2') {
+        controls.select.index = 1
+    }
     controls.select.ok()
 }
 

@@ -76,8 +76,7 @@ function liveTvCategoriesCardClick(data) {
     document.querySelector('.tv-categories-title-box').innerText = data.name
     document.querySelector('.tv-categories-title-box').append(titleIcon())
 
-    if (data.playlist) {
-        
+    if (data.type !== 'search' && data.type !== 'favorites') {
         document.querySelector('.live-tv-channels-content-box').innerHTML = ''
 
         for (var i = 0; i < data.playlist.length; i++) {
@@ -86,16 +85,28 @@ function liveTvCategoriesCardClick(data) {
     
         document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
         document.querySelector('.live-tv-categories-box').classList.add('display')
+
+        controls.select = controls.tvChannels
+        controls.select.firstActive()
+        controls.select.ok()
         
-    }else {
+    }else if (data.type === 'favorites') {
+        console.log('favorites');
+    }else if (data.type === 'search') {
+        document.querySelector('.live-tv-channels-content-box').innerHTML = ''
+
+        for (var i = 0; i < liveTvData[1].playlist.length; i++) {
+            console.log(liveTvData[1].playlist[i]);
+            document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(liveTvData[1].playlist[i],i))
+        }
+
         document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
+        document.querySelector('.tv-player-box').classList.add('translate-right')
         document.querySelector('.live-tv-categories-box').classList.add('display')
+        document.querySelector('.tv-player-video-box').pause()
     }
     
     channel = null
-    controls.select = controls.tvChannels
-    controls.select.firstActive()
-    controls.select.ok()
 }
 
 function renderLiveTvChannelsBox(playlist) {
@@ -117,6 +128,10 @@ function renderLiveTvChannelsCardBox(data,i) {
     var channelCardPosterAndNameBox = el('div','channel-card-poster-and-name-box')
     var channelCardPosterBox = el('div','channel-card-poster-box')
     var channelCardNameBox = el('div','channel-card-name-box')
+
+    if (i === 0) {
+        liveTvChannelsCardBox.classList.add('active-border')
+    }
 
     channelCardNumberBox.textContent = i+1
     channelCardNameBox.textContent = data.name

@@ -1,9 +1,11 @@
 var liveTvData = [
     {
         name:'Favorites',
+        type:'favorites'
     },
     {
         name:'All',
+        type:'all',
         playlist: [
             {
                 poster: 'https://www.lyngsat.com/logo/tv/bb/bharat-24-in.png',
@@ -65,9 +67,11 @@ var liveTvData = [
     },
     {
         name:'Search',
+        type:'search'
     },
     {
         name:'Movies',
+        type:'movies',
         playlist: [
             {
                 poster: 'https://www.lyngsat.com/logo/tv/tt/tv-3-tz.png',
@@ -101,6 +105,7 @@ var liveTvData = [
     },
     {
         name:'Music',
+        type:'music',
         playlist: [
             {
                 poster: 'https://www.lyngsat.com/logo/tv/nn/new-world-tv-tg.png',
@@ -120,6 +125,7 @@ var liveTvData = [
     },
     {
         name:'Education',
+        type:'education',
         playlist: [
             {
                 poster: 'https://www.lyngsat.com/logo/tv/bb/bharat-24-in.png',
