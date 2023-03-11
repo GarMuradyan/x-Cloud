@@ -3,7 +3,6 @@ function renderTvPLayerBox(data,i) {
 
 
     tvPlayerBox.append(renderTvPlayerTimeBox())
-    tvPlayerBox.append(renderTvPlayerContentBox(data,i))
 
     return tvPlayerBox
 
@@ -29,6 +28,14 @@ function renderTvPlayerContentBox(data,i) {
 function renderPlayerContentVideoBox(data,i) {
     var playerContentVideoBox = el('div','player-content-video-box')
     var tvPlayerVideoBox = el('video','tv-player-video-box')
+
+    tvPlayerVideoBox.onplaying = function () {
+        liveTvVideoOnPlaying()
+    }
+
+    tvPlayerVideoBox.onwaiting = function() {
+        liveTvVideoOnWaiting()
+    };
 
     tvPlayerVideoBox.setAttribute('autoplay',true)
 
@@ -85,4 +92,27 @@ function renderEpgTime(text) {
     epgTime.textContent = text
 
     return epgTime
+}
+
+function renderLiveTvVideoLoading() {
+    var videoLoadingEffect = el('div','video-loading-effect')
+
+    videoLoadingEffect.append(renderLoading())
+
+    document.querySelector('.player-content-video-box').append(videoLoadingEffect)
+}
+
+function liveTvVideoOnPlaying() {
+    console.log('play');
+    if (document.querySelector('.video-loading-effect')) {
+        document.querySelector('.video-loading-effect').remove()
+    }
+}
+
+function liveTvVideoOnWaiting() {
+    console.log("Wait!");
+    if (document.querySelector('.video-loading-effect')) {
+        document.querySelector('.video-loading-effect').remove()
+    }
+    renderLiveTvVideoLoading()
 }

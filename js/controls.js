@@ -951,5 +951,36 @@ var controls = {
                 this.items[i].classList.remove(this.class)
             }
         }
+    },
+    liveTv: {
+        left: function () {
+
+
+        },
+
+        right: function () {
+
+        },
+        ok: function () {
+        },
+
+        up: function () {
+            
+        },
+        down: function () {
+        },
+        back: function () {
+            document.exitFullscreen()
+            controls.select = controls.tvChannels
+            controls.select.addActive()
+        },
+        addActive: function () {
+        },
+        firstActive: function () {
+
+        },
+        removeClass: function () {
+
+        }
     }
 }

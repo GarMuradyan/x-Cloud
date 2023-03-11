@@ -18,8 +18,7 @@ function renderLoadingPage() {
             document.getElementById('root').innerHTML = ''
             document.getElementById('root').append(renderLogin())
             controls.select = controls.login
-            controls.select.index = 0
-            controls.select.addActive()
+            controls.select.firstActive()
         }else if (page === 'menu') {
             document.getElementById('root').innerHTML = ''
             document.getElementById('root').append(renderMenu())

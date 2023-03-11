@@ -47,6 +47,7 @@ function loginButtonClick(elem) {
                 setTimeout(() => {
                     document.getElementById('root').innerHTML = ''
                     document.getElementById('root').append(renderMenu())
+                    controls.select.index = 0
                     controls.select.addActive()
                 }, 4000);
 

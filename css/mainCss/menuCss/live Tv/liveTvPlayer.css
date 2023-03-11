@@ -39,6 +39,8 @@ height: 674px;
 border-radius: 5px;
                 
 background-color: black;
+
+position: relative;
                 }
                 
                 .tv-player-video-box {

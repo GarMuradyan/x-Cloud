@@ -1,3 +1,5 @@
+var channel = null
+
 function renderLiveTvPage(data) {
     var liveTvPageBox = el('div','live-tv-page-box')
 
@@ -89,8 +91,11 @@ function liveTvCategoriesCardClick(data) {
         document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
         document.querySelector('.live-tv-categories-box').classList.add('display')
     }
+    
+    channel = null
     controls.select = controls.tvChannels
     controls.select.firstActive()
+    controls.select.ok()
 }
 
 function renderLiveTvChannelsBox(playlist) {
@@ -132,12 +137,25 @@ function renderLiveTvChannelsCardBox(data,i) {
 }
 
 function liveTvChannelsCardClick(elem,data,i) {
+    if (channel === data) {
+        if (document.querySelector('.tv-player-video-box')) {
+            document.querySelector('.tv-player-video-box').requestFullscreen()
+            controls.select.removeClass()
+            controls.select = controls.liveTv
+            return
+        }
+    }
+
+    channel = data
+
     removeLiveTvChannelsActive()
     elem.classList.add('active-border')
     if (document.querySelector('.player-content-box')) {
         document.querySelector('.player-content-box').remove()
     }
     document.querySelector('.tv-player-box').insertBefore(renderTvPlayerContentBox(data,i+1),document.querySelector('.tv-player-box').children[1])
+
+    renderLiveTvVideoLoading()
 }
 
 function removeLiveTvChannelsActive() {

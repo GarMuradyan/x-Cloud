@@ -83,8 +83,7 @@ function cardLive() {
 
     document.getElementById('root').append(renderLiveTvPage(liveTvData))
 
-    controls.select = controls.tvChannels
-    controls.select.addActive()
+    controls.select = controls.tvCategories
     controls.select.ok()
 }
 
