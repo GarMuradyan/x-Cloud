@@ -33,6 +33,11 @@ function renderTvCategoriesBox(data) {
 function tvCategoriesTitleClick() {
     document.querySelector('.live-tv-channels-box').classList.add('scale-tv')
     document.querySelector('.live-tv-categories-box').classList.remove('display')
+    controls.select = controls.tvCategories
+    controls.select.addActive()
+    document.getElementsByClassName('tv-player-bottom-button-box')[0].classList.add('opacity')
+    document.getElementsByClassName('tv-player-bottom-button-box')[1].classList.add('opacity')
+    document.getElementsByClassName('tv-player-bottom-button-box')[2].classList.add('opacity')
 }
 
 function titleIcon() {
@@ -76,37 +81,52 @@ function liveTvCategoriesCardClick(data) {
     document.querySelector('.tv-categories-title-box').innerText = data.name
     document.querySelector('.tv-categories-title-box').append(titleIcon())
 
+    document.getElementsByClassName('tv-player-bottom-button-box')[0].classList.remove('opacity')
+    document.getElementsByClassName('tv-player-bottom-button-box')[1].classList.remove('opacity')
+    document.getElementsByClassName('tv-player-bottom-button-box')[2].classList.remove('opacity')
+
+    channel = null
+
     if (data.type !== 'search' && data.type !== 'favorites') {
-        document.querySelector('.live-tv-channels-content-box').innerHTML = ''
-
-        for (var i = 0; i < data.playlist.length; i++) {
-            document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(data.playlist[i],i))
-        }
-    
-        document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
-        document.querySelector('.live-tv-categories-box').classList.add('display')
-
-        controls.select = controls.tvChannels
-        controls.select.firstActive()
-        controls.select.ok()
-        
+        liveTvCategoriesClicks(data)
     }else if (data.type === 'favorites') {
         console.log('favorites');
     }else if (data.type === 'search') {
-        document.querySelector('.live-tv-channels-content-box').innerHTML = ''
-
-        for (var i = 0; i < liveTvData[1].playlist.length; i++) {
-            console.log(liveTvData[1].playlist[i]);
-            document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(liveTvData[1].playlist[i],i))
-        }
-
-        document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
-        document.querySelector('.tv-player-box').classList.add('translate-right')
-        document.querySelector('.live-tv-categories-box').classList.add('display')
-        document.querySelector('.tv-player-video-box').pause()
+        liveTvCategoriesSearchClick()
     }
     
-    channel = null
+}
+
+function liveTvCategoriesClicks(data) {
+    document.querySelector('.live-tv-channels-content-box').innerHTML = ''
+
+    renderLiveTvChannelsCards(data.playlist)
+
+    document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
+    document.querySelector('.live-tv-categories-box').classList.add('display')
+
+    controls.select = controls.tvChannels
+    controls.select.firstActive()
+    controls.select.ok()
+    
+}
+
+function liveTvCategoriesSearchClick() {
+    document.querySelector('.live-tv-channels-content-box').innerHTML = ''
+
+    renderLiveTvChannelsCards(liveTvData[1].playlist)
+
+    document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
+    document.querySelector('.tv-player-box').classList.add('translate-right')
+    document.querySelector('.live-tv-categories-box').classList.add('display')
+    document.querySelector('.tv-player-video-box').pause()
+}
+
+function renderLiveTvChannelsCards(playlist) {
+    console.log(playlist);
+    for (var i = 0; i < playlist.length; i++) {
+        document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(playlist[i],i))
+    }
 }
 
 function renderLiveTvChannelsBox(playlist) {

@@ -144,3 +144,26 @@ var liveTvData = [
         ]
     },
 ]
+
+var liveTvPlayerBottomData = [
+    {
+        name:'Sort',
+        id:'sort-btn',
+        classList:'sort'
+    },
+    {
+        name:'Category',
+        id:'categ-btn',
+        classList:'category'
+    },
+    {
+        name:'Favorites',
+        id:'favorit-btn',
+        classList:'favorit'
+    },
+    {
+        name:'Menu',
+        id:'menu-btn',
+        classList:'menu'
+    }
+]

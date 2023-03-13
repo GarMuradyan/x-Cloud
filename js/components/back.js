@@ -27,10 +27,8 @@ function renderBackButton() {
 function backButtonClick() {
     if (document.querySelector('.movies-and-series-page-box')) {
         document.getElementById('root').innerHTML = ''
-        document.getElementById('root').append(renderMenu())
-        controls.select = controls.menu
-        controls.select.index = 0
-        controls.select.addActive()
+        page = 'menu'
+        document.getElementById('root').append(renderLoadingPage())
     }
 
     if (controls.privius === controls.search) {
@@ -51,10 +49,8 @@ function backButtonClick() {
 
     if (document.querySelector('.settings-page-box')) {
         document.getElementById('root').innerHTML = ''
-        document.getElementById('root').append(renderMenu())
-        controls.select = controls.menu
-        controls.select.index = 0
-        controls.select.addActive()
+        page = 'menu'
+        document.getElementById('root').append(renderLoadingPage())
     }
 
     if (document.querySelector('.pin-code-page-box')) {

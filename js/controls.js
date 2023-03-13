@@ -49,6 +49,7 @@ var controls = {
             this.items[this.index].classList.add(this.class)
         },
         firstActive: function () {
+            this.class = 'active-border'
             this.index = 0
             this.addActive()
         },
@@ -729,8 +730,18 @@ var controls = {
         back: function () {
             this.removeClass()
             tvCategoriesTitleClick()
-            controls.select = controls.tvCategories
-            controls.select.addActive()
+        },
+        blue: function () {
+            menuButtonClick()
+        },
+        yellow:function () {
+            
+        },
+        green:function () {
+            
+        },
+        red:function () {
+            
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
@@ -783,7 +794,11 @@ var controls = {
         },
         back: function () {
             document.getElementById('root').innerHTML = ''
+            page = 'menu'
             document.getElementById('root').append(renderLoadingPage())
+        },
+        blue: function () {
+            menuButtonClick()
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)

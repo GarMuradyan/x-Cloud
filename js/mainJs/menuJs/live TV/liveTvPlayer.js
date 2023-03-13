@@ -3,6 +3,7 @@ function renderTvPLayerBox(data,i) {
 
 
     tvPlayerBox.append(renderTvPlayerTimeBox())
+    tvPlayerBox.append(renderTvPlayerBottomBox())
 
     return tvPlayerBox
 
@@ -24,7 +25,7 @@ function renderTvPlayerContentBox(data,i) {
     return playerContentBox
 
 }
-
+var hls;
 function renderPlayerContentVideoBox(data,i) {
     var playerContentVideoBox = el('div','player-content-video-box')
     var tvPlayerVideoBox = el('video','tv-player-video-box')
@@ -37,12 +38,17 @@ function renderPlayerContentVideoBox(data,i) {
         liveTvVideoOnWaiting()
     };
 
+    tvPlayerVideoBox.onclick = function () {
+        this.pause()
+    }
+
     tvPlayerVideoBox.setAttribute('autoplay',true)
 
     var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
     
     if (Hls.isSupported()) {
-        var hls = new Hls();
+        if(hls)hls.destroy();
+        hls = new Hls();
         hls.loadSource(videoSrc);
         hls.attachMedia(tvPlayerVideoBox);
     }else if (tvPlayerVideoBox.canPlayType('application/vnd.apple.mpegurl')) {
@@ -86,6 +92,52 @@ function renderPlayerContentInfoBox(data,i) {
     return playerContentInfoBox
 }
 
+function renderTvPlayerBottomBox() {
+    var tvPlayerBottomBox = el('div','tv-player-bottom-box')
+
+    for (var i = 0; i < liveTvPlayerBottomData.length; i++) {
+        var tvPlayerBottomButtonBox = el('div','tv-player-bottom-button-box')
+        var tvPlayerBottomButtonColorBox = el('div','tv-player-bottom-button-color-box')
+
+        tvPlayerBottomButtonBox.textContent = liveTvPlayerBottomData[i].name
+        tvPlayerBottomButtonBox.setAttribute('id',liveTvPlayerBottomData[i].id)
+        tvPlayerBottomButtonColorBox.classList.add(liveTvPlayerBottomData[i].classList)
+
+        tvPlayerBottomButtonBox.onclick = function () {
+            tvPlayerButtonsClick(this.getAttribute('id'))
+        }
+
+        tvPlayerBottomButtonBox.append(tvPlayerBottomButtonColorBox)
+
+        tvPlayerBottomBox.append(tvPlayerBottomButtonBox)
+    }
+
+
+    return tvPlayerBottomBox
+}
+
+function tvPlayerButtonsClick(id) {
+    if (id === 'sort-btn') {
+        
+    }else if (id === 'categ-btn') {
+        tvCategoriesTitleClick()
+
+    }else if (id === 'favorit-btn') {
+
+    }else if (id === 'menu-btn') {
+        menuButtonClick()
+    }
+}
+
+function sortButtonClick() {
+    
+}
+
+function menuButtonClick() {
+    document.getElementById('root').innerHTML = ''
+    document.getElementById('root').append(renderLoadingPage())
+}
+
 function renderEpgTime(text) {
     var epgTime = el('span','epg-time')
 
@@ -99,7 +151,9 @@ function renderLiveTvVideoLoading() {
 
     videoLoadingEffect.append(renderLoading())
 
-    document.querySelector('.player-content-video-box').append(videoLoadingEffect)
+    if (document.querySelector('.player-content-video-box')) {
+        document.querySelector('.player-content-video-box').append(videoLoadingEffect)
+    }
 }
 
 function liveTvVideoOnPlaying() {
