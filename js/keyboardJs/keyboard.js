@@ -262,6 +262,10 @@ function shiftClick(elem,array,data) {
             document.querySelector('.keyboard-absolute-box').remove()
             document.getElementById('root').append(renderKyeboardAbsolute(data))
         }
+        if (document.querySelector('.live-tv-page-box')) {
+            document.querySelector('.live-tv-search-keyboard-box').remove()
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
+        }
         
     }else if (array === numberKeyboard) {
         if (document.querySelector('.login-page-box')) {
@@ -271,6 +275,10 @@ function shiftClick(elem,array,data) {
         if (document.querySelector('.movies-series-search-page')) {
             document.querySelector('.keyboard-absolute-box').remove()
             document.getElementById('root').append(renderKyeboardAbsolute(data))
+        }
+        if (document.querySelector('.live-tv-page-box')) {
+            document.querySelector('.live-tv-search-keyboard-box').remove()
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
         }
     }
 
@@ -287,19 +295,25 @@ function doneClick(elem,array,data) {
     if (document.querySelector('.movies-series-search-page')) {
         console.log('done');
     }
+    if (document.querySelector('.live-tv-page-box')) {
+        console.log('done');
+    }
     showHideKeyboardItemActive(elem)
 }
 
 function numberClick(elem,array,data) {
+    keyboard = numberKeyboard
     if (document.querySelector('.login-page-box')) {
-        keyboard = numberKeyboard
         document.querySelector('.absolute-box').remove()
         document.getElementById('root').append(renderAbsoluteBox())
     }
     if (document.querySelector('.movies-series-search-page')) {
-        keyboard = numberKeyboard
         document.querySelector('.keyboard-absolute-box').remove()
         document.getElementById('root').append(renderKyeboardAbsolute(data))
+    }
+    if (document.querySelector('.live-tv-page-box')) {
+        document.querySelector('.live-tv-search-keyboard-box').remove()
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
     }
 
     controls.select.removeClass()
@@ -309,16 +323,19 @@ function numberClick(elem,array,data) {
 }
 
 function engClick(elem,array,data) {
+    keyboard = englishKeyboard
     if (document.querySelector('.login-page-box')) {
-        keyboard = englishKeyboard
         document.querySelector('.absolute-box').remove()
         document.getElementById('root').append(renderAbsoluteBox())
     }
 
     if (document.querySelector('.movies-series-search-page')) {
-        keyboard = englishKeyboard
         document.querySelector('.keyboard-absolute-box').remove()
         document.getElementById('root').append(renderKyeboardAbsolute(data))
+    }
+    if (document.querySelector('.live-tv-page-box')) {
+        document.querySelector('.live-tv-search-keyboard-box').remove()
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
     }
 
     controls.select.removeClass()

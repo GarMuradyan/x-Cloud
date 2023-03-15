@@ -5,6 +5,7 @@ function renderLiveTvPage(data) {
 
     liveTvPageBox.append(renderTvCategoriesBox(data))
     liveTvPageBox.append(renderTvPLayerBox(data[1].playlist[0],1))
+    liveTvPageBox.append(renderLiveTvSearchBox())
 
     return liveTvPageBox
 
@@ -98,7 +99,6 @@ function liveTvCategoriesCardClick(data) {
 }
 
 function liveTvCategoriesClicks(data) {
-    document.querySelector('.live-tv-channels-content-box').innerHTML = ''
 
     renderLiveTvChannelsCards(data.playlist)
 
@@ -112,18 +112,22 @@ function liveTvCategoriesClicks(data) {
 }
 
 function liveTvCategoriesSearchClick() {
-    document.querySelector('.live-tv-channels-content-box').innerHTML = ''
 
     renderLiveTvChannelsCards(liveTvData[1].playlist)
 
     document.querySelector('.live-tv-channels-box').classList.remove('scale-tv')
     document.querySelector('.tv-player-box').classList.add('translate-right')
     document.querySelector('.live-tv-categories-box').classList.add('display')
+    document.querySelector('.live-tv-search-box').classList.remove('translate-right')
+    activeInput = document.querySelector('.search-page-content-search-input')
+    controls.select = controls.keyboard
+    controls.select.firstActive()
     document.querySelector('.tv-player-video-box').pause()
 }
 
 function renderLiveTvChannelsCards(playlist) {
     console.log(playlist);
+    document.querySelector('.live-tv-channels-content-box').innerHTML = ''
     for (var i = 0; i < playlist.length; i++) {
         document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(playlist[i],i))
     }

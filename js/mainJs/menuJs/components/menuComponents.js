@@ -29,6 +29,19 @@ function renderListsCardBox(data) {
 
 }
 
+function renderMenuesSearchBox() {
+    var searchPageContentSearchBox = el('div','search-page-content-search-box')
+    var searchPageContentSearchInput = el('input','search-page-content-search-input')
+    var searchInputIcon = el('span','material-symbols-outlined')
+
+    searchInputIcon.textContent = 'search'
+
+    searchPageContentSearchBox.append(searchInputIcon)
+    searchPageContentSearchBox.append(searchPageContentSearchInput)
+
+    return searchPageContentSearchBox
+}
+
 function clickHeaderComponents() {
     controls.select.removeClass()
     controls.select = controls.moviesLists
