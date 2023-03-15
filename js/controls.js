@@ -86,7 +86,14 @@ var controls = {
 
         up: function () {
             if (this.rowsIndex === 0) {
-                console.log(8);
+                if (document.querySelector('.live-tv-page-box')) {
+                    document.querySelector('.live-tv-search-box').classList.add('translate-right')
+                    document.querySelector('.tv-player-box').classList.remove('translate-right')
+                    document.querySelector('.tv-player-video-box').play()
+                    controls.select = controls.tvChannels
+                    controls.select.firstActive()
+                    return
+                }
                 if (controls.privius === controls.search) {
                     this.removeClass()
                     controls.select = controls.back
@@ -147,7 +154,11 @@ var controls = {
             
         },
         back: function () {
-            
+            document.querySelector('.live-tv-search-box').classList.add('translate-right')
+            document.querySelector('.tv-player-box').classList.remove('translate-right')
+            document.querySelector('.tv-player-video-box').play()
+            controls.select = controls.tvChannels
+            controls.select.firstActive()
         },
         firstActive:function () {
             this.rowsIndex = 0

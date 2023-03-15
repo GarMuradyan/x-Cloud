@@ -1,3 +1,5 @@
+var searchArr = []
+
 function renderLiveTvSearchBox() {
 
     var liveTvSearchBox = el('div','live-tv-search-box')
@@ -20,4 +22,12 @@ function renderLiveTvKeyboard(data) {
 
 
     return liveTvSearchKeyboardBox
+}
+
+function renderLiveTvSearching(data) {
+    console.log(activeInput.value);
+    for (var i = 0; i < data.length; i++) {
+        console.log(data[i].name.indexOf(activeInput.value));
+    }
+    //console.log(searchArr);
 }

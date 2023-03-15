@@ -25,7 +25,7 @@ function renderTvPlayerContentBox(data,i) {
     return playerContentBox
 
 }
-var hls;
+
 function renderPlayerContentVideoBox(data,i) {
     var playerContentVideoBox = el('div','player-content-video-box')
     var tvPlayerVideoBox = el('video','tv-player-video-box')
@@ -48,7 +48,7 @@ function renderPlayerContentVideoBox(data,i) {
     
     if (Hls.isSupported()) {
         if(hls)hls.destroy();
-        hls = new Hls();
+        var hls = new Hls();
         hls.loadSource(videoSrc);
         hls.attachMedia(tvPlayerVideoBox);
     }else if (tvPlayerVideoBox.canPlayType('application/vnd.apple.mpegurl')) {

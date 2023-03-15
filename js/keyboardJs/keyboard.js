@@ -209,6 +209,9 @@ function keyboardItemClick(elem,array,data) {
         showHideKeyboardItemActive(elem)
         if (data) {
             console.log(data);
+            if (document.querySelector('.live-tv-page-box')) {
+                renderLiveTvSearching(data)
+            }
         }
     }
 
