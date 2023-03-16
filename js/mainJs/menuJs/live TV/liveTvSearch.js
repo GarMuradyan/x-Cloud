@@ -1,7 +1,7 @@
 var searchArr = []
 
 function renderLiveTvSearchBox() {
-
+    keyboard = englishKeyboard
     var liveTvSearchBox = el('div','live-tv-search-box')
     var liveTvSearchInputBox = el('div','live-tv-search-input-box')
 
@@ -10,24 +10,60 @@ function renderLiveTvSearchBox() {
     liveTvSearchInputBox.append(renderMenuesSearchBox())
 
     liveTvSearchBox.append(liveTvSearchInputBox)
-    liveTvSearchBox.append(renderLiveTvKeyboard(liveTvData[1].playlist))
+    liveTvSearchBox.append(renderLiveTvKeyboard(liveTvData[1].playlist,keyboard))
 
     return liveTvSearchBox
 }
 
-function renderLiveTvKeyboard(data) {
+function renderLiveTvKeyboard(data,keyboard) {
     var liveTvSearchKeyboardBox = el('div','live-tv-search-keyboard-box')
 
-    liveTvSearchKeyboardBox.append(renderKeyboard(keyboard,data))
+    liveTvSearchKeyboardBox.append(renderKeyboard(keyboard,data,liveTvPage))
 
 
     return liveTvSearchKeyboardBox
 }
 
 function renderLiveTvSearching(data) {
+    searchArr = []
     console.log(activeInput.value);
     for (var i = 0; i < data.length; i++) {
-        console.log(data[i].name.indexOf(activeInput.value));
+        if (data[i].name.indexOf(activeInput.value) !== -1) {
+            searchArr.push(data[i])
+        }        
     }
-    //console.log(searchArr);
+
+    renderLiveTvChannelsCards(searchArr)
+
+
+}
+
+function liveTvSearchBack() {
+    keyboard = englishKeyboard
+    document.querySelector('.live-tv-search-keyboard-box').remove()
+    document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(liveTvData[1].playlist,keyboard))
+    if (document.querySelector('.live-tv-channels-content-box').getElementsByClassName('live-tv-channels-card-box').length) {
+        console.log('kaaaaa');
+        document.querySelector('.live-tv-search-box').classList.add('translate-right')
+        document.querySelector('.tv-player-box').classList.remove('translate-right')
+        document.querySelector('.tv-player-video-box').play()
+        controls.keyboard.removeClass()
+        activeInput.value = ''
+        controls.select = controls.tvChannels
+        controls.select.firstActive()
+    }else {
+        console.log('chkaaaaa');
+        document.querySelector('.live-tv-search-box').classList.add('translate-right')
+        document.querySelector('.tv-player-box').classList.remove('translate-right')
+        document.querySelector('.tv-player-video-box').play()
+        controls.keyboard.removeClass()
+        activeInput.value = ''
+        controls.select = controls.tvCategories
+        controls.select.index = 1
+        controls.select.removeClass()
+        controls.select.ok()
+    }
+    
+
+
 }

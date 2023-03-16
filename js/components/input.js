@@ -38,7 +38,7 @@ function removeLoginPageInputsActive() {
 
 function renderAbsoluteBox () {
     var absoluteBox = el('div','absolute-box')
-    absoluteBox.append(renderKeyboard(keyboard,''))
+    absoluteBox.append(renderKeyboard(keyboard,'',loginAndMoviesPage))
 
     return absoluteBox
 }

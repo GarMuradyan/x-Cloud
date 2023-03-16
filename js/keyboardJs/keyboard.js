@@ -4,7 +4,7 @@ var isUpperCase = false
 
 var keyboard = englishKeyboard
 
-function renderKeyboard(array,data) {
+function renderKeyboard(array,data,classNmaes) {
     var keyboardBox = el('div','keyboard-box')
 
     for (var i = 0; i < array.length; i++) {
@@ -19,7 +19,7 @@ function renderKeyboard(array,data) {
 
             keyboardRowsBox.append(keyboardRowsItemBox)
 
-            keyboardItemIfElse(array[i][j],keyboardRowsItemBox)
+            keyboardItemIfElse(array[i][j],keyboardRowsItemBox,classNmaes)
 
             keyboardRowsItemBox.onclick = function () {
                 keyboardItemClick(this,array,data)
@@ -166,39 +166,45 @@ function wrongPin(name) {
     document.querySelector('.pin-code-page-title-and-inputs-box').append(wrongPin)
 }
 
-function keyboardItemIfElse(item,elem) {
+function keyboardItemIfElse(item,elem,classNmaes) {
+    if (item.length === 1) {
+        elem.classList.add(classNmaes[2])
+    }
+
     if (item === 'close') {
         elem.textContent = ''
         elem.classList.add('close')
+        elem.classList.add(classNmaes[2])
     }
 
     if (item === 'shift') {
         elem.textContent = ''
         elem.classList.add('shift')
+        elem.classList.add(classNmaes[2])
     }
 
     if (item === 'space') {
         elem.textContent = ''
-        elem.classList.add('space')
+        elem.classList.add(classNmaes[1])
     }
 
     if (item === '123') {
-        elem.classList.add('width')
+        elem.classList.add(classNmaes[0])
         elem.classList.add('num')
     }
 
     if (item === 'Clean') {
-        elem.classList.add('width')
+        elem.classList.add(classNmaes[0])
         elem.classList.add('clean')
     }
 
     if (item === 'Done') {
-        elem.classList.add('width')
+        elem.classList.add(classNmaes[0])
         elem.classList.add('done')
     }
 
     if (item === 'Eng') {
-        elem.classList.add('width')
+        elem.classList.add(classNmaes[0])
         elem.classList.add('eng')
     }
 }
@@ -208,10 +214,7 @@ function keyboardItemClick(elem,array,data) {
         activeInput.value+=elem.textContent
         showHideKeyboardItemActive(elem)
         if (data) {
-            console.log(data);
-            if (document.querySelector('.live-tv-page-box')) {
-                renderLiveTvSearching(data)
-            }
+            keyboardSearchingClick(data)
         }
     }
 
@@ -250,6 +253,12 @@ function keyboardItemClick(elem,array,data) {
     }
 }
 
+function keyboardSearchingClick(data) {
+    if (document.querySelector('.live-tv-page-box')) {
+        renderLiveTvSearching(data)
+    }
+}
+
 function shiftClick(elem,array,data) {
     if (array === englishKeyboard) {
         if (isUpperCase) {
@@ -267,7 +276,7 @@ function shiftClick(elem,array,data) {
         }
         if (document.querySelector('.live-tv-page-box')) {
             document.querySelector('.live-tv-search-keyboard-box').remove()
-            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
         }
         
     }else if (array === numberKeyboard) {
@@ -281,7 +290,7 @@ function shiftClick(elem,array,data) {
         }
         if (document.querySelector('.live-tv-page-box')) {
             document.querySelector('.live-tv-search-keyboard-box').remove()
-            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
         }
     }
 
@@ -299,7 +308,10 @@ function doneClick(elem,array,data) {
         console.log('done');
     }
     if (document.querySelector('.live-tv-page-box')) {
-        console.log('done');
+        liveTvSearchBack()
+        // document.querySelector('.live-tv-search-keyboard-box').remove()
+        // document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
+
     }
     showHideKeyboardItemActive(elem)
 }
@@ -316,7 +328,7 @@ function numberClick(elem,array,data) {
     }
     if (document.querySelector('.live-tv-page-box')) {
         document.querySelector('.live-tv-search-keyboard-box').remove()
-        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,keyboard))
     }
 
     controls.select.removeClass()
@@ -338,7 +350,7 @@ function engClick(elem,array,data) {
     }
     if (document.querySelector('.live-tv-page-box')) {
         document.querySelector('.live-tv-search-keyboard-box').remove()
-        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data))
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,keyboard))
     }
 
     controls.select.removeClass()

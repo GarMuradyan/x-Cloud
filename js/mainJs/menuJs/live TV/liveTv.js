@@ -126,7 +126,7 @@ function liveTvCategoriesSearchClick() {
 }
 
 function renderLiveTvChannelsCards(playlist) {
-    console.log(playlist);
+    //console.log(playlist);
     document.querySelector('.live-tv-channels-content-box').innerHTML = ''
     for (var i = 0; i < playlist.length; i++) {
         document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(playlist[i],i))

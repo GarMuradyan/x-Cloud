@@ -37,7 +37,7 @@ function searchButtonClick(data) {
 
 function renderKyeboardAbsolute(arr) {
     var keyboadrAbsoluteBox = el('div','keyboard-absolute-box')
-    keyboadrAbsoluteBox.append(renderKeyboard(keyboard,arr))
+    keyboadrAbsoluteBox.append(renderKeyboard(keyboard,arr,loginAndMoviesPage))
 
     return keyboadrAbsoluteBox
 }

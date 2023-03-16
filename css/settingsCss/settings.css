@@ -78,12 +78,7 @@ height: 40px;
 background-size: contain;
 }
 
-.settings-card-name-box {
-
-font-size: 32px;
-
-margin-left: 30px;
-}
+.settings-card-name-box {font-size: 30px;margin-left: 30px;font-weight: 700;}
 
 .settings-card-checked-box {
 

@@ -82,6 +82,10 @@ var settingsData = [
     {
         img:'http://smarttv.xtream.cloud/img/icons/padlock.png',
         name:'Lock Categories',
+        onClick: function () {
+            document.getElementById('root').innerHTML = ''
+            document.getElementById('root').append(renderLockCategoriesPage())
+        }
     },
     {
         img:'http://smarttv.xtream.cloud/img/icons/logout.png',

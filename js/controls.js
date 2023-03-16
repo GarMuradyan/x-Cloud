@@ -81,17 +81,14 @@ var controls = {
         },
 
         ok: function () {
+            this.removeClass()
             this.items[this.rowsIndex].getElementsByClassName('keyboard-rows-item-box')[this.index].click()
         },
 
         up: function () {
             if (this.rowsIndex === 0) {
                 if (document.querySelector('.live-tv-page-box')) {
-                    document.querySelector('.live-tv-search-box').classList.add('translate-right')
-                    document.querySelector('.tv-player-box').classList.remove('translate-right')
-                    document.querySelector('.tv-player-video-box').play()
-                    controls.select = controls.tvChannels
-                    controls.select.firstActive()
+                    liveTvSearchBack()
                     return
                 }
                 if (controls.privius === controls.search) {
@@ -154,11 +151,9 @@ var controls = {
             
         },
         back: function () {
-            document.querySelector('.live-tv-search-box').classList.add('translate-right')
-            document.querySelector('.tv-player-box').classList.remove('translate-right')
-            document.querySelector('.tv-player-video-box').play()
-            controls.select = controls.tvChannels
-            controls.select.firstActive()
+            if (document.querySelector('.live-tv-channels-content-box')) {
+                liveTvSearchBack()
+            }
         },
         firstActive:function () {
             this.rowsIndex = 0

@@ -25,12 +25,17 @@
     background: #161616;
     bottom: 0;
     left: 17%;
+    width: 1250px;
+}
+
+.static {
+    width: 90px !important;
 }
 
 .keyboard-box {
     display: flex;
     flex-direction: column;
-    width: 1250px;
+    width: 100%;
     height: 354px;
     justify-content: space-between;
     padding: 5px 0;
@@ -116,4 +121,16 @@ font-family: sans-serif;
 border-radius: 7px;
     
 font-weight: 700;
+}
+
+.liveTvWidth {
+    width: 155px !important;
+}
+
+.liveTvSpace {
+    width: 745px !important;
+}
+
+.liveTvStatic {
+    width: 75px !important;
 }
