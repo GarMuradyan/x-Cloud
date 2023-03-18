@@ -168,12 +168,11 @@ padding-left: 46px;
         
     
         .card-info-back-box {
-            
-    position: absolute;
-            
-    top: 20px;
-            
-    left: 15px;
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            width: 65px;
+            height: 60px;
         }
 
 .season-top-box {

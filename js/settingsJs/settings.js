@@ -84,7 +84,9 @@ var settingsData = [
         name:'Lock Categories',
         onClick: function () {
             document.getElementById('root').innerHTML = ''
-            document.getElementById('root').append(renderLockCategoriesPage())
+            document.getElementById('root').append(renderLockCategoriesPage(liveTvData,menuMoviesData,menuSeriesData))
+            controls.select = controls.lockCategories
+            controls.select.firstActive()
         }
     },
     {
@@ -127,15 +129,17 @@ function renderSettingsPage(data) {
 }
 
 function renderSettingsBackBox() {
+    var settingsBackAndTitleBox = el('div','settings-back-and-title-box')
     var settingsBackBox = el('div','settings-back-box')
     var settingsPageTitle = el('div','settings-page-title')
 
     settingsPageTitle.textContent = 'Settings'
 
     settingsBackBox.append(renderBackButton())
-    settingsBackBox.append(settingsPageTitle)
+    settingsBackAndTitleBox.append(settingsBackBox)
+    settingsBackAndTitleBox.append(settingsPageTitle)
 
-    return settingsBackBox
+    return settingsBackAndTitleBox
 }
 
 function renderSettingsContentCardBox(data) {

@@ -29,6 +29,11 @@ width: 444px;
     
 justify-content: space-between;
     }
+
+ .header-top-back-box {
+    width: 80px;
+    height: 83px;
+ }   
     
     .header-bottom-box {
     overflow: hidden;
@@ -121,10 +126,9 @@ margin-left: 20px;
     }
     
 .content-rows-lists-card-box {
-    
-width: 330px;
-    
-margin-left: 15px;
+    width: 330px;
+    margin-left: 15px;
+    position: relative;
     }
     
     .card-image-box {
@@ -154,3 +158,9 @@ border-bottom-right-radius: 10px;
         
 border-bottom-left-radius: 10px;
     }
+
+.movies-page-lock-box {position: absolute;background: red;border-radius: 8px;top: 5px;left: 4px;}   
+
+.movies-page-lock-box>span {
+    font-size: 35px;
+}

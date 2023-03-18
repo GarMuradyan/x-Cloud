@@ -15,6 +15,7 @@ function renderMoviesAndSeries(data) {
 function renderMoviesSeriesHeader(data) {
     var pageHeaderBox = el('div','page-header-box')
     var headerTopBox = el('div','header-top-box')
+    var headerTopBackBox = el('div','header-top-back-box')
     var headerBottomBox = el('div','header-bottom-box')
     var headerBottomContentBox = el('div','header-bottom-content-box')
 
@@ -22,7 +23,9 @@ function renderMoviesSeriesHeader(data) {
         headerBottomContentBox.append(renderHeaderComponents(data[i].name,i))
     }
 
-    headerTopBox.append(renderBackButton())
+    headerTopBackBox.append(renderBackButton())
+
+    headerTopBox.append(headerTopBackBox)
     headerTopBox.append(renderSearchButtonBox(data))
 
     headerBottomBox.append(headerBottomContentBox)
@@ -51,7 +54,7 @@ function renderMoviesSeriesLists(data) {
 
         contentRowsNameBox.textContent = data[i].name
         for (var j = 0; j < data[i].playlist.length; j++) {
-            contentRowsListsBox.append(renderListsCardBox(data[i].playlist[j]))
+            contentRowsListsBox.append(renderListsCardBox(data[i].playlist[j],data[i]))
         }
     }
 

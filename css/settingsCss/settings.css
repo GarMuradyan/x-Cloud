@@ -29,7 +29,19 @@ position: relative;
 top: 125px;
 }
 
-.settings-back-box {position: absolute;left: 20px;top: 20px;display: flex;display: -webkit-flex;align-items: center;}
+.settings-back-and-title-box {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.settings-back-box {
+    width: 65px;
+    height: 65px;
+}
 
 .settings-page-title {
 

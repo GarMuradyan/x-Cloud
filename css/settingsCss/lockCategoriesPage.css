@@ -1,0 +1,35 @@
+.lock-categories-page-box {height: 100vh;display: flex;display: -webkit-flex;padding: 20px;justify-content: center;}
+
+.lock-categories-back-box {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    left: 15px;
+    top: 20px;
+}
+
+.lock-categories-content-box {display: flex;display: -webkit-flex;height: 100%;width: 91%;}
+
+.lock-settings-categories-box {width: 30%;height: 100%;margin-left: 4%;display: flex;display: -webkit-flex;flex-direction: column;align-items: center;}
+
+.lock-settings-categories-title-box {width: 100%;height: 95px !important;color: white;font-family: sans-serif;font-size: 40px;background-color: rgb(32, 32, 32) !important;border-radius: 10px;display: flex;display: -webkit-flex;align-items: center;justify-content: center;}
+
+.lock-settings-categories-content-box {width: 100%;height: 100%;margin-top: 25px;overflow: hidden;}
+
+.lock-settings-categories-content-cards-box {
+    transition: 0.4s;
+    height: 9999999999999999999999px;
+    width: 100%;
+}
+
+.lock-categories-card-box {width: 100%;height: 93px;display: flex;display: -webkit-flex;align-items: center;color: white;font-size: 30px;font-family: sans-serif;background-color: rgb(32, 32, 32);margin-top: 5px;border-radius: 10px;padding-left: 80px;position: relative;}
+
+.lock-categoreis-card-locked-box {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+}
+
+.lock-categoreis-card-locked-box>span {
+    font-size: 40px;
+}

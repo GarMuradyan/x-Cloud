@@ -59,4 +59,11 @@ function backButtonClick() {
         controls.select = controls.settings
         controls.select.firstActive()
     }
+
+    if (document.querySelector('.lock-categories-page-box')) {
+        document.getElementById('root').innerHTML = ''
+        document.getElementById('root').append(renderSettingsPage(settingsData))
+        controls.select = controls.settings
+        controls.select.firstActive()
+    }
 }

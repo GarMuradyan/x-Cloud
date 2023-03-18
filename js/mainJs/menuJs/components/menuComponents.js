@@ -10,16 +10,20 @@ function renderHeaderComponents(name,index) {
     return headerComponentsBox
 }
 
-function renderListsCardBox(data) {
+function renderListsCardBox(data,array) {
     var contentRowsListsCardBox = el('div','content-rows-lists-card-box')
     var cardImageBox = el('div','card-image-box')
     var cardNameBox = el('div','card-name-box')
+
+    if (array.locked) {
+        contentRowsListsCardBox.append(renderMoviesPageLockBox())
+    }
 
     cardImageBox.style.backgroundImage = 'url(' + data.poster + ')'
     cardNameBox.textContent = data.name
 
     contentRowsListsCardBox.onclick = function () {
-        clickListsCard(data)
+        clickListsCard(data,array)
     }
 
     contentRowsListsCardBox.append(cardImageBox)
@@ -52,10 +56,28 @@ function clickHeaderComponents() {
     controls.select.listTransX()
 }
 
-function clickListsCard(data) {
-    controls.privius = controls.select
-    document.getElementById('root').innerHTML = ''
-    document.getElementById('root').append(renderMoviesCardInfo(data))
-    controls.select = controls.playBuuton
-    controls.select.addActive()
+function clickListsCard(data,array) {
+    if (array.locked) {
+        console.log('locked-true');
+        controls.privius = controls.select
+        document.getElementById('root').innerHTML = ''
+        document.getElementById('root').append(renderMoviesCardInfo(data))
+        controls.select = controls.playBuuton
+        controls.select.addActive()
+    }else {
+        console.log('locked-false');
+        controls.privius = controls.select
+        document.getElementById('root').innerHTML = ''
+        document.getElementById('root').append(renderMoviesCardInfo(data))
+        controls.select = controls.playBuuton
+        controls.select.addActive()
+    }
+}
+
+function renderMoviesPageLockBox() {
+    var moviesPageLockBox = el('div','movies-page-lock-box')
+
+    moviesPageLockBox.append(renderLockIcon())
+
+    return moviesPageLockBox
 }

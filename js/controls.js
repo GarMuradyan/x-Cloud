@@ -241,6 +241,11 @@ var controls = {
                 controls.select = controls.pinInputs
                 controls.select.firstActive()
             }
+            if (document.querySelector('.lock-categories-page-box')) {
+                this.removeClass()
+                controls.select = controls.lockCategories
+                controls.select.addActive()
+            }
             
         },
 
@@ -274,6 +279,12 @@ var controls = {
                 this.removeClass()
                 controls.select = controls.pinInputs
                 controls.select.firstActive()
+                return
+            }
+            if (document.querySelector('.lock-categories-page-box')) {
+                this.removeClass()
+                controls.select = controls.lockCategories
+                controls.select.addActive()
                 return
             }
             this.removeClass()
@@ -1001,6 +1012,76 @@ var controls = {
 
         },
         removeClass: function () {
+
+        }
+    },
+    lockCategories: {
+        items: document.getElementsByClassName('lock-settings-categories-content-cards-box'),
+        index: 0,
+        rowsIndex:0,
+        class:'active-background',
+        left: function () {
+            if (this.rowsIndex == 0) {
+                this.removeClass()
+                controls.select = controls.back
+                controls.select.addActive()
+            }
+            if (this.rowsIndex > 0) {
+                this.removeClass()
+                this.items[this.rowsIndex].setAttribute('position',this.index)
+                this.rowsIndex--
+                this.index = this.items[this.rowsIndex].getAttribute('position')
+                this.addActive()
+            }
+
+        },
+
+        right: function () {
+            if (this.rowsIndex < this.items.length-1) {
+                this.removeClass()
+                this.items[this.rowsIndex].setAttribute('position',this.index)
+                this.rowsIndex++
+                this.index = this.items[this.rowsIndex].getAttribute('position')
+                this.addActive()
+
+            }
+        },
+        ok: function () {
+            this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box')[this.index].click()
+        },
+
+        up: function () {
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+            
+        },
+        down: function () {
+            if (this.index < this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box').length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+        back: function () {
+            this.removeClass()
+            controls.select = controls.settings
+            controls.select.firstActive()
+        },
+        addActive: function () {
+            this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box')[this.index].classList.add(this.class)
+        },
+        firstActive: function () {
+            this.rowsIndex = 0
+            this.index = 0
+            this.addActive()
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box').length; i++) {
+                this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box')[i].classList.remove(this.class)
+            }
 
         }
     }

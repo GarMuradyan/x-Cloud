@@ -20,6 +20,11 @@ padding: 20px;
 
 }
 
+.search-page-back-box {
+    width: 70px;
+    height: 70px;
+}
+
 .search-page-content-back-box {
 
 justify-content: space-between;
