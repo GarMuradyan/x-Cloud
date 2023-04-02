@@ -1,3 +1,11 @@
+var seriesData = []
+
+var moviesData = []
+
+var moviesUrl = 'https://api.themoviedb.org/3/tv/popular?api_key=a9ce31a5dd0e31bbced7b7b38bf16555&language=en-US&page=10'
+
+var seriesUrl = 'https://api.themoviedb.org/3/tv/popular?api_key=a9ce31a5dd0e31bbced7b7b38bf16555&language=en-US&page=9'
+
 var moviesSeriesData = null
 
 function renderMenu() {
@@ -43,29 +51,62 @@ function renderMenuCards(name,url,type) {
 }
 
 function menuCardsClick(type) {
+
     if (type === 'live') {
         cardLive()
     }else if (type === 'movies') {
-        moviesSeriesData = menuMoviesData
-        cardMoviesAndSeries(moviesSeriesData)
+        cardMovies(moviesData,moviesUrl,'GET')
     }else if (type === 'series') {
-        moviesSeriesData = menuSeriesData
-        cardMoviesAndSeries(moviesSeriesData)
+        cardSeries(seriesData,seriesUrl,'GET')
     }else if (type === 'settings') {
         cardSettings()
     }
 }
 
-function cardMoviesAndSeries(data) {
-    controls.privius = controls.select
+function cardSeries(data,url,method) {
 
-    document.getElementById('root').innerHTML = ''
-    
-    document.getElementById('root').append(renderMoviesAndSeries(data))
-    controls.select = controls.headerComponents
-    controls.select.index = 0
-    controls.select.addActive()
+    if (data.length) {
+        controls.privius = controls.select
+        moviesSeriesData = data
 
+        document.getElementById('root').innerHTML = ''
+        
+        document.getElementById('root').append(renderMoviesAndSeries(data))
+
+        controls.select = controls.headerComponents
+        controls.select.index = 0
+        controls.select.addActive()
+    }else {
+        controls.privius = controls.select
+
+        document.getElementById('root').innerHTML = ''
+        
+        document.getElementById('root').append(renderMoviesAndSeries(data))
+        getSeriesData(url,method)
+    }
+
+}
+
+function cardMovies(data,url,method) {
+    if (data.length) {
+        controls.privius = controls.select
+        moviesSeriesData = data
+
+        document.getElementById('root').innerHTML = ''
+        
+        document.getElementById('root').append(renderMoviesAndSeries(data))
+
+        controls.select = controls.headerComponents
+        controls.select.index = 0
+        controls.select.addActive()
+    }else {
+        controls.privius = controls.select
+
+        document.getElementById('root').innerHTML = ''
+        
+        document.getElementById('root').append(renderMoviesAndSeries(data))
+        getMoviesData(url,method)
+    }
 }
 
 function cardSettings() {
@@ -94,13 +135,36 @@ function cardLive() {
     controls.select.ok()
 }
 
-function getLIveData(url,method) {
+function getSeriesData(url,method) {
     var xhr = new XMLHttpRequest()
     xhr.open(method,url,true)
     xhr.send()
 
     xhr.onload = ()=> {
         var data = JSON.parse(xhr.response)
-        console.log(data);
+        seriesData.push(data)
+        moviesSeriesData = seriesData
+        document.querySelector('.movies-and-series-page-box') ? document.querySelector('.movies-and-series-page-box').remove() : false
+        document.getElementById('root').append(renderMoviesAndSeries(seriesData))
+        controls.select = controls.headerComponents
+        controls.select.index = 0
+        controls.select.addActive()
+    }
+}
+
+function getMoviesData(url,method) {
+    var xhr = new XMLHttpRequest()
+    xhr.open(method,url,true)
+    xhr.send()
+
+    xhr.onload = ()=> {
+        var data = JSON.parse(xhr.response)
+        moviesData.push(data)
+        moviesSeriesData = moviesData
+        document.querySelector('.movies-and-series-page-box') ? document.querySelector('.movies-and-series-page-box').remove() : false
+        document.getElementById('root').append(renderMoviesAndSeries(moviesData))
+        controls.select = controls.headerComponents
+        controls.select.index = 0
+        controls.select.addActive()
     }
 }

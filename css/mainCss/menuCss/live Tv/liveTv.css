@@ -214,3 +214,10 @@
         
     transition: 0.4s;
     }
+
+.live-tv-lock {
+    background-image: url(http://smarttv.xtream.cloud/img/icons/padlock.png);
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 95% 75%;
+}    

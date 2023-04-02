@@ -20,8 +20,11 @@ function renderCardPosterBox(data) {
     var cardPoster = el('div','card-poter')
     var cardPosterPlayButtonBox = el('div','card-poster-play-button-box')
 
-    cardPoster.style.backgroundImage = 'url(' + data.poster + ')'
-
+    if (data.poster_path) {
+        cardPoster.style.backgroundImage = 'url(' + imageLink + data.poster_path + ')'
+    }else {
+        cardPoster.style.backgroundImage = 'url(https://icon-library.com/images/not-found-icon/not-found-icon-10.jpg)'
+    }
 
     cardPosterPlayButtonBox.append(renderButton('card-poster-play-button','Play','play',data))
 
@@ -43,7 +46,7 @@ function renderCardInfoBox(data) {
     var seasonBottomContentBox = el('div','season-bottom-content-box')
 
     cardInfoNameBox.textContent = data.name
-    cardInfoDescBox.textContent = data.description
+    cardInfoDescBox.textContent = data.overview
 
     if (data.season) {
         for (var i = 0; i < data.season.length; i++) {
@@ -59,6 +62,8 @@ function renderCardInfoBox(data) {
 
         cardInfoSeasonBox.append(seasonTopBox)
         cardInfoSeasonBox.append(seasonBottomBox)
+
+        cardInfoBox.append(cardInfoSeasonBox)
     }
 
 
@@ -69,7 +74,6 @@ function renderCardInfoBox(data) {
     cardInfoBox.append(cardInfoNameBox)
     cardInfoBox.append(cardInfoDescBox)
     cardInfoBox.append(cardInfoRatingAndDurationBox)
-    cardInfoBox.append(cardInfoSeasonBox)
 
     return cardInfoBox
 }

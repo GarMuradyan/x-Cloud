@@ -385,6 +385,7 @@ var controls = {
             controls.select = controls.moviesLists
             controls.select.addActive()
             controls.select.listTransX()
+            controls.select.listTransY()
         },
         back: function () {
             
@@ -432,6 +433,8 @@ var controls = {
         up: function () {
             if (this.rowsIndex === 0 || this.rowsIndex === '0' ) {
                 this.removeClass()
+                this.items[this.rowsIndex].setAttribute('position',this.index)
+                this.index = this.items[this.rowsIndex].getAttribute('position')
                 controls.select = controls.headerComponents
                 controls.select.addActive()
                 this.listTransX()
@@ -495,9 +498,11 @@ var controls = {
         },
 
         right: function () {
-            this.removeClass()
-            controls.seasons.ok()
-            controls.seasons.listTransX()
+            if (document.querySelector('.card-info-season-box')) {
+                this.removeClass()
+                controls.seasons.ok()
+                controls.seasons.listTransX()
+            }
         },
 
         ok: function () {

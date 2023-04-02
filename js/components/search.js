@@ -24,8 +24,8 @@ function searchButtonClick(data) {
     var arr = []
 
     for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].playlist.length; j++) {
-            arr.push(data[i].playlist[j])
+        for (var j = 0; j < data[i].results.length; j++) {
+            arr.push(data[i].results[j])
         }
     }
 

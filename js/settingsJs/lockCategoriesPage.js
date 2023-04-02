@@ -46,9 +46,14 @@ function renderLockTvCategories(array,name,position) {
 
 function renderLockCategoriesCards(data) {
     var lockCategoriesCardBox = el('div','lock-categories-card-box')
-
+    
     if (data.locked) {
-        lockCategoriesCardBox.append(renderLockCategPageLockBox())
+        lockCategoriesCardBox.classList.add('active-image')
+    }
+    for (var i = 0; i < data.playlist.length; i++) {
+        if (data.playlist[i].locked) {
+            lockCategoriesCardBox.classList.add('active-image')
+        }
     }
 
     lockCategoriesCardBox.onclick = function () {
@@ -62,22 +67,28 @@ function renderLockCategoriesCards(data) {
 }
 
 function lockCategoriesCardsClick(data,elem) {
-    console.log(elem);
-    console.log(data);
 
-    if (data.locked) {
-        data.locked = false
-        elem.getElementsByClassName('lock-categoreis-card-locked-box')[0].remove()
+    if (data.playlist[0].locked) {
+        for (var i = 0; i < data.playlist.length; i++) {
+            data.playlist[i].locked = false
+        }
+        liveTvData[1].playlist = f()
+        elem.classList.remove('active-image')
         localStorageSetItemMenuesData()
     }else {
-        data.locked = true
-        elem.append(renderLockCategPageLockBox())
+        for (var i = 0; i < data.playlist.length; i++) {
+            data.playlist[i].locked = true
+        }
+        liveTvData[1].playlist = f()
+        elem.classList.add('active-image')
         localStorageSetItemMenuesData()
         
     }
 }
 
 function renderLockCategPageLockBox() {
+    console.log('aapend');
+    debugger
     var lockCategoriesCardLockedBox = el('div','lock-categoreis-card-locked-box')
 
     lockCategoriesCardLockedBox.append(renderLockIcon())

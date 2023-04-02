@@ -10,27 +10,47 @@ function renderHeaderComponents(name,index) {
     return headerComponentsBox
 }
 
+function renderHeaderLoadingComponents() {
+    var headerLoadingComponentsBox = el('div','header-loading-components-box')
+    
+    return headerLoadingComponentsBox
+}
+
 function renderListsCardBox(data,array) {
     var contentRowsListsCardBox = el('div','content-rows-lists-card-box')
     var cardImageBox = el('div','card-image-box')
     var cardNameBox = el('div','card-name-box')
+    var cardName = el('div','card-name')
 
-    if (array.locked) {
+    if (data.locked) {
         contentRowsListsCardBox.append(renderMoviesPageLockBox())
     }
 
-    cardImageBox.style.backgroundImage = 'url(' + data.poster + ')'
-    cardNameBox.textContent = data.name
+    if (data.poster_path) {
+        cardImageBox.style.backgroundImage = 'url(' + imageLink + data.poster_path + ')'
+    }else {
+        cardImageBox.style.backgroundImage = 'url(https://icon-library.com/images/not-found-icon/not-found-icon-10.jpg)'
+    }
+
+    cardName.textContent = data.name
 
     contentRowsListsCardBox.onclick = function () {
         clickListsCard(data,array)
     }
+
+    cardNameBox.append(cardName)
 
     contentRowsListsCardBox.append(cardImageBox)
     contentRowsListsCardBox.append(cardNameBox)
 
     return contentRowsListsCardBox
 
+}
+
+function renderListsLoadingCardBox() {
+    var listsLoadingCardBox = el('div','lists-loading-card-box')
+
+    return listsLoadingCardBox
 }
 
 function renderMenuesSearchBox() {
@@ -57,7 +77,7 @@ function clickHeaderComponents() {
 }
 
 function clickListsCard(data,array) {
-    if (array.locked) {
+    if (data.locked) {
         console.log('locked-true');
         controls.privius = controls.select
         document.getElementById('root').innerHTML = ''

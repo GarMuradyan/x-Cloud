@@ -1,3 +1,5 @@
+var imageLink = 'https://image.tmdb.org/t/p/w500'
+
 var menuImagesLinks = [
     {
         url:'http://smarttv.xtream.cloud/img/menu/tv.png',
@@ -390,3 +392,11 @@ var menuSeriesData = [
         ]
     },
 ]
+
+if (localStorage.getItem('menu-series-data')) {
+    menuSeriesData = JSON.parse(localStorage.getItem('menu-series-data'))
+}
+
+if (localStorage.getItem('menu-movies-data')) {
+    menuMoviesData = JSON.parse(localStorage.getItem('menu-movies-data'))
+}

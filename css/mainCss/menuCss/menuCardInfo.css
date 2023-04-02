@@ -20,17 +20,13 @@
         
         .card-poter {
         
-width: 513px;
-        
-height: 860px;
-        
-background-size: cover;
-        
-background-repeat: no-repeat;
-        
-border-radius: 15px;
-        
-background-position: -42px;
+            width: 513px;
+            height: 860px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 15px;
+            background-position: center;
+            background-color: aliceblue;
         }
         
         .card-poster-play-button-box {
@@ -81,17 +77,14 @@ margin-left: 80px;
         
         .card-info-desc-box {
         
-    margin-top: 20px;
-        
-    color: white;
-        
-    font-size: 35px;
-        
-    font-family: sans-serif;
-        
-    letter-spacing: 1px;
-        
-    line-height: 45px;
+            margin-top: 20px;
+            color: white;
+            font-size: 35px;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+            line-height: 45px;
+            height: 320px;
+            overflow: hidden;
         }
         
         .card-info-rating-and-duration-box {
