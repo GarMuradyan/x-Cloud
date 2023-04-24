@@ -45,16 +45,15 @@ function renderPlayerContentVideoBox(data,i) {
     tvPlayerVideoBox.setAttribute('autoplay',true)
 
     var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-    
+
     if (Hls.isSupported()) {
-        if(hls)hls.destroy();
-        var hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(tvPlayerVideoBox);
-    }else if (tvPlayerVideoBox.canPlayType('application/vnd.apple.mpegurl')) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(tvPlayerVideoBox);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         tvPlayerVideoBox.src = videoSrc;
     }
-
+    
     playerContentVideoBox.append(tvPlayerVideoBox)
 
     return playerContentVideoBox

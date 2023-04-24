@@ -1,278 +1,182 @@
-.movies-card-info-page {
+.movies-card-info-page {height: 100vh;padding: 25px 80px;position: relative;}
 
+.gradient-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(92.79deg, #202020 50.94%, rgba(32, 32, 32, 0) 96.06%);
+    width: 1000px;
     height: 100vh;
-    
-    padding: 30px 115px;
-    
-    }
-        
-        .card-info-and-poster-box {
-        display: flex;
-        display: -webkit-flex;
-        }
-        
-        .card-poster-box {
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        flex-direction: column;
-        }
-        
-        .card-poter {
-        
-            width: 513px;
-            height: 860px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            border-radius: 15px;
-            background-position: center;
-            background-color: aliceblue;
-        }
-        
-        .card-poster-play-button-box {
-        
-    width: 195px;
-        
-    height: 70px;
-        
-    background-color: rgb(32, 32, 32);
-        
-    border-radius: 7px;
-        
-    margin-top: 40px;
-        }
-        
-        .card-poster-play-button {
-        
-    width: 100%;
-        
-    height: 100%;
-        
+}
+
+.height {
+    border: 3px solid white !important;
+    height: 190px !important;
+}
+
+.movies-card-info-page::before {
+    content: "";
+    background: var(--background);
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.75;
+}
+
+.movies-card-info-loading-box {height: 100vh;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+
+.info-loading-box {width: 80px;height: 80px;}
+
+.info-loading-text-box {color: white;font-family: sans-serif;font-size: 40px;position: relative;top: 8%;}
+
+.movies-card-info-not-found {
+    position: absolute;
+    top: 50%;
+    left: 43%;
     color: white;
-        
-    border: 0;
-        
-    background-color: transparent;
-        
-    border-radius: 7px;
-        
-    font-size: 30px;
-        }
-        
-        .card-info-box {
-        
-margin-left: 80px;
-        }
-        
-        .card-info-name-box {
-        
-    color: white;
-        
-    font-size: 55px;
-        
+    font-size: 40px;
     font-family: sans-serif;
-        
-    font-weight: 700;
-        }
-        
-        .card-info-desc-box {
-        
-            margin-top: 20px;
-            color: white;
-            font-size: 35px;
-            font-family: sans-serif;
-            letter-spacing: 1px;
-            line-height: 45px;
-            height: 320px;
-            overflow: hidden;
-        }
-        
-        .card-info-rating-and-duration-box {
-        
-margin-top: 20px;
-        
-color: white;
-        
-display: flex;
-        
-display: -webkit-flex;
-        
-align-items: center;
-        }
-        
-        .card-info-season-box {
-        
-margin-top: 50px;
-        }
-        
-        .card-info-rating-box {
-        
-background-repeat: no-repeat;
-        
-width: 100px;
-        
-height: 30px;
-        
-background-size: 1.4rem;
-        
-background-position: 0% 50%;
-        
-background-repeat: no-repeat;
-        
-padding-left: 32px;
-        
-display: flex;
-        
-align-items: center;
-        
-display: -webkit-flex;
-        
-font-size: 33px;
-        
-font-family: sans-serif;
-        }
-        
-        .card-info-duration-box {
-        
-margin-left: 10px;
-        
-font-size: 33px;
-        
-display: flex;
-        
-display: -webkit-flex;
-        
-align-items: center;
-        
-font-family: sans-serif;
-        
-flex-direction: row-reverse;
-        
-height: 30px;
-        
-background-size: 37px;
-        
-background-position: 1px 16%;
-        
-background-repeat: no-repeat;
-        
-padding-left: 46px;
-        }
-        
-    
-        .card-info-back-box {
-            position: absolute;
-            top: 20px;
-            left: 15px;
-            width: 65px;
-            height: 60px;
-        }
-
-.season-top-box {
-width: 1210px;
-overflow: hidden;
 }
 
-.season-top-content-box {
-    display: flex;
+.card-info-box {
+    position: relative;
+    z-index: 999;
+}
 
-    align-items: center;
-    
-    display: -webkit-flex;
-    
+.card-info-name-and-rating-box {display: flex;display: -webkit-flex;align-items: center;}
+
+.card-info-name-box {color: white;font-size: 34px;font-family: sans-serif;}
+
+.card-info-stars-box {margin-left: 50px;display: flex;}
+
+.card-info-star {margin-left: 9px;width: 20px;height: 20px;}
+
+.card-info-description-box {margin-top: 20px;}
+
+.card-info-description {
     color: white;
-
-    width: 99999999999999999999999px;
-
-    transition: 0.3s;
+    font-family: sans-serif;
+    width: 849px;
+    font-size: 22px;
+    height: 165px;
+    overflow: hidden;
+    font-style: normal;
+    line-height: 33px;
+    font-weight: 400;
 }
 
-.season-bottom-box {
+.card-info-directed-and-duration-box {margin-top: 48px;}
 
-margin-top: 25px;
+.card-info-directed-box {font-style: normal;font-weight: 700;font-size: 22px;line-height: 33px;color: white;font-family: sans-serif;letter-spacing: 1px;}
 
-width: 1210px;
-
-overflow: hidden;
+.card-info-duration-box {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    color: white;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 }
 
-.season-bottom-content-box {
-
-display: flex;
-
-display: -webkit-flex;
-
-align-items: center;
-
-width: 99999999999999999999999px;
-
-transition: 0.3s;
+.card-info-buttons-box {
+    display: flex;
+    align-items: center;
+    margin-top: 56px;
 }
+
+.card-info-button {
+    width: 189px;
+    height: 75px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    color: white;
+    background: rgba(249, 249, 249, 0.2);
+    border-radius: 15px;
+    border: 1px solid transparent;
+    margin-left: 31px;
+}
+
+.card-info-button:nth-child(1) {
+    margin-left: 0px;
+}
+
+.info-card-bottom-content {position: absolute;z-index: 11;bottom: 2%;width: 1760px;}
+
+.bottom-similiar-content {height: 360px;overflow: hidden;}
+
+.similiar-content-name {font-size: 30px;color: white;font-family: sans-serif;}
+
+.similiar-content-list-box {
+    width: 1720px;
+    overflow: hidden;
+    margin-top: 22px;
+}
+
+.similiar-content-list-content-box {
+    position: relative;
+    width: 9999999999999999999999999999999999999px;
+    height: 360px;
+}
+
+.season-content-parent-box {margin-top: 52px;position: relative;z-index: 14;width: 409px;}
+
+.season-content-title-box {width: 409px;height: 89px;color: white;font-size: 24px;font-family: sans-serif;cursor: pointer;background: rgba(30, 31, 32, 0.45);backdrop-filter: blur(37px);border: 3px solid;background: linear-gradient(0deg, rgb(29 30 31 / 45%), rgb(53 54 56 / 45%)), linear-gradient(118.06deg, rgb(127 124 124 / 40%) 14.72%, rgba(255, 255, 255, 0) 93.25%);padding-top: 28px;padding-bottom: 25px;padding-left: 62px;padding-right: 36px;border-radius: 12px;}
+
+.season-list-box {height: 0px;overflow: hidden;border: 3px solid transparent;transition: 0.3s;border-radius: 12px;/* margin-top: 10px; */background: rgb(0 4 8 / 45%);position: relative;}
+
+.season-list-content-box {border-radius: 12px;height: 99999999999999999999px;background: black;padding: 0 10px;transition: 0.3s;}
 
 .season-card-box {
-
-width: 130px;
-
-font-family: sans-serif;
-
-font-size: 23px;
-
-font-weight: 700;
-
-margin-left: 15px;
-
-background-color: rgb(32, 32, 32);
-
-height: 46px;
-
-border-radius: 5px;
-
-display: flex;
-
-display: -webkit-flex;
-
-align-items: center;
-
-justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 10px;
+    height: 50px;
+    color: white;
+    font-size: 24px;
+    font-family: sans-serif;
+    padding-left: 62px;
+    padding-right: 36px;
+    padding-top: 10px;
+    padding-bottom: 9px;
+    cursor: pointer;
+    background: linear-gradient(0deg, rgb(92 94 95 / 45%), rgb(85 87 90 / 45%)),
+linear-gradient(118.06deg, rgba(255, 255, 255, 0.4) 14.72%, rgba(255, 255, 255, 0) 93.25%);
 }
 
-.season-card-box:nth-child(1) {
-    margin-left: 0px;
+.bottom-episodes-content {color: white;font-family: sans-serif;}
+
+.episodes-content-name {font-size: 32px;}
+
+.episodes-list-box {margin-top: 22px;width: 100%;overflow: hidden;}
+
+.episodes-list-content-box {display: flex;position: relative;width: 999999999999999999999999px;height: 305px;transition: 0.4s;}
+
+.episode-card-box {
+    height: 298px;
+    width: 486px;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-color: #373434;
+    border: 3px solid transparent;
 }
 
-.season-episode-card-box:nth-child(1) {
-    margin-left: 0px;
-}
+.episode-card-info-box {margin-top: 200px;width: 440px;margin-left: 20px;}
 
-.season-episode-card-box {
+.episode-card-info-number {font-size: 22px;font-weight: 800;}
 
-margin-left: 10px;
-}
+.episode-card-info-name {font-size: 20px;color: rgba(249, 249, 249, 0.7);}
 
-.season-episode-card-poster-box {
+.episode-card-info-progres-box {width: 100%;height: 3px;background-color: white;margin-top: 15px;}
 
-height: 136px;
+.episode-card-info-progres-line-box {
 
-width: 130px;
-
-background-size: cover;
-}
-
-.season-episode-card-name-box {
-    
-height: 26px;
-    
-color: white;
-    
-background-color: rgb(32, 32, 32);
-    
-font-family: sans-serif;
-    
-font-size: 19px;
-    
-border-bottom-left-radius: 5px;
-    
-padding-left: 10px;
-    
-border-bottom-right-radius: 5px;
 }

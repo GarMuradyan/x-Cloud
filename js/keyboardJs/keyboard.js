@@ -212,27 +212,35 @@ function keyboardItemIfElse(item,elem,classNmaes) {
 function keyboardItemClick(elem,array,data) {
     if (elem.textContent.length === 1) {
         activeInput.value+=elem.textContent
-        showHideKeyboardItemActive(elem)
+        activeInputText = activeInput.value
         if (data) {
             keyboardSearchingClick(data)
         }
+        showHideKeyboardItemActive(elem)
     }
 
     if (elem.classList.contains('clean')) {
         if (activeInput.value) {
             activeInput.value = ''
-            showHideKeyboardItemActive(elem)
+            activeInputText = activeInput.value
         }
+        showHideKeyboardItemActive(elem)
     }
 
     if (elem.classList.contains('close')) {
         var x = activeInput.value.substring(0,activeInput.value.length-1)
         activeInput.value = x
+        activeInputText = activeInput.value
+        if (data) {
+            keyboardSearchingClick(data)
+        }
         showHideKeyboardItemActive(elem)
     }
 
-    if (elem.classList.contains('space')) {
+    if (elem.classList.contains('space')|| elem.classList.contains('liveTvSpace')) {
+        console.log('space');
         activeInput.value+=' '
+        activeInputText = activeInput.value
         showHideKeyboardItemActive(elem)
     }
 
@@ -256,6 +264,9 @@ function keyboardItemClick(elem,array,data) {
 function keyboardSearchingClick(data) {
     if (document.querySelector('.live-tv-page-box')) {
         renderLiveTvSearching(data)
+    }
+    if (document.querySelector('.movies-series-search-page')) {
+        renderFilmsSearching(data,infoUrl)
     }
 }
 
@@ -305,15 +316,21 @@ function doneClick(elem,array,data) {
         controls.privius.ok()
     }
     if (document.querySelector('.movies-series-search-page')) {
-        console.log('done');
+        if (document.querySelector('.search-list-content-box').getElementsByClassName('card-name-box').length) {
+            controls.select.removeClass()
+            controls.select = controls.searchLists
+            controls.select.addActive()
+            controls.select.listTransX()
+        }else {
+            controls.select = controls.back
+            controls.select.addActive()
+        }
     }
     if (document.querySelector('.live-tv-page-box')) {
         liveTvSearchBack()
-        // document.querySelector('.live-tv-search-keyboard-box').remove()
-        // document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
 
     }
-    showHideKeyboardItemActive(elem)
+    //showHideKeyboardItemActive(elem)
 }
 
 function numberClick(elem,array,data) {

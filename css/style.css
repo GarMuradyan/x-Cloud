@@ -5,7 +5,6 @@
 }
 
 #root {
-    background-image: url(http://smarttv.xtream.cloud/img/bg.png);
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,7 +18,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    background: rgb(17 16 16 / 86%);
+    border-radius: 50%;
 }
 
 .back-box>span {
@@ -27,11 +27,11 @@
 }
 
 .active-border {
-    border: 3px solid #2e844e !important;
+    border:3px solid #3EFF0E !important;
 }
 
 .active-background {
-    background-color: #2e844e !important;
+    background: linear-gradient(112.45deg, #3EFF0E -74.95%, #3A854F 98%) !important;
 }
 
 .scale {
@@ -39,20 +39,24 @@
 }
 
 .search-button-box {
-    width: 346px;
+    width: 667px;
     height: 83px;
     color: white;
     font-family: sans-serif;
     display: flex;
     align-items: center;
     padding-left: 20px;
-    background-color: rgb(32, 32, 32);
-    border-radius: 10px;
+    border-radius: 20px;
+    background: #ffffff1a;
+    margin-left: 44px;
 }
 
 .search-button-box>span {
 
 font-size: 50px;
+}
+.popup-display {
+    display: none;
 }
 
 .search-text {font-size: 35px;margin-left: 15px;}

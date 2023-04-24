@@ -61,12 +61,8 @@ width: 800px;
 
 .search-system-box {
     left: 21%;
-
-    bottom: 37%;
-
     position: absolute;
     width: 1110px;
-
 }
 
 .search-page-content-search-box {
@@ -88,10 +84,27 @@ margin-left: 20px;
 }
 
 .search-list-box {
-    
-width: 1900px;
-    
-position: absolute;
-    
-top: 35%;
+    width: 1760px;
+    position: absolute;
+    top: 25%;
+    overflow: hidden;
+    left: 65px;
+}
+
+.search-list-content-box {
+    transition: 0.4s;
+    width: 99999999999999999999999999999999999px;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    position: relative;
+    height: 310px;
+}
+
+.films-searching-load-box {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
 }

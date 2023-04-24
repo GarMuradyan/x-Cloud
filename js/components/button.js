@@ -4,15 +4,34 @@ function renderButton(className,text,classList,data) {
     buttonBox.textContent = text
     buttonBox.classList.add(classList)
 
-    buttonBox.onclick = buttonClick
+    buttonBox.onclick = function () {
+        buttonClick(this,data)
+    }
 
     return buttonBox
 }
 
-function buttonClick() {
-    if (this.textContent === 'Login') {
-        loginButtonClick(this)
+function buttonClick(elem,data) {
+    if (elem.classList.contains('login-button')) {
+        loginButtonClick(elem)
 
+    }
+
+    if (elem.classList.contains('play')) {
+        console.log('play',data);
+        playButtonClick(data)
+    }
+}
+
+function playButtonClick(data) {
+    cardInfo = data
+    if (data.episodes) {
+        
+    }else {
+        document.querySelector('.movies-card-info-page').classList.add('popup-display')
+        document.getElementById('root').append(renderMoviesVideoOnPlaying())
+        controls.select = controls.moviesVideoLoad
+        document.getElementById('root').append(renderMoviesVideo(data))
     }
 }
 

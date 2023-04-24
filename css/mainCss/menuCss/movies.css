@@ -8,37 +8,33 @@
     }
     
     .page-content-box {
-    
-height: 100%;
-    
-padding: 20px 80px;
+    height: 100%;
+    padding: 20px 60px;
     }
     
     .page-header-box {
     
 margin-top: 15px;
     
-margin-left: 15px;
     }
     
     .header-top-box {
-    
-display: flex;
-    
-width: 444px;
-    
-justify-content: space-between;
+    display: flex;
+    width: 700px;
+    justify-content: space-between;
+    align-items: center;
     }
 
  .header-top-back-box {
-    width: 80px;
-    height: 83px;
+    width: 94px;
+    background: #ffffff1a;
+    border-radius: 50%;
+    height: 80px;
  }   
     
     .header-bottom-box {
     overflow: hidden;
     
-width: 1380px;
     
 margin-top: 40px;
     }
@@ -46,20 +42,19 @@ margin-top: 40px;
 .header-bottom-content-box {
     display: flex;
     color: white;
-    font-size: 24px;
+    font-size: 21px;
     font-family: sans-serif;
     align-items: center;
     width: 99999999999999999999px;
     transition: 0.4s;
+    position: relative;
+    height: 90px;
 }    
     
     .page-lists-parent-box {
-    
-margin-top: 13px;
-    
-height: 809px;
-    
-overflow: hidden;
+    margin-top: 13px;
+    height: 809px;
+    overflow: hidden;
     }
     
     .parent-content-box {
@@ -74,14 +69,10 @@ transition: 0.4s;
     }
     
     .content-rows-box {
-    
-color: white;
-    
-font-family: sans-serif;
-    
-height: 570px;
-    
-margin-top: 30px;
+    color: white;
+    font-family: sans-serif;
+    height: 360px;
+    margin-top: 30px;
     }
     
     .content-rows-name-box {
@@ -94,12 +85,11 @@ margin-left: 15px;
     }
     
     .content-rows-lists-box {
-    
-display: flex;
-    
-height: 510px;
-
-transition: 0.4s;
+    display: flex;
+    transition: 0.4s;
+    position: relative;
+    display: -webkit-flex;
+    height: 300px;
     }
 
 .header-components-box:nth-child(1) {
@@ -107,66 +97,152 @@ transition: 0.4s;
 }    
     
     .header-components-box {
-    
-width: 330px;
-    
-height: 100px;
-    
-display: flex;
-    
-justify-content: center;
-    
-align-items: center;
-    
-background-color: rgb(32, 32, 32);
-    
-border-radius: 10px;
-    
-margin-left: 20px;
+    width: 260px;
+    text-align: center;
+    height: 82px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    /* margin-left: 15px; */
+    border: 3px solid;
+    background: linear-gradient(0deg, rgba(30, 31, 32, 0.45), rgba(30, 31, 32, 0.45)), linear-gradient(118.06deg, rgba(255, 255, 255, 0.4) 14.72%, rgba(255, 255, 255, 0) 93.25%);
+    position: absolute;
+    padding: 10px 10px;
     }
     
 .content-rows-lists-card-box {
-    width: 330px;
-    margin-left: 15px;
-    position: relative;
+    width: 237px;
+    /* margin-left: 15px; */
+    position: absolute;
+    top: 0;
+    border-radius: 20px;
+    border: 3px solid transparent;
     }
+
+.content-rows-lists-card-box:nth-child(1) {
+    margin-left: 0;
+}   
+
+.card-image-parent-box {
+    height: 298px;
+    width: 100%;
+    position: relative;
+}
     
     .card-image-box {
-        
         width: 100%;
-        height: 434px;
-        background-size: cover;
-        background-color: aliceblue;
-        background-position-x: center;
+        background: #757575;
+        height: 100%;
+        opacity: 0.7;
+        border-radius: 20px;
     }
     
     .card-name-box {
-        
-height: 76px;
-        
-background-color: rgb(32, 32, 32);
-        
-display: flex;
-        
-align-items: center;
-        
-padding-left: 35px;
-        
-border-bottom-right-radius: 10px;
-        
-border-bottom-left-radius: 10px;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: absolute;
+        top: 10px;
+        left: 20px;
     }
 
 .card-name {
-    font-size: 22px;
+    font-size: 21px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 280px;
-    height: 53px;
-}    
+    width: 200px;
+    height: 48px;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 700;
+}  
+
+.card-stars-box {position: absolute;top: 28%;left: 20px;}
+
+.card-star {
+    
+}
 
 .movies-page-lock-box {position: absolute;background: red;border-radius: 8px;top: 5px;left: 4px;}   
 
 .movies-page-lock-box>span {
     font-size: 35px;
+    color: white;
 }
+
+.header-loading-components-box {
+    width: 260px;
+    height: 82px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
+    border-radius: 12px;
+    margin-left: 20px;
+    position: relative;
+    background: #3a3a3a;
+    background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 200px; 
+    
+  /* Animantion */
+    -webkit-animation-duration: 1s;
+    
+    /* Specifies style for element when animation isn't playing */
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: shimmer-header-load-card;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.header-loading-components-box:nth-child(1) {
+    margin-left: 0;
+}
+
+.lists-loading-card-box {
+    width: 237px;
+    margin-left: 22px;
+    height: 300px;
+    position: relative;
+    background: #3a3a3a;
+    background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 700px;
+    border-radius: 10px; 
+    
+  /* Animantion */
+    -webkit-animation-duration: 1s;
+    
+    /* Specifies style for element when animation isn't playing */
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: shimmer-movies-load-card;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.lists-loading-card-box:nth-child(1) {
+    margin-left: 0;
+}
+
+@keyframes shimmer-header-load-card {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0; 
+    }
+}
+
+@keyframes shimmer-movies-load-card {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0; 
+    }
+  }
+  
+  

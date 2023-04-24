@@ -9,7 +9,6 @@ if (localStorage.getItem('page')) {
 function renderLogin() {
     var loginPageBox = el('div','login-page-box')
 
-    loginPageBox.style.backgroundImage = 'url(bg.png)'
 
     loginPageBox.append(renderLoginInputsBox())
 

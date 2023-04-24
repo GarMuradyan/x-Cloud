@@ -83,10 +83,50 @@ var settingsData = [
         img:'http://smarttv.xtream.cloud/img/icons/padlock.png',
         name:'Lock Categories',
         onClick: function () {
-            document.getElementById('root').innerHTML = ''
-            document.getElementById('root').append(renderLockCategoriesPage(liveTvData,menuMoviesData,menuSeriesData))
-            controls.select = controls.lockCategories
-            controls.select.firstActive()
+        //     if (moviesData.length && seriesData.length) {
+        //         document.getElementById('root').innerHTML = ''
+        //         document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
+        //         controls.select = controls.lockCategories
+        //         controls.select.firstActive()
+        //     }else {
+        //         var lockCategoriesLoadingBox = el('div','lock-categories-loading-box')
+
+        //         lockCategoriesLoadingBox.append(renderLoading())
+
+        //         document.getElementById('root').innerHTML = ''
+
+        //         document.getElementById('root').append(lockCategoriesLoadingBox)
+
+        //         req(moviesUrl,'GET').then((data)=> {
+        //             moviesData.length ? false : moviesData.push(data)
+        //             console.log(data);
+
+        //             if (moviesData.length && seriesData.length) {
+        //                 document.getElementById('root').innerHTML = ''
+        //                 document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
+        //                 controls.select = controls.lockCategories
+        //                 controls.select.firstActive()
+        //             }
+
+        //         }).catch((err)=> {
+        //             console.log(err);
+        //         })
+
+        //         req(seriesUrl,'GET').then((data)=> {
+        //             seriesData.length ? false : seriesData.push(data)
+        //             console.log(data);
+
+        //             if (moviesData.length && seriesData.length) {
+        //                 document.getElementById('root').innerHTML = ''
+        //                 document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
+        //                 controls.select = controls.lockCategories
+        //                 controls.select.firstActive()
+        //             }
+                    
+        //         }).catch((err)=> {
+        //             console.log(err);
+        //         })
+        //     }
         }
     },
     {
