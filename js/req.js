@@ -1,4 +1,4 @@
-function req(url,method,data,params) {
+function req(url,method,data) {
 
     return new Promise((resolve,reject)=> {
         var xhr = new XMLHttpRequest()

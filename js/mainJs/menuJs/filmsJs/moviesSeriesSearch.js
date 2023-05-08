@@ -11,14 +11,6 @@ function renderMoviesSeriesSearchingBox (infoUrl) {
     var searchListContentBox = el('div', 'search-list-content-box')
     var searchSystemBox = el('div', 'search-system-box')
 
-    if (filmsSearchArray.length) {
-        for (var i = 0; i < filmsSearchArray.length; i++) {
-            searchListContentBox.append(renderListsCardBox(filmsSearchArray[i], '', '', infoUrl, i))
-        }
-    }
-
-    searchPageContentBackBox.textContent = 'Search'
-
     searchPageBackBox.append(renderBackButton())
 
     searchPageContentBackBox.append(searchPageBackBox)

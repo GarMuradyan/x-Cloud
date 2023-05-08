@@ -4,11 +4,35 @@ var infoUrl = null
 
 var similiarContent = null
 
+var clickedCard = null
+
 var moviesCategories = null
+
+var moviesSeriesStreams = null
 
 var seriesData = []
 
 var moviesData = []
+
+var vodes = {
+
+}
+
+var series = {
+
+}
+
+var moviesCategoriesData = {}
+
+var seriesCategoriesData = {}
+
+if (localStorage.getItem('vods')) {
+    vodes = JSON.parse(localStorage.getItem('vods'))
+}
+
+if (localStorage.getItem('series')) {
+    series = JSON.parse(localStorage.getItem('series'))
+}
 
 var moviesStreams = null
 
@@ -16,7 +40,23 @@ var seriesCategories = null
 
 var seriesStreams = null
 
-var reqUrl = 'https://xtream-ie.com/player_api.php?username=MYOWN1&password=Meins321'
+var moviesFavorits = {
+    category_name:'Movies Favorit',
+    type:'favorit',
+    playlist: [
+
+    ]
+}
+
+var seriesFavorits = {
+    category_name:'Series Favorit',
+    type:'favorit',
+    playlist: [
+
+    ]
+}
+
+var reqUrl = 'http://kingtop10.net:7070/player_api.php?username=QATeamTest&password=jby2jccj'
 
 var moviesInfoUrl = reqUrl + '&action=get_vod_info&vod_id='
 
@@ -48,13 +88,3 @@ var menuImagesLinks = [
         type: 'settings'
     }
 ]
-
-if (localStorage.getItem('series-categories')) {
-    console.log('seriesCategories');
-    seriesCategories = (JSON.parse(localStorage.getItem('series-categories')))
-}
-
-if (localStorage.getItem('movies-categories')) {
-    console.log('moviesCategories');
-    moviesCategories = (JSON.parse(localStorage.getItem('movies-categories')))
-}

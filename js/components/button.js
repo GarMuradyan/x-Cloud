@@ -18,9 +18,114 @@ function buttonClick(elem,data) {
     }
 
     if (elem.classList.contains('play')) {
-        console.log('play',data);
         playButtonClick(data)
     }
+
+    if (elem.classList.contains('favorit-btn')) {
+        favoritButtonClick(data)
+    }
+}
+
+function favoritButtonClick(data) {
+    console.log(data);
+
+    if (season.length) {
+        seriesFavoritClick(data)
+    }else {
+        moviesFavoritClick(data)
+    }
+
+}
+
+function seriesFavoritClick(data) {
+    var id = data.series_id
+
+    if (data.favorit) {
+        data.favorit = false
+        for (var i = 0; i < seriesFavorits.playlist.length; i++) {
+            if (seriesFavorits.playlist[i] === data) {
+                seriesFavorits.playlist.splice(i,1)
+            }            
+        }
+        series[id] = {favorit:false}
+        localStorage.setItem('series',JSON.stringify(series))
+        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
+            document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+        }
+    }else {
+        data.favorit = true
+        seriesFavorits.playlist.push(data)
+        series[id] = {favorit:true}
+        localStorage.setItem('series',JSON.stringify(series))
+        console.log(document.querySelectorAll("[id='"+id+"']"));
+        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
+            document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+        }
+    }
+
+
+    console.log(data);
+}
+
+function moviesFavoritClick(data) {
+    
+    var id = data.stream_id
+
+    if (data.favorit) {
+        data.favorit = false
+        for (var i = 0; i < moviesFavorits.playlist.length; i++) {
+            if (moviesFavorits.playlist[i] === data) {
+                moviesFavorits.playlist.splice(i,1)
+            }            
+        }
+        vodes[id] = {favorit:false}
+        localStorage.setItem('vods',JSON.stringify(vodes))
+        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
+            document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+        }
+    }else {
+        data.favorit = true
+        moviesFavorits.playlist.push(data)
+        vodes[id] = {favorit:true}
+        localStorage.setItem('vods',JSON.stringify(vodes))
+        console.log(document.querySelectorAll("[id='"+id+"']"));
+        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
+            document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+        }
+    }
+
+
+    console.log(data);
+}
+
+function getMoviesFavorits() {
+    for (var i = 0; i < moviesStreams.length; i++) {
+        var vod = moviesStreams[i]
+
+        if (vodes[vod.stream_id]) {
+            if (vodes[vod.stream_id].favorit) {
+                vod.favorit = vodes[vod.stream_id].favorit
+                moviesFavorits.playlist.push(vod)
+            }
+        }
+    }
+
+    moviesFavorits.playlist.length ? moviesData.unshift(moviesFavorits) : false
+}
+
+function getSeriesFavorits() {
+    for (var i = 0; i < seriesStreams.length; i++) {
+        var serie = seriesStreams[i]
+
+        if (series[serie.series_id]) {
+            if (series[serie.series_id].favorit) {
+                serie.favorit = series[serie.series_id].favorit
+                seriesFavorits.playlist.push(serie)
+            }
+        }
+    }
+
+    seriesFavorits.playlist.length ? seriesData.unshift(seriesFavorits) : false
 }
 
 function playButtonClick(data) {
@@ -31,7 +136,7 @@ function playButtonClick(data) {
         document.querySelector('.movies-card-info-page').classList.add('popup-display')
         document.getElementById('root').append(renderMoviesVideoOnPlaying())
         controls.select = controls.moviesVideoLoad
-        document.getElementById('root').append(renderMoviesVideo(data))
+        document.getElementById('root').append(renderMoviesVideo(clickedCard))
     }
 }
 

@@ -28,16 +28,21 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
 
     if (data.series_id) {
         console.log('series-id');
+        seriesLocked[data.category_id] ? data.locked = seriesLocked[data.category_id].locked : false
         contentRowsListsCardBox.setAttribute('id', data.series_id)
     } else if (data.stream_id) {
         console.log('stream-id');
+        moviesLocked[data.category_id] ? data.locked = moviesLocked[data.category_id].locked : false
         contentRowsListsCardBox.setAttribute('id', data.stream_id)
     }
+
+    data.locked ? contentRowsListsCardBox.append(renderMoviesLockedBox(data)) : false
 
     contentRowsListsCardBox.setAttribute('rows-index', i)
     contentRowsListsCardBox.style.left = j * 259 + 'px'
     cardName.textContent = data.name
 
+    // data.progresDuration ? contentRowsListsCardBox.append(renderMoviesProgresBar(data)) : false
 
     if (data.stream_icon) {
         cardImageBox.src = data.stream_icon
@@ -61,7 +66,6 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
         cardImageBox.src = 'http://smarttv.xtream.cloud/img/logo.png'
     }
 
-
     contentRowsListsCardBox.onclick = function () {
         clickListsCard(data, array, infoUrl, this.getAttribute('id'))
     }
@@ -73,6 +77,7 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
     contentRowsListsCardBox.append(cardImageParentBox)
     contentRowsListsCardBox.append(cardNameBox)
     contentRowsListsCardBox.append(cardStarsBox)
+    data.favorit ? contentRowsListsCardBox.append(renderMoviesPageFavoritBox(data)) : false
 
     return contentRowsListsCardBox
 
@@ -112,8 +117,7 @@ function clickHeaderComponents () {
 }
 
 function clickListsCard (data, array, infoUrl, id) {
-    console.log(data.rating_5based);
-    console.log(array);
+    clickedCard = data
     array.playlist ? similiarContent = array.playlist : similiarContent = array
 
     similiarContent = array
@@ -125,8 +129,6 @@ function clickListsCard (data, array, infoUrl, id) {
 
     controls.select = ''
 
-    console.log(similiarContent);
-
     controls.similiarList.index = 0
     controls.similiarList.start = 6
     controls.similiarList.transIndex = 0
@@ -134,6 +136,7 @@ function clickListsCard (data, array, infoUrl, id) {
     controls.episodesLists.start = 3
     controls.episodesLists.index = 0
     controls.seasonContent.index = 0
+    controls.seasonContent.transIndex = 0
 
     if (controls.privius === controls.moviesLists) {
         console.log('movies-popup');
@@ -150,7 +153,7 @@ function clickListsCard (data, array, infoUrl, id) {
     document.getElementById('root').append(renderMoviesCardInfoLoading())
 
     req(infoUrl + id, 'GET').then((res) => {
-        console.log(res);
+        console.log('info-respons',res);
         if (res.info) {
             infoData = res
             document.querySelector('.movies-card-info-loading-box').remove()
@@ -166,10 +169,34 @@ function clickListsCard (data, array, infoUrl, id) {
     })
 }
 
-function renderMoviesPageLockBox () {
-    var moviesPageLockBox = el('div', 'movies-page-lock-box')
+function renderMoviesPageFavoritBox (data) {
+    var moviesPageFavoritBox = el('div', 'movies-page-favorit-box')
+    var moviesPageFavoritImage = el('img','movies-page-favorit-imge')
 
-    moviesPageLockBox.append(renderLockIcon())
+    data.locked ? moviesPageFavoritImage.style.left = '69%' : moviesPageFavoritImage.style.left = '85%'
 
-    return moviesPageLockBox
+    moviesPageFavoritImage.src = 'favorit.png'
+
+    moviesPageFavoritBox.append(moviesPageFavoritImage)
+    
+    return moviesPageFavoritBox
+}
+
+function renderMoviesLockedBox() {
+    var moviesLockedBox = el('div','movies-locked-box')
+
+    moviesLockedBox.append(renderLockIcon())
+
+    return moviesLockedBox
+}
+
+function renderMoviesProgresBar(data) {
+    var moviesProgresBarBox = el('div','movies-progres-bar-box')
+    var moviesProgresBarContentBox = el('div','movies-progres-bar-content-box')
+
+    moviesProgresBarContentBox.style.width = data.progresDuration
+
+    moviesProgresBarBox.append(moviesProgresBarContentBox)
+
+    return moviesProgresBarBox
 }

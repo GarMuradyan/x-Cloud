@@ -1,10 +1,14 @@
 function renderLockCategoriesPage(array) {
 
-    var names = ['Movie Categories','Series Categories']
+    var names = ['Live Categories' ,'Movie Categories','Series Categories']
 
     var lockCategoriesPageBox = el('div','lock-categories-page-box')
+    var lockCategoriesHeaderBox = el('div','lock-categories-header-box')
     var lockCategoriesBackBox = el('div','lock-categories-back-box')
+    var lockCategoriesBackNameBox = el('div','lock-categories-back-name-box')
     var lockCategoriesContentBox = el('div','lock-categories-content-box')
+
+    lockCategoriesBackNameBox.textContent = 'Settings'
 
     for (var i = 0; i < array.length; i++) {
         lockCategoriesContentBox.append(renderLockTvCategories(array[i], names[i] ,0))
@@ -12,7 +16,10 @@ function renderLockCategoriesPage(array) {
 
     lockCategoriesBackBox.append(renderBackButton())
 
-    lockCategoriesPageBox.append(lockCategoriesBackBox)
+    lockCategoriesHeaderBox.append(lockCategoriesBackBox)
+    lockCategoriesHeaderBox.append(lockCategoriesBackNameBox)
+
+    lockCategoriesPageBox.append(lockCategoriesHeaderBox)
     lockCategoriesPageBox.append(lockCategoriesContentBox)
 
 
@@ -44,21 +51,19 @@ function renderLockTvCategories(array,name,position) {
 
 function renderLockCategoriesCards(data) {
     var lockCategoriesCardBox = el('div','lock-categories-card-box')
+    var lockCategoriesCardNameBox = el('div','lock-categories-card-name-box')
     
     if (data.locked) {
         lockCategoriesCardBox.classList.add('active-image')
-    }
-    for (var i = 0; i < data.results.length; i++) {
-        if (data.results[i].locked) {
-            lockCategoriesCardBox.classList.add('active-image')
-        }
     }
 
     lockCategoriesCardBox.onclick = function () {
         lockCategoriesCardsClick(data,this)
     }
 
-    lockCategoriesCardBox.textContent = data.page
+    lockCategoriesCardNameBox.textContent = data.category_name
+
+    lockCategoriesCardBox.append(lockCategoriesCardNameBox)
 
 
     return lockCategoriesCardBox
@@ -66,26 +71,83 @@ function renderLockCategoriesCards(data) {
 
 function lockCategoriesCardsClick(data,elem) {
 
-    if (data.results[0].locked) {
-        for (var i = 0; i < data.results.length; i++) {
-            data.results[i].locked = false
-        }
+    if (data.locked) {
+        data.locked = false
         elem.classList.remove('active-image')
+        if (controls.lockCategories.rowsIndex == 0) {
+            liveLocked[data.category_id] = {locked:false}
+        }
+        if (controls.lockCategories.rowsIndex == 1) {
+            moviesLocked[data.category_id] = {locked:false}
+        }
+        if (controls.lockCategories.rowsIndex == 2) {
+            seriesLocked[data.category_id] = {locked:false}
+        }
         localStorageSetItemMenuesData()
     }else {
-        for (var i = 0; i < data.results.length; i++) {
-            data.results[i].locked = true
-        }
+        data.locked = true
         elem.classList.add('active-image')
+        if (controls.lockCategories.rowsIndex == 0) {
+            liveLocked[data.category_id] = {locked:true}
+        }
+        if (controls.lockCategories.rowsIndex == 1) {
+            moviesLocked[data.category_id] = {locked:true}
+        }
+        if (controls.lockCategories.rowsIndex == 2) {
+            seriesLocked[data.category_id] = {locked:true}
+        }
         localStorageSetItemMenuesData()
         
     }
+    console.log(data);
 }
 
-function renderLockCategPageLockBox() {
-    var lockCategoriesCardLockedBox = el('div','lock-categoreis-card-locked-box')
+function getLiveTvLockedCategories() {
+    for (var i = 0; i < liveTvData.length; i++) {
+        if (liveTvData[i].category_id) {
+            if (liveLocked[liveTvData[i].category_id]) {
+                liveTvData[i].locked = liveLocked[liveTvData[i].category_id].locked
+            }
+        }
+    }
+}
 
-    lockCategoriesCardLockedBox.append(renderLockIcon())
+function getMoviesLockedCategories() {
+    for (var i = 0; i < moviesData.length; i++) {
+        if (moviesData[i].category_id) {
+            if (moviesLocked[moviesData[i].category_id]) {
+                moviesData[i].locked = moviesLocked[moviesData[i].category_id].locked
+            }
+        }        
+    }
+}
 
-    return lockCategoriesCardLockedBox
+function getSeriesLockedCategories() {
+    for (var i = 0; i < seriesData.length; i++) {
+        if (seriesData[i].category_id) {
+            if (seriesLocked[seriesData[i].category_id]) {
+                seriesData[i].locked = seriesLocked[seriesData[i].category_id].locked
+            }
+        }        
+    }
+}
+
+function getAllLockedCategories() {
+    for (var i = 0; i < liveTvCategories.length; i++) {
+        if (liveLocked[liveTvCategories[i].category_id]) {
+            liveTvCategories[i].locked = liveLocked[liveTvCategories[i].category_id].locked
+        }
+    }
+
+    for (var i = 0; i < seriesCategories.length; i++) {
+        if (seriesLocked[seriesCategories[i].category_id]) {
+            seriesCategories[i].locked = seriesLocked[seriesCategories[i].category_id].locked
+        }        
+    }
+
+    for (var i = 0; i < moviesCategories.length; i++) {
+        if (moviesLocked[moviesCategories[i].category_id]) {
+            moviesCategories[i].locked = moviesLocked[moviesCategories[i].category_id].locked
+        }
+    }
 }

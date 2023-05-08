@@ -38,9 +38,7 @@ function renderLoginInputsBox() {
     contentLogoBox.append(logoItemBox)
 
     contentButtonsBox.append(renderButton('login-button','Login','input-content-items'))
-    contentButtonsBox.append(or)
-    contentButtonsBox.append(renderButton('provider-or-host-button','Upload playlist','input-content-items'))
-
+    
     inputsParentContentBox.append(contentLogoBox)
     inputsParentContentBox.append(contentInputsBox)
     inputsParentContentBox.append(contentButtonsBox)

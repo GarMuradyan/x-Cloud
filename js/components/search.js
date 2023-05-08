@@ -21,16 +21,7 @@ function searchButtonClick (data, infoUrl) {
     document.querySelector('.movies-and-series-page-box').classList.add('popup-display')
     document.getElementById('root').append(renderMoviesSeriesSearchingBox(infoUrl))
 
-    var arr = []
-
-    for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].playlist.length; j++) {
-            arr.push(data[i].playlist[j])
-        }
-    }
-    console.log(arr);
-
-    document.getElementById('root').append(renderKyeboardAbsolute(arr))
+    document.getElementById('root').append(renderKyeboardAbsolute(moviesSeriesStreams))
     activeInput = document.querySelector('.search-page-content-search-input')
     controls.searchLists.start = 6
     controls.searchLists.transIndex = 0

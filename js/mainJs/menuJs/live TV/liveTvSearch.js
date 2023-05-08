@@ -25,6 +25,7 @@ function renderLiveTvKeyboard(data,keyboard) {
 }
 
 function renderLiveTvSearching(data) {
+    id ? clearTimeout(id) : false
     searchArr = []
     console.log(activeInput.value);
     for (var i = 0; i < data.length; i++) {
@@ -32,9 +33,13 @@ function renderLiveTvSearching(data) {
             searchArr.push(data[i])
         }        
     }
+    selectedCategoriChannels = searchArr
+    console.log(searchArr);
 
-    renderLiveTvChannelsCards(searchArr)
-
+    var id = setTimeout(() => {
+        renderLiveTvChannelsCards(searchArr)
+        controls.tvChannels.firstActive()
+    }, 600);
 
 }
 
@@ -50,7 +55,7 @@ function liveTvSearchBack() {
         controls.keyboard.removeClass()
         activeInput.value = ''
         controls.select = controls.tvChannels
-        controls.select.firstActive()
+        controls.select.ok()
     }else {
         console.log('chkaaaaa');
         document.querySelector('.live-tv-search-box').classList.add('translate-right')

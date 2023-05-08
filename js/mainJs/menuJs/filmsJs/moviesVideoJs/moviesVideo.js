@@ -7,11 +7,19 @@ var showPlay = false
 var showControl = false
 
 function renderMoviesVideo (data) {
+    console.log(data);
+    //var link = 'https://kingtop10.net:7070/movie/QATeamTest/jby2jccj/'+ data.id + '.' + data.container_extension
+    var link =  'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+    console.log(link);
     var moviesVideoPageBox = el('div', 'movies-video-page-box')
     var moviesVideoBox = el('video', 'movies-video-box')
     var showControlColorBox = el('div', 'show-control-color-box')
 
     moviesVideoBox.setAttribute('autoplay', true)
+
+    if (data.continue) {
+        moviesVideoBox.currentTime = data.continue
+    }
 
     moviesVideoBox.onplaying = () => {
         moviesVideoOnPlaying()
@@ -26,14 +34,14 @@ function renderMoviesVideo (data) {
     }
 
     moviesVideoBox.ontimeupdate = () => {
-        moviesVideoOnTimeUpdate(moviesVideoBox)
+        moviesVideoOnTimeUpdate(moviesVideoBox,data)
     }
 
     moviesVideoBox.onclick = () => {
         showPlayPause(moviesVideoBox)
     }
 
-    var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+    var videoSrc = link;
 
     if (Hls.isSupported()) {
         var hls = new Hls();
@@ -58,8 +66,10 @@ function moviesVideoOnLoadedData (elem) {
     }
 }
 
-function moviesVideoOnTimeUpdate (elem) {
+function moviesVideoOnTimeUpdate (elem,data) {
     if (document.querySelector('.progres-line-box')) {
+        data.continue = elem.currentTime
+        data.progresDuration = (data.continue / elem.duration) * 100 + '%'
         document.querySelector('.progres-line-box').style.width = (elem.currentTime / elem.duration) * 100 + '%'
         videoCurrentTime = new Date(elem.currentTime * 1000).toISOString().slice(14, 19)
         document.getElementsByClassName('video-current-time')[0].textContent = videoCurrentTime

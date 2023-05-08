@@ -1,9 +1,8 @@
 function renderLockIcon() {
-    var lockIconBox = el('span','material-symbols-outlined')
+    var lockImgBox = el('div','lock-img-box')
 
-    lockIconBox.textContent = 'lock'
-    console.log('append');
+    lockImgBox.style.backgroundImage = 'url(locked.png)'
 
 
-    return lockIconBox
+    return lockImgBox
 }

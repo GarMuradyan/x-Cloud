@@ -83,50 +83,106 @@ var settingsData = [
         img:'http://smarttv.xtream.cloud/img/icons/padlock.png',
         name:'Lock Categories',
         onClick: function () {
-        //     if (moviesData.length && seriesData.length) {
-        //         document.getElementById('root').innerHTML = ''
-        //         document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
-        //         controls.select = controls.lockCategories
-        //         controls.select.firstActive()
-        //     }else {
-        //         var lockCategoriesLoadingBox = el('div','lock-categories-loading-box')
+            if (liveTvCategories && seriesCategories && moviesCategories) {
+                var arr = []
 
-        //         lockCategoriesLoadingBox.append(renderLoading())
+                getAllLockedCategories()
 
-        //         document.getElementById('root').innerHTML = ''
+                arr.push(liveTvCategories)
+                arr.push(moviesCategories)
+                arr.push(seriesCategories)
 
-        //         document.getElementById('root').append(lockCategoriesLoadingBox)
+                document.getElementById('root').innerHTML = ''
 
-        //         req(moviesUrl,'GET').then((data)=> {
-        //             moviesData.length ? false : moviesData.push(data)
-        //             console.log(data);
+                document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
 
-        //             if (moviesData.length && seriesData.length) {
-        //                 document.getElementById('root').innerHTML = ''
-        //                 document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
-        //                 controls.select = controls.lockCategories
-        //                 controls.select.firstActive()
-        //             }
+                document.querySelector('.lock-categories-page-box') ? document.querySelector('.lock-categories-page-box').remove() : false
 
-        //         }).catch((err)=> {
-        //             console.log(err);
-        //         })
+                document.getElementById('root').append(renderLockCategoriesPage(arr))
 
-        //         req(seriesUrl,'GET').then((data)=> {
-        //             seriesData.length ? false : seriesData.push(data)
-        //             console.log(data);
+                controls.select = controls.lockCategories
+                controls.select.firstActive()
+                
+                document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+                
+            }else {
+                document.getElementById('root').innerHTML = ''
+                document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
+                req(reqUrl + '&action=get_series_categories', "GET").then((res)=> {
+                    seriesCategories = res
+                    if (liveTvCategories && seriesCategories && moviesCategories) {
+                        var arr = []
 
-        //             if (moviesData.length && seriesData.length) {
-        //                 document.getElementById('root').innerHTML = ''
-        //                 document.getElementById('root').append(renderLockCategoriesPage([moviesData,seriesData]))
-        //                 controls.select = controls.lockCategories
-        //                 controls.select.firstActive()
-        //             }
-                    
-        //         }).catch((err)=> {
-        //             console.log(err);
-        //         })
-        //     }
+                        getAllLockedCategories()
+
+                        arr.push(liveTvCategories)
+                        arr.push(moviesCategories)
+                        arr.push(seriesCategories)
+
+                        
+                        document.querySelector('.lock-categories-page-box') ? document.querySelector('.lock-categories-page-box').remove() : false
+        
+                        document.getElementById('root').append(renderLockCategoriesPage(arr))
+        
+                        controls.select = controls.lockCategories
+                        controls.select.firstActive()
+
+                        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+                    }
+                }).catch((err)=> {
+                    console.log(err);
+                })
+
+                req(reqUrl+'&action=get_live_categories',"GET",'').then((res)=> {
+                    liveTvCategories = res
+                    if (liveTvCategories && seriesCategories && moviesCategories) {
+                        var arr = []
+
+                        getAllLockedCategories()
+
+                        arr.push(liveTvCategories)
+                        arr.push(moviesCategories)
+                        arr.push(seriesCategories)
+
+                        
+                        document.querySelector('.lock-categories-page-box') ? document.querySelector('.lock-categories-page-box').remove() : false
+        
+                        document.getElementById('root').append(renderLockCategoriesPage(arr))
+        
+                        controls.select = controls.lockCategories
+                        controls.select.firstActive()
+
+                        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+                    }
+                }).catch((err)=> {
+                    console.log(err);
+                })
+
+                req(reqUrl + '&action=get_vod_categories', "GET").then((res)=> {
+                    moviesCategories = res
+                    if (liveTvCategories && seriesCategories && moviesCategories) {
+                        var arr = []
+
+                        getAllLockedCategories()
+
+                        arr.push(liveTvCategories)
+                        arr.push(moviesCategories)
+                        arr.push(seriesCategories)
+
+                        
+                        document.querySelector('.lock-categories-page-box') ? document.querySelector('.lock-categories-page-box').remove() : false
+        
+                        document.getElementById('root').append(renderLockCategoriesPage(arr))
+        
+                        controls.select = controls.lockCategories
+                        controls.select.firstActive()
+
+                        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+                    }
+                }).catch((err)=> {
+                    console.log(err);
+                })
+            }
         }
     },
     {
@@ -265,5 +321,6 @@ function typeLogOut() {
     document.getElementById('root').innerHTML = ''
     page = 'login'
     localStorage.setItem('page',page)
+    localStorage.clear()
     document.getElementById('root').append(renderLoadingPage())
 }

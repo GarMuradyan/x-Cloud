@@ -1,4 +1,5 @@
-function localStorageSetItemMenuesData(seriesData,moviesData) {
-    localStorage.setItem('movies-categories',JSON.stringify(moviesData))
-    localStorage.setItem('series-categories',JSON.stringify(seriesData))
+function localStorageSetItemMenuesData() {
+    localStorage.setItem('live-locked',JSON.stringify(liveLocked))
+    localStorage.setItem('movies-locked',JSON.stringify(moviesLocked))
+    localStorage.setItem('series-locked',JSON.stringify(seriesLocked))
 }

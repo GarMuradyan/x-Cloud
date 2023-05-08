@@ -44,6 +44,19 @@ function renderMoviesSeriesHeader (data, infoUrl) {
     var pageHeaderBox = el('div', 'page-header-box')
     var headerTopBox = el('div', 'header-top-box')
     var headerTopBackBox = el('div', 'header-top-back-box')
+
+    headerTopBackBox.append(renderBackButton())
+
+    headerTopBox.append(headerTopBackBox)
+    headerTopBox.append(renderSearchButtonBox(data, infoUrl))
+
+    pageHeaderBox.append(headerTopBox)
+    pageHeaderBox.append(renderMoviesHeaderBottomBox(data,infoUrl))
+
+    return pageHeaderBox
+}
+
+function renderMoviesHeaderBottomBox(data,infoUrl) {
     var headerBottomBox = el('div', 'header-bottom-box')
     var headerBottomContentBox = el('div', 'header-bottom-content-box')
 
@@ -53,17 +66,9 @@ function renderMoviesSeriesHeader (data, infoUrl) {
         }
     }
 
-    headerTopBackBox.append(renderBackButton())
-
-    headerTopBox.append(headerTopBackBox)
-    headerTopBox.append(renderSearchButtonBox(data, infoUrl))
-
     headerBottomBox.append(headerBottomContentBox)
 
-    pageHeaderBox.append(headerTopBox)
-    pageHeaderBox.append(headerBottomBox)
-
-    return pageHeaderBox
+    return headerBottomBox
 }
 
 function renderMoviesSeriesLoadingLists () {
@@ -119,8 +124,11 @@ function renderMoviesSeriesLists (categori, infoUrl,data,i) {
     contentRowsNameBox.textContent = categori.category_name
 
     for (var j = 0; j < 7; j++) {
-        if (categori.playlist[j]) {
-            contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j))
+        if (categori.playlist.length) {
+            console.log('render');
+            if (categori.playlist[j]) {
+                contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j))
+            }
         }
     }
 

@@ -3,7 +3,7 @@ var controls = {
     privius: '',
 
     login: {
-        class: 'active-border',
+        class: 'active-white',
         index: 0,
         items: document.getElementsByClassName('input-content-items'),
 
@@ -25,7 +25,7 @@ var controls = {
                 this.removeClass()
                 this.index--
                 if (this.index === 2) {
-                    this.class = 'active-border'
+                    this.class = 'active-white'
                 }
                 this.addActive()
             }
@@ -49,7 +49,7 @@ var controls = {
             this.items[this.index].classList.add(this.class)
         },
         firstActive: function () {
-            this.class = 'active-border'
+            this.class = 'active-white'
             this.index = 0
             this.addActive()
         },
@@ -60,7 +60,7 @@ var controls = {
         }
     },
     keyboard: {
-        class: 'active-background',
+        class: 'keyboard-active',
         index: 0,
         rowsIndex: 0,
         items: document.getElementsByClassName('keyboard-rows-box'),
@@ -476,6 +476,9 @@ var controls = {
                 }
 
                 this.addActive()
+                this.items[this.rowsIndex].setAttribute('position', this.index)
+                this.items[this.rowsIndex].setAttribute('row-index', this.start)
+                this.items[this.rowsIndex].setAttribute('translate', this.transIndex)
             }
         },
 
@@ -498,6 +501,9 @@ var controls = {
                     this.items[this.rowsIndex].append(renderListsCardBox(moviesSeriesData[this.rowsIndex].playlist[this.start], moviesSeriesData[this.rowsIndex], this.rowsIndex, infoUrl, this.start))
                 }
                 this.addActive()
+                this.items[this.rowsIndex].setAttribute('position', this.index)
+                this.items[this.rowsIndex].setAttribute('row-index', this.start)
+                this.items[this.rowsIndex].setAttribute('translate', this.transIndex)
             }
         },
 
@@ -594,11 +600,21 @@ var controls = {
         },
         back: function () {
 
-            document.querySelector('.movies-video-on-playing-box') ? document.querySelector('.movies-video-on-playing-box').remove() : false
-            document.querySelector('.movies-video-page-box') ? document.querySelector('.movies-video-page-box').remove() : false
-            document.querySelector('.movies-card-info-page').classList.remove('popup-display')
-            controls.select = controls.infoButtons
-            controls.select.addActive()
+            if (season.length) {
+                document.querySelector('.movies-video-on-playing-box') ? document.querySelector('.movies-video-on-playing-box').remove() : false
+                document.querySelector('.movies-video-page-box') ? document.querySelector('.movies-video-page-box').remove() : false
+                document.getElementById('root').append(renderMoviesCardInfo(infoData,similiarContent))
+                controls.select = controls.episodesLists
+                controls.seasonContent.ok()
+                controls.select.addActive()
+                controls.select.listTransX()
+            }else {
+                document.querySelector('.movies-video-on-playing-box') ? document.querySelector('.movies-video-on-playing-box').remove() : false
+                document.querySelector('.movies-video-page-box') ? document.querySelector('.movies-video-page-box').remove() : false
+                document.querySelector('.movies-card-info-page').classList.remove('popup-display')
+                controls.select = controls.infoButtons
+                controls.select.addActive()
+            }
         },
 
         listTransY: function () {
@@ -644,10 +660,19 @@ var controls = {
             if (showControl) {
                 hideControl()
             } else {
-                document.querySelector('.movies-video-page-box').remove()
-                document.querySelector('.movies-card-info-page').classList.remove('popup-display')
-                controls.select = controls.infoButtons
-                controls.select.addActive()
+                if (season.length) {
+                    document.querySelector('.movies-video-page-box').remove()
+                    document.getElementById('root').append(renderMoviesCardInfo(infoData,similiarContent))
+                    controls.select = controls.episodesLists
+                    controls.seasonContent.ok()
+                    controls.select.addActive()
+                    controls.select.listTransX()
+                }else {
+                    document.querySelector('.movies-video-page-box').remove()
+                    document.querySelector('.movies-card-info-page').classList.remove('popup-display')
+                    controls.select = controls.infoButtons
+                    controls.select.addActive()
+                }
             }
         },
 
@@ -832,58 +857,15 @@ var controls = {
 
         },
         down: function () {
-            if (document.querySelector('.bottom-similiar-content')) {
+
+            if (document.querySelector('.bottom-episodes-content')) {
                 this.removeClass()
-                controls.select = controls.similiarList
+                controls.select = controls.seasonContent
                 controls.select.addActive()
             }else {
                 this.removeClass()
-                controls.select = controls.seasonButton
+                controls.select = controls.similiarList
                 controls.select.addActive()
-            }
-        },
-        back: function () {
-            backButtonClick()
-        },
-        addActive: function () {
-            this.items[this.index].classList.add(this.class)
-        },
-        removeClass: function () {
-            for (var i = 0; i < this.items.length; i++) {
-                this.items[i].classList.remove(this.class)
-            }
-        }
-    },
-
-    seasonButton: {
-        items: document.getElementsByClassName('season-content-title-box'),
-        index: 0,
-        class: 'active-border',
-
-        left: function () {
-
-        },
-
-        right: function () {
-
-        },
-
-        ok: function () {
-            this.items[this.index].click()
-        },
-
-        up: function () {
-            this.removeClass()
-            controls.select = controls.infoButtons
-            controls.select.addActive()
-        },
-        down: function () {
-            if (document.querySelector('.episodes-list-box')) {
-                if (document.getElementsByClassName('episode-card-box').length) {
-                    this.removeClass()
-                    controls.select = controls.episodesLists
-                    controls.select.addActive()
-                }
             }
         },
         back: function () {
@@ -902,14 +884,32 @@ var controls = {
     seasonContent: {
         items: document.getElementsByClassName('season-card-box'),
         index: 0,
-        class: 'active-background',
+        transIndex:0,
+        class: 'active-border',
 
         left: function () {
-
+            if (this.index > 0) {
+                this.removeClass()
+                if (this.index > 3) {
+                    this.transIndex--
+                    this.listTransX()
+                }
+                this.index--
+                this.addActive()
+            }
         },
 
         right: function () {
-
+            if (this.index < this.items.length-1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+                if (this.index > 3) {
+                    console.log('trnalsate');
+                    this.transIndex++
+                    this.listTransX()
+                }
+            }
         },
 
         ok: function () {
@@ -917,32 +917,20 @@ var controls = {
         },
 
         up: function () {
-            if (this.index === 0) {
-                this.back()
-            }
-            if (this.index > 0) {
-                this.removeClass()
-                this.index--
-                this.addActive()
-                this.listTransY()
-            }
-        },
-        down: function () {
-            if (this.index < this.items.length-1) {
-                this.removeClass()
-                this.index++
-                this.addActive()
-                this.listTransY()
-            }
-        },
-        back: function () {
             this.removeClass()
-            document.querySelector('.season-list-box').classList.remove('height')
-            controls.select = controls.seasonButton
+            controls.select = controls.infoButtons
             controls.select.addActive()
         },
-        listTransY: function () {
-            document.querySelector('.season-list-content-box').style.transform = 'translateY(' + (- this.index * 60) + 'px)'
+        down: function () {
+            this.removeClass()
+            controls.select = controls.episodesLists
+            controls.select.addActive()
+        },
+        back: function () {
+            backButtonClick()
+        },
+        listTransX: function () {
+            document.querySelector('.season-list-content-box').style.transform = 'translateX(' + (- this.transIndex * 237) + 'px)'
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)
@@ -1002,21 +990,14 @@ var controls = {
         },
 
         ok: function () {
-            
+            this.items[this.index].click()
         },
 
         up:function () {
-                if (document.querySelector('.season-list-box').classList.contains('height')) {
-                    this.removeClass()
-                    controls.select = controls.seasonContent
-                    controls.select.addActive()
-                    controls.select.listTransY()
-                }else {
-                    this.removeClass()
-                    controls.select = controls.seasonButton
-                    controls.select.addActive()
-                    
-                }
+            this.removeClass()
+            controls.select = controls.seasonContent
+            controls.select.addActive()
+            controls.select.listTransX()
         },
 
         down: function () {
@@ -1216,7 +1197,11 @@ var controls = {
     tvChannels: {
         items: document.getElementsByClassName('live-tv-channels-card-box'),
         index: 0,
-        class: 'active-background',
+        transIndex:0,
+        start:6,
+        selectIndex:0,
+        parent:document.getElementsByClassName('live-tv-channels-content-box'),
+        class: 'live-active',
 
         left: function () {
 
@@ -1235,6 +1220,16 @@ var controls = {
             if (this.index > 0) {
                 this.removeClass()
                 this.index--
+                if (this.index < 3 && this.start !== 6) {
+                    this.start--
+                    if (selectedCategoriChannels[this.start]) {
+                        this.index = 3
+                        this.transIndex--
+                        this.listTransY()
+                        this.items[6].remove()
+                        this.parent[0].insertBefore(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start - 6], this.start - 6,selectedCategoriChannels), this.parent[0].children[0])
+                    }
+                }
                 this.addActive()
             }
 
@@ -1243,6 +1238,18 @@ var controls = {
             if (this.index < this.items.length - 1) {
                 this.removeClass()
                 this.index++
+                if (this.index > 3 && this.start < selectedCategoriChannels.length - 1) {
+                    console.log('render');
+                    this.start++
+                    console.log(this.start);
+                    if (selectedCategoriChannels[this.start]) {
+                        this.index = 3
+                        this.transIndex++
+                        this.listTransY()
+                        this.items[0].remove()
+                        this.parent[0].append(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start], this.start,selectedCategoriChannels))
+                    }
+                }
                 this.addActive()
             }
         },
@@ -1250,6 +1257,11 @@ var controls = {
             this.removeClass()
             tvCategoriesTitleClick()
         },
+
+        listTransY:function () {
+            this.parent[0].style.transform = 'translateY(' + (- this.transIndex * 133) + 'px)'
+        },
+
         blue: function () {
             menuButtonClick()
         },
@@ -1278,7 +1290,11 @@ var controls = {
     tvCategories: {
         items: document.getElementsByClassName('live-tv-categories-card-box'),
         index: 0,
-        class: 'active-background',
+        selectedCategories:0,
+        transIndex:0,
+        start:6,
+        parent:document.getElementsByClassName('live-tv-categories-content-box'),
+        class: 'live-active',
 
         left: function () {
 
@@ -1300,6 +1316,16 @@ var controls = {
             if (this.index > 0) {
                 this.removeClass()
                 this.index--
+                if (this.index < 3 && this.start !== 6) {
+                    this.start--
+                    if (liveTvData[this.start]) {
+                        this.index = 3
+                        this.transIndex--
+                        this.listTransY()
+                        this.items[6].remove()
+                        this.parent[0].insertBefore(renderLiveTvCategoriesCardBox(liveTvData[this.start - 6], this.start - 6), this.parent[0].children[0])
+                    }
+                }
                 this.addActive()
             }
 
@@ -1308,6 +1334,18 @@ var controls = {
             if (this.index < this.items.length - 1) {
                 this.removeClass()
                 this.index++
+                if (this.index > 3 && this.start < liveTvData.length - 1) {
+                    console.log('render');
+                    this.start++
+                    console.log(this.start);
+                    if (liveTvData[this.start]) {
+                        this.index = 3
+                        this.transIndex++
+                        this.listTransY()
+                        this.items[0].remove()
+                        this.parent[0].append(renderLiveTvCategoriesCardBox(liveTvData[this.start], this.start))
+                    }
+                }
                 this.addActive()
             }
         },
@@ -1316,6 +1354,11 @@ var controls = {
             page = 'menu'
             document.getElementById('root').append(renderLoadingPage())
         },
+
+        listTransY:function () {
+            this.parent[0].style.transform = 'translateY(' + (- this.transIndex * 133) + 'px)'
+        },
+
         blue: function () {
             menuButtonClick()
         },
@@ -1521,7 +1564,7 @@ var controls = {
         items: document.getElementsByClassName('lock-settings-categories-content-cards-box'),
         index: 0,
         rowsIndex: 0,
-        class: 'active-background',
+        class: 'active-border',
         left: function () {
             if (this.rowsIndex == 0) {
                 this.removeClass()
@@ -1534,6 +1577,7 @@ var controls = {
                 this.rowsIndex--
                 this.index = this.items[this.rowsIndex].getAttribute('position')
                 this.addActive()
+                this.listTransY()
             }
 
         },
@@ -1545,6 +1589,7 @@ var controls = {
                 this.rowsIndex++
                 this.index = this.items[this.rowsIndex].getAttribute('position')
                 this.addActive()
+                this.listTransY()
 
             }
         },
@@ -1553,10 +1598,16 @@ var controls = {
         },
 
         up: function () {
+            if (this.index == 0) {
+                this.removeClass()
+                controls.select = controls.back
+                controls.select.addActive()
+            }
             if (this.index > 0) {
                 this.removeClass()
                 this.index--
                 this.addActive()
+                this.listTransY()
             }
 
         },
@@ -1565,13 +1616,16 @@ var controls = {
                 this.removeClass()
                 this.index++
                 this.addActive()
+                this.listTransY()
             }
         },
         back: function () {
-            this.removeClass()
-            controls.select = controls.settings
-            controls.select.firstActive()
         },
+
+        listTransY: function () {
+            this.items[this.rowsIndex].style.transform = 'translateY(' + (- this.index * 108) + 'px)'
+        },
+
         addActive: function () {
             this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box')[this.index].classList.add(this.class)
         },

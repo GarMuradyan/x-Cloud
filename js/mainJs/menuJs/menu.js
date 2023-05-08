@@ -24,6 +24,7 @@ function renderMenuCards (name, url, type) {
     menuCardBox.setAttribute('type', type)
     menuCardPoster.src = url
     menuCardName.textContent = name
+    menuCardBox.style.backgroundImage = 'url(elipse.png)'
 
     menuCardBox.onclick = function () {
         menuCardsClick(this.getAttribute('type'))
@@ -58,13 +59,19 @@ function cardSeries (data) {
     controls.moviesLists.index = 0
 
     if (data.length) {
+        getSeriesLockedCategories()
         controls.privius = controls.select
         moviesSeriesData = data
+        moviesSeriesStreams = seriesStreams
         infoUrl = seriesInfoUrl
+
+        document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
 
         document.getElementById('root').innerHTML = ''
 
         document.getElementById('root').append(renderMoviesAndSeries(data, infoUrl))
+
+        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
@@ -105,13 +112,19 @@ function cardMovies (data) {
     controls.moviesLists.index = 0
 
     if (data.length) {
+        getMoviesLockedCategories()
         controls.privius = controls.select
         moviesSeriesData = data
+        moviesSeriesStreams = moviesStreams
         infoUrl = moviesInfoUrl
+
+        document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
 
         document.getElementById('root').innerHTML = ''
 
         document.getElementById('root').append(renderMoviesAndSeries(data, infoUrl))
+
+        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
@@ -156,41 +169,55 @@ function cardSettings () {
 }
 
 function cardLive () {
-    document.getElementById('root').innerHTML = ''
+    if (liveTvData) {
+        console.log('no-request');
+        document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
+        document.getElementById('root').innerHTML = ''
 
-    document.getElementById('root').append(renderLiveTvPage(liveTvData))
+        getLiveTvLockedCategories()
 
-    controls.select = controls.tvCategories
-    if (controls.select.index === 0 || controls.select.index === '0') {
+        document.getElementById('root').append(renderLiveTvPage(liveTvData))
+
+        document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+    
+        controls.select = controls.tvCategories
+        controls.select.start = 6
         controls.select.index = 1
+        controls.select.transIndex = 0
+        controls.select.ok()
+    }else {
+        document.getElementById('root').innerHTML = ''
+        document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
+        getLiveTvData()
     }
-
-    if (controls.select.index === 2 || controls.select.index === '2') {
-        controls.select.index = 1
-    }
-    controls.select.ok()
 }
 
 function getSeriesData () {
     req(reqUrl + '&action=get_series_categories', "GET").then((res) => {
         console.log(res);
         seriesCategories = res
-        for (var i = 0; i < seriesCategories.length; i++) {
-            seriesCategories[i].playlist = []
+        for (var i = 0; i < res.length; i++) {
+            seriesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
         }
+
         if (seriesStreams) {
-            for (var i = 0; i < seriesCategories.length; i++) {
-                for (var j = 0; j < seriesStreams.length; j++) {
-                    if (seriesCategories[i].category_id === seriesStreams[j].category_id) {
-                        seriesCategories[i].playlist.push(seriesStreams[j])
-                    }
+            for (var i = 0; i < seriesStreams.length; i++) {
+                if (seriesCategoriesData[seriesStreams[i].category_id]) {
+                    seriesCategoriesData[seriesStreams[i].category_id].playlist.push(seriesStreams[i])
                 }
             }
-            for (var i = 0; i < seriesCategories.length; i++) {
-                if (seriesCategories[i].playlist.length) {
-                    seriesData.push(seriesCategories[i])
+
+            var arr = Object.values(seriesCategoriesData)
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].playlist.length) {
+                    seriesData.push(arr[i])
                 }
             }
+            getSeriesFavorits()
+            getSeriesLockedCategories()
+            moviesSeriesData = seriesData
+            moviesSeriesStreams = seriesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
@@ -205,19 +232,23 @@ function getSeriesData () {
         console.log(res);
         seriesStreams = res
         if (seriesCategories) {
-            for (var i = 0; i < seriesCategories.length; i++) {
-                for (var j = 0; j < seriesStreams.length; j++) {
-                    if (seriesCategories[i].category_id === seriesStreams[j].category_id) {
-                        seriesCategories[i].playlist.push(seriesStreams[j])
-                    }
+            for (var i = 0; i < seriesStreams.length; i++) {
+                if (seriesCategoriesData[seriesStreams[i].category_id]) {
+                    seriesCategoriesData[seriesStreams[i].category_id].playlist.push(seriesStreams[i])
                 }
             }
-            for (var i = 0; i < seriesCategories.length; i++) {
-                if (seriesCategories[i].playlist.length) {
-                    seriesData.push(seriesCategories[i])
+
+            var arr = Object.values(seriesCategoriesData)
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].playlist.length) {
+                    seriesData.push(arr[i])
                 }
             }
+            getSeriesFavorits()
+            getSeriesLockedCategories()
             moviesSeriesData = seriesData
+            moviesSeriesStreams = seriesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
@@ -234,24 +265,28 @@ function getMoviesData () {
     req(reqUrl + '&action=get_vod_categories', "GET").then((res) => {
         console.log(res);
         moviesCategories = res
-        for (var i = 0; i < moviesCategories.length; i++) {
-            moviesCategories[i].playlist = []
+        for (var i = 0; i < res.length; i++) {
+            moviesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
         }
         if (moviesStreams) {
-            for (var i = 0; i < moviesCategories.length; i++) {
-                for (var j = 0; j < moviesStreams.length; j++) {
-                    if (moviesCategories[i].category_id === moviesStreams[j].category_id) {
-                        moviesCategories[i].playlist.push(moviesStreams[j])
-                    }
+            for (var i = 0; i < moviesStreams.length; i++) {
+                if (moviesCategoriesData[moviesStreams[i].category_id]) {
+                    moviesCategoriesData[moviesStreams[i].category_id].playlist.push(moviesStreams[i])
                 }
             }
-            for (var i = 0; i < moviesCategories.length; i++) {
-                if (moviesCategories[i].playlist.length) {
-                    moviesData.push(moviesCategories[i])
+
+            var arr = Object.values(moviesCategoriesData)
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].playlist.length) {
+                    moviesData.push(arr[i])
                 }
             }
+            getMoviesFavorits()
+            getMoviesLockedCategories()
             console.log(moviesData);
             moviesSeriesData = moviesData
+            moviesSeriesStreams = moviesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
@@ -266,21 +301,24 @@ function getMoviesData () {
         console.log(res);
         moviesStreams = res
         if (moviesCategories) {
-            for (var i = 0; i < moviesCategories.length; i++) {
-                for (var j = 0; j < moviesStreams.length; j++) {
-                    if (moviesCategories[i].category_id === moviesStreams[j].category_id) {
-                        moviesCategories[i].playlist.push(moviesStreams[j])
-                    }
+            for (var i = 0; i < moviesStreams.length; i++) {
+                if (moviesCategoriesData[moviesStreams[i].category_id]) {
+                    moviesCategoriesData[moviesStreams[i].category_id].playlist.push(moviesStreams[i])
                 }
             }
 
-            for (var i = 0; i < moviesCategories.length; i++) {
-                if (moviesCategories[i].playlist.length) {
-                    moviesData.push(moviesCategories[i])
+            var arr =  Object.values(moviesCategoriesData)
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].playlist.length) {
+                    moviesData.push(arr[i])
                 }
             }
+            getMoviesFavorits()
+            getMoviesLockedCategories()
             console.log(moviesData);
             moviesSeriesData = moviesData
+            moviesSeriesStreams = moviesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
@@ -289,5 +327,78 @@ function getMoviesData () {
         }
     }).catch((err) => {
 
+    })
+}
+
+function getLiveTvData() {
+    
+    req(reqUrl+'&action=get_live_categories',"GET",'').then((res)=> {
+        liveTvCategories = res
+        for (var i = 0; i < res.length; i++) {
+            liveCategories[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
+        }
+
+        if (liveTvChannels) {
+            for (var i = 0; i < liveTvChannels.length; i++) {
+                if (liveCategories[liveTvChannels[i].category_id]) {
+                    liveCategories[liveTvChannels[i].category_id].playlist.push(liveTvChannels[i])
+                }
+            }
+
+            liveTvAll.playlist = liveTvChannels
+            liveTvSearch.playlist = liveTvChannels
+            liveTvData = Object.values(liveCategories)
+            console.log(liveTvData);
+            liveTvData.unshift(liveTvSearch)
+            liveTvData.unshift(liveTvAll)
+            liveTvData.unshift(liveTvFavorits)
+            getLiveTvFavorits()
+            getLiveTvLockedCategories()
+            document.getElementById('root').innerHTML = ''
+
+            document.getElementById('root').append(renderLiveTvPage(liveTvData))
+            document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+        
+            controls.select = controls.tvCategories
+            controls.select.start = 6
+            controls.select.index = 1
+            controls.select.transIndex = 0
+            controls.select.ok()
+        }
+
+    }).catch((err)=> {
+        console.log(err);
+    })
+
+    req(reqUrl+'&action=get_live_streams',"GET",'').then((res)=> {
+        liveTvChannels = res
+        if (liveTvCategories) {
+            for (var i = 0; i < res.length; i++) {
+                if (liveCategories[res[i].category_id]) {
+                    liveCategories[res[i].category_id].playlist.push(res[i])
+                }
+            }
+
+            liveTvAll.playlist = liveTvChannels
+            liveTvSearch.playlist = liveTvChannels
+            liveTvData = Object.values(liveCategories)
+            liveTvData.unshift(liveTvSearch)
+            liveTvData.unshift(liveTvAll)
+            liveTvData.unshift(liveTvFavorits)
+            getLiveTvFavorits()       
+            getLiveTvLockedCategories()     
+            document.getElementById('root').innerHTML = ''
+
+            document.getElementById('root').append(renderLiveTvPage(liveTvData))
+            document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
+        
+            controls.select = controls.tvCategories
+            controls.select.start = 6
+            controls.select.index = 1
+            controls.select.transIndex = 0
+            controls.select.ok()
+        }
+    }).catch((err)=> {
+        console.log(err);
     })
 }

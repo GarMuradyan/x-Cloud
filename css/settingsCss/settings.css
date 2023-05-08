@@ -1,10 +1,9 @@
 .settings-card-box.checked .settings-card-checked-point-box{
-    background-color: rgb(10, 237, 29) !important;
-    transform: translateX(25px)
+    transform: translateX(30px);
 }
 
-.checked-trans {
-    transform: translateX(25px);
+.settings-card-box.checked .settings-card-checked-box{
+    background: linear-gradient(105.8deg, #39B32A 14.07%, #3A8D4B 100%) !important;
 }
 
 .settings-page-box {
@@ -33,100 +32,32 @@ top: 125px;
     position: absolute;
     left: 20px;
     top: 20px;
-    display: flex;
+    width: 747px;
+    border-radius: 20px;
+    height: 72px;
+    background: rgba(30, 31, 32, 0.45);
     display: -webkit-flex;
     align-items: center;
 }
 
 .settings-back-box {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
+    margin-left: 32px;
+    border-radius: 50%;
 }
 
-.settings-page-title {
+.settings-page-title {color: white;margin-left: 19px;font-size: 40px;font-family: sans-serif;}
 
-color: white;
+.settings-card-box {width: 694px;height: 89px;margin-top: 16px;background: rgba(30, 31, 32, 0.45);border-radius: 12px;color: white;font-family: sans-serif;display: flex;display: -webkit-flex;align-items: center;padding: 0px 20px;}
 
-margin-left: 20px;
+.settings-card-img-box {background-repeat: no-repeat;width: 30px;height: 30px;background-size: contain;}
 
-font-size: 40px;
+.settings-card-name-box {font-size: 24px;margin-left: 30px;font-weight: 700;}
 
-font-family: sans-serif;
-}
+.settings-card-checked-box {width: 79px;height: 42px;border-radius: 30px;position: absolute;right: 100px;display: flex;background: #4B4B4B;display: -webkit-flex;align-items: center;}
 
-.settings-card-box {
-
-width: 694px;
-
-height: 80px;
-
-background-color: rgb(32, 32, 32);
-
-margin-top: 10px;
-
-border-radius: 12px;
-
-color: white;
-
-font-family: sans-serif;
-
-display: flex;
-
-display: -webkit-flex;
-
-align-items: center;
-
-padding: 0px 20px;
-}
-
-.settings-card-img-box {
-
-background-repeat: no-repeat;
-
-width: 40px;
-
-height: 40px;
-
-background-size: contain;
-}
-
-.settings-card-name-box {font-size: 30px;margin-left: 30px;font-weight: 700;}
-
-.settings-card-checked-box {
-
-width: 55px;
-
-height: 25px;
-
-background-color: white;
-
-border-radius: 30px;
-
-position: absolute;
-
-right: 100px;
-
-display: flex;
-
-display: -webkit-flex;
-
-align-items: center;
-}
-
-.settings-card-checked-point-box {
-
-height: 17px;
-
-width: 17px;
-
-background-color: black;
-
-border-radius: 50%;
-
-margin-left: 6px;
-
-transition: 0.3s;
-}
+.settings-card-checked-point-box {height: 32px;width: 32px;background-color: white;border-radius: 50%;margin-left: 6px;transition: 0.3s;}
 
 .log-out-popup-box {
 

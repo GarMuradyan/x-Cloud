@@ -37,6 +37,7 @@ function backButtonClick () {
 
     if (document.querySelector('.movies-series-search-page')) {
         if (!document.querySelector('.movies-series-search-page').classList.contains('popup-display')) {
+            season = []
             filmsSearchArray = []
             activeInputText = ''
             document.querySelector('.movies-series-search-page').remove()
@@ -52,6 +53,12 @@ function backButtonClick () {
     }
 
     if (controls.privius === controls.moviesLists) {
+        if (season.length) {
+            renderSeriesFavoritCategori()
+        }else {
+            renderFavoritCategori()
+        }
+        season = []
         document.querySelector('.movies-card-info-page').remove()
         document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
         controls.select = controls.privius
@@ -63,6 +70,12 @@ function backButtonClick () {
     }
 
     if (controls.privius === controls.searchLists) {
+        if (season.length) {
+            renderSeriesFavoritCategori()
+        }else {
+            renderFavoritCategori()
+        }
+        season = []
         document.querySelector('.movies-card-info-page').remove()
         document.querySelector('.keyboard-absolute-box').classList.remove('popup-display')
         document.querySelector('.movies-series-search-page').classList.remove('popup-display')
@@ -91,5 +104,96 @@ function backButtonClick () {
         document.getElementById('root').append(renderSettingsPage(settingsData))
         controls.select = controls.settings
         controls.select.firstActive()
+    }
+}
+
+function renderFavoritCategori() {
+    if (moviesFavorits.playlist) {
+        for (var i = 0; i < moviesSeriesData.length; i++) {
+            if (moviesSeriesData[i] === moviesFavorits) {
+                document.getElementsByClassName('parent-content-box')[0].getElementsByClassName('content-rows-box')[0].remove()
+                moviesSeriesData.splice(i,1)
+                controls.moviesLists.rowsIndex-=1
+            }
+        }
+
+        if (moviesFavorits.playlist.length) {
+
+            moviesSeriesData.unshift(moviesFavorits)
+
+            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(moviesFavorits,infoUrl,moviesFavorits,0),document.getElementsByClassName('parent-content-box')[0].children[0])
+            controls.moviesLists.rowsIndex+=1
+            if (controls.moviesLists.rowsIndex == 0) {
+                controls.moviesLists.start = 6
+                controls.moviesLists.index = 0
+                controls.moviesLists.transIndex = 0
+            }
+        }else {
+            console.log(controls.moviesLists.items[0].getAttribute('row-index'));
+            controls.moviesLists.rowsIndex === -1 ? controls.moviesLists.rowsIndex = 0 : false
+            controls.moviesLists.index = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('position')
+            controls.moviesLists.transIndex = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('translate')
+            controls.moviesLists.start = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('row-index')
+        }
+
+        if (document.querySelector('.header-bottom-box')) {
+            document.querySelector('.header-bottom-box').remove()
+            document.querySelector('.page-header-box').append(renderMoviesHeaderBottomBox(moviesData))
+            controls.headerComponents.start = 6
+            controls.headerComponents.transIndex = 0
+            controls.headerComponents.index = 0
+        }
+    }
+}
+
+function renderSeriesFavoritCategori() {
+    if (seriesFavorits.playlist) {
+        for (var i = 0; i < moviesSeriesData.length; i++) {
+            if (moviesSeriesData[i] === seriesFavorits) {
+                document.getElementsByClassName('parent-content-box')[0].getElementsByClassName('content-rows-box')[0].remove()
+                moviesSeriesData.splice(i,1)
+                controls.moviesLists.rowsIndex-=1
+            }
+        }
+
+        if (seriesFavorits.playlist.length) {
+
+            moviesSeriesData.unshift(seriesFavorits)
+
+            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(seriesFavorits,infoUrl,seriesFavorits,0),document.getElementsByClassName('parent-content-box')[0].children[0])
+            controls.moviesLists.rowsIndex+=1
+            if (controls.moviesLists.rowsIndex == 0) {
+                controls.moviesLists.start = 6
+                controls.moviesLists.index = 0
+                controls.moviesLists.transIndex = 0
+            }
+        }
+        else {
+            console.log(controls.moviesLists.items[0].getAttribute('row-index'));
+            controls.moviesLists.rowsIndex === -1 ? controls.moviesLists.rowsIndex = 0 : false
+            controls.moviesLists.index = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('position')
+            controls.moviesLists.transIndex = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('translate')
+            controls.moviesLists.start = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('row-index')
+        }
+
+        if (document.querySelector('.header-bottom-box')) {
+            document.querySelector('.header-bottom-box').remove()
+            document.querySelector('.page-header-box').append(renderMoviesHeaderBottomBox(seriesData))
+            controls.headerComponents.start = 6
+            controls.headerComponents.transIndex = 0
+            controls.headerComponents.index = 0
+        }
+    }
+}
+
+
+document.onwheel = (e)=> {
+    if (controls.select === controls.moviesLists) {
+        if (e.deltaY > 0) {
+            controls.select.down()
+        }
+        if (e.deltaY < 0) {
+            controls.select.up()
+        }
     }
 }

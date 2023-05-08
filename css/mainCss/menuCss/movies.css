@@ -46,7 +46,7 @@ margin-top: 40px;
     font-family: sans-serif;
     align-items: center;
     width: 99999999999999999999px;
-    transition: 0.4s;
+    transition: 0.4s linear;
     position: relative;
     height: 90px;
 }    
@@ -58,14 +58,10 @@ margin-top: 40px;
     }
     
     .parent-content-box {
-    
-width: 11111111111111112011110px;
-    
-height: 1111212121212121212212121212121px;
-    
-margin-top: 30px;
-
-transition: 0.4s;
+    width: 11111111111111112011110px;
+    height: 1111212121212121212212121212121px;
+    margin-top: 30px;
+    transition: 0.4s linear;
     }
     
     .content-rows-box {
@@ -73,6 +69,14 @@ transition: 0.4s;
     font-family: sans-serif;
     height: 360px;
     margin-top: 30px;
+    }
+
+    .movies-page-favorit-box {position: relative;/* height: 298px; *//* top: -298px; */}
+
+    .movies-page-favorit-imge {
+        left: 69%;
+        position: absolute;
+        bottom: 40px;
     }
     
     .content-rows-name-box {
@@ -86,7 +90,7 @@ margin-left: 15px;
     
     .content-rows-lists-box {
     display: flex;
-    transition: 0.4s;
+    transition: 0.4s linear;
     position: relative;
     display: -webkit-flex;
     height: 300px;
@@ -122,7 +126,14 @@ margin-left: 15px;
 
 .content-rows-lists-card-box:nth-child(1) {
     margin-left: 0;
-}   
+} 
+
+.movies-progres-bar-box {width: 200px;height: 5px;position: absolute;background: #F9F9F9;bottom: 10px;z-index: 99999;left: 15px;}
+
+.movies-progres-bar-content-box {
+    background: #3EFF0E;
+    height: 5px;
+}
 
 .card-image-parent-box {
     height: 298px;
@@ -159,6 +170,15 @@ margin-left: 15px;
     font-family: sans-serif;
     font-weight: 700;
 }  
+
+.movies-locked-box {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    bottom: 38px;
+    right: 7px;
+    z-index: 999;
+}
 
 .card-stars-box {position: absolute;top: 28%;left: 20px;}
 

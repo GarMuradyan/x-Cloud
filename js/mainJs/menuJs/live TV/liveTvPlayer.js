@@ -70,13 +70,8 @@ function renderPlayerContentInfoBox(data,i) {
     var nextEpg = el('div','next-epg')
 
     playContentInfoNumberBox.textContent = i
-    playerContentInfoPosterBox.style.backgroundImage = 'url('+ data.poster + ')'
+    data.stream_icon ? playerContentInfoPosterBox.style.backgroundImage = 'url('+ data.stream_icon + ')' : playerContentInfoPosterBox.style.backgroundImage = 'url(http://smarttv.xtream.cloud/img/logo.png)'
     channelInfoNameBox.textContent = data.name
-    currentEpg.textContent = data.epg[0].desc
-    nextEpg.textContent = data.epg[1].desc
-
-    currentEpg.append(renderEpgTime(data.epg[0].time))
-    nextEpg.append(renderEpgTime(data.epg[1].time))
 
     channelInfoEpgBox.append(currentEpg)
     channelInfoEpgBox.append(nextEpg)
@@ -122,7 +117,7 @@ function tvPlayerButtonsClick(id) {
         tvCategoriesTitleClick()
 
     }else if (id === 'favorit-btn') {
-
+        liveFavoritButtonClick()
     }else if (id === 'menu-btn') {
         menuButtonClick()
     }
@@ -130,6 +125,36 @@ function tvPlayerButtonsClick(id) {
 
 function sortButtonClick() {
     
+}
+
+function liveFavoritButtonClick() {
+    if (channel.favorit) {
+        liveChannels[channel.stream_id] = {favorit:false}
+        channel.favorit = false
+        for (var i = 0; i < liveTvFavorits.playlist.length; i++) {
+            if (channel.stream_id === liveTvFavorits.playlist[i].stream_id) {
+                liveTvFavorits.playlist.splice(i,1)
+            }            
+        }
+        document.querySelectorAll("[id='"+channel.stream_id+"']")[0] ? document.querySelectorAll("[id='"+channel.stream_id+"']")[0].classList.remove('live-tv-favorit') : false
+        localStorage.setItem('live-channels',JSON.stringify(liveChannels))
+        if (controls.tvCategories.selectedCategories == 0) {
+            id ? clearTimeout(id) : false
+            document.querySelectorAll("[id='"+channel.stream_id+"']")[0].style.transform = 'translateX(-800px)'
+            var id = setTimeout(() => {
+                document.querySelectorAll("[id='"+channel.stream_id+"']")[0].remove()
+                if (controls.select === controls.tvChannels) {
+                    controls.tvCategories.ok()
+                }
+            }, 1000);
+        }
+    }else {
+        liveChannels[channel.stream_id] = {favorit:true}
+        channel.favorit = true
+        liveTvFavorits.playlist.push(channel)
+        document.querySelectorAll("[id='"+channel.stream_id+"']")[0] ? document.querySelectorAll("[id='"+channel.stream_id+"']")[0].classList.add('live-tv-favorit') : false
+        localStorage.setItem('live-channels',JSON.stringify(liveChannels))
+    }
 }
 
 function menuButtonClick() {
@@ -168,4 +193,16 @@ function liveTvVideoOnWaiting() {
         document.querySelector('.video-loading-effect').remove()
     }
     renderLiveTvVideoLoading()
+}
+
+function getLiveTvFavorits() {
+    for (var i = 0; i < liveTvChannels.length; i++) {
+        if (liveChannels[liveTvChannels[i].stream_id]) {
+            if (liveChannels[liveTvChannels[i].stream_id].favorit) {
+                liveTvChannels[i].favorit = liveChannels[liveTvChannels[i].stream_id].favorit
+                liveTvFavorits.playlist.push(liveTvChannels[i])
+            }
+        }
+        
+    }
 }

@@ -36,12 +36,6 @@
     width: 390px;
     height: 390px;
     transition: 0.3s linear;
-    background: rgb(255 255 255 / 6%);
-    backdrop-filter: blur(20px);
-    background: linear-gradient(white,white) padding-box, linear-gradient(90deg darkblue , darkorchid) border-box;
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent;
     border-radius: 50%;
 }
 

@@ -17,14 +17,10 @@
     }
                 
                 .tv-player-time-box {
-                
                 width: 100%;
-                
-                background-color: rgb(32, 32, 32) !important;
-                
                 height: 83px;
-                
-                border-radius: 5px;
+                border-radius: 20px;
+                background: rgba(30, 31, 32, 0.45);
                 }
                 
                 .player-content-box {
@@ -33,16 +29,11 @@
                 }
                 
                 .player-content-video-box{
-                
-width: 100%;
-                
-height: 674px;
-                
-border-radius: 5px;
-                
-background-color: black;
-
-position: relative;
+                width: 100%;
+                height: 607px;
+                border-radius: 5px;
+                background-color: black;
+                position: relative;
                 }
                 
                 .tv-player-video-box {
@@ -57,24 +48,16 @@ position: relative;
                 }
                 
                 .player-content-info-box {
-                
-    margin-top: 1%;
-                
-    width: 100%;
-                
-    height: 155px;
-                
-    background-color: rgb(32, 32, 32) !important;
-                
-    display: flex;
-                
-    align-items: center;
-                
-    color: white;
-                
-    font-family: sans-serif;
-                
-    border-radius: 5px;
+                margin-top: 17px;
+                width: 100%;
+                height: 181px;
+                display: flex;
+                align-items: center;
+                color: white;
+                font-family: sans-serif;
+                border-radius: 12px;
+                background: rgba(30, 31, 32, 0.45);
+                border: 2px solid white;
                 }
                 
                 .player-content-info-number-box {
@@ -87,14 +70,12 @@ position: relative;
                 }
                 
                 .player-content-info-poster-box {
-                
-            width: 105px;
-                
-            height: 83px;
-                
-            background-size: contain;
-                
-            margin-left: 60px;
+                width: 105px;
+                height: 83px;
+                background-size: contain;
+                margin-left: 60px;
+                background-repeat: no-repeat;
+                background-position: 0px 10px;
                 }
                 
                 .channel-info-box {
@@ -143,26 +124,7 @@ position: relative;
 }        
 
 
-.tv-player-bottom-box {
-
-height: 83px;
-
-background-color: rgb(32, 32, 32) !important;
-
-margin-top: 10px;
-
-border-radius: 5px;
-
-display: flex;
-
-display: -webkit-flex;
-
-align-items: center;
-
-justify-content: center;
-
-color: rgba(255, 255, 255, 0.6);
-}
+.tv-player-bottom-box {height: 83px;margin-top: 12px;border-radius: 5px;background: rgba(30, 31, 32, 0.45);display: flex;display: -webkit-flex;border: 2px solid white;align-items: center;justify-content: center;color: rgba(255, 255, 255, 0.6);}
 
 .tv-player-bottom-button-box{
 
@@ -196,7 +158,7 @@ margin-right: 35px;
 }
 
 .sort {
-    background-color: red;
+    background-color: yellow;
 }
 
 .menu {
@@ -204,7 +166,7 @@ margin-right: 35px;
 }
 
 .favorit {
-    background-color: yellow;
+    background-color: red;
 }
 
 .category {
