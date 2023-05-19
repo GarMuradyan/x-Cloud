@@ -27,14 +27,12 @@ function renderLiveTvKeyboard(data,keyboard) {
 function renderLiveTvSearching(data) {
     id ? clearTimeout(id) : false
     searchArr = []
-    console.log(activeInput.value);
     for (var i = 0; i < data.length; i++) {
         if (data[i].name.indexOf(activeInput.value) !== -1) {
             searchArr.push(data[i])
         }        
     }
     selectedCategoriChannels = searchArr
-    console.log(searchArr);
 
     var id = setTimeout(() => {
         renderLiveTvChannelsCards(searchArr)
@@ -48,7 +46,6 @@ function liveTvSearchBack() {
     document.querySelector('.live-tv-search-keyboard-box').remove()
     document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(liveTvData[1].playlist,keyboard))
     if (document.querySelector('.live-tv-channels-content-box').getElementsByClassName('live-tv-channels-card-box').length) {
-        console.log('kaaaaa');
         document.querySelector('.live-tv-search-box').classList.add('translate-right')
         document.querySelector('.tv-player-box').classList.remove('translate-right')
         document.querySelector('.tv-player-video-box').play()
@@ -57,7 +54,6 @@ function liveTvSearchBack() {
         controls.select = controls.tvChannels
         controls.select.ok()
     }else {
-        console.log('chkaaaaa');
         document.querySelector('.live-tv-search-box').classList.add('translate-right')
         document.querySelector('.tv-player-box').classList.remove('translate-right')
         document.querySelector('.tv-player-video-box').play()

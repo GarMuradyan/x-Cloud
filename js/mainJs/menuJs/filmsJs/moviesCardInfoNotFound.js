@@ -12,7 +12,6 @@ function renderMoviesCardInfoNotFound() {
             controls.select.addActive()
             controls.select.listTransX()
             controls.select.listTransY()
-            console.log(moviesSeriesData);
         }
     
         if (controls.privius === controls.searchLists) {
@@ -24,6 +23,14 @@ function renderMoviesCardInfoNotFound() {
             controls.privius = ''
             controls.select.addActive()
             controls.select.listTransX()
+        }
+
+        if (controls.privius === controls.viewMore) {
+            document.querySelector('.movies-card-info-not-found').remove()
+            document.querySelector('.view-more-page-box').classList.remove('popup-display')
+            controls.select = controls.privius
+            controls.privius = ''
+            controls.select.addActive()
         }
     }, 2500);
 

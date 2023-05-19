@@ -33,7 +33,6 @@ function renderFilmsSearching (data, infoUrl) {
     filmsSearchArray = []
     searchArray = []
 
-    console.log(activeInput.value);
 
     controls.searchLists.index = 0
     controls.searchLists.transIndex = 0
@@ -61,8 +60,6 @@ function renderFilmsSearching (data, infoUrl) {
     }
 
     var id = setTimeout(() => {
-        console.log(searchArray);
-        console.log(filmsSearchArray);
         renderSearchListCards(filmsSearchArray, searchArray, infoUrl)
     }, 600);
 }

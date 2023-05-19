@@ -27,7 +27,6 @@ function buttonClick(elem,data) {
 }
 
 function favoritButtonClick(data) {
-    console.log(data);
 
     if (season.length) {
         seriesFavoritClick(data)
@@ -50,21 +49,23 @@ function seriesFavoritClick(data) {
         series[id] = {favorit:false}
         localStorage.setItem('series',JSON.stringify(series))
         for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            if (document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
+                document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            }
         }
     }else {
         data.favorit = true
         seriesFavorits.playlist.push(data)
         series[id] = {favorit:true}
         localStorage.setItem('series',JSON.stringify(series))
-        console.log(document.querySelectorAll("[id='"+id+"']"));
         for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+            if (!document.querySelectorAll("[id='"+id+"']")[i].getAttribute('type')) {
+                document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+            }
         }
     }
 
 
-    console.log(data);
 }
 
 function moviesFavoritClick(data) {
@@ -81,21 +82,23 @@ function moviesFavoritClick(data) {
         vodes[id] = {favorit:false}
         localStorage.setItem('vods',JSON.stringify(vodes))
         for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            if (document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
+                document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            }
         }
     }else {
         data.favorit = true
         moviesFavorits.playlist.push(data)
         vodes[id] = {favorit:true}
         localStorage.setItem('vods',JSON.stringify(vodes))
-        console.log(document.querySelectorAll("[id='"+id+"']"));
         for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+            if (!document.querySelectorAll("[id='"+id+"']")[i].getAttribute('type')) {
+                document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+            }
         }
     }
 
 
-    console.log(data);
 }
 
 function getMoviesFavorits() {

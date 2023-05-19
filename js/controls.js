@@ -243,6 +243,13 @@ var controls = {
                     controls.select.addActive()
                 }
             }
+            if (document.querySelector('.view-more-page-box')) {
+                if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
+                    this.removeClass()
+                    controls.select = controls.searchButton
+                    controls.select.addActive()
+                }
+            }
             if (document.querySelector('.settings-page-box')) {
                 this.removeClass()
                 controls.select = controls.settings
@@ -285,6 +292,14 @@ var controls = {
                     }
                 }
             }
+            if (document.querySelector('.view-more-page-box')) {
+                if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
+                    this.removeClass()
+                    controls.select = controls.viewMore
+                    controls.select.addActive()
+                }
+                return
+            }
             if (document.querySelector('.settings-page-box')) {
                 this.removeClass()
                 controls.select = controls.settings
@@ -314,7 +329,9 @@ var controls = {
             backButtonClick()
         },
         addActive: function () {
-            this.items[this.index].classList.add(this.class)
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.add(this.class)
+            }
         },
         removeClass: function () {
             for (var i = 0; i < this.items.length; i++) {
@@ -346,6 +363,14 @@ var controls = {
 
         },
         down: function () {
+            if (document.querySelector('.view-more-page-box')) {
+                if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
+                    this.removeClass()
+                    controls.select = controls.viewMore
+                    controls.select.addActive()
+                }
+                return
+            }
             this.removeClass()
             controls.select = controls.headerComponents
             controls.select.addActive()
@@ -354,7 +379,9 @@ var controls = {
 
         },
         addActive: function () {
-            this.items[this.index].classList.add(this.class)
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].classList.add(this.class)
+            }
         },
         removeClass: function () {
             for (var i = 0; i < this.items.length; i++) {
@@ -370,50 +397,68 @@ var controls = {
         transIndex: 0,
         start: 6,
         class: 'active-border',
+        isAnimated: true,
 
         left: function () {
-            if (this.index == 0) return
             if (this.index > 0) {
-                this.removeClass()
-                this.index--
-                if (this.index < 3 && this.start !== 6) {
-                    this.start--
-                    if (moviesSeriesData[this.start]) {
-                        this.index = 3
-                        this.transIndex--
-                        this.listTransX()
-                        this.items[6].remove()
-                        console.log(moviesSeriesData[this.start]);
-                        this.parent[0].insertBefore(renderHeaderComponents(moviesSeriesData[this.start - 6].category_name, this.start - 6), this.parent[0].children[0])
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index--
+                    if (this.index < 3 && this.start !== 6) {
+                        this.start--
+                        if (moviesSeriesData[this.start]) {
+                            this.index = 3
+                            this.transIndex--
+                            this.listTransX()
+                            this.antimatedLeft()
+                            this.parent[0].insertBefore(renderHeaderComponents(moviesSeriesData[this.start - 6].category_name, this.start - 6), this.parent[0].children[0])
+                        }
                     }
+                    this.addActive()
                 }
-                this.addActive()
             }
         },
 
         right: function () {
-            console.log(this.parent);
             if (this.index < this.items.length - 1) {
-                this.removeClass()
-                this.index++
-                if (this.index > 3 && this.start < moviesSeriesData.length - 1) {
-                    console.log('render');
-                    this.start++
-                    console.log(this.start);
-                    if (moviesSeriesData[this.start]) {
-                        this.index = 3
-                        this.transIndex++
-                        this.listTransX()
-                        this.items[0].remove()
-                        this.parent[0].append(renderHeaderComponents(moviesSeriesData[this.start].category_name, this.start))
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index++
+                    if (this.index > 3 && this.start < moviesSeriesData.length - 1) {
+                        this.start++
+                        if (moviesSeriesData[this.start]) {
+                            this.index = 3
+                            this.transIndex++
+                            this.listTransX()
+                            this.antimated()
+                            this.parent[0].append(renderHeaderComponents(moviesSeriesData[this.start].category_name, this.start))
+                        }
                     }
+                    this.addActive()
                 }
-                this.addActive()
             }
         },
 
         ok: function () {
             this.items[this.index].click()
+        },
+
+        antimated: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[0].remove()
+                this.isAnimated = true
+            }, 400);
+        },
+
+        antimatedLeft: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[7].remove()
+                this.isAnimated = true
+            }, 400);
         },
 
         up: function () {
@@ -454,27 +499,9 @@ var controls = {
         class: 'active-border',
 
         left: function () {
-            if (this.index == 0) return
             if (this.index > 0) {
                 this.removeClass()
                 this.index--
-                if (this.start - 7 < 0) {
-                } else {
-                    console.log('render');
-                    if (this.index < 3) {
-                        this.start--
-                        if (!moviesSeriesData[this.rowsIndex].playlist[this.start]) {
-                            console.log('return');
-                            return
-                        }
-                        this.index = 3
-                        this.transIndex--
-                        this.listTransX()
-                        this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[6].remove()
-                        this.items[this.rowsIndex].insertBefore(renderListsCardBox(moviesSeriesData[this.rowsIndex].playlist[this.start - 6], moviesSeriesData[this.rowsIndex], this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
-                    }
-                }
-
                 this.addActive()
                 this.items[this.rowsIndex].setAttribute('position', this.index)
                 this.items[this.rowsIndex].setAttribute('row-index', this.start)
@@ -483,23 +510,9 @@ var controls = {
         },
 
         right: function () {
-            if (this.index < this.items[this.rowsIndex].getElementsByClassName('card-name-box').length - 1) {
+            if (this.index < this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box').length - 1) {
                 this.removeClass()
                 this.index++
-                if (this.index > 3 && this.start < moviesSeriesData[this.rowsIndex].playlist.length - 1) {
-                    console.log('render');
-                    this.start++
-                    console.log(this.start);
-                    if (!moviesSeriesData[this.rowsIndex].playlist[this.start]) {
-                        console.log('return');
-                        return
-                    }
-                    this.index = 3
-                    this.transIndex++
-                    this.listTransX()
-                    this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
-                    this.items[this.rowsIndex].append(renderListsCardBox(moviesSeriesData[this.rowsIndex].playlist[this.start], moviesSeriesData[this.rowsIndex], this.rowsIndex, infoUrl, this.start))
-                }
                 this.addActive()
                 this.items[this.rowsIndex].setAttribute('position', this.index)
                 this.items[this.rowsIndex].setAttribute('row-index', this.start)
@@ -508,7 +521,7 @@ var controls = {
         },
 
         ok: function () {
-            this.items[this.rowsIndex].getElementsByClassName('card-name-box')[this.index].click()
+            this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[this.index].click()
         },
 
         up: function () {
@@ -568,12 +581,12 @@ var controls = {
         },
 
         addActive: function () {
-            if (this.items[this.rowsIndex].getElementsByClassName('card-name-box').length) {
+            if (this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box').length) {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[this.index].classList.add(this.class)
             }
         },
         removeClass: function () {
-            for (var i = 0; i < this.items[this.rowsIndex].getElementsByClassName('card-name-box').length; i++) {
+            for (var i = 0; i < this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box').length; i++) {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[i].classList.remove(this.class)
             }
         }
@@ -603,12 +616,12 @@ var controls = {
             if (season.length) {
                 document.querySelector('.movies-video-on-playing-box') ? document.querySelector('.movies-video-on-playing-box').remove() : false
                 document.querySelector('.movies-video-page-box') ? document.querySelector('.movies-video-page-box').remove() : false
-                document.getElementById('root').append(renderMoviesCardInfo(infoData,similiarContent))
+                document.getElementById('root').append(renderMoviesCardInfo(infoData, similiarContent))
                 controls.select = controls.episodesLists
                 controls.seasonContent.ok()
                 controls.select.addActive()
                 controls.select.listTransX()
-            }else {
+            } else {
                 document.querySelector('.movies-video-on-playing-box') ? document.querySelector('.movies-video-on-playing-box').remove() : false
                 document.querySelector('.movies-video-page-box') ? document.querySelector('.movies-video-page-box').remove() : false
                 document.querySelector('.movies-card-info-page').classList.remove('popup-display')
@@ -662,12 +675,12 @@ var controls = {
             } else {
                 if (season.length) {
                     document.querySelector('.movies-video-page-box').remove()
-                    document.getElementById('root').append(renderMoviesCardInfo(infoData,similiarContent))
+                    document.getElementById('root').append(renderMoviesCardInfo(infoData, similiarContent))
                     controls.select = controls.episodesLists
                     controls.seasonContent.ok()
                     controls.select.addActive()
                     controls.select.listTransX()
-                }else {
+                } else {
                     document.querySelector('.movies-video-page-box').remove()
                     document.querySelector('.movies-card-info-page').classList.remove('popup-display')
                     controls.select = controls.infoButtons
@@ -750,45 +763,64 @@ var controls = {
         transIndex: 0,
         rowsIndex: 0,
         class: 'active-border',
+        isAnimated: true,
 
         left: function () {
             if (this.index > 0) {
-                this.removeClass()
-                this.index--
-                if (this.start - 7 < 0) {
-                } else {
-                    console.log('render');
-                    if (this.index < 3) {
-                        this.index = 3
-                        this.start--
-                        this.transIndex--
-                        this.listTransX()
-                        this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[6].remove()
-                        this.items[this.rowsIndex].insertBefore(renderListsCardBox(searchArray[this.start - 6], searchArray, this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index--
+                    if (this.start - 7 < 0) {
+                    } else {
+                        if (this.index < 3) {
+                            this.index = 3
+                            this.start--
+                            this.transIndex--
+                            this.listTransX()
+                            this.antimatedLeft()
+                            this.items[this.rowsIndex].insertBefore(renderListsCardBox(searchArray[this.start - 6], searchArray, this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
+                        }
                     }
+                    this.addActive()
                 }
-
-                this.addActive()
             }
         },
 
         right: function () {
             if (this.index < this.items[this.rowsIndex].getElementsByClassName('card-name-box').length - 1) {
-                this.removeClass()
-                this.index++
-                if (this.index > 3 && this.start < searchArray.length - 1) {
-                    console.log('render');
-                    this.start++
-                    if (!searchArray[this.start]) return
-                    this.index = 3
-                    this.transIndex++
-                    this.listTransX()
-                    this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
-                    this.items[this.rowsIndex].append(renderListsCardBox(searchArray[this.start], searchArray, this.rowsIndex, infoUrl, this.start))
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index++
+                    if (this.index > 3 && this.start < searchArray.length - 1) {
+                        this.start++
+                        if (!searchArray[this.start]) return
+                        this.index = 3
+                        this.transIndex++
+                        this.listTransX()
+                        this.antimated()
+                        this.items[this.rowsIndex].append(renderListsCardBox(searchArray[this.start], searchArray, this.rowsIndex, infoUrl, this.start))
+                    }
+                    this.addActive()
                 }
-                this.addActive()
-
             }
+        },
+        antimated: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
+                this.isAnimated = true
+            }, 400);
+        },
+
+
+        antimatedLeft: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[7].remove()
+                this.isAnimated = true
+            }, 400);
         },
 
         ok: function () {
@@ -862,7 +894,7 @@ var controls = {
                 this.removeClass()
                 controls.select = controls.seasonContent
                 controls.select.addActive()
-            }else {
+            } else {
                 this.removeClass()
                 controls.select = controls.similiarList
                 controls.select.addActive()
@@ -884,7 +916,7 @@ var controls = {
     seasonContent: {
         items: document.getElementsByClassName('season-card-box'),
         index: 0,
-        transIndex:0,
+        transIndex: 0,
         class: 'active-border',
 
         left: function () {
@@ -900,12 +932,11 @@ var controls = {
         },
 
         right: function () {
-            if (this.index < this.items.length-1) {
+            if (this.index < this.items.length - 1) {
                 this.removeClass()
                 this.index++
                 this.addActive()
                 if (this.index > 3) {
-                    console.log('trnalsate');
                     this.transIndex++
                     this.listTransX()
                 }
@@ -974,9 +1005,7 @@ var controls = {
                 this.removeClass()
                 this.index++
                 if (this.index > 2 && this.start < seasonEpisodes.length - 1) {
-                    console.log('render');
                     this.start++
-                    console.log(this.start);
                     if (seasonEpisodes[this.start]) {
                         this.index = 2
                         this.transIndex++
@@ -993,7 +1022,7 @@ var controls = {
             this.items[this.index].click()
         },
 
-        up:function () {
+        up: function () {
             this.removeClass()
             controls.select = controls.seasonContent
             controls.select.addActive()
@@ -1001,12 +1030,11 @@ var controls = {
         },
 
         down: function () {
-            
+
         },
 
-        
+
         back: function () {
-            console.log('back');
             backButtonClick()
         },
 
@@ -1022,7 +1050,7 @@ var controls = {
             this.items[this.index].classList.add(this.class)
         },
 
-        removeClass:function () {
+        removeClass: function () {
             for (var i = 0; i < this.items.length; i++) {
                 this.items[i].classList.remove(this.class)
             }
@@ -1044,7 +1072,6 @@ var controls = {
                 if (this.start - 7 < 0) {
                 } else {
                     if (similiarContent.playlist) {
-                        console.log('render');
                         if (this.index < 3) {
                             this.index = 3
                             this.start--
@@ -1054,7 +1081,6 @@ var controls = {
                             this.items[this.rowsIndex].insertBefore(renderListsCardBox(similiarContent.playlist[this.start - 6], similiarContent, this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
                         }
                     } else {
-                        console.log('render');
                         if (this.index < 3) {
                             this.index = 3
                             this.start--
@@ -1076,7 +1102,6 @@ var controls = {
                 this.index++
                 if (similiarContent.playlist) {
                     if (this.index > 3 && this.start < similiarContent.playlist.length - 1) {
-                        console.log('render');
                         this.start++
                         if (!similiarContent.playlist[this.start]) return
                         this.index = 3
@@ -1087,7 +1112,6 @@ var controls = {
                     }
                 } else {
                     if (this.index > 3 && this.start < similiarContent.length - 1) {
-                        console.log('render');
                         this.start++
                         if (!similiarContent[this.start]) return
                         this.index = 3
@@ -1116,7 +1140,6 @@ var controls = {
         down: function () {
         },
         back: function () {
-            console.log('back');
             backButtonClick()
         },
 
@@ -1197,10 +1220,10 @@ var controls = {
     tvChannels: {
         items: document.getElementsByClassName('live-tv-channels-card-box'),
         index: 0,
-        transIndex:0,
-        start:6,
-        selectIndex:0,
-        parent:document.getElementsByClassName('live-tv-channels-content-box'),
+        transIndex: 0,
+        start: 6,
+        selectIndex: 0,
+        parent: document.getElementsByClassName('live-tv-channels-content-box'),
         class: 'live-active',
 
         left: function () {
@@ -1227,7 +1250,7 @@ var controls = {
                         this.transIndex--
                         this.listTransY()
                         this.items[6].remove()
-                        this.parent[0].insertBefore(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start - 6], this.start - 6,selectedCategoriChannels), this.parent[0].children[0])
+                        this.parent[0].insertBefore(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start - 6], this.start - 6, selectedCategoriChannels), this.parent[0].children[0])
                     }
                 }
                 this.addActive()
@@ -1239,15 +1262,13 @@ var controls = {
                 this.removeClass()
                 this.index++
                 if (this.index > 3 && this.start < selectedCategoriChannels.length - 1) {
-                    console.log('render');
                     this.start++
-                    console.log(this.start);
                     if (selectedCategoriChannels[this.start]) {
                         this.index = 3
                         this.transIndex++
                         this.listTransY()
                         this.items[0].remove()
-                        this.parent[0].append(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start], this.start,selectedCategoriChannels))
+                        this.parent[0].append(renderLiveTvChannelsCardBox(selectedCategoriChannels[this.start], this.start, selectedCategoriChannels))
                     }
                 }
                 this.addActive()
@@ -1258,7 +1279,7 @@ var controls = {
             tvCategoriesTitleClick()
         },
 
-        listTransY:function () {
+        listTransY: function () {
             this.parent[0].style.transform = 'translateY(' + (- this.transIndex * 133) + 'px)'
         },
 
@@ -1290,10 +1311,10 @@ var controls = {
     tvCategories: {
         items: document.getElementsByClassName('live-tv-categories-card-box'),
         index: 0,
-        selectedCategories:0,
-        transIndex:0,
-        start:6,
-        parent:document.getElementsByClassName('live-tv-categories-content-box'),
+        selectedCategories: 0,
+        transIndex: 0,
+        start: 6,
+        parent: document.getElementsByClassName('live-tv-categories-content-box'),
         class: 'live-active',
 
         left: function () {
@@ -1335,9 +1356,7 @@ var controls = {
                 this.removeClass()
                 this.index++
                 if (this.index > 3 && this.start < liveTvData.length - 1) {
-                    console.log('render');
                     this.start++
-                    console.log(this.start);
                     if (liveTvData[this.start]) {
                         this.index = 3
                         this.transIndex++
@@ -1355,7 +1374,7 @@ var controls = {
             document.getElementById('root').append(renderLoadingPage())
         },
 
-        listTransY:function () {
+        listTransY: function () {
             this.parent[0].style.transform = 'translateY(' + (- this.transIndex * 133) + 'px)'
         },
 
@@ -1639,6 +1658,107 @@ var controls = {
                 this.items[this.rowsIndex].getElementsByClassName('lock-categories-card-box')[i].classList.remove(this.class)
             }
 
+        }
+    },
+
+    viewMore: {
+        items: document.getElementsByClassName('view-more-movies-lists-box'),
+        parent: document.getElementsByClassName('view-more-movies-content-box'),
+        index: 0,
+        rowsIndex: 0,
+        transIndex: 0,
+        start: 1,
+        class: 'active-border',
+
+        left: function () {
+            if (this.index > 0) {
+                this.removeClass()
+                this.index--
+                this.addActive()
+            }
+        },
+
+        right: function () {
+            if (this.index < this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box').length - 1) {
+                this.removeClass()
+                this.index++
+                this.addActive()
+            }
+        },
+
+        ok: function () {
+            this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[this.index].click()
+        },
+
+        up: function () {
+            if (this.rowsIndex == 0) {
+                this.removeClass()
+                controls.select = controls.back
+                controls.select.addActive()
+                return
+            }
+
+            if (this.rowsIndex > 0) {
+                this.removeClass()
+                this.rowsIndex--
+                this.index = 0
+                if (this.rowsIndex < 1 && this.start != 1) {
+                    this.start--
+                    if (viewMoreArray[this.start]) {
+                        console.log('render');
+                        this.rowsIndex = 1
+                        this.transIndex--
+                        this.listTransY()
+                        this.items[1].remove()
+                        this.parent[0].insertBefore(renderViewMoreMoviesLists(viewMoreArray[this.start - 1], this.start - 1), this.parent[0].children[0])
+                    }
+                }
+                this.addActive()
+            }
+
+        },
+
+        down: function () {
+            if (this.rowsIndex <= this.items.length - 1) {
+                this.removeClass()
+                this.rowsIndex++
+                this.index = 0
+                if (this.rowsIndex > 1 && this.start < viewMoreArray.length - 1) {
+                    this.start++
+                    if (viewMoreArray[this.start]) {
+                        this.rowsIndex = 1
+                        this.transIndex++
+                        this.listTransY()
+                        this.items[0].remove()
+                        this.parent[0].append(renderViewMoreMoviesLists(viewMoreArray[this.start], this.start))
+                    }
+                }
+            }
+            this.addActive()
+        },
+        back: function () {
+            backButtonClick()
+        },
+
+        listTransY: function () {
+            this.parent[0].style.transform = 'translateY(' + (- this.transIndex * 344) + 'px)'
+        },
+
+        listTransX: function () {
+        },
+
+        addActive: function () {
+            if (this.items[this.rowsIndex]) {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[this.index].classList.add(this.class)
+            } else {
+                this.rowsIndex = this.items.length - 1
+                this.addActive()
+            }
+        },
+        removeClass: function () {
+            for (var i = 0; i < this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box').length; i++) {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[i].classList.remove(this.class)
+            }
         }
     }
 }

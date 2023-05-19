@@ -27,7 +27,6 @@ function renderLockCategoriesPage(array) {
 }
 
 function renderLockTvCategories(array,name,position) {
-    console.log(array);
     var lockSettingsCategoriesBox = el('div','lock-settings-categories-box')
     var lockSettingsCategoriesTitleBox = el('div','lock-settings-categories-title-box')
     var lockSettingsCategoriesContentBox = el('div','lock-settings-categories-content-box')
@@ -37,7 +36,6 @@ function renderLockTvCategories(array,name,position) {
     lockSettingsCategoriesContentCardsBox.setAttribute('position',position)
 
     for (var i = 0; i < array.length; i++) {
-        console.log(array[i]);
         lockSettingsCategoriesContentCardsBox.append(renderLockCategoriesCards(array[i]))
     }
 
@@ -99,7 +97,6 @@ function lockCategoriesCardsClick(data,elem) {
         localStorageSetItemMenuesData()
         
     }
-    console.log(data);
 }
 
 function getLiveTvLockedCategories() {

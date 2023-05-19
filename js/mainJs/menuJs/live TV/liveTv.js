@@ -13,7 +13,6 @@ function renderLiveTvPage(data) {
 }
 
 function renderTvCategoriesBox(data) {
-    console.log(data);
     var tvCategoriesBox = el('div','tv-categories-box')
     var tvCategoriesTitleBox = el('div','tv-categories-title-box')
     var tvCatgoriesContentBox = el('div','tv-categories-content-box')
@@ -127,7 +126,6 @@ function liveTvCategoriesFavoritClick(data) {
             controls.select = controls.tvCategories
             controls.select.firstActive()
         }
-        console.log('favorites');
     }
 }
 
@@ -179,10 +177,8 @@ function liveTvCategoriesSearchClick(data) {
 }
 
 function renderLiveTvChannelsCards(playlist,data) {
-    console.log(playlist);
     document.querySelector('.live-tv-channels-content-box').innerHTML = ''
     if (playlist.length) {
-        console.log('playlist-length-true');
         for (var i = 0; i < 7; i++) {
             if (playlist[i]) {
                 document.querySelector('.live-tv-channels-content-box').append(renderLiveTvChannelsCardBox(playlist[i],i,data))
@@ -206,7 +202,6 @@ function renderLiveTvChannelsBox(playlist,data) {
 }
 
 function renderLiveTvChannelsCardBox(data,i,array) {
-    console.log(data);
     var liveTvChannelsCardBox = el('div','live-tv-channels-card-box')
     var channelCardNumberBox = el('div','channel-card-number-box')
     var channelCardPosterAndNameBox = el('div','channel-card-poster-and-name-box')
@@ -244,7 +239,6 @@ function renderLiveTvChannelsCardBox(data,i,array) {
 function liveTvChannelsCardClick(elem,data,i) {
     controls.select.selectIndex = controls.select.index
     if (data.locked) {
-        console.log('locked-true');
         if (channel === data) {
             if (document.querySelector('.tv-player-video-box')) {
                 document.querySelector('.tv-player-video-box').requestFullscreen()
@@ -265,7 +259,6 @@ function liveTvChannelsCardClick(elem,data,i) {
     
         renderLiveTvVideoLoading()
     }else {
-        console.log('locked-false');
         if (channel === data) {
             if (document.querySelector('.tv-player-video-box')) {
                 document.querySelector('.tv-player-video-box').requestFullscreen()

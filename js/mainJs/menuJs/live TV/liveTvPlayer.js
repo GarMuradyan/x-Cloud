@@ -181,14 +181,12 @@ function renderLiveTvVideoLoading() {
 }
 
 function liveTvVideoOnPlaying() {
-    console.log('play');
     if (document.querySelector('.video-loading-effect')) {
         document.querySelector('.video-loading-effect').remove()
     }
 }
 
 function liveTvVideoOnWaiting() {
-    console.log("Wait!");
     if (document.querySelector('.video-loading-effect')) {
         document.querySelector('.video-loading-effect').remove()
     }

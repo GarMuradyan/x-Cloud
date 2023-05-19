@@ -11,7 +11,6 @@ var settingsData = [
         img:'http://smarttv.xtream.cloud/img/icons/globus.png',
         name:'Change Language',
         onClick: function () {
-            console.log('language');
         }
 
     },

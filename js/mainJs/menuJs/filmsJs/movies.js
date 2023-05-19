@@ -48,7 +48,7 @@ function renderMoviesSeriesHeader (data, infoUrl) {
     headerTopBackBox.append(renderBackButton())
 
     headerTopBox.append(headerTopBackBox)
-    headerTopBox.append(renderSearchButtonBox(data, infoUrl))
+    headerTopBox.append(renderSearchButtonBox(moviesSeriesStreams, infoUrl))
 
     pageHeaderBox.append(headerTopBox)
     pageHeaderBox.append(renderMoviesHeaderBottomBox(data,infoUrl))
@@ -125,9 +125,8 @@ function renderMoviesSeriesLists (categori, infoUrl,data,i) {
 
     for (var j = 0; j < 7; j++) {
         if (categori.playlist.length) {
-            console.log('render');
             if (categori.playlist[j]) {
-                contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j))
+                contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j,'view-more'))
             }
         }
     }

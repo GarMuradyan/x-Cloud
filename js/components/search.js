@@ -6,7 +6,6 @@ function renderSearchButtonBox (data, infoUrl) {
 
     searchText.textContent = 'Search'
     searchIcon.textContent = 'search'
-
     searchButtonBox.onclick = () => {
         searchButtonClick(data, infoUrl)
     }
@@ -18,10 +17,12 @@ function renderSearchButtonBox (data, infoUrl) {
 }
 
 function searchButtonClick (data, infoUrl) {
+    console.log(data);
     document.querySelector('.movies-and-series-page-box').classList.add('popup-display')
+    document.querySelector('.view-more-page-box') ?  document.querySelector('.view-more-page-box').classList.add('popup-display') : false
     document.getElementById('root').append(renderMoviesSeriesSearchingBox(infoUrl))
 
-    document.getElementById('root').append(renderKyeboardAbsolute(moviesSeriesStreams))
+    document.getElementById('root').append(renderKyeboardAbsolute(data))
     activeInput = document.querySelector('.search-page-content-search-input')
     controls.searchLists.start = 6
     controls.searchLists.transIndex = 0

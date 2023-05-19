@@ -146,7 +146,7 @@
     padding-bottom: 9px;
     cursor: pointer;
     background: linear-gradient(0deg, rgb(29 30 31 / 45%), rgb(53 54 56 / 45%)), linear-gradient(118.06deg, rgb(127 124 124 / 40%) 14.72%, rgba(255, 255, 255, 0) 93.25%);
-    border: 3px solid #838080;
+    border: 3px solid transparent;
 }
 
 .season-card-box:nth-child(1) {

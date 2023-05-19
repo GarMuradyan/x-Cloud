@@ -35,38 +35,80 @@ function backButtonClick () {
         }
     }
 
+    if (document.querySelector('.view-more-page-box')) {
+        if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
+            season = []
+            document.querySelector('.view-more-page-box') ? document.querySelector('.view-more-page-box').remove() : false
+            document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
+            controls.select = controls.moviesLists
+            controls.privius = ''
+            controls.searchButton.index = 0
+            controls.select.addActive()
+            controls.select.listTransY()
+        }
+    }
+
     if (document.querySelector('.movies-series-search-page')) {
         if (!document.querySelector('.movies-series-search-page').classList.contains('popup-display')) {
-            season = []
-            filmsSearchArray = []
-            activeInputText = ''
-            document.querySelector('.movies-series-search-page').remove()
-            document.querySelector('.keyboard-absolute-box').remove()
-            document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
-            controls.moviesLists.rowsIndex = 0
-            controls.searchLists.index = 0
-            controls.select = controls.headerComponents
-            controls.select.listTransX()
-            controls.select.addActive()
-            console.log(moviesSeriesData);
+            if (document.querySelector('.view-more-page-box')) {
+                season = []
+                filmsSearchArray = []
+                activeInputText = ''
+                controls.privius = ''
+                document.querySelector('.movies-series-search-page').remove()
+                document.querySelector('.keyboard-absolute-box').remove()
+                document.querySelector('.view-more-page-box').classList.remove('popup-display')
+                controls.searchLists.index = 0
+                controls.select = controls.viewMore
+                controls.select.addActive()
+            }else {
+                season = []
+                filmsSearchArray = []
+                activeInputText = ''
+                controls.privius = ''
+                document.querySelector('.movies-series-search-page').remove()
+                document.querySelector('.keyboard-absolute-box').remove()
+                document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
+                controls.moviesLists.rowsIndex = 0
+                controls.searchLists.index = 0
+                controls.select = controls.headerComponents
+                controls.select.listTransX()
+                controls.select.addActive()
+            }
         }
     }
 
     if (controls.privius === controls.moviesLists) {
+        if (!document.querySelector('.view-more-page-box')) {
+            if (season.length) {
+                renderSeriesFavoritCategori()
+            }else {
+                renderFavoritCategori()
+            }
+        }
+        season = []
+        document.querySelector('.movies-card-info-page') ? document.querySelector('.movies-card-info-page').remove() : false
+        document.querySelector('.view-more-page-box') ? document.querySelector('.view-more-page-box').remove() : false
+        document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
+        controls.select = controls.privius
+        controls.privius = ''
+        controls.searchButton.index = 0
+        controls.select.addActive()
+        controls.select.listTransX()
+        controls.select.listTransY()
+    }
+
+    if (controls.privius === controls.viewMore) {
         if (season.length) {
             renderSeriesFavoritCategori()
         }else {
             renderFavoritCategori()
         }
         season = []
-        document.querySelector('.movies-card-info-page').remove()
-        document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
+        document.querySelector('.movies-card-info-page') ? document.querySelector('.movies-card-info-page').remove() : false
+        document.querySelector('.view-more-page-box').classList.remove('popup-display')
         controls.select = controls.privius
         controls.privius = ''
-        controls.select.addActive()
-        controls.select.listTransX()
-        controls.select.listTransY()
-        console.log(moviesSeriesData);
     }
 
     if (controls.privius === controls.searchLists) {
@@ -129,7 +171,6 @@ function renderFavoritCategori() {
                 controls.moviesLists.transIndex = 0
             }
         }else {
-            console.log(controls.moviesLists.items[0].getAttribute('row-index'));
             controls.moviesLists.rowsIndex === -1 ? controls.moviesLists.rowsIndex = 0 : false
             controls.moviesLists.index = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('position')
             controls.moviesLists.transIndex = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('translate')
@@ -169,7 +210,6 @@ function renderSeriesFavoritCategori() {
             }
         }
         else {
-            console.log(controls.moviesLists.items[0].getAttribute('row-index'));
             controls.moviesLists.rowsIndex === -1 ? controls.moviesLists.rowsIndex = 0 : false
             controls.moviesLists.index = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('position')
             controls.moviesLists.transIndex = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('translate')

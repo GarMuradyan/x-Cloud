@@ -8,7 +8,7 @@ function renderMoviesCardInfo (data, similiarContent) {
 
     console.log(data);
 
-    //season = []
+    season = []
 
     if (data.episodes) {
         season = null
@@ -18,25 +18,18 @@ function renderMoviesCardInfo (data, similiarContent) {
     var moviesCardInfoPage = el('div', 'movies-card-info-page')
     var gradientBox = el('div', 'gradient-box')
     var style = moviesCardInfoPage.style
-    console.log(style);
 
     if (data.info.backdrop_path) {
         if (data.info.backdrop_path.length) {
-            console.log('backdrop');
             style.setProperty('--background', 'url(' + data.info.backdrop_path[0] + ')');
         }
         else if (data.info.movie_image) {
-            console.log('movies-nkar');
-            console.log(data.info.backdrop);
             style.setProperty('--background', 'url(' + data.info.movie_image + ')');
         }
     } else if (data.info.movie_image) {
-        console.log('movies-nkar');
-        console.log(data.info.backdrop);
         style.setProperty('--background', 'url(' + data.info.movie_image + ')');
     }
 
-    console.log(season);
 
     moviesCardInfoPage.append(renderCardInfo(data))
     season.length ? moviesCardInfoPage.append(renderSeasonContent(data, season)) : false
@@ -125,7 +118,6 @@ function renderInfoCardBottomContent (data, similiarContent, season) {
     var infoCardBottomContent = el('div', 'info-card-bottom-content')
 
     if (season.length) {
-        console.log('season');
         infoCardBottomContent.append(renderBottomEpisodesContent(seasonEpisodes))
     } else {
         infoCardBottomContent.append(renderBottomSimiliarContent(similiarContent))
@@ -191,7 +183,6 @@ function renderSeasonCard (i) {
         removeSelectidSezon()
         seasonEpisodes = season[this.getAttribute('index')]
         seasonCardBox.classList.add('selectid-sezon')
-        console.log(seasonEpisodes);
         document.querySelector('.info-card-bottom-content').append(renderBottomEpisodesContent(seasonEpisodes))
         controls.select.removeClass()
         controls.select = controls.episodesLists
@@ -240,7 +231,6 @@ function renderBottomEpisodesContent (seasonEpisodes) {
 }
 
 function renderEpisodesCard (data, i) {
-    console.log(data);
     var episodeCardBox = el('div', 'episode-card-box')
     var episodeCardInfoBox = el('div', 'episode-card-info-box')
     var episodeCardInfoNumber = el('div', 'episode-card-info-number')
@@ -278,7 +268,6 @@ function renderEpisodesCard (data, i) {
 }
 
 function episodeCardClick(data) {
-    console.log(data);
     document.getElementsByClassName('movies-card-info-page')[0].remove()
     document.getElementById('root').append(renderMoviesVideoOnPlaying())
     controls.select = controls.moviesVideoLoad

@@ -19,8 +19,10 @@ padding: 20px;
 .search-page-content-box {display: flex;justify-content: center;align-items: center;}
 
 .search-page-back-box {
-    width: 70px;
-    height: 70px;
+    width: 73px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    height: 73px;
 }
 
 .search-page-content-back-box {justify-content: space-between;display: flex;flex-direction: row-reverse;color: white;font-size: 45px;margin: 0 20px;font-family: sans-serif;align-items: center;}

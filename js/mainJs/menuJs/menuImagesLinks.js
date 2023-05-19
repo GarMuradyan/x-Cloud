@@ -10,6 +10,8 @@ var moviesCategories = null
 
 var moviesSeriesStreams = null
 
+var isAnimated = false
+
 var seriesData = []
 
 var moviesData = []

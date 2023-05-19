@@ -65,6 +65,8 @@ function cardSeries (data) {
         moviesSeriesStreams = seriesStreams
         infoUrl = seriesInfoUrl
 
+        controls.select = controls.moviesLists
+
         document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
 
         document.getElementById('root').innerHTML = ''
@@ -82,8 +84,7 @@ function cardSeries (data) {
         controls.headerComponents.start = 6
         controls.headerComponents.transIndex = 0
 
-        controls.select = controls.headerComponents
-        controls.select.index = 0
+        controls.headerComponents.index = 0
         controls.select.addActive()
     } else {
 
@@ -118,6 +119,8 @@ function cardMovies (data) {
         moviesSeriesStreams = moviesStreams
         infoUrl = moviesInfoUrl
 
+        controls.select = controls.moviesLists
+
         document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
 
         document.getElementById('root').innerHTML = ''
@@ -135,8 +138,7 @@ function cardMovies (data) {
         controls.headerComponents.start = 6
         controls.headerComponents.transIndex = 0
 
-        controls.select = controls.headerComponents
-        controls.select.index = 0
+        controls.headerComponents.index = 0
         controls.select.addActive()
     } else {
 
@@ -170,7 +172,6 @@ function cardSettings () {
 
 function cardLive () {
     if (liveTvData) {
-        console.log('no-request');
         document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
         document.getElementById('root').innerHTML = ''
 
@@ -194,7 +195,6 @@ function cardLive () {
 
 function getSeriesData () {
     req(reqUrl + '&action=get_series_categories', "GET").then((res) => {
-        console.log(res);
         seriesCategories = res
         for (var i = 0; i < res.length; i++) {
             seriesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
@@ -220,8 +220,8 @@ function getSeriesData () {
             moviesSeriesStreams = seriesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
+            controls.select = controls.moviesLists
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
-            controls.select = controls.headerComponents
             controls.select.addActive()
         }
     }).catch((err) => {
@@ -229,7 +229,6 @@ function getSeriesData () {
     })
 
     req(reqUrl + '&action=get_series', "GET").then((res) => {
-        console.log(res);
         seriesStreams = res
         if (seriesCategories) {
             for (var i = 0; i < seriesStreams.length; i++) {
@@ -251,8 +250,8 @@ function getSeriesData () {
             moviesSeriesStreams = seriesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
+            controls.select = controls.moviesLists
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
-            controls.select = controls.headerComponents
             controls.select.addActive()
         }
     }).catch((err) => {
@@ -263,7 +262,6 @@ function getSeriesData () {
 function getMoviesData () {
 
     req(reqUrl + '&action=get_vod_categories', "GET").then((res) => {
-        console.log(res);
         moviesCategories = res
         for (var i = 0; i < res.length; i++) {
             moviesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
@@ -284,13 +282,12 @@ function getMoviesData () {
             }
             getMoviesFavorits()
             getMoviesLockedCategories()
-            console.log(moviesData);
             moviesSeriesData = moviesData
             moviesSeriesStreams = moviesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
+            controls.select = controls.moviesLists
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
-            controls.select = controls.headerComponents
             controls.select.addActive()
         }
     }).catch((err) => {
@@ -298,7 +295,6 @@ function getMoviesData () {
     })
 
     req(reqUrl + '&action=get_vod_streams', "GET").then((res) => {
-        console.log(res);
         moviesStreams = res
         if (moviesCategories) {
             for (var i = 0; i < moviesStreams.length; i++) {
@@ -316,13 +312,12 @@ function getMoviesData () {
             }
             getMoviesFavorits()
             getMoviesLockedCategories()
-            console.log(moviesData);
             moviesSeriesData = moviesData
             moviesSeriesStreams = moviesStreams
             document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
+            controls.select = controls.moviesLists
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
-            controls.select = controls.headerComponents
             controls.select.addActive()
         }
     }).catch((err) => {
@@ -348,7 +343,6 @@ function getLiveTvData() {
             liveTvAll.playlist = liveTvChannels
             liveTvSearch.playlist = liveTvChannels
             liveTvData = Object.values(liveCategories)
-            console.log(liveTvData);
             liveTvData.unshift(liveTvSearch)
             liveTvData.unshift(liveTvAll)
             liveTvData.unshift(liveTvFavorits)

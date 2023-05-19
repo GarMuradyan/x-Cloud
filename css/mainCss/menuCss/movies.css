@@ -113,11 +113,13 @@ margin-left: 15px;
     background: linear-gradient(0deg, rgba(30, 31, 32, 0.45), rgba(30, 31, 32, 0.45)), linear-gradient(118.06deg, rgba(255, 255, 255, 0.4) 14.72%, rgba(255, 255, 255, 0) 93.25%);
     position: absolute;
     padding: 10px 10px;
+    font-size: 18px;
     }
     
 .content-rows-lists-card-box {
     width: 237px;
     /* margin-left: 15px; */
+    height: 302px;
     position: absolute;
     top: 0;
     border-radius: 20px;
@@ -136,7 +138,7 @@ margin-left: 15px;
 }
 
 .card-image-parent-box {
-    height: 298px;
+    height: 296px;
     width: 100%;
     position: relative;
 }
@@ -178,6 +180,14 @@ margin-left: 15px;
     bottom: 38px;
     right: 7px;
     z-index: 999;
+}
+
+.view-more-box {
+    font-size: 35px;
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    top: 40%;
 }
 
 .card-stars-box {position: absolute;top: 28%;left: 20px;}

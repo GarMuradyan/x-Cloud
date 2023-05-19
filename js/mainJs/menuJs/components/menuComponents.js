@@ -17,8 +17,7 @@ function renderHeaderLoadingComponents () {
     return headerLoadingComponentsBox
 }
 
-function renderListsCardBox (data, array, i, infoUrl, j) {
-    console.log(data);
+function renderListsCardBox (data, array, i, infoUrl, j,newclass) {
     var contentRowsListsCardBox = el('div', 'content-rows-lists-card-box')
     var cardImageParentBox = el('div', 'card-image-parent-box')
     var cardStarsBox = el('div', 'card-stars-box')
@@ -27,11 +26,9 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
     var cardName = el('div', 'card-name')
 
     if (data.series_id) {
-        console.log('series-id');
         seriesLocked[data.category_id] ? data.locked = seriesLocked[data.category_id].locked : false
         contentRowsListsCardBox.setAttribute('id', data.series_id)
     } else if (data.stream_id) {
-        console.log('stream-id');
         moviesLocked[data.category_id] ? data.locked = moviesLocked[data.category_id].locked : false
         contentRowsListsCardBox.setAttribute('id', data.stream_id)
     }
@@ -59,7 +56,6 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
     }
 
     cardImageBox.onload = () => {
-        console.log('loaded');
     }
 
     cardImageBox.onerror = () => {
@@ -67,7 +63,7 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
     }
 
     contentRowsListsCardBox.onclick = function () {
-        clickListsCard(data, array, infoUrl, this.getAttribute('id'))
+        clickListsCard(data, array, infoUrl, this.getAttribute('id'),this)
     }
 
     cardNameBox.append(cardName)
@@ -78,6 +74,8 @@ function renderListsCardBox (data, array, i, infoUrl, j) {
     contentRowsListsCardBox.append(cardNameBox)
     contentRowsListsCardBox.append(cardStarsBox)
     data.favorit ? contentRowsListsCardBox.append(renderMoviesPageFavoritBox(data)) : false
+
+    renderViewMore(contentRowsListsCardBox,j,newclass)
 
     return contentRowsListsCardBox
 
@@ -116,57 +114,15 @@ function clickHeaderComponents () {
     controls.select.listTransX()
 }
 
-function clickListsCard (data, array, infoUrl, id) {
-    clickedCard = data
-    array.playlist ? similiarContent = array.playlist : similiarContent = array
-
-    similiarContent = array
-
-
+function clickListsCard (data, array, infoUrl, id,elem) {
     if (controls.select !== controls.similiarList) {
         controls.privius = controls.select
     }
-
-    controls.select = ''
-
-    controls.similiarList.index = 0
-    controls.similiarList.start = 6
-    controls.similiarList.transIndex = 0
-    controls.episodesLists.transIndex = 0
-    controls.episodesLists.start = 3
-    controls.episodesLists.index = 0
-    controls.seasonContent.index = 0
-    controls.seasonContent.transIndex = 0
-
-    if (controls.privius === controls.moviesLists) {
-        console.log('movies-popup');
-        document.getElementsByClassName('movies-and-series-page-box')[0].classList.add('popup-display')
+    if (elem.getAttribute('type')) {
+        moviesCardViewMoreClick(array,elem)
+    }else {
+        moviesCardClick(data,array,infoUrl,id,elem)
     }
-    if (controls.privius === controls.searchLists) {
-        document.getElementsByClassName('movies-series-search-page')[0].classList.add('popup-display')
-        document.getElementsByClassName('keyboard-absolute-box')[0].classList.add('popup-display')
-    }
-    if (document.querySelector('.movies-card-info-page')) {
-        document.querySelector('.movies-card-info-page').remove()
-    }
-
-    document.getElementById('root').append(renderMoviesCardInfoLoading())
-
-    req(infoUrl + id, 'GET').then((res) => {
-        console.log('info-respons',res);
-        if (res.info) {
-            infoData = res
-            document.querySelector('.movies-card-info-loading-box').remove()
-            document.getElementById('root').append(renderMoviesCardInfo(res, similiarContent))
-            controls.select = controls.infoButtons
-            controls.select.addActive()
-        } else {
-            document.querySelector('.movies-card-info-loading-box').remove()
-            document.getElementById('root').append(renderMoviesCardInfoNotFound())
-        }
-    }).catch((err) => {
-        console.log(err);
-    })
 }
 
 function renderMoviesPageFavoritBox (data) {
@@ -199,4 +155,84 @@ function renderMoviesProgresBar(data) {
     moviesProgresBarBox.append(moviesProgresBarContentBox)
 
     return moviesProgresBarBox
+}
+
+function renderViewMore(elem,index,newclass) {
+    if (newclass) {
+        if(index == 6) {
+            var viewMoreBox = el('div','view-more-box')
+    
+            viewMoreBox.textContent = 'View More...'
+    
+            elem.innerHTML = ''
+    
+            elem.setAttribute('type','view-more')
+    
+            elem.append(viewMoreBox)
+    
+        }
+    }
+}
+
+function moviesCardClick(data,array,infoUrl,id,elem) {
+    clickedCard = data
+    array.playlist ? similiarContent = array.playlist : similiarContent = array
+
+    similiarContent = array
+
+    controls.select = ''
+
+    controls.similiarList.index = 0
+    controls.similiarList.start = 6
+    controls.similiarList.transIndex = 0
+    controls.episodesLists.transIndex = 0
+    controls.episodesLists.start = 3
+    controls.episodesLists.index = 0
+    controls.seasonContent.index = 0
+    controls.seasonContent.transIndex = 0
+
+    if (controls.privius === controls.moviesLists) {
+        document.getElementsByClassName('movies-and-series-page-box')[0].classList.add('popup-display')
+    }
+    if (controls.privius === controls.searchLists) {
+        document.getElementsByClassName('movies-series-search-page')[0].classList.add('popup-display')
+        document.getElementsByClassName('keyboard-absolute-box')[0].classList.add('popup-display')
+    }
+    if (document.querySelector('.movies-card-info-page')) {
+        document.querySelector('.movies-card-info-page').remove()
+    }
+    if (controls.privius === controls.viewMore) {
+        document.getElementsByClassName('view-more-page-box')[0].classList.add('popup-display')
+    }
+
+    document.getElementById('root').append(renderMoviesCardInfoLoading())
+
+    req(infoUrl + id, 'GET').then((res) => {
+        console.log('info-respons',res);
+        if (res.info) {
+            infoData = res
+            document.querySelector('.movies-card-info-loading-box').remove()
+            document.getElementById('root').append(renderMoviesCardInfo(res, similiarContent))
+            controls.select = controls.infoButtons
+            controls.select.addActive()
+        } else {
+            document.querySelector('.movies-card-info-loading-box').remove()
+            document.getElementById('root').append(renderMoviesCardInfoNotFound())
+        }
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
+function moviesCardViewMoreClick(categori,elem) {
+    viewMoreArray =[]
+    controls.select = controls.viewMore
+    controls.searchButton.index = 1
+    controls.select.index = 0
+    controls.select.rowsIndex = 0
+    controls.select.start = 1
+    controls.select.transIndex = 0
+    document.getElementsByClassName('movies-and-series-page-box')[0].classList.add('popup-display')
+    document.getElementById('root').append(renderViewMorePage(categori))
+    controls.select.addActive()
 }
