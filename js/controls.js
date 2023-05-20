@@ -449,7 +449,7 @@ var controls = {
             setTimeout(() => {
                 this.items[0].remove()
                 this.isAnimated = true
-            }, 400);
+            }, 100);
         },
 
         antimatedLeft: function () {
@@ -458,7 +458,7 @@ var controls = {
             setTimeout(() => {
                 this.items[7].remove()
                 this.isAnimated = true
-            }, 400);
+            }, 100);
         },
 
         up: function () {
@@ -810,7 +810,7 @@ var controls = {
             setTimeout(() => {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
                 this.isAnimated = true
-            }, 400);
+            }, 200);
         },
 
 
@@ -820,7 +820,7 @@ var controls = {
             setTimeout(() => {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[7].remove()
                 this.isAnimated = true
-            }, 400);
+            }, 200);
         },
 
         ok: function () {
@@ -980,42 +980,66 @@ var controls = {
         transIndex: 0,
         start: 3,
         class: 'active-border',
+        isAnimated: true,
 
         left: function () {
             if (this.index == 0) return
             if (this.index > 0) {
-                this.removeClass()
-                this.index--
-                if (this.index < 2 && this.start !== 3) {
-                    this.start--
-                    if (seasonEpisodes[this.start]) {
-                        this.index = 2
-                        this.transIndex--
-                        this.listTransX()
-                        this.items[3].remove()
-                        this.parent[0].insertBefore(renderEpisodesCard(seasonEpisodes[this.start - 3], this.start - 3), this.parent[0].children[0])
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index--
+                    if (this.index < 2 && this.start !== 3) {
+                        this.start--
+                        if (seasonEpisodes[this.start]) {
+                            this.index = 2
+                            this.transIndex--
+                            this.listTransX()
+                            this.antimatedLeft()
+                            this.parent[0].insertBefore(renderEpisodesCard(seasonEpisodes[this.start - 3], this.start - 3), this.parent[0].children[0])
+                        }
                     }
+                    this.addActive()
                 }
-                this.addActive()
             }
         },
 
         right: function () {
             if (this.index < this.items.length - 1) {
-                this.removeClass()
-                this.index++
-                if (this.index > 2 && this.start < seasonEpisodes.length - 1) {
-                    this.start++
-                    if (seasonEpisodes[this.start]) {
-                        this.index = 2
-                        this.transIndex++
-                        this.listTransX()
-                        this.items[0].remove()
-                        this.parent[0].append(renderEpisodesCard(seasonEpisodes[this.start], this.start))
+                if (this.isAnimated) {
+                    this.removeClass()
+                    this.index++
+                    if (this.index > 2 && this.start < seasonEpisodes.length - 1) {
+                        this.start++
+                        if (seasonEpisodes[this.start]) {
+                            this.index = 2
+                            this.transIndex++
+                            this.listTransX()
+                            this.antimated()
+                            this.parent[0].append(renderEpisodesCard(seasonEpisodes[this.start], this.start))
+                        }
                     }
+                    this.addActive()
                 }
-                this.addActive()
             }
+        },
+
+        antimated: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[0].remove()
+                this.isAnimated = true
+            }, 100);
+        },
+
+
+        antimatedLeft: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[4].remove()
+                this.isAnimated = true
+            }, 100);
         },
 
         ok: function () {
@@ -1064,6 +1088,7 @@ var controls = {
         transIndex: 0,
         rowsIndex: 0,
         class: 'active-border',
+        isAnimated: true,
 
         left: function () {
             if (this.index > 0) {
@@ -1077,7 +1102,7 @@ var controls = {
                             this.start--
                             this.transIndex--
                             this.listTransX()
-                            this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[6].remove()
+                            this.antimatedLeft()
                             this.items[this.rowsIndex].insertBefore(renderListsCardBox(similiarContent.playlist[this.start - 6], similiarContent, this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
                         }
                     } else {
@@ -1086,7 +1111,7 @@ var controls = {
                             this.start--
                             this.transIndex--
                             this.listTransX()
-                            this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[6].remove()
+                            this.antimatedLeft()
                             this.items[this.rowsIndex].insertBefore(renderListsCardBox(similiarContent[this.start - 6], similiarContent, this.rowsIndex, infoUrl, this.start - 6), this.items[this.rowsIndex].children[0])
                         }
                     }
@@ -1107,7 +1132,7 @@ var controls = {
                         this.index = 3
                         this.transIndex++
                         this.listTransX()
-                        this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
+                        this.antimated()
                         this.items[this.rowsIndex].append(renderListsCardBox(similiarContent.playlist[this.start], similiarContent, this.rowsIndex, infoUrl, this.start))
                     }
                 } else {
@@ -1117,13 +1142,32 @@ var controls = {
                         this.index = 3
                         this.transIndex++
                         this.listTransX()
-                        this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
+                        this.antimated()
                         this.items[this.rowsIndex].append(renderListsCardBox(similiarContent[this.start], similiarContent, this.rowsIndex, infoUrl, this.start))
                     }
                 }
                 this.addActive()
 
             }
+        },
+
+        antimated: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
+                this.isAnimated = true
+            }, 100);
+        },
+
+
+        antimatedLeft: function () {
+            this.isAnimated = false
+
+            setTimeout(() => {
+                this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[7].remove()
+                this.isAnimated = true
+            }, 100);
         },
 
         ok: function () {
@@ -1290,10 +1334,10 @@ var controls = {
 
         },
         green: function () {
-
+            tvCategoriesTitleClick()
         },
         red: function () {
-
+            liveFavoritButtonClick()
         },
         addActive: function () {
             this.items[this.index].classList.add(this.class)

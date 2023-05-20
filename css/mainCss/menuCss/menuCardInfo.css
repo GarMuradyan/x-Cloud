@@ -1,4 +1,4 @@
-.movies-card-info-page {height: 100vh;padding: 25px 80px;position: relative;}
+.movies-card-info-page {height: 100vh;padding: 25px 60px;position: relative;}
 
 .gradient-box {
     position: absolute;
@@ -105,14 +105,14 @@
     margin-left: 0px;
 }
 
-.info-card-bottom-content {position: absolute;z-index: 11;bottom: 2%;width: 1760px;}
+.info-card-bottom-content {position: absolute;z-index: 11;bottom: 2%;width: 1800px;}
 
 .bottom-similiar-content {height: 360px;overflow: hidden;}
 
 .similiar-content-name {font-size: 30px;color: white;font-family: sans-serif;}
 
 .similiar-content-list-box {
-    width: 1720px;
+    width: 1800px;
     overflow: hidden;
     margin-top: 22px;
 }
@@ -121,7 +121,7 @@
     position: relative;
     width: 9999999999999999999999999999999999999px;
     height: 360px;
-    transition: 0.3s linear;
+    transition: 0.2s linear;
 }
 
 .season-content-parent-box {margin-top: 52px;position: relative;z-index: 14;width: 409px;}
@@ -159,7 +159,7 @@
 
 .episodes-list-box {margin-top: 22px;width: 100%;overflow: hidden;}
 
-.episodes-list-content-box {display: flex;position: relative;width: 999999999999999999999999px;height: 305px;transition: 0.4s linear;}
+.episodes-list-content-box {display: flex;position: relative;width: 999999999999999999999999px;height: 305px;transition: 0.2s linear;}
 
 .episode-card-box {
     height: 298px;

@@ -8,6 +8,7 @@ var showControl = false
 
 function renderMoviesVideo (data) {
     console.log(data);
+    console.log(infoData);
     var link = 'http://kingtop10.net:7070/movie/QATeamTest/jby2jccj/' + data.stream_id + '.' + data.container_extension
     console.log(link);
     var moviesVideoPageBox = el('div', 'movies-video-page-box')
@@ -51,13 +52,16 @@ function renderMoviesVideo (data) {
 }
 
 function moviesVideoOnLoadedData (elem) {
-    if (document.querySelector('.progres-line-box')) {
+    if (infoData.info.duration) {
+        document.getElementsByClassName('video-duration-time')[0].textContent = infoData.info.duration
+    } else if (document.querySelector('.progres-line-box')) {
         videoDuration = new Date(elem.duration * 1000).toISOString().slice(14, 19)
         document.getElementsByClassName('video-duration-time')[0].textContent = videoDuration
     }
 }
 
 function moviesVideoOnTimeUpdate (elem, data) {
+    console.log(elem.currentTime);
     if (document.querySelector('.progres-line-box')) {
         data.continue = elem.currentTime
         data.progresDuration = (data.continue / elem.duration) * 100 + '%'
@@ -71,6 +75,7 @@ function moviesVideoOnTimeUpdate (elem, data) {
 }
 
 function moviesVideoOnWaiting (elem) {
+    console.log('wait');
     document.querySelector('.movies-video-loading-box') ? document.querySelector('.movies-video-loading-box').remove() : false
     elem.append(renderMoviesVideoLoading())
 }

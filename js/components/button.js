@@ -1,17 +1,17 @@
-function renderButton(className,text,classList,data) {
-    var buttonBox = el('button',className)
+function renderButton (className, text, classList, data) {
+    var buttonBox = el('button', className)
 
     buttonBox.textContent = text
     buttonBox.classList.add(classList)
 
     buttonBox.onclick = function () {
-        buttonClick(this,data)
+        buttonClick(this, data)
     }
 
     return buttonBox
 }
 
-function buttonClick(elem,data) {
+function buttonClick (elem, data) {
     if (elem.classList.contains('login-button')) {
         loginButtonClick(elem)
 
@@ -26,41 +26,41 @@ function buttonClick(elem,data) {
     }
 }
 
-function favoritButtonClick(data) {
+function favoritButtonClick (data) {
 
     if (season.length) {
         seriesFavoritClick(data)
-    }else {
+    } else {
         moviesFavoritClick(data)
     }
 
 }
 
-function seriesFavoritClick(data) {
+function seriesFavoritClick (data) {
     var id = data.series_id
 
     if (data.favorit) {
         data.favorit = false
         for (var i = 0; i < seriesFavorits.playlist.length; i++) {
             if (seriesFavorits.playlist[i] === data) {
-                seriesFavorits.playlist.splice(i,1)
-            }            
-        }
-        series[id] = {favorit:false}
-        localStorage.setItem('series',JSON.stringify(series))
-        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            if (document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
-                document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+                seriesFavorits.playlist.splice(i, 1)
             }
         }
-    }else {
+        series[id] = { favorit: false }
+        localStorage.setItem('series', JSON.stringify(series))
+        for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
+            if (document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
+                document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            }
+        }
+    } else {
         data.favorit = true
         seriesFavorits.playlist.push(data)
-        series[id] = {favorit:true}
-        localStorage.setItem('series',JSON.stringify(series))
-        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            if (!document.querySelectorAll("[id='"+id+"']")[i].getAttribute('type')) {
-                document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+        series[id] = { favorit: true }
+        localStorage.setItem('series', JSON.stringify(series))
+        for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
+            if (!document.querySelectorAll("[id='" + id + "']")[i].getAttribute('type')) {
+                document.querySelectorAll("[id='" + id + "']")[i].append(renderMoviesPageFavoritBox(clickedCard))
             }
         }
     }
@@ -68,32 +68,32 @@ function seriesFavoritClick(data) {
 
 }
 
-function moviesFavoritClick(data) {
-    
+function moviesFavoritClick (data) {
+
     var id = data.stream_id
 
     if (data.favorit) {
         data.favorit = false
         for (var i = 0; i < moviesFavorits.playlist.length; i++) {
             if (moviesFavorits.playlist[i] === data) {
-                moviesFavorits.playlist.splice(i,1)
-            }            
-        }
-        vodes[id] = {favorit:false}
-        localStorage.setItem('vods',JSON.stringify(vodes))
-        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            if (document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
-                document.querySelectorAll("[id='"+id+"']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+                moviesFavorits.playlist.splice(i, 1)
             }
         }
-    }else {
+        vodes[id] = { favorit: false }
+        localStorage.setItem('vods', JSON.stringify(vodes))
+        for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
+            if (document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
+                document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0].remove()
+            }
+        }
+    } else {
         data.favorit = true
         moviesFavorits.playlist.push(data)
-        vodes[id] = {favorit:true}
-        localStorage.setItem('vods',JSON.stringify(vodes))
-        for (var i = 0; i < document.querySelectorAll("[id='"+id+"']").length; i++) {
-            if (!document.querySelectorAll("[id='"+id+"']")[i].getAttribute('type')) {
-                document.querySelectorAll("[id='"+id+"']")[i].append(renderMoviesPageFavoritBox(clickedCard))
+        vodes[id] = { favorit: true }
+        localStorage.setItem('vods', JSON.stringify(vodes))
+        for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
+            if (!document.querySelectorAll("[id='" + id + "']")[i].getAttribute('type')) {
+                document.querySelectorAll("[id='" + id + "']")[i].append(renderMoviesPageFavoritBox(clickedCard))
             }
         }
     }
@@ -101,7 +101,7 @@ function moviesFavoritClick(data) {
 
 }
 
-function getMoviesFavorits() {
+function getMoviesFavorits () {
     for (var i = 0; i < moviesStreams.length; i++) {
         var vod = moviesStreams[i]
 
@@ -116,7 +116,7 @@ function getMoviesFavorits() {
     moviesFavorits.playlist.length ? moviesData.unshift(moviesFavorits) : false
 }
 
-function getSeriesFavorits() {
+function getSeriesFavorits () {
     for (var i = 0; i < seriesStreams.length; i++) {
         var serie = seriesStreams[i]
 
@@ -131,11 +131,12 @@ function getSeriesFavorits() {
     seriesFavorits.playlist.length ? seriesData.unshift(seriesFavorits) : false
 }
 
-function playButtonClick(data) {
+function playButtonClick (data) {
     cardInfo = data
     if (data.episodes) {
-        
-    }else {
+
+    } else {
+        console.log(infoData);
         document.querySelector('.movies-card-info-page').classList.add('popup-display')
         document.getElementById('root').append(renderMoviesVideoOnPlaying())
         controls.select = controls.moviesVideoLoad
@@ -143,22 +144,22 @@ function playButtonClick(data) {
     }
 }
 
-function loginButtonClick(elem) {
+function loginButtonClick (elem) {
     if (document.querySelector('.login-load')) {
         document.querySelector('.login-load').remove()
     }
-    var loginLoad = el('div','login-load')
-    
+    var loginLoad = el('div', 'login-load')
+
     loginLoad.append(renderLoading())
 
     elem.append(loginLoad)
 
     removeLoginPageInputsActive()
-    
+
     if (document.querySelector('.keyboard-box')) {
         document.querySelector('.keyboard-box').remove()
     }
-    
+
     if (controls.privius === controls.login) {
         controls.select = controls.privius
         controls.select.addActive()
@@ -169,7 +170,8 @@ function loginButtonClick(elem) {
     if (elems[0].value === "") {
         if (elems[1].value === "") {
             if (elems[2].value === '') {
-                localStorage.setItem('page','menu')
+                localStorage.setItem('page', 'menu')
+                page = 'menu'
                 controls.select = controls.menu
                 setTimeout(() => {
                     document.getElementById('root').innerHTML = ''
@@ -186,20 +188,20 @@ function loginButtonClick(elem) {
     loginError()
 }
 
-function loginError() {
+function loginError () {
     if (document.querySelector('.error')) {
         document.querySelector('.error').remove()
     }
-    var error = el('div','error')
+    var error = el('div', 'error')
     error.textContent = 'invalid login or password'
 
-    document.querySelector('.inputs-parent-box').append(error) 
+    document.querySelector('.inputs-parent-box').append(error)
 
     setTimeout(() => {
         if (document.querySelector('.login-load')) {
             document.querySelector('.login-load').remove()
         }
-        
+
     }, 1500);
 
     setTimeout(() => {
@@ -207,5 +209,5 @@ function loginError() {
             document.querySelector('.error').remove()
         }
     }, 4000);
-    
+
 }

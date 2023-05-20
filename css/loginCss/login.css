@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.inputs-parent-box {width: 511px;height: 514px;display: flex;align-items: center;justify-content: center;padding-top: 30px;border-radius: 12px;background-blend-mode: overlay;background: linear-gradient(118.06deg, rgba(255, 255, 255, 0.4) 14.72%, rgba(255, 255, 255, 0) 93.25%);background: rgb(255 253 253 / 15%);}
+.inputs-parent-box {width: 511px;height: 514px;display: flex;align-items: center;justify-content: center;padding-top: 30px;border-radius: 12px;background-blend-mode: overlay;}
 
 .inputs-parent-content-box {width: 500px;height: 100%;display: flex;display: -webkit-flex;flex-direction: column;align-items: center;}
 

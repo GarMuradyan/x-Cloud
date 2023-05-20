@@ -68,7 +68,7 @@ var KeyCode = {
 document.onkeydown = function (e) {
 
     var name = ''
-    
+
     switch (e.keyCode) {
 
         case KeyCode.N0:

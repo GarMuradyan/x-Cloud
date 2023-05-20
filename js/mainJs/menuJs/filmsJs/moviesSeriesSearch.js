@@ -61,7 +61,7 @@ function renderFilmsSearching (data, infoUrl) {
 
     var id = setTimeout(() => {
         renderSearchListCards(filmsSearchArray, searchArray, infoUrl)
-    }, 600);
+    }, 300);
 }
 
 function renderSearchListCards (data, searchArray, infoUrl) {

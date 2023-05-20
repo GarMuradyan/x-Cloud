@@ -61,7 +61,7 @@ function backButtonClick () {
                 controls.searchLists.index = 0
                 controls.select = controls.viewMore
                 controls.select.addActive()
-            }else {
+            } else {
                 season = []
                 filmsSearchArray = []
                 activeInputText = ''
@@ -82,7 +82,7 @@ function backButtonClick () {
         if (!document.querySelector('.view-more-page-box')) {
             if (season.length) {
                 renderSeriesFavoritCategori()
-            }else {
+            } else {
                 renderFavoritCategori()
             }
         }
@@ -101,7 +101,7 @@ function backButtonClick () {
     if (controls.privius === controls.viewMore) {
         if (season.length) {
             renderSeriesFavoritCategori()
-        }else {
+        } else {
             renderFavoritCategori()
         }
         season = []
@@ -114,7 +114,7 @@ function backButtonClick () {
     if (controls.privius === controls.searchLists) {
         if (season.length) {
             renderSeriesFavoritCategori()
-        }else {
+        } else {
             renderFavoritCategori()
         }
         season = []
@@ -124,7 +124,6 @@ function backButtonClick () {
         activeInput = document.querySelector('.search-page-content-search-input')
         controls.select = controls.privius
         controls.privius = ''
-        controls.select.addActive()
         controls.select.listTransX()
     }
 
@@ -149,13 +148,13 @@ function backButtonClick () {
     }
 }
 
-function renderFavoritCategori() {
+function renderFavoritCategori () {
     if (moviesFavorits.playlist) {
         for (var i = 0; i < moviesSeriesData.length; i++) {
             if (moviesSeriesData[i] === moviesFavorits) {
                 document.getElementsByClassName('parent-content-box')[0].getElementsByClassName('content-rows-box')[0].remove()
-                moviesSeriesData.splice(i,1)
-                controls.moviesLists.rowsIndex-=1
+                moviesSeriesData.splice(i, 1)
+                controls.moviesLists.rowsIndex -= 1
             }
         }
 
@@ -163,14 +162,14 @@ function renderFavoritCategori() {
 
             moviesSeriesData.unshift(moviesFavorits)
 
-            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(moviesFavorits,infoUrl,moviesFavorits,0),document.getElementsByClassName('parent-content-box')[0].children[0])
-            controls.moviesLists.rowsIndex+=1
+            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(moviesFavorits, infoUrl, moviesFavorits, 0), document.getElementsByClassName('parent-content-box')[0].children[0])
+            controls.moviesLists.rowsIndex += 1
             if (controls.moviesLists.rowsIndex == 0) {
                 controls.moviesLists.start = 6
                 controls.moviesLists.index = 0
                 controls.moviesLists.transIndex = 0
             }
-        }else {
+        } else {
             controls.moviesLists.rowsIndex === -1 ? controls.moviesLists.rowsIndex = 0 : false
             controls.moviesLists.index = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('position')
             controls.moviesLists.transIndex = controls.moviesLists.items[controls.moviesLists.rowsIndex].getAttribute('translate')
@@ -187,13 +186,13 @@ function renderFavoritCategori() {
     }
 }
 
-function renderSeriesFavoritCategori() {
+function renderSeriesFavoritCategori () {
     if (seriesFavorits.playlist) {
         for (var i = 0; i < moviesSeriesData.length; i++) {
             if (moviesSeriesData[i] === seriesFavorits) {
                 document.getElementsByClassName('parent-content-box')[0].getElementsByClassName('content-rows-box')[0].remove()
-                moviesSeriesData.splice(i,1)
-                controls.moviesLists.rowsIndex-=1
+                moviesSeriesData.splice(i, 1)
+                controls.moviesLists.rowsIndex -= 1
             }
         }
 
@@ -201,8 +200,8 @@ function renderSeriesFavoritCategori() {
 
             moviesSeriesData.unshift(seriesFavorits)
 
-            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(seriesFavorits,infoUrl,seriesFavorits,0),document.getElementsByClassName('parent-content-box')[0].children[0])
-            controls.moviesLists.rowsIndex+=1
+            document.getElementsByClassName('parent-content-box')[0].insertBefore(renderMoviesSeriesLists(seriesFavorits, infoUrl, seriesFavorits, 0), document.getElementsByClassName('parent-content-box')[0].children[0])
+            controls.moviesLists.rowsIndex += 1
             if (controls.moviesLists.rowsIndex == 0) {
                 controls.moviesLists.start = 6
                 controls.moviesLists.index = 0
@@ -227,7 +226,7 @@ function renderSeriesFavoritCategori() {
 }
 
 
-document.onwheel = (e)=> {
+document.onwheel = (e) => {
     if (controls.select === controls.moviesLists) {
         if (e.deltaY > 0) {
             controls.select.down()
