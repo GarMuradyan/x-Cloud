@@ -51,7 +51,7 @@ font-family: sans-serif;
 
 margin-top: 70px;
 
-height: 700px;
+height: 660px;
 
 overflow: hidden;
 }   
@@ -61,6 +61,23 @@ overflow: hidden;
 height: 99999999999999999000000000000px;
 
 position: relative;
+}
+
+.view-more-keyboard {
+    position: fixed;
+    width: 1250px;
+    left: 18%;
+    transition: 0.3s;
+    transform: translateY(140px);
+}
+
+.view-more-input-box {
+    margin-left: 70px;
+    height: 83px;
+}
+
+.keyboard-translate {
+    transform: translateY(-265px) !important;
 }
 
 .view-more-movies-lists-box {

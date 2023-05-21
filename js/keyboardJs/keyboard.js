@@ -4,34 +4,34 @@ var isUpperCase = false
 
 var keyboard = englishKeyboard
 
-function renderKeyboard(array,data,classNmaes) {
-    var keyboardBox = el('div','keyboard-box')
+function renderKeyboard (array, data, classNmaes) {
+    var keyboardBox = el('div', 'keyboard-box')
 
     for (var i = 0; i < array.length; i++) {
-        var keyboardRowsBox = el('div','keyboard-rows-box')
+        var keyboardRowsBox = el('div', 'keyboard-rows-box')
 
         keyboardBox.append(keyboardRowsBox)
 
         for (var j = 0; j < array[i].length; j++) {
-            var keyboardRowsItemBox = el('div','keyboard-rows-item-box')
+            var keyboardRowsItemBox = el('div', 'keyboard-rows-item-box')
 
             keyboardRowsItemBox.textContent = array[i][j]
 
             keyboardRowsBox.append(keyboardRowsItemBox)
 
-            keyboardItemIfElse(array[i][j],keyboardRowsItemBox,classNmaes)
+            keyboardItemIfElse(array[i][j], keyboardRowsItemBox, classNmaes)
 
             keyboardRowsItemBox.onclick = function () {
-                keyboardItemClick(this,array,data)
+                keyboardItemClick(this, array, data)
             }
 
-        }        
+        }
     }
 
     return keyboardBox
 }
 
-function keyboardItemIfElse(item,elem,classNmaes) {
+function keyboardItemIfElse (item, elem, classNmaes) {
     if (item.length === 1) {
         elem.classList.add(classNmaes[2])
     }
@@ -74,9 +74,9 @@ function keyboardItemIfElse(item,elem,classNmaes) {
     }
 }
 
-function keyboardItemClick(elem,array,data) {
+function keyboardItemClick (elem, array, data) {
     if (elem.textContent.length === 1) {
-        activeInput.value+=elem.textContent
+        activeInput.value += elem.textContent
         activeInputText = activeInput.value
         if (data) {
             keyboardSearchingClick(data)
@@ -93,7 +93,7 @@ function keyboardItemClick(elem,array,data) {
     }
 
     if (elem.classList.contains('close')) {
-        var x = activeInput.value.substring(0,activeInput.value.length-1)
+        var x = activeInput.value.substring(0, activeInput.value.length - 1)
         activeInput.value = x
         activeInputText = activeInput.value
         if (data) {
@@ -102,44 +102,47 @@ function keyboardItemClick(elem,array,data) {
         showHideKeyboardItemActive(elem)
     }
 
-    if (elem.classList.contains('space')|| elem.classList.contains('liveTvSpace')) {
+    if (elem.classList.contains('space') || elem.classList.contains('liveTvSpace')) {
         console.log('space');
-        activeInput.value+=' '
+        activeInput.value += ' '
         activeInputText = activeInput.value
         showHideKeyboardItemActive(elem)
     }
 
     if (elem.classList.contains('shift')) {
-        shiftClick(elem,array,data)
+        shiftClick(elem, array, data)
     }
 
     if (elem.classList.contains('done')) {
-        doneClick(elem,array,data)
+        doneClick(elem, array, data)
     }
 
     if (elem.classList.contains('num')) {
-        numberClick(elem,array,data)
+        numberClick(elem, array, data)
     }
 
     if (elem.classList.contains('eng')) {
-        engClick(elem,array,data)
+        engClick(elem, array, data)
     }
 }
 
-function keyboardSearchingClick(data) {
+function keyboardSearchingClick (data) {
     if (document.querySelector('.live-tv-page-box')) {
         renderLiveTvSearching(data)
     }
     if (document.querySelector('.movies-series-search-page')) {
-        renderFilmsSearching(data,infoUrl)
+        renderFilmsSearching(data, infoUrl)
+    }
+    if (document.querySelector('.view-more-page-box')) {
+        renderViewMoreSearching(data)
     }
 }
 
-function shiftClick(elem,array,data) {
+function shiftClick (elem, array, data) {
     if (array === englishKeyboard) {
         if (isUpperCase) {
             lowerCase()
-        }else {
+        } else {
             upperCase()
         }
         if (document.querySelector('.login-page-box')) {
@@ -152,10 +155,15 @@ function shiftClick(elem,array,data) {
         }
         if (document.querySelector('.live-tv-page-box')) {
             document.querySelector('.live-tv-search-keyboard-box').remove()
-            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data, array))
         }
-        
-    }else if (array === numberKeyboard) {
+        if (document.querySelector('.view-more-page-box')) {
+            document.querySelector('.view-more-keyboard').remove()
+            document.querySelector('.view-more-page-box').append(renderViewMoreKeyboard(data, array))
+            document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
+        }
+
+    } else if (array === numberKeyboard) {
         if (document.querySelector('.login-page-box')) {
             document.querySelector('.absolute-box').remove()
             document.getElementById('root').append(renderAbsoluteBox())
@@ -166,7 +174,12 @@ function shiftClick(elem,array,data) {
         }
         if (document.querySelector('.live-tv-page-box')) {
             document.querySelector('.live-tv-search-keyboard-box').remove()
-            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,array))
+            document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data, array))
+        }
+        if (document.querySelector('.view-more-page-box')) {
+            document.querySelector('.view-more-keyboard').remove()
+            document.querySelector('.view-more-page-box').append(renderViewMoreKeyboard(data, array))
+            document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
         }
     }
 
@@ -175,9 +188,9 @@ function shiftClick(elem,array,data) {
     controls.select.firstActive()
 }
 
-function doneClick(elem,array,data) {
+function doneClick (elem, array, data) {
     if (document.querySelector('.login-page-box')) {
-        controls.privius.index+=1
+        controls.privius.index += 1
         controls.privius.ok()
     }
     if (document.querySelector('.movies-series-search-page')) {
@@ -186,7 +199,7 @@ function doneClick(elem,array,data) {
             controls.select = controls.searchLists
             controls.select.addActive()
             controls.select.listTransX()
-        }else {
+        } else {
             controls.select = controls.back
             controls.select.addActive()
         }
@@ -195,10 +208,20 @@ function doneClick(elem,array,data) {
         liveTvSearchBack()
 
     }
+    if (document.querySelector('.view-more-page-box')) {
+        if (document.querySelector('.view-more-movies-content-box').getElementsByClassName('view-more-movies-lists-box').length) {
+            controls.select = controls.viewMore
+            controls.select.addActive()
+        } else {
+            controls.select = controls.back
+            controls.select.addActive()
+        }
+        document.querySelector('.view-more-keyboard').classList.remove('keyboard-translate')
+    }
     //showHideKeyboardItemActive(elem)
 }
 
-function numberClick(elem,array,data) {
+function numberClick (elem, array, data) {
     keyboard = numberKeyboard
     if (document.querySelector('.login-page-box')) {
         document.querySelector('.absolute-box').remove()
@@ -210,7 +233,12 @@ function numberClick(elem,array,data) {
     }
     if (document.querySelector('.live-tv-page-box')) {
         document.querySelector('.live-tv-search-keyboard-box').remove()
-        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,keyboard))
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data, keyboard))
+    }
+    if (document.querySelector('.view-more-page-box')) {
+        document.querySelector('.view-more-keyboard').remove()
+        document.querySelector('.view-more-page-box').append(renderViewMoreKeyboard(data, keyboard))
+        document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
     }
 
     controls.select.removeClass()
@@ -219,7 +247,7 @@ function numberClick(elem,array,data) {
     showHideKeyboardItemActive(elem)
 }
 
-function engClick(elem,array,data) {
+function engClick (elem, array, data) {
     keyboard = englishKeyboard
     if (document.querySelector('.login-page-box')) {
         document.querySelector('.absolute-box').remove()
@@ -232,7 +260,12 @@ function engClick(elem,array,data) {
     }
     if (document.querySelector('.live-tv-page-box')) {
         document.querySelector('.live-tv-search-keyboard-box').remove()
-        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data,keyboard))
+        document.querySelector('.live-tv-search-box').append(renderLiveTvKeyboard(data, keyboard))
+    }
+    if (document.querySelector('.view-more-page-box')) {
+        document.querySelector('.view-more-keyboard').remove()
+        document.querySelector('.view-more-page-box').append(renderViewMoreKeyboard(data, keyboard))
+        document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
     }
 
     controls.select.removeClass()
@@ -241,14 +274,14 @@ function engClick(elem,array,data) {
     showHideKeyboardItemActive(elem)
 }
 
-function showHideKeyboardItemActive(elem) {
+function showHideKeyboardItemActive (elem) {
     setTimeout(() => {
         elem.classList.add('keyboard-active')
     }, 100);
     elem.classList.remove('keyboard-active')
 }
 
-function lowerCase() {
+function lowerCase () {
     isUpperCase = false
     for (var i = 0; i < englishKeyboard.length; i++) {
         for (var j = 0; j < englishKeyboard[i].length; j++) {
@@ -259,7 +292,7 @@ function lowerCase() {
     }
 }
 
-function upperCase() {
+function upperCase () {
     isUpperCase = true
     for (var i = 0; i < englishKeyboard.length; i++) {
         for (var j = 0; j < englishKeyboard[i].length; j++) {

@@ -68,9 +68,10 @@ margin-top: 70px;
     width: 27px;
     height: 27px;
     position: absolute;
-    top: 64.5%;
+    top: 60.7%;
     left: 60%;
 }
+
 
 @keyframes toggle {
     0% {

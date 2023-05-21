@@ -17,7 +17,7 @@ function renderHeaderLoadingComponents () {
     return headerLoadingComponentsBox
 }
 
-function renderListsCardBox (data, array, i, infoUrl, j,newclass) {
+function renderListsCardBox (data, array, i, infoUrl, j, newclass) {
     var contentRowsListsCardBox = el('div', 'content-rows-lists-card-box')
     var cardImageParentBox = el('div', 'card-image-parent-box')
     var cardStarsBox = el('div', 'card-stars-box')
@@ -46,6 +46,8 @@ function renderListsCardBox (data, array, i, infoUrl, j,newclass) {
     } else if (data.cover) {
         cardImageBox.src = data.cover
 
+    } else {
+        ardImageBox.src = 'http://smarttv.xtream.cloud/img/logo.png'
     }
 
     for (var i = 0; i < Math.ceil(data.rating_5based); i++) {
@@ -63,7 +65,7 @@ function renderListsCardBox (data, array, i, infoUrl, j,newclass) {
     }
 
     contentRowsListsCardBox.onclick = function () {
-        clickListsCard(data, array, infoUrl, this.getAttribute('id'),this)
+        clickListsCard(data, array, infoUrl, this.getAttribute('id'), this)
     }
 
     cardNameBox.append(cardName)
@@ -75,7 +77,7 @@ function renderListsCardBox (data, array, i, infoUrl, j,newclass) {
     contentRowsListsCardBox.append(cardStarsBox)
     data.favorit ? contentRowsListsCardBox.append(renderMoviesPageFavoritBox(data)) : false
 
-    renderViewMore(contentRowsListsCardBox,j,newclass)
+    renderViewMore(contentRowsListsCardBox, j, newclass)
 
     return contentRowsListsCardBox
 
@@ -114,41 +116,41 @@ function clickHeaderComponents () {
     controls.select.listTransX()
 }
 
-function clickListsCard (data, array, infoUrl, id,elem) {
+function clickListsCard (data, array, infoUrl, id, elem) {
     if (controls.select !== controls.similiarList) {
         controls.privius = controls.select
     }
     if (elem.getAttribute('type')) {
-        moviesCardViewMoreClick(array,elem)
-    }else {
-        moviesCardClick(data,array,infoUrl,id,elem)
+        moviesCardViewMoreClick(array, elem)
+    } else {
+        moviesCardClick(data, array, infoUrl, id, elem)
     }
 }
 
 function renderMoviesPageFavoritBox (data) {
     var moviesPageFavoritBox = el('div', 'movies-page-favorit-box')
-    var moviesPageFavoritImage = el('img','movies-page-favorit-imge')
+    var moviesPageFavoritImage = el('img', 'movies-page-favorit-imge')
 
     data.locked ? moviesPageFavoritImage.style.left = '69%' : moviesPageFavoritImage.style.left = '85%'
 
     moviesPageFavoritImage.src = 'favorit.png'
 
     moviesPageFavoritBox.append(moviesPageFavoritImage)
-    
+
     return moviesPageFavoritBox
 }
 
-function renderMoviesLockedBox() {
-    var moviesLockedBox = el('div','movies-locked-box')
+function renderMoviesLockedBox () {
+    var moviesLockedBox = el('div', 'movies-locked-box')
 
     moviesLockedBox.append(renderLockIcon())
 
     return moviesLockedBox
 }
 
-function renderMoviesProgresBar(data) {
-    var moviesProgresBarBox = el('div','movies-progres-bar-box')
-    var moviesProgresBarContentBox = el('div','movies-progres-bar-content-box')
+function renderMoviesProgresBar (data) {
+    var moviesProgresBarBox = el('div', 'movies-progres-bar-box')
+    var moviesProgresBarContentBox = el('div', 'movies-progres-bar-content-box')
 
     moviesProgresBarContentBox.style.width = data.progresDuration
 
@@ -157,24 +159,24 @@ function renderMoviesProgresBar(data) {
     return moviesProgresBarBox
 }
 
-function renderViewMore(elem,index,newclass) {
+function renderViewMore (elem, index, newclass) {
     if (newclass) {
-        if(index == 6) {
-            var viewMoreBox = el('div','view-more-box')
-    
+        if (index == 6) {
+            var viewMoreBox = el('div', 'view-more-box')
+
             viewMoreBox.textContent = 'View More...'
-    
+
             elem.innerHTML = ''
-    
-            elem.setAttribute('type','view-more')
-    
+
+            elem.setAttribute('type', 'view-more')
+
             elem.append(viewMoreBox)
-    
+
         }
     }
 }
 
-function moviesCardClick(data,array,infoUrl,id,elem) {
+function moviesCardClick (data, array, infoUrl, id, elem) {
     clickedCard = data
     array.playlist ? similiarContent = array.playlist : similiarContent = array
 
@@ -208,7 +210,7 @@ function moviesCardClick(data,array,infoUrl,id,elem) {
     document.getElementById('root').append(renderMoviesCardInfoLoading())
 
     req(infoUrl + id, 'GET').then((res) => {
-        console.log('info-respons',res);
+        console.log('info-respons', res);
         if (res.info) {
             infoData = res
             document.querySelector('.movies-card-info-loading-box').remove()
@@ -224,8 +226,10 @@ function moviesCardClick(data,array,infoUrl,id,elem) {
     })
 }
 
-function moviesCardViewMoreClick(categori,elem) {
-    viewMoreArray =[]
+function moviesCardViewMoreClick (categori, elem) {
+    lowerCase()
+    keyboard = englishKeyboard
+    viewMoreArray = []
     controls.select = controls.viewMore
     controls.searchButton.index = 1
     controls.select.index = 0
@@ -235,4 +239,6 @@ function moviesCardViewMoreClick(categori,elem) {
     document.getElementsByClassName('movies-and-series-page-box')[0].classList.add('popup-display')
     document.getElementById('root').append(renderViewMorePage(categori))
     controls.select.addActive()
+    activeInput = document.querySelector('.search-page-content-search-input')
+    activeInput.value = ''
 }

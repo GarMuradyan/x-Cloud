@@ -17,18 +17,27 @@ function renderSearchButtonBox (data, infoUrl) {
 }
 
 function searchButtonClick (data, infoUrl) {
-    console.log(data);
-    document.querySelector('.movies-and-series-page-box').classList.add('popup-display')
-    document.querySelector('.view-more-page-box') ?  document.querySelector('.view-more-page-box').classList.add('popup-display') : false
-    document.getElementById('root').append(renderMoviesSeriesSearchingBox(infoUrl))
+    if (document.querySelector('.view-more-page-box')) {
+        console.log('view-more');
+        document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
+        controls.select.removeClass()
+        controls.select = controls.keyboard
+        controls.select.firstActive()
+    } else {
+        keyboard = englishKeyboard
+        lowerCase()
+        console.log(data);
+        document.querySelector('.movies-and-series-page-box').classList.add('popup-display')
+        document.getElementById('root').append(renderMoviesSeriesSearchingBox(infoUrl))
 
-    document.getElementById('root').append(renderKyeboardAbsolute(data))
-    activeInput = document.querySelector('.search-page-content-search-input')
-    controls.searchLists.start = 6
-    controls.searchLists.transIndex = 0
-    controls.select.removeClass()
-    controls.select = controls.keyboard
-    controls.select.firstActive()
+        document.getElementById('root').append(renderKyeboardAbsolute(data))
+        activeInput = document.querySelector('.search-page-content-search-input')
+        controls.searchLists.start = 6
+        controls.searchLists.transIndex = 0
+        controls.select.removeClass()
+        controls.select = controls.keyboard
+        controls.select.firstActive()
+    }
 }
 
 function renderKyeboardAbsolute (arr) {

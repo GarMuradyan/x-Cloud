@@ -54,7 +54,7 @@ width: 800px;
     height: 100%;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgb(255 255 255 / 10%);
 }
 
 .search-page-content-search-box>span {

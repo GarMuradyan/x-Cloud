@@ -1,41 +1,36 @@
 var viewMoreArray = []
 
-function renderViewMorePage(categori) {
+function renderViewMorePage (categori) {
     console.log(categori);
-    var viewMorePageBox = el('div','view-more-page-box')
+    var viewMorePageBox = el('div', 'view-more-page-box')
 
-    var quantArray = []
+    var playlist = categori.playlist
 
-    for (var i = 0; i < categori.playlist.length; i++) {
-        var elem = categori.playlist[i]
-        quantArray.push(elem)
-        if (quantArray.length == 7) {
-            viewMoreArray.push(quantArray)
-            quantArray = []
-        }else if (i == categori.playlist.length-1 && quantArray.length < 7) {
-            viewMoreArray.push(quantArray)
-            quantArray = []
-        }
-    }
+    wiewMoreArrayFiltering(playlist)
 
     viewMorePageBox.append(renderViewMoreHeader(categori))
     viewMorePageBox.append(renderViewMoreMovies(viewMoreArray))
+    viewMorePageBox.append(renderViewMoreKeyboard(categori.playlist, englishKeyboard))
 
     return viewMorePageBox
 }
 
-function renderViewMoreHeader(categori) {
-    var viewMoreHeaderBox = el('div','view-more-header-box')
-    var viewMoreHeaderBackAndSearchBox = el('div','view-more-header-back-and-search-box')
-    var viewMoreBackBox = el('div','view-more-back-box')
-    var viewMoreCategoryNameBox = el('div','view-more-category-name-box')
+function renderViewMoreHeader (categori) {
+    var viewMoreHeaderBox = el('div', 'view-more-header-box')
+    var viewMoreHeaderBackAndSearchBox = el('div', 'view-more-header-back-and-search-box')
+    var viewMoreBackBox = el('div', 'view-more-back-box')
+    var viewMoreCategoryNameBox = el('div', 'view-more-category-name-box')
+    var viewMoreInputBox = el('div', 'view-more-input-box')
 
     viewMoreCategoryNameBox.textContent = categori.category_name
 
     viewMoreBackBox.append(renderBackButton())
 
+    viewMoreInputBox.append(renderMenuesSearchBox())
+
     viewMoreHeaderBackAndSearchBox.append(viewMoreBackBox)
-    viewMoreHeaderBackAndSearchBox.append(renderSearchButtonBox(categori.playlist,infoUrl))
+    viewMoreHeaderBackAndSearchBox.append(renderSearchButtonBox(categori.playlist, infoUrl))
+    viewMoreHeaderBackAndSearchBox.append(viewMoreInputBox)
 
     viewMoreHeaderBox.append(viewMoreHeaderBackAndSearchBox)
     viewMoreHeaderBox.append(viewMoreCategoryNameBox)
@@ -44,14 +39,14 @@ function renderViewMoreHeader(categori) {
 
 }
 
-function renderViewMoreMovies(categori) {
+function renderViewMoreMovies (categori) {
     console.log(categori);
-    var viewMoreMoviesBox = el('div','view-more-movies-box')
-    var viewMoreMoviesContentBox = el('div','view-more-movies-content-box')
+    var viewMoreMoviesBox = el('div', 'view-more-movies-box')
+    var viewMoreMoviesContentBox = el('div', 'view-more-movies-content-box')
 
     for (var i = 0; i < 2; i++) {
         if (categori[i]) {
-            viewMoreMoviesContentBox.append(renderViewMoreMoviesLists(categori[i],i))
+            viewMoreMoviesContentBox.append(renderViewMoreMoviesLists(categori[i], i))
         }
     }
 
@@ -60,20 +55,88 @@ function renderViewMoreMovies(categori) {
     return viewMoreMoviesBox
 }
 
-function renderViewMoreMoviesLists(categori,rowsIndex) {
-    var viewMoreMoviesListsBox = el('div','view-more-movies-lists-box')
-    var viewMoreMoviesListsContentBox = el('div','view-more-movies-lists-content-box')
+function renderViewMoreMoviesLists (categori, rowsIndex) {
+    var viewMoreMoviesListsBox = el('div', 'view-more-movies-lists-box')
+    var viewMoreMoviesListsContentBox = el('div', 'view-more-movies-lists-content-box')
 
-    viewMoreMoviesListsContentBox.setAttribute('position',0)
+    viewMoreMoviesListsContentBox.setAttribute('position', 0)
 
     viewMoreMoviesListsBox.style.top = rowsIndex * 344 + 'px'
 
     for (var i = 0; i < categori.length; i++) {
-        viewMoreMoviesListsContentBox.append(renderListsCardBox(categori[i],categori,rowsIndex,infoUrl,i))
+        viewMoreMoviesListsContentBox.append(renderListsCardBox(categori[i], categori, rowsIndex, infoUrl, i))
     }
 
     viewMoreMoviesListsBox.append(viewMoreMoviesListsContentBox)
 
     return viewMoreMoviesListsBox
 
+}
+
+function renderViewMoreKeyboard (playlist, array) {
+    keyboard = array
+
+
+    console.log(playlist);
+    var viewMoreKeyboard = el('div', 'view-more-keyboard')
+
+    viewMoreKeyboard.append(renderKeyboard(keyboard, playlist, loginAndMoviesPage))
+
+    return viewMoreKeyboard
+}
+
+
+function wiewMoreArrayFiltering (playlist) {
+
+    var quantArray = []
+
+    for (var i = 0; i < playlist.length; i++) {
+        var elem = playlist[i]
+        quantArray.push(elem)
+        if (quantArray.length == 7) {
+            viewMoreArray.push(quantArray)
+            quantArray = []
+        } else if (i == playlist.length - 1 && quantArray.length < 7) {
+            viewMoreArray.push(quantArray)
+            quantArray = []
+        }
+    }
+}
+
+
+function renderViewMoreSearching (data) {
+    var viewSearch = []
+    viewMoreArray = []
+
+    controls.viewMore.index = 0
+    controls.viewMore.rowsIndex = 0
+    controls.viewMore.start = 1
+    controls.viewMore.transIndex = 0
+    controls.viewMore.listTransY()
+
+    document.querySelector('.view-more-movies-content-box').innerHTML = ''
+    document.getElementById('root').append(renderFilmsSearchingLoading())
+
+    if (activeInput.value) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name.indexOf(activeInput.value) !== -1) {
+                viewSearch.push(data[i])
+            }
+        }
+    }
+
+    wiewMoreArrayFiltering(viewSearch)
+
+    console.log(viewMoreArray);
+
+    setTimeout(() => {
+        document.querySelector('.films-searching-load-box') ? document.querySelector('.films-searching-load-box').remove() : false
+        if (viewMoreArray.length) {
+            for (var i = 0; i < 2; i++) {
+                if (viewMoreArray[i]) {
+                    document.querySelector('.view-more-movies-content-box').append(renderViewMoreMoviesLists(viewMoreArray[i], i))
+                }
+            }
+        }
+    }, 400);
 }

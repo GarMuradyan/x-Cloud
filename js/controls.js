@@ -3,7 +3,7 @@ var controls = {
     privius: '',
 
     login: {
-        class: 'active-white',
+        class: 'active-border',
         index: 0,
         items: document.getElementsByClassName('input-content-items'),
 
@@ -25,7 +25,7 @@ var controls = {
                 this.removeClass()
                 this.index--
                 if (this.index === 2) {
-                    this.class = 'active-white'
+                    this.class = 'active-border'
                 }
                 this.addActive()
             }
@@ -49,7 +49,7 @@ var controls = {
             this.items[this.index].classList.add(this.class)
         },
         firstActive: function () {
-            this.class = 'active-white'
+            this.class = 'active-border'
             this.index = 0
             this.addActive()
         },
@@ -104,6 +104,17 @@ var controls = {
                         controls.select.addActive()
                         return
                     }
+                }
+                if (document.querySelector('.view-more-page-box')) {
+                    this.removeClass()
+                    if (document.querySelector('.view-more-movies-content-box').getElementsByClassName('view-more-movies-lists-box').length) {
+                        controls.select = controls.viewMore
+                        controls.select.addActive()
+                    } else {
+                        controls.select = controls.back
+                        controls.select.addActive()
+                    }
+                    document.querySelector('.view-more-keyboard').classList.remove('keyboard-translate')
                 }
 
             }
@@ -163,6 +174,17 @@ var controls = {
         back: function () {
             if (document.querySelector('.live-tv-channels-content-box')) {
                 liveTvSearchBack()
+            }
+            if (document.querySelector('.view-more-page-box')) {
+                this.removeClass()
+                if (document.querySelector('.view-more-movies-content-box').getElementsByClassName('view-more-movies-lists-box').length) {
+                    controls.select = controls.viewMore
+                    controls.select.addActive()
+                } else {
+                    controls.select = controls.back
+                    controls.select.addActive()
+                }
+                document.querySelector('.view-more-keyboard').classList.remove('keyboard-translate')
             }
         },
         firstActive: function () {
@@ -294,9 +316,11 @@ var controls = {
             }
             if (document.querySelector('.view-more-page-box')) {
                 if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
-                    this.removeClass()
-                    controls.select = controls.viewMore
-                    controls.select.addActive()
+                    if (document.querySelector('.view-more-movies-content-box').getElementsByClassName('view-more-movies-lists-box').length) {
+                        this.removeClass()
+                        controls.select = controls.viewMore
+                        controls.select.addActive()
+                    }
                 }
                 return
             }
@@ -365,9 +389,11 @@ var controls = {
         down: function () {
             if (document.querySelector('.view-more-page-box')) {
                 if (!document.querySelector('.view-more-page-box').classList.contains('popup-display')) {
-                    this.removeClass()
-                    controls.select = controls.viewMore
-                    controls.select.addActive()
+                    if (document.querySelector('.view-more-movies-content-box').getElementsByClassName('view-more-movies-lists-box').length) {
+                        this.removeClass()
+                        controls.select = controls.viewMore
+                        controls.select.addActive()
+                    }
                 }
                 return
             }
@@ -810,7 +836,7 @@ var controls = {
             setTimeout(() => {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[0].remove()
                 this.isAnimated = true
-            }, 200);
+            }, 100);
         },
 
 
@@ -820,7 +846,7 @@ var controls = {
             setTimeout(() => {
                 this.items[this.rowsIndex].getElementsByClassName('content-rows-lists-card-box')[7].remove()
                 this.isAnimated = true
-            }, 200);
+            }, 100);
         },
 
         ok: function () {

@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.inputs-parent-box {width: 511px;height: 514px;display: flex;align-items: center;justify-content: center;padding-top: 30px;border-radius: 12px;background-blend-mode: overlay;}
+.inputs-parent-box {background-image: url(../../login.png);width: 550px;height: 600px;display: flex;align-items: center;justify-content: center;padding-top: 30px;border-radius: 12px;background-blend-mode: overlay;}
 
 .inputs-parent-content-box {width: 500px;height: 100%;display: flex;display: -webkit-flex;flex-direction: column;align-items: center;}
 
@@ -24,28 +24,9 @@ width: 168px;
 
 .content-buttons-box {margin-top: 15px;width: 463px;}
 
-.content-inputs-items-box {margin-top: 34px;/* background-color: rgb(32, 32, 32); */border: 3px solid transparent;height: 75px;padding: 0px 30px;font-size: 22px;color: white;border-radius: 10px;background: #1E1E1E;}
+.content-inputs-items-box {margin-top: 34px;border: 3px solid white;height: 75px;padding: 0px 30px;font-size: 22px;color: white;border-radius: 10px;background: #202020;}
 
-.login-button {
-
-font-weight: 700;
-
-background-color: rgb(32, 32, 32);
-
-border: 0;
-
-height: 75px;
-
-padding: 0px 30px;
-
-font-size: 25px;
-
-color: white;
-
-border-radius: 10px;
-
-width: 100%;
-}
+.login-button {font-weight: 700;border: 0;height: 75px;padding: 0px 30px;font-size: 25px;color: white;border-radius: 10px;width: 100%;background: linear-gradient(112.45deg, #3EFF0E -74.95%, #3A854F 98%);}
 
 .provider-or-host-button {
 

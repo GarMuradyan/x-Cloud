@@ -50,31 +50,18 @@ function backButtonClick () {
 
     if (document.querySelector('.movies-series-search-page')) {
         if (!document.querySelector('.movies-series-search-page').classList.contains('popup-display')) {
-            if (document.querySelector('.view-more-page-box')) {
-                season = []
-                filmsSearchArray = []
-                activeInputText = ''
-                controls.privius = ''
-                document.querySelector('.movies-series-search-page').remove()
-                document.querySelector('.keyboard-absolute-box').remove()
-                document.querySelector('.view-more-page-box').classList.remove('popup-display')
-                controls.searchLists.index = 0
-                controls.select = controls.viewMore
-                controls.select.addActive()
-            } else {
-                season = []
-                filmsSearchArray = []
-                activeInputText = ''
-                controls.privius = ''
-                document.querySelector('.movies-series-search-page').remove()
-                document.querySelector('.keyboard-absolute-box').remove()
-                document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
-                controls.moviesLists.rowsIndex = 0
-                controls.searchLists.index = 0
-                controls.select = controls.headerComponents
-                controls.select.listTransX()
-                controls.select.addActive()
-            }
+            season = []
+            filmsSearchArray = []
+            activeInputText = ''
+            controls.privius = ''
+            document.querySelector('.movies-series-search-page').remove()
+            document.querySelector('.keyboard-absolute-box').remove()
+            document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
+            controls.moviesLists.rowsIndex = 0
+            controls.searchLists.index = 0
+            controls.select = controls.headerComponents
+            controls.select.listTransX()
+            controls.select.addActive()
         }
     }
 
