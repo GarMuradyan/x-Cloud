@@ -1,9 +1,9 @@
-function renderMoviesCardInfoNotFound() {
-    var moviesCardInfoNotFound = el('div','movies-card-info-not-found')
+function renderMoviesCardInfoNotFound () {
+    var moviesCardInfoNotFound = el('div', 'movies-card-info-not-found')
 
     moviesCardInfoNotFound.textContent = 'Info Not Found'
 
-    setTimeout(() => {
+    setTimeout(function () {
         if (controls.privius === controls.moviesLists) {
             document.querySelector('.movies-card-info-not-found').remove()
             document.querySelector('.movies-and-series-page-box').classList.remove('popup-display')
@@ -13,7 +13,7 @@ function renderMoviesCardInfoNotFound() {
             controls.select.listTransX()
             controls.select.listTransY()
         }
-    
+
         if (controls.privius === controls.searchLists) {
             document.querySelector('.movies-card-info-not-found').remove()
             document.querySelector('.keyboard-absolute-box').classList.remove('popup-display')

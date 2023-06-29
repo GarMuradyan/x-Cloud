@@ -17,6 +17,9 @@ function renderKeyboard (array, data, classNmaes) {
 
             keyboardRowsItemBox.textContent = array[i][j]
 
+            keyboardRowsItemBox.setAttribute("index", j)
+            keyboardRowsItemBox.setAttribute("rows-index", i)
+
             keyboardRowsBox.append(keyboardRowsItemBox)
 
             keyboardItemIfElse(array[i][j], keyboardRowsItemBox, classNmaes)
@@ -25,10 +28,72 @@ function renderKeyboard (array, data, classNmaes) {
                 keyboardItemClick(this, array, data)
             }
 
+            keyboardRowsItemBox.onmousemove = function () {
+                keyboardItemMouseMove(this)
+            }
+
         }
     }
 
     return keyboardBox
+}
+
+function renderPinKeyboard (selected, callBack) {
+    console.log(selected);
+    console.log(callBack);
+    var pinKeyboardBox = el('div', 'pin-keyboard-box')
+
+    for (var i = 0; i < pinKeyboard.length; i++) {
+        var pinKeyboardItemBox = el('div', 'pin-keyboard-item-box')
+
+        pinKeyboardItemBox.textContent = pinKeyboard[i]
+
+        pinKeyboardItemBox.onclick = function () {
+            pinKeyboardClick(this, selected, callBack)
+        }
+
+        pinKeyboardBox.append(pinKeyboardItemBox)
+    }
+
+    return pinKeyboardBox
+
+}
+
+function pinKeyboardClick (elem, selected, callBack) {
+    console.log(selected);
+    var pinTitle = document.querySelector('.pin-code-page-title-box')
+    pinObject.value += elem.textContent
+    pinObject.state === 'Enter new pin' ? pinObject.newValue += elem.textContent : false
+    controls.pinInputs.items[controls.pinInputs.index].textContent = ''
+    controls.pinInputs.items[controls.pinInputs.index].textContent = '*'
+    controls.pinInputs.removeClass()
+    controls.pinInputs.index++
+    if (controls.pinInputs.index == 4) {
+        if (pinObject.changePin) {
+            pinLogic(pinTitle)
+        } else {
+            pinStaticLogic(selected, callBack)
+        }
+    }
+
+    if (document.querySelector('.pin-code-page-box')) {
+        controls.pinInputs.addActive()
+    }
+}
+
+function pinInputHtml () {
+    for (var i = 0; i < document.getElementsByClassName('pin-code-page-inputs-item-box').length; i++) {
+        document.getElementsByClassName('pin-code-page-inputs-item-box')[i].textContent = ''
+    }
+}
+
+function keyboardItemMouseMove (elem) {
+    controls.select.removeClass()
+    controls.select = controls.keyboard
+    controls.select.removeClass()
+    controls.select.index = elem.getAttribute('index')
+    controls.select.rowsIndex = elem.getAttribute('rows-index')
+    controls.select.addActive()
 }
 
 function keyboardItemIfElse (item, elem, classNmaes) {
@@ -275,7 +340,7 @@ function engClick (elem, array, data) {
 }
 
 function showHideKeyboardItemActive (elem) {
-    setTimeout(() => {
+    setTimeout(function () {
         elem.classList.add('keyboard-active')
     }, 100);
     elem.classList.remove('keyboard-active')

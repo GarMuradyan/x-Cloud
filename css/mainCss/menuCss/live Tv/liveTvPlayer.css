@@ -1,130 +1,132 @@
 .tv-player-box{
 
-    position: fixed;
-    
-    top: 20px;
-    
-    width: 1072px;
-    
-    height: 1040px;
-    
-    left: 43%;
-    
-    border-radius: 5px;
+position: fixed;
 
-    transition: 0.3s;
-    
-    }
-                
-                .tv-player-time-box {
-                width: 100%;
-                height: 83px;
-                border-radius: 20px;
-                background: rgba(30, 31, 32, 0.45);
-                }
-                
-                .player-content-box {
-                
-    margin-top: 25px;
-                }
-                
-                .player-content-video-box{
-                width: 100%;
-                height: 607px;
-                border-radius: 5px;
-                background-color: black;
-                position: relative;
-                }
-                
-                .tv-player-video-box {
-                
-    width: 100%;
-                
-    height: 100%;
-                
-    object-fit: fill;
-                
-    border-radius: 5px;
-                }
-                
-                .player-content-info-box {
-                margin-top: 17px;
-                width: 100%;
-                height: 181px;
-                display: flex;
-                align-items: center;
-                color: white;
-                font-family: sans-serif;
-                border-radius: 12px;
-                background: rgba(30, 31, 32, 0.45);
-                border: 2px solid white;
-                }
-                
-                .player-content-info-number-box {
-                
-            font-size: 50px;
-                
-            font-weight: 700;
-                
-            margin-left: 70px;
-                }
-                
-                .player-content-info-poster-box {
-                width: 105px;
-                height: 83px;
-                background-size: contain;
-                margin-left: 60px;
-                background-repeat: no-repeat;
-                background-position: 0px 10px;
-                }
-                
-                .channel-info-box {
-                
-            margin-left: 50px;
-                
-            height: 130px;
-                
-            font-size: 30px;
-                }
-                
-                .channel-info-name-box {
-                
-                }
-                
-                .channel-info-epg-box {
-                
-            margin-top: 10px;
-                }
-                
-                .current-epg {
-                
-            display: flex;
-                
-            flex-direction: row-reverse;
-                }
-                
-                .next-epg {
-                
-            margin-top: 10px;
-                
-            display: flex;
-                
-            flex-direction: row-reverse;
-                }
-                
-                .epg-time {
-                    
-            color: green;
-                    
-            margin-right: 15px;
-                }
+top: 20px;
+
+width: 1072px;
+
+height: 1040px;
+
+left: 43%;
+
+border-radius: 5px;
+
+transition: 0.3s;
+
+}
+
+.tv-player-time-box {
+width: 100%;
+height: 83px;
+border-radius: 20px;
+background: rgba(30, 31, 32, 0.45);
+border: 3px solid #767677;
+}
+
+.player-content-box {
+
+margin-top: 25px;
+}
+
+.player-content-video-box{
+width: 100%;
+height: 607px;
+border-radius: 5px;
+background-color: black;
+position: relative;
+}
+
+.tv-player-video-box {
+
+width: 100%;
+
+height: 100%;
+
+object-fit: fill;
+
+border-radius: 5px;
+}
+
+.player-content-info-box {
+margin-top: 17px;
+width: 100%;
+height: 181px;
+display: flex;
+align-items: center;
+color: white;
+font-family: sans-serif;
+border-radius: 12px;
+background: rgba(30, 31, 32, 0.45);
+border: 3px solid #767677;
+}
+
+.player-content-info-number-box {
+
+font-size: 50px;
+
+font-weight: 700;
+
+margin-left: 70px;
+}
+
+.player-content-info-poster-box {
+width: 105px;
+height: 83px;
+background-size: contain;
+margin-left: 60px;
+background-repeat: no-repeat;
+background-position: 0px 10px;
+background-position: center;
+}
+
+.channel-info-box {
+
+margin-left: 50px;
+
+height: 130px;
+
+font-size: 30px;
+}
+
+.channel-info-name-box {
+
+}
+
+.channel-info-epg-box {
+
+margin-top: 10px;
+}
+
+.current-epg {
+
+display: flex;
+
+flex-direction: row-reverse;
+}
+
+.next-epg {
+
+margin-top: 10px;
+
+display: flex;
+
+flex-direction: row-reverse;
+}
+
+.epg-time {
+
+color: green;
+
+margin-right: 15px;
+}
 
 .translate-right {
-    transform: translateX(150%);
+transform: translateX(150%);
 }        
 
 
-.tv-player-bottom-box {height: 83px;margin-top: 12px;border-radius: 5px;background: rgba(30, 31, 32, 0.45);display: flex;display: -webkit-flex;border: 2px solid white;align-items: center;justify-content: center;color: rgba(255, 255, 255, 0.6);}
+.tv-player-bottom-box {height: 83px;margin-top: 12px;border-radius: 5px;background: rgba(30, 31, 32, 0.45);display: flex;display: -webkit-flex;align-items: center;justify-content: center;color: rgba(255, 255, 255, 0.6);border: 3px solid #767677;}
 
 .tv-player-bottom-button-box{
 
@@ -146,33 +148,46 @@ font-weight: 700;
 }
 
 .tv-player-bottom-button-color-box {
-    
+
 width: 27px;
-    
+
 height: 16px;
-    
-    
+
+
 border-radius: 3px;
-    
+
 margin-right: 35px;
 }
 
 .sort {
-    background-color: yellow;
+background-color: yellow;
 }
 
 .menu {
-    background-color: blue;
+background-color: blue;
 }
 
 .favorit {
-    background-color: red;
+background-color: red;
 }
 
 .category {
-    background-color: green;
+background-color: green;
 }
 
 .opacity {
-    opacity: 0;
+opacity: 0;
+}
+
+.live-tv-favorit-box {
+background-image: url(../../../../live.png);
+background-position: center;
+height: 30px;
+width: 35px;
+position: absolute;
+z-index: 999999;
+background-size: contain;
+left: 93%;
+top: 21px;
+background-repeat: no-repeat;
 }

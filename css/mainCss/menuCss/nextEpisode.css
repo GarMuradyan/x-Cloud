@@ -1,0 +1,46 @@
+.next-episode-popup-box {
+    position: absolute;
+    left: 73%;
+    bottom: 100px;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    display: -webkit-flex;
+    border-radius: 20px;
+}
+
+.next-episode-popup-content-box {
+    width: 500px;
+    height: 300px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #00000026;
+    border-radius: 20px;
+}
+
+.next-episode-popup-title-box {
+    /* font-size: 40px; */
+    position: absolute;
+    /* font-weight: 600; */
+    background-image: url(../../../nextEpisode.png);
+    z-index: 99;
+    background-size: contain;
+    height: 70px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.next-episode-poster-box {
+    width: 500px;
+    height: 300px;
+    border: 3px solid transparent;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+}

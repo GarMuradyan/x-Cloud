@@ -5,158 +5,127 @@
     height: 100vh;
     
     }
-        
-        .tv-categories-box {display: flex;display: -webkit-flex;flex-direction: column;width: 752px;align-items: center;height: 1035px;}
-        
-        .tv-categories-title-box {
-        color: white;
-        height: 83px;
-        border-radius: 20px;
-        background: rgba(30, 31, 32, 0.45);
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        flex-direction: row-reverse;
-        font-size: 28px;
-        width: 752px;
-        font-family: sans-serif;
-        justify-content: flex-end;
-        font-weight: 700;
-        }
-        
-        .tv-categories-title-icon-box {
-        width: 55px;
-        height: 55px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        margin-right: 31px;
-        margin-left: 30px;
-        }
-        
-        .tv-categories-content-box {
-        
+    
+    .tv-categories-box {display: flex;display: -webkit-flex;flex-direction: column;width: 752px;align-items: center;height: 1035px;}
+    
+    .tv-categories-title-box {color: white;height: 83px;border-radius: 20px;background: rgba(30, 31, 32, 0.45);display: flex;display: -webkit-flex;align-items: center;flex-direction: row-reverse;font-size: 28px;width: 752px;font-family: sans-serif;justify-content: flex-end;font-weight: 700;border: 3px solid #767677;}
+    
+    .tv-categories-title-icon-box {
+    width: 55px;
+    height: 55px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 31px;
+    margin-left: 30px;
+    }
+    
+    .tv-categories-content-box {
+    
     margin-top: 15px;
-        }
-        
-        .live-tv-categories-box {
-        
+    }
+    
+    .live-tv-categories-box {
+    
     width: 752px;
-        
+    
     height: 950px;
-        
+    
     overflow: hidden;
-        
+    
     padding: 0 15px;
-        
+    
     transition: 0.6s;
-        
+    
     position: absolute;
-        
+    
     top: 11%;
-        
+    
     left: 2.0%;
-        
+    
     z-index: 999;
     }
-        
-        .live-tv-categories-card-box {
-        width: 100%;
-        position: absolute;
-        height: 123px;
-        margin-top: 10px;
-        background: rgba(30, 31, 32, 0.45);
-        color: white;
-        font-family: sans-serif;
-        font-size: 30px;
-        font-weight: 700;
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        padding-left: 70px;
-        border-radius: 6px;
-        }
-        
-        .live-tv-channels-box {
-        
+    
+    .live-tv-categories-card-box {width: 100%;position: absolute;height: 123px;margin-top: 10px;background: rgba(30, 31, 32, 0.45);color: white;font-family: sans-serif;font-size: 30px;font-weight: 700;display: flex;display: -webkit-flex;align-items: center;padding-left: 70px;border-radius: 11px;border: 3px solid #767677;}
+    
+    .live-tv-channels-box {
+    
     width: 752px;
-        
+    
     height: 950px;
-        
+    
     overflow: hidden;
-        
+    
     padding: 0 15px;
-        
+    
     transition: 0.6s;
-        
+    
     position: absolute;
-        
+    
     top: 11%;
-        
+    
     left: 2.0%;
-        
+    
     z-index: 999;
     }
-        
-        .live-tv-channels-card-box {
-        width: 100%;
-        height: 123px;
-        background: rgba(30, 31, 32, 0.45);
-        margin-top: 10px;
-        color: white;
-        font-family: sans-serif;
-        font-size: 30px;
-        font-weight: 700;
-        display: flex;
-        display: -webkit-flex;
-        align-items: center;
-        padding-left: 70px;
-        transition: 0.3s linear;
-        border-radius: 6px;
-        position: absolute;
-        }
-        
-        .channel-card-number-box {
-        
-        }
-        
-        .channel-card-poster-and-name-box {
-        
-        margin-left: 60px;
-        
-        display: flex;
-        
-        display: -webkit-flex;
-        
-        align-items: center;
-        }
-        
-        .channel-card-poster-box {
-        
-        width: 118px;
-        
-        height: 107px;
-        
-        background-repeat: no-repeat;
-        
-        background-size: 65%;
-        
-        background-position: center;
-        }
-        
-        .channel-card-name-box {
-            margin-left: 30px;
-            height: 34px;
-            overflow: hidden;
-            width: 350px;
-        }
+    
+    .live-tv-channels-card-box {
+    width: 100%;
+    height: 123px;
+    background: rgba(30, 31, 32, 0.45);
+    /* background-image: url(../../../../liveTvBackground.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    margin-top: 10px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    padding-left: 70px;
+    transition: 0.3s linear;
+    border-radius: 11px;
+    border: 3px solid #767677;
+    position: absolute;
+    }
+    
+    .channel-card-number-box {
+    
+    }
+    
+    .channel-card-poster-and-name-box {
+    margin-left: 60px;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    }
+    
+    .channel-card-poster-box {
+    width: 118px;
+    height: 107px;
+    background-repeat: no-repeat;
+    background-size: 65%;
+    background-position: center;
+    position: absolute;
+    left: 120px;
+    }
+    
+    .channel-card-name-box {
+    margin-left: 80px;
+    height: 34px;
+    overflow: hidden;
+    width: 350px;
+    }
     
     .display {
-        transform: translateX(-130%);
+    transform: translateX(-130%);
     }
     
     .scale-tv {
-        transform: scale(0.7);
-        opacity: 0;
+    transform: scale(0.7);
+    opacity: 0;
     }
     
     .live-tv-channels-content-box {
@@ -166,27 +135,39 @@
     }
     
     .live-tv-categories-content-box {
-        height: 80000000000000000000000000000px;
-        /* transition: 0.4s; */
-        position: relative;
+    height: 80000000000000000000000000000px;
+    /* transition: 0.4s; */
+    position: relative;
     }
-
-.live-tv-lock {
+    
+    .live-tv-lock {
     background-image: url(http://smarttv.xtream.cloud/img/icons/padlock.png);
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: 95% 75%;
-}    
-
-.live-tv-favorit {
+    }    
+    
+    .live-tv-favorit {
     background-image: url(../../../../live-favorit.png) !important;
     background-repeat: no-repeat !important;
     background-position: 98% 86% !important;
-}
-
-.live-tv-locked-box {
+    }
+    
+    .channel-card-line-box {
+    position: absolute;
+    width: 4px;
+    height: 52px;
+    left: 12px;
+    }
+    
+    .line-active {
+    background: linear-gradient(180deg, #3EFF0E 0%, #3A864F 100%) !important;
+    }
+    
+    .live-tv-locked-box {
     width: 35px;
     height: 35px;
-    position: fixed;
-    left: 93.4%;
-}
+    position: absolute;
+    left: 93%;
+    bottom: 20px;
+    }

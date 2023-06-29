@@ -1,17 +1,24 @@
 function renderButton (className, text, classList, data) {
     var buttonBox = el('button', className)
+    var favoritIcon = el('div', 'favorit-icon')
 
     buttonBox.textContent = text
     buttonBox.classList.add(classList)
 
+    if (classList === 'favorit-btn') {
+        data.favorit ? favoritIcon.style.backgroundImage = 'url(../../favorit.png)' : favoritIcon.style.backgroundImage = 'url(../../unfavorit.png)'
+
+        buttonBox.append(favoritIcon)
+    }
+
     buttonBox.onclick = function () {
-        buttonClick(this, data)
+        buttonClick(this, data, favoritIcon)
     }
 
     return buttonBox
 }
 
-function buttonClick (elem, data) {
+function buttonClick (elem, data, favoritIcon) {
     if (elem.classList.contains('login-button')) {
         loginButtonClick(elem)
 
@@ -22,31 +29,36 @@ function buttonClick (elem, data) {
     }
 
     if (elem.classList.contains('favorit-btn')) {
-        favoritButtonClick(data)
+        favoritButtonClick(data, favoritIcon)
     }
 }
 
-function favoritButtonClick (data) {
+function favoritButtonClick (data, favoritIcon) {
 
     if (season.length) {
-        seriesFavoritClick(data)
+        seriesFavoritClick(data, favoritIcon)
     } else {
-        moviesFavoritClick(data)
+        moviesFavoritClick(data, favoritIcon)
     }
 
 }
 
-function seriesFavoritClick (data) {
+function seriesFavoritClick (data, favoritIcon) {
     var id = data.series_id
 
     if (data.favorit) {
         data.favorit = false
+        favoritIcon.style.backgroundImage = 'url(../../unfavorit.png)'
         for (var i = 0; i < seriesFavorits.playlist.length; i++) {
             if (seriesFavorits.playlist[i] === data) {
                 seriesFavorits.playlist.splice(i, 1)
             }
         }
-        series[id] = { favorit: false }
+        if (series[id]) {
+            series[id].favorit = false
+        } else {
+            series[id] = { favorit: false }
+        }
         localStorage.setItem('series', JSON.stringify(series))
         for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
             if (document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
@@ -55,8 +67,13 @@ function seriesFavoritClick (data) {
         }
     } else {
         data.favorit = true
+        favoritIcon.style.backgroundImage = 'url(../../favorit.png)'
         seriesFavorits.playlist.push(data)
-        series[id] = { favorit: true }
+        if (series[id]) {
+            series[id].favorit = true
+        } else {
+            series[id] = { favorit: true }
+        }
         localStorage.setItem('series', JSON.stringify(series))
         for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
             if (!document.querySelectorAll("[id='" + id + "']")[i].getAttribute('type')) {
@@ -68,18 +85,23 @@ function seriesFavoritClick (data) {
 
 }
 
-function moviesFavoritClick (data) {
+function moviesFavoritClick (data, favoritIcon) {
 
     var id = data.stream_id
 
     if (data.favorit) {
         data.favorit = false
+        favoritIcon.style.backgroundImage = 'url(../../unfavorit.png)'
         for (var i = 0; i < moviesFavorits.playlist.length; i++) {
             if (moviesFavorits.playlist[i] === data) {
                 moviesFavorits.playlist.splice(i, 1)
             }
         }
-        vodes[id] = { favorit: false }
+        if (vodes[id]) {
+            vodes[id].favorit = false
+        } else {
+            vodes[id] = { favorit: false }
+        }
         localStorage.setItem('vods', JSON.stringify(vodes))
         for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
             if (document.querySelectorAll("[id='" + id + "']")[i].getElementsByClassName('movies-page-favorit-box')[0]) {
@@ -88,8 +110,13 @@ function moviesFavoritClick (data) {
         }
     } else {
         data.favorit = true
+        favoritIcon.style.backgroundImage = 'url(../../favorit.png)'
         moviesFavorits.playlist.push(data)
-        vodes[id] = { favorit: true }
+        if (vodes[id]) {
+            vodes[id].favorit = true
+        } else {
+            vodes[id] = { favorit: true }
+        }
         localStorage.setItem('vods', JSON.stringify(vodes))
         for (var i = 0; i < document.querySelectorAll("[id='" + id + "']").length; i++) {
             if (!document.querySelectorAll("[id='" + id + "']")[i].getAttribute('type')) {
@@ -102,45 +129,36 @@ function moviesFavoritClick (data) {
 }
 
 function getMoviesFavorits () {
-    for (var i = 0; i < moviesStreams.length; i++) {
-        var vod = moviesStreams[i]
-
-        if (vodes[vod.stream_id]) {
-            if (vodes[vod.stream_id].favorit) {
-                vod.favorit = vodes[vod.stream_id].favorit
-                moviesFavorits.playlist.push(vod)
-            }
-        }
-    }
-
     moviesFavorits.playlist.length ? moviesData.unshift(moviesFavorits) : false
 }
 
 function getSeriesFavorits () {
-    for (var i = 0; i < seriesStreams.length; i++) {
-        var serie = seriesStreams[i]
-
-        if (series[serie.series_id]) {
-            if (series[serie.series_id].favorit) {
-                serie.favorit = series[serie.series_id].favorit
-                seriesFavorits.playlist.push(serie)
-            }
-        }
-    }
-
     seriesFavorits.playlist.length ? seriesData.unshift(seriesFavorits) : false
 }
 
 function playButtonClick (data) {
     cardInfo = data
-    if (data.episodes) {
+    if (moviesSeriesData === seriesData) {
 
     } else {
-        console.log(infoData);
-        document.querySelector('.movies-card-info-page').classList.add('popup-display')
-        document.getElementById('root').append(renderMoviesVideoOnPlaying())
-        controls.select = controls.moviesVideoLoad
-        document.getElementById('root').append(renderMoviesVideo(clickedCard))
+        if (clickedCard.continue) {
+            console.log('continue');
+            if (document.querySelector('.info-continue-popup-parent-box')) {
+                document.querySelector('.info-continue-popup-parent-box').remove()
+            }
+            controls.select.removeClass()
+
+            document.getElementsByClassName('movies-card-info-page')[0].append(renderInfoContinuePopupBox(clickedCard))
+
+            controls.select = controls.infoPopup
+            controls.select.privius = controls.similiarList
+            controls.select.addActive()
+        } else {
+            document.getElementsByClassName('movies-card-info-page')[0].classList.add('popup-display')
+            document.getElementById('root').append(renderMoviesVideoOnPlaying())
+            controls.select = controls.moviesVideoLoad
+            document.getElementById('root').append(renderMoviesVideo(clickedCard))
+        }
     }
 }
 
@@ -173,10 +191,9 @@ function loginButtonClick (elem) {
                 localStorage.setItem('page', 'menu')
                 page = 'menu'
                 controls.select = controls.menu
-                setTimeout(() => {
+                setTimeout(function () {
                     document.getElementById('root').innerHTML = ''
                     document.getElementById('root').append(renderMenu())
-                    controls.select.index = 0
                     controls.select.addActive()
                 }, 4000);
 
@@ -197,14 +214,14 @@ function loginError () {
 
     document.querySelector('.inputs-parent-box').append(error)
 
-    setTimeout(() => {
+    setTimeout(function () {
         if (document.querySelector('.login-load')) {
             document.querySelector('.login-load').remove()
         }
 
     }, 1500);
 
-    setTimeout(() => {
+    setTimeout(function () {
         if (document.querySelector('.error')) {
             document.querySelector('.error').remove()
         }

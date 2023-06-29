@@ -3,6 +3,7 @@ function renderTvPLayerBox (data, i) {
 
 
     tvPlayerBox.append(renderTvPlayerTimeBox())
+    tvPlayerBox.append(renderTvPlayerContentBox())
     tvPlayerBox.append(renderTvPlayerBottomBox())
 
     return tvPlayerBox
@@ -46,12 +47,15 @@ function renderPlayerContentVideoBox (data, i) {
 
     var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
-    if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(tvPlayerVideoBox);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        tvPlayerVideoBox.src = videoSrc;
+    if (data) {
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(tvPlayerVideoBox);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            tvPlayerVideoBox.src = videoSrc;
+        }
     }
 
     playerContentVideoBox.append(tvPlayerVideoBox)
@@ -69,9 +73,13 @@ function renderPlayerContentInfoBox (data, i) {
     var currentEpg = el('div', 'current-epg')
     var nextEpg = el('div', 'next-epg')
 
-    playContentInfoNumberBox.textContent = i
-    data.stream_icon ? playerContentInfoPosterBox.style.backgroundImage = 'url(' + data.stream_icon + ')' : playerContentInfoPosterBox.style.backgroundImage = 'url(http://smarttv.xtream.cloud/img/logo.png)'
-    channelInfoNameBox.textContent = data.name
+    if (data) {
+        playContentInfoNumberBox.textContent = i
+        data.stream_icon ? playerContentInfoPosterBox.style.backgroundImage = 'url(' + data.stream_icon + ')' : playerContentInfoPosterBox.style.backgroundImage = 'url(http://smarttv.xtream.cloud/img/logo.png)'
+        channelInfoNameBox.textContent = data.name
+    } else {
+        channelInfoNameBox.textContent = "Not Found"
+    }
 
     channelInfoEpgBox.append(currentEpg)
     channelInfoEpgBox.append(nextEpg)
@@ -137,12 +145,14 @@ function liveFavoritButtonClick () {
                 liveTvFavorits.playlist.splice(i, 1)
             }
         }
-        document.querySelectorAll("[id='" + channel.stream_id + "']")[0] ? document.querySelectorAll("[id='" + channel.stream_id + "']")[0].classList.remove('live-tv-favorit') : false
+
+        document.querySelectorAll("[id='" + channel.stream_id + "']")[0] ? document.querySelectorAll("[id='" + channel.stream_id + "']")[0].getElementsByClassName('live-tv-favorit-box')[0].remove() : false
         localStorage.setItem('live-channels', JSON.stringify(liveChannels))
+
         if (controls.tvCategories.selectedCategories == 0) {
             id ? clearTimeout(id) : false
             document.querySelectorAll("[id='" + channel.stream_id + "']")[0].style.transform = 'translateX(-800px)'
-            var id = setTimeout(() => {
+            var id = setTimeout(function () {
                 document.querySelectorAll("[id='" + channel.stream_id + "']")[0].remove()
                 if (controls.select === controls.tvChannels) {
                     controls.tvCategories.ok()
@@ -153,7 +163,7 @@ function liveFavoritButtonClick () {
         liveChannels[channel.stream_id] = { favorit: true }
         channel.favorit = true
         liveTvFavorits.playlist.push(channel)
-        document.querySelectorAll("[id='" + channel.stream_id + "']")[0] ? document.querySelectorAll("[id='" + channel.stream_id + "']")[0].classList.add('live-tv-favorit') : false
+        document.querySelectorAll("[id='" + channel.stream_id + "']")[0] ? document.querySelectorAll("[id='" + channel.stream_id + "']")[0].append(renderLiveTvFavorit()) : false
         localStorage.setItem('live-channels', JSON.stringify(liveChannels))
     }
 }

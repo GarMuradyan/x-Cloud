@@ -28,8 +28,15 @@ function renderViewMoreHeader (categori) {
 
     viewMoreInputBox.append(renderMenuesSearchBox())
 
+    viewMoreInputBox.onclick = function () {
+        console.log('view-more');
+        document.querySelector('.view-more-keyboard').classList.add('keyboard-translate')
+        controls.select.removeClass()
+        controls.select = controls.keyboard
+        controls.select.firstActive()
+    }
+
     viewMoreHeaderBackAndSearchBox.append(viewMoreBackBox)
-    viewMoreHeaderBackAndSearchBox.append(renderSearchButtonBox(categori.playlist, infoUrl))
     viewMoreHeaderBackAndSearchBox.append(viewMoreInputBox)
 
     viewMoreHeaderBox.append(viewMoreHeaderBackAndSearchBox)
@@ -79,8 +86,11 @@ function renderViewMoreKeyboard (playlist, array) {
 
     console.log(playlist);
     var viewMoreKeyboard = el('div', 'view-more-keyboard')
+    var viewMoreKeyboardContent = el('div', 'view-more-keyboard-content')
 
-    viewMoreKeyboard.append(renderKeyboard(keyboard, playlist, loginAndMoviesPage))
+    viewMoreKeyboardContent.append(renderKeyboard(keyboard, playlist, loginAndMoviesPage))
+
+    viewMoreKeyboard.append(viewMoreKeyboardContent)
 
     return viewMoreKeyboard
 }
@@ -119,7 +129,7 @@ function renderViewMoreSearching (data) {
 
     if (activeInput.value) {
         for (var i = 0; i < data.length; i++) {
-            if (data[i].name.indexOf(activeInput.value) !== -1) {
+            if (data[i].name.toLowerCase().indexOf(activeInput.value.toLowerCase()) !== -1) {
                 viewSearch.push(data[i])
             }
         }
@@ -127,16 +137,13 @@ function renderViewMoreSearching (data) {
 
     wiewMoreArrayFiltering(viewSearch)
 
-    console.log(viewMoreArray);
 
-    setTimeout(() => {
-        document.querySelector('.films-searching-load-box') ? document.querySelector('.films-searching-load-box').remove() : false
-        if (viewMoreArray.length) {
-            for (var i = 0; i < 2; i++) {
-                if (viewMoreArray[i]) {
-                    document.querySelector('.view-more-movies-content-box').append(renderViewMoreMoviesLists(viewMoreArray[i], i))
-                }
+    document.querySelector('.films-searching-load-box') ? document.querySelector('.films-searching-load-box').remove() : false
+    if (viewMoreArray.length) {
+        for (var i = 0; i < 2; i++) {
+            if (viewMoreArray[i]) {
+                document.querySelector('.view-more-movies-content-box').append(renderViewMoreMoviesLists(viewMoreArray[i], i))
             }
         }
-    }, 400);
+    }
 }

@@ -1,10 +1,12 @@
 function renderMoviesAndSeries (data, infoUrl) {
+    console.log('movies-page');
     var moviesAndSeriesPageBox = el('div', 'movies-and-series-page-box')
     var pageContentBox = el('div', 'page-content-box')
 
     if (data) {
         pageContentBox.append(renderMoviesSeriesHeader(data, infoUrl))
-        pageContentBox.append(renderMovies(data,infoUrl))
+        pageContentBox.append(renderMovies(data, infoUrl))
+        console.log('data', data);
     } else {
         pageContentBox.append(renderMoviesSeriesLoadingHeader())
         pageContentBox.append(renderMoviesSeriesLoadingLists())
@@ -51,12 +53,12 @@ function renderMoviesSeriesHeader (data, infoUrl) {
     headerTopBox.append(renderSearchButtonBox(moviesSeriesStreams, infoUrl))
 
     pageHeaderBox.append(headerTopBox)
-    pageHeaderBox.append(renderMoviesHeaderBottomBox(data,infoUrl))
+    pageHeaderBox.append(renderMoviesHeaderBottomBox(data, infoUrl))
 
     return pageHeaderBox
 }
 
-function renderMoviesHeaderBottomBox(data,infoUrl) {
+function renderMoviesHeaderBottomBox (data, infoUrl) {
     var headerBottomBox = el('div', 'header-bottom-box')
     var headerBottomContentBox = el('div', 'header-bottom-content-box')
 
@@ -97,13 +99,18 @@ function renderMoviesSeriesLoadingLists () {
     return pageListsParentBox
 }
 
-function renderMovies(data,infoUrl) {
+function renderMovies (data, infoUrl) {
     var pageListsParentBox = el('div', 'page-lists-parent-box')
     var parentConetntBox = el('div', 'parent-content-box')
 
     for (var i = 0; i < data.length; i++) {
         if (data[i].playlist.length) {
-            parentConetntBox.append(renderMoviesSeriesLists(data[i],infoUrl,data[i],i)) 
+            try {
+
+                parentConetntBox.append(renderMoviesSeriesLists(data[i], infoUrl, data[i], i))
+            } catch (e) {
+                console.log(e);
+            }
         }
     }
 
@@ -112,7 +119,7 @@ function renderMovies(data,infoUrl) {
     return pageListsParentBox
 }
 
-function renderMoviesSeriesLists (categori, infoUrl,data,i) {
+function renderMoviesSeriesLists (categori, infoUrl, data, i) {
 
     var contentRowsBox = el('div', 'content-rows-box')
     var contentRowsNameBox = el('div', 'content-rows-name-box')
@@ -126,7 +133,7 @@ function renderMoviesSeriesLists (categori, infoUrl,data,i) {
     for (var j = 0; j < 7; j++) {
         if (categori.playlist.length) {
             if (categori.playlist[j]) {
-                contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j,'view-more'))
+                contentRowsListsBox.append(renderListsCardBox(categori.playlist[j], data, i, infoUrl, j, 'view-more'))
             }
         }
     }

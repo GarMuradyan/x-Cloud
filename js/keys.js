@@ -207,6 +207,8 @@ document.onkeydown = function (e) {
     }
 
     if (name) {
-        controls.select[name]()
+        if (controls.select) {
+            controls.select[name]()
+        }
     }
 }

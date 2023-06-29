@@ -6,41 +6,56 @@ var showPlay = false
 
 var showControl = false
 
+var isNextEpisode = true
+
 function renderMoviesVideo (data) {
     console.log(data);
-    console.log(infoData);
-    var link = 'http://kingtop10.net:7070/movie/QATeamTest/jby2jccj/' + data.stream_id + '.' + data.container_extension
+    var id = null
+    var type = null
+
+    if (data.stream_id) {
+        id = data.stream_id
+        type = 'movie'
+    } else if (data.id) {
+        id = data.id
+        type = 'series'
+    }
+
+    var link = 'http://diblax.spartacus.site/' + type + '/WOYQyy5YzT/2WawEOAw0d/' + id + '.' + data.container_extension
     console.log(link);
     var moviesVideoPageBox = el('div', 'movies-video-page-box')
     var moviesVideoBox = el('video', 'movies-video-box')
     var showControlColorBox = el('div', 'show-control-color-box')
 
     moviesVideoBox.setAttribute('autoplay', true)
+    moviesVideoBox.setAttribute('muted', true)
     moviesVideoBox.src = link
 
     if (data.continue) {
         moviesVideoBox.currentTime = data.continue
     }
 
-    moviesVideoBox.onplaying = () => {
+    moviesVideoBox.onplaying = function () {
         moviesVideoOnPlaying()
     }
 
-    moviesVideoBox.onwaiting = () => {
+    moviesVideoBox.onwaiting = function () {
         moviesVideoOnWaiting(moviesVideoPageBox)
     }
 
-    moviesVideoBox.onloadeddata = () => {
+    moviesVideoBox.onloadeddata = function () {
         moviesVideoOnLoadedData(moviesVideoBox)
     }
 
-    moviesVideoBox.ontimeupdate = () => {
+    moviesVideoBox.ontimeupdate = function () {
         moviesVideoOnTimeUpdate(moviesVideoBox, data)
     }
 
-    moviesVideoBox.onclick = () => {
-        showPlayPause(moviesVideoBox)
+    moviesVideoBox.onclick = function (e) {
+        showPlayPause(moviesVideoBox, e)
     }
+
+    moviesVideoPageBox.append(renderMoviesVideoPlayPause())
 
     moviesVideoPageBox.append(moviesVideoBox)
     moviesVideoPageBox.append(showControlColorBox)
@@ -51,38 +66,78 @@ function renderMoviesVideo (data) {
     return moviesVideoPageBox
 }
 
+function moviesVideoOnEnded (elem) {
+    if (moviesSeriesData === seriesData) {
+        console.log('next-episode');
+        console.log(elem);
+        if (seasonEpisodes[controls.episodesLists.nextIndex + 1]) {
+            elem.append(renderNextEpisodePopupBox())
+        }
+    } else if (moviesSeriesData === moviesData) {
+        console.log('next-movie');
+    }
+}
+
+function renderMoviesVideoPlayPause () {
+    var moviesVideoPlayPauseBox = el('div', 'movies-video-play-pause-box')
+
+    moviesVideoPlayPauseBox.style.backgroundImage = 'url(../../../../../play.png)'
+
+    return moviesVideoPlayPauseBox
+}
+
 function moviesVideoOnLoadedData (elem) {
     if (infoData.info.duration) {
-        document.getElementsByClassName('video-duration-time')[0].textContent = infoData.info.duration
+        document.getElementsByClassName('video-duration-time')[0] ? document.getElementsByClassName('video-duration-time')[0].textContent = infoData.info.duration : false
     } else if (document.querySelector('.progres-line-box')) {
-        videoDuration = new Date(elem.duration * 1000).toISOString().slice(14, 19)
+        videoDuration = formatTime(elem.duration)
         document.getElementsByClassName('video-duration-time')[0].textContent = videoDuration
     }
 }
 
+function formatTime (timeInSeconds) {
+    var hours = Math.floor(timeInSeconds / 3600);
+    var minutes = Math.floor((timeInSeconds % 3600) / 60);
+    var seconds = Math.floor(timeInSeconds % 60);
+
+    return hours + ':' + padZero(minutes) + ':' + padZero(seconds)
+
+}
+
+function padZero (number) {
+    return number.toString().padStart(2, '0');
+}
+
 function moviesVideoOnTimeUpdate (elem, data) {
-    console.log(elem.currentTime);
     if (document.querySelector('.progres-line-box')) {
         data.continue = elem.currentTime
         data.progresDuration = (data.continue / elem.duration) * 100 + '%'
         document.querySelector('.progres-line-box').style.width = (elem.currentTime / elem.duration) * 100 + '%'
-        videoCurrentTime = new Date(elem.currentTime * 1000).toISOString().slice(14, 19)
+        videoCurrentTime = formatTime(elem.currentTime)
         document.getElementsByClassName('video-current-time')[0].textContent = videoCurrentTime
-        if (videoCurrentTime === videoDuration) {
-            elem.pause()
-        }
+        // if (elem.currentTime >= elem.duration - 20) {
+        //     if (isNextEpisode) {
+        //         console.log('ended 20 sec');
+        //         moviesVideoOnEnded(document.querySelector('.movies-video-page-box'))
+        //         isNextEpisode = false
+        //     }
+        // }
     }
 }
 
 function moviesVideoOnWaiting (elem) {
+    var playPauseBox = document.querySelector('.movies-video-play-pause-box')
+
+    playPauseBox.classList.remove('settings-opacity')
+
     console.log('wait');
     document.querySelector('.movies-video-loading-box') ? document.querySelector('.movies-video-loading-box').remove() : false
     elem.append(renderMoviesVideoLoading())
 }
 
 function moviesVideoOnPlaying () {
-    if (document.querySelector('.movies-video-on-playing-box')) {
-        document.querySelector('.movies-video-on-playing-box').remove()
+    if (document.querySelector('.movies-video-on-playing-parent-box')) {
+        document.querySelector('.movies-video-on-playing-parent-box').remove()
         controls.select = controls.moviesVideo
         document.querySelector('.movies-video-page-box').classList.add('movies-video-display')
     }
@@ -145,22 +200,31 @@ function renderMoviesVideoLoading () {
 
 
 function renderMoviesVideoOnPlaying () {
+    var moviesVideoOnPlayingParentBox = el('div', 'movies-video-on-playing-parent-box')
     var moviesVideoOnPlayingBox = el('div', 'movies-video-on-playing-box')
 
     moviesVideoOnPlayingBox.append(renderLoading())
 
-    return moviesVideoOnPlayingBox
+    moviesVideoOnPlayingParentBox.append(moviesVideoOnPlayingBox)
+
+    return moviesVideoOnPlayingParentBox
 }
 
-function showPlayPause (video) {
+function showPlayPause (video, e) {
+
+    e.preventDefault()
+
+    var playPauseBox = document.querySelector('.movies-video-play-pause-box')
 
     if (showPlay) {
         showPlay = false
         video.play()
+        playPauseBox.style.backgroundImage = 'url(../../../../../play.png)'
     } else {
         video.pause()
         showPlay = true
         openControl()
+        playPauseBox.style.backgroundImage = 'url(../../../../../pause.png)'
     }
 }
 
@@ -168,6 +232,7 @@ function openControl () {
     var controlElem = document.querySelector('.video-progres-box')
     var colorBox = document.querySelector('.video-progres-box')
     var settingsBox = document.querySelector('.video-settings-box')
+    var playPauseBox = document.querySelector('.movies-video-play-pause-box')
 
     if (showControl) {
         false
@@ -176,6 +241,7 @@ function openControl () {
         controlElem.classList.add('show-control')
         colorBox.classList.add('color-box')
         settingsBox.classList.add('settings-opacity')
+        playPauseBox.classList.add('settings-opacity')
         controls.select = controls.moviesVideoTimeLine
         controls.select.addActive()
     }
@@ -185,12 +251,14 @@ function hideControl () {
     var controlElem = document.querySelector('.video-progres-box')
     var colorBox = document.querySelector('.video-progres-box')
     var settingsBox = document.querySelector('.video-settings-box')
+    var playPauseBox = document.querySelector('.movies-video-play-pause-box')
 
     if (showControl) {
         showControl = false
         controlElem.classList.remove('show-control')
         colorBox.classList.remove('color-box')
         settingsBox.classList.remove('settings-opacity')
+        playPauseBox.classList.remove('settings-opacity')
     } else {
         false
     }

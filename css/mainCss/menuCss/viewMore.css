@@ -27,13 +27,13 @@
     
     .view-more-back-box {
     
-    width: 70px;
+width: 70px;
     
-    height: 70px;
+height: 70px;
     
-    background: rgba(255, 255, 255, 0.08);
+background-color: rgba(255, 255, 255,0.1);
     
-    border-radius: 20px;
+border-radius: 20px;
     }
     
     .view-more-category-name-box {
@@ -65,15 +65,31 @@ position: relative;
 
 .view-more-keyboard {
     position: fixed;
-    width: 1250px;
-    left: 18%;
+    left: 15%;
     transition: 0.3s;
     transform: translateY(140px);
+    width: 1340px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    background: #0B0A0A;
+    height: 395px;
+    align-items: center;
+    border: 3px solid green;
+    border-radius: 20px;
+    z-index: 999999;
+}
+
+.view-more-keyboard-content {
+    width: 1250px;
 }
 
 .view-more-input-box {
     margin-left: 70px;
-    height: 83px;
+    height: 80px;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    width: 900px;
 }
 
 .keyboard-translate {

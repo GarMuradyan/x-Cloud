@@ -20,7 +20,7 @@ padding: 20px;
 
 .search-page-back-box {
     width: 73px;
-    background: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     height: 73px;
 }
@@ -54,16 +54,17 @@ width: 800px;
     height: 100%;
     display: flex;
     align-items: center;
-    background: rgb(255 255 255 / 10%);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.search-page-content-search-box>span {
-
-color: white;
-
-font-size: 45px;
-
-margin-left: 20px;
+.search-input-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../search.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 30px;
 }
 
 .search-list-box {
@@ -89,5 +90,5 @@ margin-left: 20px;
     height: 100px;
     position: absolute;
     top: 35%;
-    left: 50%;
+    left: 48%;
 }

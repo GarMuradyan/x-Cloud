@@ -1,83 +1,75 @@
 .pin-code-page-box {
-
     display: flex;
-    
     height: 100vh;
-    
     display: -webkit-flex;
-    
     justify-content: center;
-    }
+    padding: 30px;
+    width: 100%;
+    position: absolute;
+    z-index: 9999999999999999999;
+    top: 0;
+    /* background-image: url(../../Film.png); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000000d1;
+}
     
     .pin-code-page-back-box {
-    
     position: absolute;
-    
-    left: 15px;
-    
-    top: 15px;
+    left: 40px;
+    top: 35px;
+    width: 73px;
+    height: 73px;
+    border-radius: 20px;
+    background-color: #202020;
     }
     
     .pin-code-page-title-and-inputs-box {
-    
-width: 1300px;
-    
-height: 300px;
-    
-display: flex;
-    
-display: -webkit-flex;
-    
-align-items: center;
-    
-flex-direction: column;
-    
-position: relative;
-    
-top: 25%;
-    
-justify-content: space-between;
+    width: 1010px;
+    height: 435px;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 25%;
+    /* justify-content: space-around; */
+    background-image: url(../../pin.png);
+    position: relative;
     }
     
     .pin-code-page-title-box {
-    
-color: white;
-    
-font-family: sans-serif;
-    
-font-size: 50px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    margin-top: 66px;
     }
     
     .pin-code-page-inputs-box {
-    
-display: flex;
-    
-display: -webkit-flex;
-    
-align-items: center;
-    
-width: 850px;
-    
-justify-content: space-between;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    width: 850px;
+    justify-content: space-between;
+    margin-top: 60px;
     }
     
     .pin-code-page-inputs-item-box {
-        
-width: 188px;
-        
-height: 186px;
-        
-border-radius: 15px;
-        
-background-color: rgb(32, 32, 32);
+        width: 164px;
+        height: 169px;
+        border-radius: 15px;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(0deg, #202020, #202020),
+linear-gradient(0deg, #3B3B3C, #3B3B3C);
+        color: white;
+        font-size: 100px;
+    }
 
-display: flex;
-
-display: -webkit-flex;
-
-justify-content: center;
-
-align-items: center;
+    .pin-keyboard-item-box {
+        
     }
 
 .wrong-pin {
@@ -99,4 +91,12 @@ align-items: center;
 
 .green-color {
     color: rgb(4, 165, 37) !important;
+}
+
+.wrong-pin-box {position: absolute;bottom: 20px;}
+
+.wrong-pin-title-box {
+    color: rgba(255, 0, 0, 0.812);
+    font-family: sans-serif;
+    font-size: 35px;
 }

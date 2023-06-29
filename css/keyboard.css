@@ -57,44 +57,19 @@ justify-content: space-between;
 }
 
 .keyboard-rows-item-box {
-
     border-radius: 10px;
-    
-width: 90px;
-    
-height: 100%;
-    
-display: flex;
-    
-justify-content: center;
-    
-align-items: center;
-    
-background-color: rgb(32, 32, 32);
-    
-font-family: sans-serif;
+    width: 90px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: linear-gradient(180deg, rgba(22, 24, 30, 0.7) 9.24%, rgba(22, 24, 30, 0) 52.65%), linear-gradient(0deg, rgba(22, 24, 30, 0.4), rgba(22, 24, 30, 0.4)); */
+    background-color: rgb(32, 32, 32);
+    font-family: sans-serif;
+    border: 3px solid transparent;
 }
 
-.pin-keyboard-box {
-
-position: fixed;
-
-left: 26%;
-
-width: 950px;
-
-height: 88px;
-
-bottom: 0%;
-
-display: flex;
-
-display: -webkit-flex;
-
-justify-content: space-between;
-
-align-items: center;
-}
+.pin-keyboard-box {position: fixed;left: 26%;width: 950px;height: 88px;bottom: 2%;display: flex;display: -webkit-flex;justify-content: space-between;align-items: center;z-index: 9999999999999999999999999;}
 
 .pin-keyboard-item-box {
     

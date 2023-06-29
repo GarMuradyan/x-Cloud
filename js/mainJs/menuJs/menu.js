@@ -55,6 +55,7 @@ function menuCardsClick (type) {
 
 function cardSeries (data) {
 
+    controls.privius = ''
     controls.moviesLists.rowsIndex = 0
     controls.moviesLists.index = 0
 
@@ -77,7 +78,7 @@ function cardSeries (data) {
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
-        controls.moviesLists.start = 6
+        controls.moviesLists.start = 1
         controls.moviesLists.transIndex = 0
         controls.headerComponents.index = 0
         controls.headerComponents.rowsIndex = 0
@@ -90,7 +91,7 @@ function cardSeries (data) {
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
-        controls.moviesLists.start = 6
+        controls.moviesLists.start = 1
         controls.moviesLists.transIndex = 0
         controls.headerComponents.index = 0
         controls.headerComponents.rowsIndex = 0
@@ -98,6 +99,8 @@ function cardSeries (data) {
         controls.headerComponents.transIndex = 0
 
         controls.privius = controls.select
+
+        controls.select = controls.back
 
         document.getElementById('root').innerHTML = ''
 
@@ -109,6 +112,7 @@ function cardSeries (data) {
 
 function cardMovies (data) {
 
+    controls.privius = ''
     controls.moviesLists.rowsIndex = 0
     controls.moviesLists.index = 0
 
@@ -131,7 +135,7 @@ function cardMovies (data) {
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
-        controls.moviesLists.start = 6
+        controls.moviesLists.start = 1
         controls.moviesLists.transIndex = 0
         controls.headerComponents.index = 0
         controls.headerComponents.rowsIndex = 0
@@ -144,7 +148,7 @@ function cardMovies (data) {
 
         controls.moviesLists.index = 0
         controls.moviesLists.rowsIndex = 0
-        controls.moviesLists.start = 6
+        controls.moviesLists.start = 1
         controls.moviesLists.transIndex = 0
         controls.headerComponents.index = 0
         controls.headerComponents.rowsIndex = 0
@@ -152,6 +156,8 @@ function cardMovies (data) {
         controls.headerComponents.transIndex = 0
 
         controls.privius = controls.select
+
+        controls.select = controls.back
 
         document.getElementById('root').innerHTML = ''
 
@@ -162,6 +168,7 @@ function cardMovies (data) {
 
 function cardSettings () {
 
+    controls.privius = ''
     document.getElementById('root').innerHTML = ''
 
     document.getElementById('root').append(renderSettingsPage(settingsData))
@@ -171,6 +178,8 @@ function cardSettings () {
 }
 
 function cardLive () {
+
+    controls.privius = ''
     if (liveTvData) {
         document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
         document.getElementById('root').innerHTML = ''
@@ -180,13 +189,13 @@ function cardLive () {
         document.getElementById('root').append(renderLiveTvPage(liveTvData))
 
         document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
-    
+
         controls.select = controls.tvCategories
         controls.select.start = 6
         controls.select.index = 1
         controls.select.transIndex = 0
         controls.select.ok()
-    }else {
+    } else {
         document.getElementById('root').innerHTML = ''
         document.getElementsByClassName('hidden-loading-box')[0].classList.remove('popup-display')
         getLiveTvData()
@@ -194,15 +203,21 @@ function cardLive () {
 }
 
 function getSeriesData () {
-    req(reqUrl + '&action=get_series_categories', "GET").then((res) => {
+    request = req(reqUrl + '&action=get_series_categories', "GET").then(function (res) {
         seriesCategories = res
         for (var i = 0; i < res.length; i++) {
-            seriesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
+            seriesCategoriesData[res[i].category_id] = { category_id: res[i].category_id, category_name: res[i].category_name, playlist: [] }
         }
 
         if (seriesStreams) {
             for (var i = 0; i < seriesStreams.length; i++) {
                 if (seriesCategoriesData[seriesStreams[i].category_id]) {
+                    if (series[seriesStreams[i].series_id]) {
+                        if (series[seriesStreams[i].series_id].favorit) {
+                            seriesStreams[i].favorit = series[seriesStreams[i].series_id].favorit
+                            seriesFavorits.playlist.push(seriesStreams[i])
+                        }
+                    }
                     seriesCategoriesData[seriesStreams[i].category_id].playlist.push(seriesStreams[i])
                 }
             }
@@ -218,21 +233,27 @@ function getSeriesData () {
             getSeriesLockedCategories()
             moviesSeriesData = seriesData
             moviesSeriesStreams = seriesStreams
-            document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
             controls.select = controls.moviesLists
+            document.getElementById('root').innerHTML = ''
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
             controls.select.addActive()
         }
-    }).catch((err) => {
+    }).catch(function (err) {
         console.log(err);
     })
 
-    req(reqUrl + '&action=get_series', "GET").then((res) => {
+    request = req(reqUrl + '&action=get_series', "GET").then(function (res) {
         seriesStreams = res
         if (seriesCategories) {
             for (var i = 0; i < seriesStreams.length; i++) {
                 if (seriesCategoriesData[seriesStreams[i].category_id]) {
+                    if (series[seriesStreams[i].series_id]) {
+                        if (series[seriesStreams[i].series_id].favorit) {
+                            seriesStreams[i].favorit = series[seriesStreams[i].series_id].favorit
+                            seriesFavorits.playlist.push(seriesStreams[i])
+                        }
+                    }
                     seriesCategoriesData[seriesStreams[i].category_id].playlist.push(seriesStreams[i])
                 }
             }
@@ -248,27 +269,39 @@ function getSeriesData () {
             getSeriesLockedCategories()
             moviesSeriesData = seriesData
             moviesSeriesStreams = seriesStreams
-            document.getElementById('root').innerHTML = ''
             infoUrl = seriesInfoUrl
             controls.select = controls.moviesLists
+            document.getElementById('root').innerHTML = ''
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, seriesInfoUrl))
             controls.select.addActive()
         }
-    }).catch((err) => {
+    }).catch(function (err) {
 
     })
 }
 
 function getMoviesData () {
 
-    req(reqUrl + '&action=get_vod_categories', "GET").then((res) => {
+    request = req(reqUrl + '&action=get_vod_categories', "GET").then(function (res) {
         moviesCategories = res
         for (var i = 0; i < res.length; i++) {
-            moviesCategoriesData[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
+            moviesCategoriesData[res[i].category_id] = { category_id: res[i].category_id, category_name: res[i].category_name, playlist: [] }
         }
         if (moviesStreams) {
             for (var i = 0; i < moviesStreams.length; i++) {
                 if (moviesCategoriesData[moviesStreams[i].category_id]) {
+                    if (vodes[moviesStreams[i].stream_id]) {
+                        if (vodes[moviesStreams[i].stream_id].favorit) {
+                            moviesStreams[i].favorit = vodes[moviesStreams[i].stream_id].favorit
+                            moviesFavorits.playlist.push(moviesStreams[i])
+                        }
+                        if (vodes[moviesStreams[i].stream_id].continue) {
+                            moviesStreams[i].continue = vodes[moviesStreams[i].stream_id].continue
+                        }
+                        if (vodes[moviesStreams[i].stream_id].progresDuration) {
+                            moviesStreams[i].progresDuration = vodes[moviesStreams[i].stream_id].progresDuration
+                        }
+                    }
                     moviesCategoriesData[moviesStreams[i].category_id].playlist.push(moviesStreams[i])
                 }
             }
@@ -284,26 +317,39 @@ function getMoviesData () {
             getMoviesLockedCategories()
             moviesSeriesData = moviesData
             moviesSeriesStreams = moviesStreams
-            document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
             controls.select = controls.moviesLists
+            document.getElementById('root').innerHTML = ''
+            console.log('render');
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
             controls.select.addActive()
         }
-    }).catch((err) => {
+    }).catch(function (err) {
         console.log(err);
     })
 
-    req(reqUrl + '&action=get_vod_streams', "GET").then((res) => {
+    request = req(reqUrl + '&action=get_vod_streams', "GET").then(function (res) {
         moviesStreams = res
         if (moviesCategories) {
             for (var i = 0; i < moviesStreams.length; i++) {
                 if (moviesCategoriesData[moviesStreams[i].category_id]) {
+                    if (vodes[moviesStreams[i].stream_id]) {
+                        if (vodes[moviesStreams[i].stream_id].favorit) {
+                            moviesStreams[i].favorit = vodes[moviesStreams[i].stream_id].favorit
+                            moviesFavorits.playlist.push(moviesStreams[i])
+                        }
+                        if (vodes[moviesStreams[i].stream_id].continue) {
+                            moviesStreams[i].continue = vodes[moviesStreams[i].stream_id].continue
+                        }
+                        if (vodes[moviesStreams[i].stream_id].progresDuration) {
+                            moviesStreams[i].progresDuration = vodes[moviesStreams[i].stream_id].progresDuration
+                        }
+                    }
                     moviesCategoriesData[moviesStreams[i].category_id].playlist.push(moviesStreams[i])
                 }
             }
 
-            var arr =  Object.values(moviesCategoriesData)
+            var arr = Object.values(moviesCategoriesData)
 
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].playlist.length) {
@@ -314,23 +360,24 @@ function getMoviesData () {
             getMoviesLockedCategories()
             moviesSeriesData = moviesData
             moviesSeriesStreams = moviesStreams
-            document.getElementById('root').innerHTML = ''
             infoUrl = moviesInfoUrl
             controls.select = controls.moviesLists
+            document.getElementById('root').innerHTML = ''
+            console.log('render');
             document.getElementById('root').append(renderMoviesAndSeries(moviesSeriesData, moviesInfoUrl))
             controls.select.addActive()
         }
-    }).catch((err) => {
+    }).catch(function (err) {
 
     })
 }
 
-function getLiveTvData() {
-    
-    req(reqUrl+'&action=get_live_categories',"GET",'').then((res)=> {
+function getLiveTvData () {
+
+    req(reqUrl + '&action=get_live_categories', "GET", '').then(function (res) {
         liveTvCategories = res
         for (var i = 0; i < res.length; i++) {
-            liveCategories[res[i].category_id] = {category_id:res[i].category_id,category_name:res[i].category_name,playlist:[]}
+            liveCategories[res[i].category_id] = { category_id: res[i].category_id, category_name: res[i].category_name, playlist: [] }
         }
 
         if (liveTvChannels) {
@@ -352,7 +399,7 @@ function getLiveTvData() {
 
             document.getElementById('root').append(renderLiveTvPage(liveTvData))
             document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
-        
+
             controls.select = controls.tvCategories
             controls.select.start = 6
             controls.select.index = 1
@@ -360,11 +407,11 @@ function getLiveTvData() {
             controls.select.ok()
         }
 
-    }).catch((err)=> {
+    }).catch(function (err) {
         console.log(err);
     })
 
-    req(reqUrl+'&action=get_live_streams',"GET",'').then((res)=> {
+    req(reqUrl + '&action=get_live_streams', "GET", '').then(function (res) {
         liveTvChannels = res
         if (liveTvCategories) {
             for (var i = 0; i < res.length; i++) {
@@ -379,20 +426,20 @@ function getLiveTvData() {
             liveTvData.unshift(liveTvSearch)
             liveTvData.unshift(liveTvAll)
             liveTvData.unshift(liveTvFavorits)
-            getLiveTvFavorits()       
-            getLiveTvLockedCategories()     
+            getLiveTvFavorits()
+            getLiveTvLockedCategories()
             document.getElementById('root').innerHTML = ''
 
             document.getElementById('root').append(renderLiveTvPage(liveTvData))
             document.getElementsByClassName('hidden-loading-box')[0].classList.add('popup-display')
-        
+
             controls.select = controls.tvCategories
             controls.select.start = 6
             controls.select.index = 1
             controls.select.transIndex = 0
             controls.select.ok()
         }
-    }).catch((err)=> {
+    }).catch(function (err) {
         console.log(err);
     })
 }

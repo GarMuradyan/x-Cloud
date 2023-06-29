@@ -1,23 +1,23 @@
 var liveTvPlayerBottomData = [
     {
-        name:'Sort',
-        id:'sort-btn',
-        classList:'sort'
+        name: 'Sort',
+        id: 'sort-btn',
+        classList: 'sort'
     },
     {
-        name:'Category',
-        id:'categ-btn',
-        classList:'category'
+        name: 'Category',
+        id: 'categ-btn',
+        classList: 'category'
     },
     {
-        name:'Favorites',
-        id:'favorit-btn',
-        classList:'favorit'
+        name: 'Favorites',
+        id: 'favorit-btn',
+        classList: 'favorit'
     },
     {
-        name:'Menu',
-        id:'menu-btn',
-        classList:'menu'
+        name: 'Menu',
+        id: 'menu-btn',
+        classList: 'menu'
     }
 ]
 
@@ -32,20 +32,21 @@ var liveTvChannels = null
 var liveTvData = null
 
 var liveTvFavorits = {
-    type:'favorites',
-    category_name:'Favorits',
-    playlist:[]
+    type: 'favorites',
+    category_name: 'Favorites',
+    playlist: []
 }
 
 var liveTvAll = {
-    category_name:'All',
-    playlist:[]
+    type: 'all',
+    category_name: 'All',
+    playlist: []
 }
 
 var liveTvSearch = {
-    type:'search',
-    category_name:'Search',
-    playlist:[]
+    type: 'search',
+    category_name: 'Search',
+    playlist: []
 }
 
 if (localStorage.getItem('live-channels')) {

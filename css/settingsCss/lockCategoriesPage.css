@@ -11,7 +11,7 @@
 
 .lock-categories-back-name-box {margin-left: 8px;width: 663px;height: 72px;color: white;font-family: sans-serif;display: flex;display: -webkit-flex;background: #1E1F20;border-radius: 20px;font-size: 28px;align-items: center;padding-left: 30px;}
 
-.lock-categories-content-box {display: flex;display: -webkit-flex;height: 350px;/* width: 91%; */justify-content: space-between;margin-top: 80px;}
+.lock-categories-content-box {display: flex;display: -webkit-flex;height: 800px;width: 91%;justify-content: space-between;margin-top: 80px;}
 
 .lock-settings-categories-box {width: 425px;height: 100%;margin-left: 120px;display: flex;display: -webkit-flex;flex-direction: column;align-items: center;}
 

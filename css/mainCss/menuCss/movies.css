@@ -1,278 +1,277 @@
 .movies-and-series-page-box {
 
-    height: 100vh;
-    
-    background-repeat: no-repeat;
-    
-    background-size: cover;
-    }
-    
-    .page-content-box {
-    height: 100%;
-    padding: 20px 60px;
-    }
-    
-    .page-header-box {
-    
-margin-top: 15px;
-    
-    }
-    
-    .header-top-box {
-    display: flex;
-    width: 700px;
-    justify-content: space-between;
-    align-items: center;
-    }
+height: 100vh;
 
- .header-top-back-box {
-    width: 94px;
-    background: #ffffff1a;
-    border-radius: 50%;
-    height: 80px;
- }   
-    
-    .header-bottom-box {
-    overflow: hidden;
-    
-    
+background-repeat: no-repeat;
+
+background-size: cover;
+}
+
+.page-content-box {
+height: 100%;
+padding: 20px 60px;
+}
+
+.page-header-box {
+
+margin-top: 15px;
+
+}
+
+.header-top-box {
+display: flex;
+width: 700px;
+justify-content: space-between;
+align-items: center;
+}
+
+.header-top-back-box {
+width: 94px;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+height: 80px;
+}   
+
+.header-bottom-box {
+overflow: hidden;
+
+
 margin-top: 40px;
-    }
+}
 
 .header-bottom-content-box {
-    display: flex;
-    color: white;
-    font-size: 21px;
-    font-family: sans-serif;
-    align-items: center;
-    width: 99999999999999999999px;
-    transition: 0.2s linear;
-    position: relative;
-    height: 90px;
+display: flex;
+color: white;
+font-size: 21px;
+font-family: sans-serif;
+align-items: center;
+width: 99999999999999999999px;
+transition: 0.2s linear;
+position: relative;
+height: 90px;
 }    
-    
-    .page-lists-parent-box {
-    margin-top: 13px;
-    height: 809px;
-    overflow: hidden;
-    }
-    
-    .parent-content-box {
-    width: 11111111111111112011110px;
-    height: 1111212121212121212212121212121px;
-    margin-top: 30px;
-    transition: 0.4s linear;
-    }
-    
-    .content-rows-box {
-    color: white;
-    font-family: sans-serif;
-    height: 360px;
-    margin-top: 30px;
-    }
 
-    .movies-page-favorit-box {position: relative;/* height: 298px; *//* top: -298px; */}
+.page-lists-parent-box {
+margin-top: 13px;
+height: 809px;
+overflow: hidden;
+}
 
-    .movies-page-favorit-imge {
-        left: 69%;
-        position: absolute;
-        bottom: 40px;
-    }
-    
-    .content-rows-name-box {
-    
+.parent-content-box {
+width: 11111111111111112011110px;
+height: 1111212121212121212212121212121px;
+margin-top: 30px;
+transition: 0.4s linear;
+}
+
+.content-rows-box {
+color: white;
+font-family: sans-serif;
+height: 360px;
+margin-top: 30px;
+}
+
+.movies-page-favorit-box {position: relative;/* height: 298px; *//* top: -298px; */}
+
+.movies-page-favorit-imge {
+    left: 69%;
+    position: absolute;
+    bottom: 40px;
+}
+
+.content-rows-name-box {
+
 font-size: 30px;
-    
+
 height: 60px;
-    
+
 margin-left: 15px;
-    }
-    
-    .content-rows-lists-box {
-    display: flex;
-    transition: 0.4s linear;
-    position: relative;
-    display: -webkit-flex;
-    height: 300px;
-    }
+}
+
+.content-rows-lists-box {
+display: flex;
+transition: 0.4s linear;
+position: relative;
+display: -webkit-flex;
+height: 300px;
+}
 
 .header-components-box:nth-child(1) {
-    margin-left: 0px;
+margin-left: 0px;
 }    
-    
-    .header-components-box {
+
+.header-components-box {
     width: 260px;
     text-align: center;
-    height: 82px;
+    height: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    /* margin-left: 15px; */
-    border: 3px solid;
-    background: linear-gradient(0deg, rgba(30, 31, 32, 0.45), rgba(30, 31, 32, 0.45)), linear-gradient(118.06deg, rgba(255, 255, 255, 0.4) 14.72%, rgba(255, 255, 255, 0) 93.25%);
+    border: 3px solid #767677;
     position: absolute;
     padding: 10px 10px;
-    font-size: 18px;
-    }
-    
+    font-size: 19px;
+    background-color: #17181a;
+}
+
 .content-rows-lists-card-box {
-    width: 237px;
-    /* margin-left: 15px; */
-    height: 302px;
-    position: absolute;
-    top: 0;
-    border-radius: 20px;
-    border: 3px solid transparent;
-    }
+width: 237px;
+/* margin-left: 15px; */
+height: 302px;
+position: absolute;
+top: 0;
+border-radius: 20px;
+border: 3px solid transparent;
+}
 
 .content-rows-lists-card-box:nth-child(1) {
-    margin-left: 0;
+margin-left: 0;
 } 
 
 .movies-progres-bar-box {width: 200px;height: 5px;position: absolute;background: #F9F9F9;bottom: 10px;z-index: 99999;left: 15px;}
 
 .movies-progres-bar-content-box {
-    background: #3EFF0E;
-    height: 5px;
+background: #3EFF0E;
+height: 5px;
 }
 
 .card-image-parent-box {
-    height: 296px;
-    width: 100%;
-    position: relative;
+height: 296px;
+width: 100%;
+position: relative;
+border-radius: 20px;
 }
-    
-    .card-image-box {
-        width: 100%;
-        background: #757575;
-        height: 100%;
-        opacity: 0.7;
-        border-radius: 20px;
-    }
-    
-    .card-name-box {
-        height: 76px;
-        display: flex;
-        align-items: center;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        position: absolute;
-        top: 10px;
-        left: 20px;
-    }
+
+.card-image-box {
+    width: 100%;
+    background: #303234;
+    height: 100%;
+    opacity: 0.6;
+    border-radius: 20px;
+}
+
+.card-name-box {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
 
 .card-name {
-    font-size: 21px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 200px;
-    height: 48px;
-    color: white;
-    font-family: sans-serif;
-    font-weight: 700;
+font-size: 21px;
+overflow: hidden;
+text-overflow: ellipsis;
+width: 200px;
+height: 48px;
+color: white;
+font-family: sans-serif;
+font-weight: 700;
 }  
 
 .movies-locked-box {
-    height: 30px;
-    width: 30px;
-    position: absolute;
-    bottom: 38px;
-    right: 7px;
-    z-index: 999;
+height: 30px;
+width: 30px;
+position: absolute;
+bottom: 38px;
+right: 7px;
+z-index: 999;
 }
 
 .view-more-box {
-    font-size: 35px;
-    font-family: sans-serif;
-    text-align: center;
-    position: relative;
-    top: 40%;
+font-size: 35px;
+font-family: sans-serif;
+text-align: center;
+position: relative;
+top: 40%;
 }
 
 .card-stars-box {position: absolute;top: 28%;left: 20px;}
 
 .card-star {
-    
+
 }
 
 .movies-page-lock-box {position: absolute;background: red;border-radius: 8px;top: 5px;left: 4px;}   
 
 .movies-page-lock-box>span {
-    font-size: 35px;
-    color: white;
+font-size: 35px;
+color: white;
 }
 
 .header-loading-components-box {
-    width: 260px;
-    height: 82px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(32, 32, 32);
-    border-radius: 12px;
-    margin-left: 20px;
-    position: relative;
-    background: #3a3a3a;
-    background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
-    background-repeat: no-repeat;
-    background-size: 800px 200px; 
-    
-  /* Animantion */
-    -webkit-animation-duration: 1s;
-    
-    /* Specifies style for element when animation isn't playing */
-    -webkit-animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: shimmer-header-load-card;
-    -webkit-animation-timing-function: ease-in-out;
+width: 260px;
+height: 82px;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: rgb(32, 32, 32);
+border-radius: 12px;
+margin-left: 20px;
+position: relative;
+background: #3a3a3a;
+background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
+background-repeat: no-repeat;
+background-size: 800px 200px; 
+
+/* Animantion */
+-webkit-animation-duration: 1s;
+
+/* Specifies style for element when animation isn't playing */
+-webkit-animation-fill-mode: forwards;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-name: shimmer-header-load-card;
+-webkit-animation-timing-function: ease-in-out;
 }
 
 .header-loading-components-box:nth-child(1) {
-    margin-left: 0;
+margin-left: 0;
 }
 
 .lists-loading-card-box {
-    width: 237px;
-    margin-left: 22px;
-    height: 300px;
-    position: relative;
-    background: #3a3a3a;
-    background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
-    background-repeat: no-repeat;
-    background-size: 800px 700px;
-    border-radius: 10px; 
-    
-  /* Animantion */
-    -webkit-animation-duration: 1s;
-    
-    /* Specifies style for element when animation isn't playing */
-    -webkit-animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: shimmer-movies-load-card;
-    -webkit-animation-timing-function: ease-in-out;
+width: 237px;
+margin-left: 22px;
+height: 300px;
+position: relative;
+background: #3a3a3a;
+background-image: linear-gradient(to right, #3a3a3a 0%, #3f3f3f 10%, #4a4a4a 20%, #3f3f3f 30%, #3a3a3a 50%, #3a3a3a 100%);
+background-repeat: no-repeat;
+background-size: 800px 700px;
+border-radius: 10px; 
+
+/* Animantion */
+-webkit-animation-duration: 1s;
+
+/* Specifies style for element when animation isn't playing */
+-webkit-animation-fill-mode: forwards;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-name: shimmer-movies-load-card;
+-webkit-animation-timing-function: ease-in-out;
 }
 
 .lists-loading-card-box:nth-child(1) {
-    margin-left: 0;
+margin-left: 0;
 }
 
 @keyframes shimmer-header-load-card {
-    0% {
-      background-position: -400px 0;
-    }
-    100% {
-      background-position: 400px 0; 
-    }
+0% {
+    background-position: -400px 0;
+}
+100% {
+    background-position: 400px 0; 
+}
 }
 
 @keyframes shimmer-movies-load-card {
-    0% {
-      background-position: -400px 0;
-    }
-    100% {
-      background-position: 400px 0; 
-    }
-  }
-  
-  
+0% {
+    background-position: -400px 0;
+}
+100% {
+    background-position: 400px 0; 
+}
+}
+

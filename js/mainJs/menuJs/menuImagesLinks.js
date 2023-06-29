@@ -2,7 +2,7 @@ var moviesSeriesData = null
 
 var infoUrl = null
 
-var similiarContent = null
+var similiarContent = []
 
 var clickedCard = null
 
@@ -10,11 +10,15 @@ var moviesCategories = null
 
 var moviesSeriesStreams = null
 
-var isAnimated = false
-
 var seriesData = []
 
 var moviesData = []
+
+var episodes = {
+
+}
+
+var request = null
 
 var vodes = {
 
@@ -27,6 +31,10 @@ var series = {
 var moviesCategoriesData = {}
 
 var seriesCategoriesData = {}
+
+if (localStorage.getItem('episodes')) {
+    episodes = JSON.parse(localStorage.getItem('episodes'))
+}
 
 if (localStorage.getItem('vods')) {
     vodes = JSON.parse(localStorage.getItem('vods'))
@@ -43,22 +51,22 @@ var seriesCategories = null
 var seriesStreams = null
 
 var moviesFavorits = {
-    category_name:'Movies Favorit',
-    type:'favorit',
+    category_name: 'Movies Favorit',
+    type: 'favorit',
     playlist: [
 
     ]
 }
 
 var seriesFavorits = {
-    category_name:'Series Favorit',
-    type:'favorit',
+    category_name: 'Series Favorit',
+    type: 'favorit',
     playlist: [
 
     ]
 }
 
-var reqUrl = 'http://kingtop10.net:7070/player_api.php?username=QATeamTest&password=jby2jccj'
+var reqUrl = 'http://diblax.spartacus.site/player_api.php?username=WOYQyy5YzT&password=2WawEOAw0d&type=m3u_plus&output=ts'
 
 var moviesInfoUrl = reqUrl + '&action=get_vod_info&vod_id='
 

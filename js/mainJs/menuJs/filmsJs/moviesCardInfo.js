@@ -1,5 +1,7 @@
 var season = []
 
+var selectedEpisode = null
+
 var seasonEpisodes = null
 
 var infoData = null
@@ -14,6 +16,7 @@ function renderMoviesCardInfo (data, similiarContent) {
         season = null
         season = Object.values(data.episodes)
         seasonEpisodes = season[controls.seasonContent.index]
+        getEpisodesContinue()
     }
     var moviesCardInfoPage = el('div', 'movies-card-info-page')
     var gradientBox = el('div', 'gradient-box')
@@ -68,7 +71,7 @@ function renderCardInfoNameAndRating (data) {
     } else if (data.info.name) {
         cardInfoNameBox.textContent = data.info.name
     } else {
-        cardInfoNameBox.textContent = 'Not Found'
+        cardInfoNameBox.textContent = ''
     }
 
     cardInfoNameAndRatingBox.append(cardInfoNameBox)
@@ -81,7 +84,7 @@ function renderCardInfoDescription (data) {
     var cardInfoDescriptionBox = el('div', 'card-info-description-box')
     var cardInfoDescription = el('div', 'card-info-description')
 
-    data.info.plot ? cardInfoDescription.textContent = data.info.plot : cardInfoDescription.textContent = 'Not Found'
+    data.info.plot ? cardInfoDescription.textContent = data.info.plot : cardInfoDescription.textContent = ''
 
     cardInfoDescriptionBox.append(cardInfoDescription)
 
@@ -93,8 +96,8 @@ function renderCardInfoDirectedAndDuration (data) {
     var cardInfoDirectedBox = el('div', 'card-info-directed-box')
     var cardInfoDurationBox = el('div', 'card-info-duration-box')
 
-    data.info.director ? cardInfoDirectedBox.textContent = 'Directed by:' + data.info.director : cardInfoDirectedBox.textContent = 'Not Found'
-    data.info.duration ? cardInfoDurationBox.textContent = 'Duration:' + data.info.duration : cardInfoDurationBox.textContent = 'Not Found'
+    data.info.director ? cardInfoDirectedBox.textContent = 'Directed by:' + data.info.director : cardInfoDirectedBox.textContent = ''
+    data.info.duration ? cardInfoDurationBox.textContent = 'Duration:' + data.info.duration : cardInfoDurationBox.textContent = ''
 
     cardInfoDirectedAndDurationBox.append(cardInfoDirectedBox)
     cardInfoDirectedAndDurationBox.append(cardInfoDurationBox)
@@ -108,7 +111,7 @@ function renderCardInfoButtons (data) {
 
     cardInfoButtonsBox.append(renderButton('card-info-button', 'Play', 'play', data))
     cardInfoButtonsBox.append(renderButton('card-info-button', 'Watch trailer', 'trailer', data))
-    cardInfoButtonsBox.append(renderButton('card-info-button', 'Favorit', 'favorit-btn' ,clickedCard))
+    cardInfoButtonsBox.append(renderButton('card-info-button', 'Favorite', 'favorit-btn', clickedCard))
 
     return cardInfoButtonsBox
 
@@ -118,7 +121,7 @@ function renderInfoCardBottomContent (data, similiarContent, season) {
     var infoCardBottomContent = el('div', 'info-card-bottom-content')
 
     if (season.length) {
-        infoCardBottomContent.append(renderBottomEpisodesContent(seasonEpisodes))
+        // infoCardBottomContent.append(renderBottomEpisodesContent(seasonEpisodes))
     } else {
         infoCardBottomContent.append(renderBottomSimiliarContent(similiarContent))
     }
@@ -182,6 +185,7 @@ function renderSeasonCard (i) {
     seasonCardBox.onclick = function () {
         removeSelectidSezon()
         seasonEpisodes = season[this.getAttribute('index')]
+        getEpisodesContinue()
         seasonCardBox.classList.add('selectid-sezon')
         document.querySelector('.info-card-bottom-content').append(renderBottomEpisodesContent(seasonEpisodes))
         controls.select.removeClass()
@@ -189,6 +193,7 @@ function renderSeasonCard (i) {
         controls.select.index = 0
         controls.select.start = 3
         controls.select.transIndex = 0
+        controls.select.nextIndex = 0
         controls.select.addActive()
 
     }
@@ -199,10 +204,10 @@ function renderSeasonCard (i) {
     return seasonCardBox
 }
 
-function removeSelectidSezon() {
+function removeSelectidSezon () {
     for (var i = 0; i < document.getElementsByClassName('season-card-box').length; i++) {
         document.getElementsByClassName('season-card-box')[i].classList.remove('selectid-sezon')
-        
+
     }
 }
 
@@ -215,7 +220,7 @@ function renderBottomEpisodesContent (seasonEpisodes) {
 
     episodesContentName.textContent = 'Epizodes'
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < seasonEpisodes.length; i++) {
         if (seasonEpisodes[i]) {
             episodesListContentBox.append(renderEpisodesCard(seasonEpisodes[i], i))
         }
@@ -232,45 +237,89 @@ function renderBottomEpisodesContent (seasonEpisodes) {
 
 function renderEpisodesCard (data, i) {
     var episodeCardBox = el('div', 'episode-card-box')
+    var episodeCardPosterBox = el('img', 'episode-card-poster-box')
     var episodeCardInfoBox = el('div', 'episode-card-info-box')
     var episodeCardInfoNumber = el('div', 'episode-card-info-number')
     var episodeCardInfoName = el('div', 'episode-card-info-name')
-    var episodeCardInfoProgresBox = el('div', 'episode-card-info-progres-box')
-    var episodeCardInfoProgresLineBox = el('div', 'episode-card-info-progres-line-box')
+    var img = new Image();
 
-    if (data.info.movie_image) {
-        episodeCardBox.style.backgroundImage = 'url(' + data.info.movie_image + ')'
-    } else {
-        episodeCardBox.style.backgroundImage = 'url(http://smarttv.xtream.cloud/img/logo.png)'
-        episodeCardBox.style.backgroundSize = '40%'
+    img.src = data.info.movie_image
+
+    episodeCardPosterBox.src = 'notFound.png'
+    episodeCardPosterBox.style.width = '200px'
+    episodeCardPosterBox.style.height = '200px'
+    episodeCardPosterBox.style.objectFit = 'none'
+
+    img.onload = function () {
+        console.log('onload');
+        episodeCardPosterBox.src = data.info.movie_image
+        episodeCardPosterBox.style.width = '100%'
+        episodeCardPosterBox.style.height = '100%'
+        episodeCardPosterBox.style.objectFit = 'cover'
     }
 
-    data.progresDuration ? episodeCardInfoProgresLineBox.style.width = data.progresDuration : false
+    img.onerror = function () {
+        console.log('onerror');
+        episodeCardPosterBox.src = 'notFound.png'
+        episodeCardPosterBox.style.width = '200px'
+        episodeCardPosterBox.style.height = '200px'
+        episodeCardPosterBox.style.objectFit = 'none'
+    }
     episodeCardInfoNumber.textContent = 'Episode ' + data.episode_num
     episodeCardInfoName.textContent = data.title
     episodeCardBox.style.left = i * 499 + 'px'
+    episodeCardInfoBox.setAttribute('id', data.id)
+    episodeCardBox.setAttribute('index', i)
 
-    episodeCardBox.onclick = ()=> {
-        episodeCardClick(data)
+    episodeCardBox.onclick = function () {
+        episodeCardClick(this.getAttribute('index'), data)
     }
-
-
-    data.progresDuration ? episodeCardInfoProgresBox.append(episodeCardInfoProgresLineBox) : false
 
     episodeCardInfoBox.append(episodeCardInfoNumber)
     episodeCardInfoBox.append(episodeCardInfoName)
-    data.progresDuration ? episodeCardInfoBox.append(episodeCardInfoProgresBox) : false
+    data.continue ? episodeCardInfoBox.append(renderEpisodeCardProgressBar(data)) : false
 
+    episodeCardBox.append(episodeCardPosterBox)
     episodeCardBox.append(episodeCardInfoBox)
 
     return episodeCardBox
 
 }
 
-function episodeCardClick(data) {
-    document.getElementsByClassName('movies-card-info-page')[0].remove()
-    document.getElementById('root').append(renderMoviesVideoOnPlaying())
-    controls.select = controls.moviesVideoLoad
-    document.getElementById('root').append(renderMoviesVideo(data))
+function renderEpisodeCardProgressBar (data) {
+    var episodeCardInfoProgresBox = el('div', 'episode-card-info-progres-box')
+    var episodeCardInfoProgresLineBox = el('div', 'episode-card-info-progres-line-box')
+
+    data.progresDuration ? episodeCardInfoProgresLineBox.style.width = data.progresDuration : false
+
+    data.progresDuration ? episodeCardInfoProgresBox.append(episodeCardInfoProgresLineBox) : false
+
+    return episodeCardInfoProgresBox
+}
+
+function episodeCardClick (index, data) {
+    selectedEpisode = data
+    isNextEpisode = true
+    showControl = false
+    showPlay = false
+    console.log(data, selectedEpisode);
+    if (data.continue) {
+        console.log('continue');
+        if (document.querySelector('.info-continue-popup-parent-box')) {
+            document.querySelector('.info-continue-popup-parent-box').remove()
+        }
+        controls.select.removeClass()
+
+        document.getElementsByClassName('movies-card-info-page')[0].append(renderInfoContinuePopupBox(data))
+
+        controls.select = controls.infoPopup
+        controls.select.privius = controls.episodesLists
+        controls.select.firstActive()
+    } else {
+        document.getElementsByClassName('movies-card-info-page')[0].classList.add('popup-display')
+        document.getElementById('root').append(renderMoviesVideoOnPlaying())
+        controls.select = controls.moviesVideoLoad
+        document.getElementById('root').append(renderMoviesVideo(data))
+    }
 }
 

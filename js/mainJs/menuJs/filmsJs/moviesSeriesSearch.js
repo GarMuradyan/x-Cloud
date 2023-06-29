@@ -29,10 +29,8 @@ function renderMoviesSeriesSearchingBox (infoUrl) {
 }
 
 function renderFilmsSearching (data, infoUrl) {
-    id ? clearTimeout(id) : false
     filmsSearchArray = []
     searchArray = []
-
 
     controls.searchLists.index = 0
     controls.searchLists.transIndex = 0
@@ -45,23 +43,21 @@ function renderFilmsSearching (data, infoUrl) {
 
     if (activeInput.value) {
         for (var i = 0; i < data.length; i++) {
-            if (data[i].name.indexOf(activeInput.value) !== -1) {
+            if (data[i].name.toLowerCase().indexOf(activeInput.value.toLowerCase()) !== -1) {
                 searchArray.push(data[i])
             }
         }
     }
 
     if (searchArray.length) {
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < 50; i++) {
             if (searchArray[i]) {
                 filmsSearchArray.push(searchArray[i])
             }
         }
     }
 
-    var id = setTimeout(() => {
-        renderSearchListCards(filmsSearchArray, searchArray, infoUrl)
-    }, 300);
+    renderSearchListCards(filmsSearchArray, searchArray, infoUrl)
 }
 
 function renderSearchListCards (data, searchArray, infoUrl) {
