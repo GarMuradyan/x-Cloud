@@ -26,7 +26,7 @@ function renderSeriesContinueWatched () {
 }
 
 function getEpisodesContinue () {
-    for (let i = 0; i < seasonEpisodes.length; i++) {
+    for (var i = 0; i < seasonEpisodes.length; i++) {
         if (episodes[seasonEpisodes[i].id]) {
             seasonEpisodes[i].continue = episodes[seasonEpisodes[i].id].continue
             seasonEpisodes[i].progresDuration = episodes[seasonEpisodes[i].id].progresDuration

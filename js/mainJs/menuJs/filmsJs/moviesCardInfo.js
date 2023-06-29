@@ -13,8 +13,9 @@ function renderMoviesCardInfo (data, similiarContent) {
     season = []
 
     if (data.episodes) {
-        season = null
-        season = Object.values(data.episodes)
+        for (var key in data.episodes) {
+            season.push(data.episodes[key])
+        }
         seasonEpisodes = season[controls.seasonContent.index]
         getEpisodesContinue()
     }

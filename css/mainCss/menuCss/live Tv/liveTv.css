@@ -96,10 +96,11 @@
     }
     
     .channel-card-poster-and-name-box {
-    margin-left: 60px;
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
+        margin-left: 60px;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        height: 100%;
     }
     
     .channel-card-poster-box {

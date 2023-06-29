@@ -28,7 +28,6 @@ function renderMoviesVideo (data) {
     var showControlColorBox = el('div', 'show-control-color-box')
 
     moviesVideoBox.setAttribute('autoplay', true)
-    moviesVideoBox.setAttribute('muted', true)
     moviesVideoBox.src = link
 
     if (data.continue) {
@@ -95,17 +94,22 @@ function moviesVideoOnLoadedData (elem) {
     }
 }
 
-function formatTime (timeInSeconds) {
-    var hours = Math.floor(timeInSeconds / 3600);
-    var minutes = Math.floor((timeInSeconds % 3600) / 60);
-    var seconds = Math.floor(timeInSeconds % 60);
+function formatTime (seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = Math.floor(seconds % 60);
 
-    return hours + ':' + padZero(minutes) + ':' + padZero(seconds)
+    var formattedMinutes = String(minutes);
+    if (formattedMinutes.length < 2) {
+        formattedMinutes = '0' + formattedMinutes;
+    }
 
-}
+    var formattedSeconds = String(remainingSeconds);
+    if (formattedSeconds.length < 2) {
+        formattedSeconds = '0' + formattedSeconds;
+    }
 
-function padZero (number) {
-    return number.toString().padStart(2, '0');
+    return formattedMinutes + ':' + formattedSeconds;
+
 }
 
 function moviesVideoOnTimeUpdate (elem, data) {

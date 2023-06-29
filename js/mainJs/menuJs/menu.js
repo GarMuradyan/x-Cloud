@@ -222,7 +222,11 @@ function getSeriesData () {
                 }
             }
 
-            var arr = Object.values(seriesCategoriesData)
+            var arr = []
+
+            for (var key in seriesCategoriesData) {
+                arr.push(seriesCategoriesData[key])
+            }
 
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].playlist.length) {
@@ -258,7 +262,11 @@ function getSeriesData () {
                 }
             }
 
-            var arr = Object.values(seriesCategoriesData)
+            var arr = []
+
+            for (var key in seriesCategoriesData) {
+                arr.push(seriesCategoriesData[key])
+            }
 
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].playlist.length) {
@@ -306,7 +314,11 @@ function getMoviesData () {
                 }
             }
 
-            var arr = Object.values(moviesCategoriesData)
+            var arr = []
+
+            for (var key in moviesCategoriesData) {
+                arr.push(moviesCategoriesData[key])
+            }
 
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].playlist.length) {
@@ -349,7 +361,12 @@ function getMoviesData () {
                 }
             }
 
-            var arr = Object.values(moviesCategoriesData)
+
+            var arr = []
+
+            for (var key in moviesCategoriesData) {
+                arr.push(moviesCategoriesData[key])
+            }
 
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i].playlist.length) {
@@ -389,7 +406,13 @@ function getLiveTvData () {
 
             liveTvAll.playlist = liveTvChannels
             liveTvSearch.playlist = liveTvChannels
-            liveTvData = Object.values(liveCategories)
+            var arr = []
+
+            for (var key in liveCategories) {
+                arr.push(liveCategories[key])
+            }
+
+            liveTvData = arr
             liveTvData.unshift(liveTvSearch)
             liveTvData.unshift(liveTvAll)
             liveTvData.unshift(liveTvFavorits)
@@ -422,7 +445,13 @@ function getLiveTvData () {
 
             liveTvAll.playlist = liveTvChannels
             liveTvSearch.playlist = liveTvChannels
-            liveTvData = Object.values(liveCategories)
+            var arr = []
+
+            for (var key in liveCategories) {
+                arr.push(liveCategories[key])
+            }
+
+            liveTvData = arr
             liveTvData.unshift(liveTvSearch)
             liveTvData.unshift(liveTvAll)
             liveTvData.unshift(liveTvFavorits)
